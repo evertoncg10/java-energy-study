@@ -1,0 +1,41 @@
+# Java e Maven
+**/target/
+*.class
+hs_err_pid*
+replay_pid*
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+*.egg-info/
+**/build/
+**/dist/
+
+# Configuração local e credenciais
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.idea/
+.vscode/
+*.iml
+.DS_Store
+*~
+
+# Suítes e pacotes baixados: guardar versão, endereço e SHA-256
+ferramentas/**/*.jar
+ferramentas/**/*.zip
+ferramentas/**/*.tar.gz
+ferramentas/**/*.tgz
+# Planejamento e rascunhos locais
+/docs/
+/Docs/
+/planejamento/
+/arquivos-planejamento/
