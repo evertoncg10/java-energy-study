@@ -39,3 +39,9 @@ ferramentas/**/*.tgz
 /Docs/
 /planejamento/
 /arquivos-planejamento/
+
+# Distribuição completa do DaCapo e saídas locais de verificação
+/ferramentas/dacapo/
+/scratch/
+/dados/verificacao/*
+!/dados/verificacao/README.md

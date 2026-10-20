@@ -1,0 +1,19 @@
+{
+  "version": "23.11-MR2-chopin",
+  "tag": "v23.11-MR2-chopin",
+  "release_url": "https://github.com/dacapobench/dacapobench/releases/tag/v23.11-MR2-chopin",
+  "canonical_download_url": "https://download.dacapobench.org/chopin/dacapo-23.11-MR2-chopin.zip",
+  "resolved_download_url": "https://download-r2.dacapobench.org/chopin/dacapo-23.11-MR2-chopin.zip",
+  "checksum_url": "https://github.com/dacapobench/dacapobench/releases/download/v23.11-MR2-chopin/dacapo-23.11-MR2-chopin.zip.sha256sum",
+  "archive_sha256": "70a1fd4ed959f09053bb7ef8b2745a19d6f28dd8a7d0b350362039d89b49eb26",
+  "archive_sha256_compared_to_official": true,
+  "archive_bytes": 6336034377,
+  "extracted_bytes": 15936806844,
+  "main_jar": "dacapo/dacapo-23.11-MR2-chopin.jar",
+  "main_jar_bytes": 4462646,
+  "main_jar_sha256": "c488cc61fcd02bb04b87e601fd80517b8b0991c0baf564cae17538fdc1edb792",
+  "jar_hash_origin": "Computed locally from the ZIP checked against the official SHA-256",
+  "verified_at_utc": "2026-10-20T12:38:22.777342+00:00",
+  "license_note": "DaCapo harness Apache-2.0; bundled applications and dependencies retain their own licenses.",
+  "use_status": "Initial meter development; benchmark selection and collection settings require the pilot."
+}
