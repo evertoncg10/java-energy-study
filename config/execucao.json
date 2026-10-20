@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "protocol_status": "provisorio",
+  "configurations": {
+    "A": {"sdkman_id": "17.0.19-tem", "java_feature": 17, "java_version": "17.0.19", "runtime_version": "17.0.19+10", "compact_headers": null},
+    "B": {"sdkman_id": "21.0.11-tem", "java_feature": 21, "java_version": "21.0.11", "runtime_version": "21.0.11+10-LTS", "compact_headers": null},
+    "C": {"sdkman_id": "25.0.3-tem", "java_feature": 25, "java_version": "25.0.3", "runtime_version": "25.0.3+9-LTS", "compact_headers": false},
+    "D": {"sdkman_id": "25.0.3-tem", "java_feature": 25, "java_version": "25.0.3", "runtime_version": "25.0.3+9-LTS", "compact_headers": true}
+  },
+  "applications": {
+    "avrora": {"input": "default", "threads": 1, "heap_initial": "256m", "heap_max": "1g"},
+    "lusearch": {"input": "default", "threads": 1, "heap_initial": "256m", "heap_max": "1g"},
+    "pmd": {"input": "default", "threads": 1, "heap_initial": "256m", "heap_max": "1g"}
+  },
+  "warmup_iterations": 1,
+  "process_timeout_seconds": 600,
+  "rapl_directory": "/sys/class/powercap/intel-rapl:0",
+  "sample_interval_ms": 100,
+  "max_gap_ms": 10000,
+  "assumed_power_upper_bound_w": 1000,
+  "meter": {"path": "medidor-java/target/java-energy-meter-0.1.0.jar", "sha256": "bcbfa9695fbeb4590829f5124c5b90e6aedf08dfea47085aaac134af274ba700"},
+  "dacapo": {"path": "ferramentas/dacapo/dacapo-23.11-MR2-chopin.jar", "version": "23.11-MR2-chopin", "sha256": "c488cc61fcd02bb04b87e601fd80517b8b0991c0baf564cae17538fdc1edb792"}
+}
