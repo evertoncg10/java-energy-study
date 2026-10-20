@@ -44,4 +44,14 @@ ferramentas/**/*.tgz
 /ferramentas/dacapo/
 /scratch/
 /dados/verificacao/*
-!/dados/verificacao/README.md
+
+# Documentação e configuração de editor mantidas na pasta local de documentos
+*.md
+*.rst
+*.adoc
+*.doc
+*.docx
+*.odt
+*.tex
+*.bib
+.editorconfig
