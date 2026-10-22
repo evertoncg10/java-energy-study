@@ -14,7 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 
-/** DaCapo 23.11-MR2 callback: one measured iteration after explicit warmup. */
+/** DaCapo 23.11-MR2 callback: the last k iterations are measured after explicit warmup. */
 public final class EnergyCallback extends Callback {
     private final RunRecorder recorder;
     private EnergySampler sampler;
@@ -23,6 +23,7 @@ public final class EnergyCallback extends Callback {
     private long maxGapMillis;
     private double powerUpperBoundW;
     private int ordinal;
+    private int measuredIterations;
     private boolean warmup;
     private volatile boolean waitingForValidation;
     private String application;
@@ -52,6 +53,9 @@ public final class EnergyCallback extends Callback {
                     || args.getIterations() < 2 || args.getArgList().size() != 1) {
                 throw new IllegalArgumentException("Use one benchmark and -n >= 2 (warmup plus one measured iteration)");
             }
+            measuredIterations = Integer.parseInt(System.getProperty("study.measuredIterations", "1"));
+            IterationPlan.require(args.getIterations(), measuredIterations);
+            recorder.expectMeasured(measuredIterations);
             sampleMillis = Long.parseLong(System.getProperty("study.sampleMillis", "100"));
             maxGapMillis = Long.parseLong(System.getProperty("study.maxGapMillis", "10000"));
             powerUpperBoundW = Double.parseDouble(System.getProperty("study.powerUpperBoundW", "1000"));
@@ -77,6 +81,7 @@ public final class EnergyCallback extends Callback {
             Map<String, Object> parameters = new LinkedHashMap<>();
             parameters.put("methodology", args.getMethodology().toString());
             parameters.put("iterations", args.getIterations());
+            parameters.put("measured_iterations", measuredIterations);
             parameters.put("input_size", args.getSize());
             parameters.put("thread_count", args.getThreadCount());
             parameters.put("thread_factor", args.getThreadFactor());
@@ -138,8 +143,9 @@ public final class EnergyCallback extends Callback {
         }
         super.start(benchmark); // DaCapo console output precedes our first energy read.
         application = benchmark;
-        warmup = isWarmup();
         ordinal++;
+        // The last k iterations are measured; DaCapo's own isWarmup() only marks the final one.
+        warmup = !IterationPlan.isMeasured(ordinal, args.getIterations(), measuredIterations);
         window = null;
         waitingForValidation = true;
         recorder.create("iteration-" + ordinal + ".started.json", Map.of(
