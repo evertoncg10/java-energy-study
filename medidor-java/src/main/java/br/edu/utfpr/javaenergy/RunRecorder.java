@@ -17,6 +17,7 @@ final class RunRecorder {
     private boolean failed;
     private String failure;
     private int measured;
+    private int expectedMeasured = 1;
     private String application;
 
     RunRecorder(Path directory) throws IOException {
@@ -32,6 +33,11 @@ final class RunRecorder {
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
+    }
+
+    synchronized void expectMeasured(int count) {
+        if (count < 1) throw new IllegalArgumentException("At least one measured iteration");
+        expectedMeasured = count;
     }
 
     synchronized void iteration(Map<String, Object> record, boolean valid, boolean warmup) {
@@ -58,9 +64,11 @@ final class RunRecorder {
         summary.put("finished_at_utc", Instant.now().toString());
         summary.put("application", application);
         summary.put("measured_iterations", measured);
-        summary.put("status", !failed && measured == 1 ? "measurement_valid" : "failure");
+        summary.put("expected_measured_iterations", expectedMeasured);
+        summary.put("status", !failed && measured == expectedMeasured ? "measurement_valid" : "failure");
         summary.put("requires_external_exit_code_check", true);
-        summary.put("failure", failure != null ? failure : measured != 1 ? "Expected exactly one measured iteration" : null);
+        summary.put("failure", failure != null ? failure
+                : measured != expectedMeasured ? "Expected exactly " + expectedMeasured + " measured iteration(s)" : null);
         try {
             Path temp = directory.resolve("summary.json.tmp");
             Files.writeString(temp, Json.encode(summary) + "\n", StandardCharsets.UTF_8);

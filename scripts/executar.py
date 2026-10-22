@@ -84,8 +84,17 @@ def require_config(config, category):
             raise ValueError('Quantidade de threads inválida.')
         if any(not re.fullmatch(r'[1-9][0-9]*[kKmMgG]', params[k]) for k in ['heap_initial', 'heap_max']):
             raise ValueError('Heap inválido.')
-    if type(config['warmup_iterations']) is not int or config['warmup_iterations'] < 1:
-        raise ValueError('É necessária pelo menos uma preparação.')
+    for app in config['applications']:
+        if type(warmups(config, app)) is not int or warmups(config, app) < 1:
+            raise ValueError('É necessária pelo menos uma preparação.')
+    if type(measured_count(config)) is not int or not 1 <= measured_count(config) <= 10:
+        raise ValueError('Quantidade de iterações medidas inválida (1 a 10).')
+    if config.get('cpu_affinity') not in AFFINITY_POLICIES:
+        raise ValueError('Política de núcleos desconhecida.')
+    if type(config.get('idle_baseline_seconds', 0)) not in (int, float) or not 0 <= config.get('idle_baseline_seconds', 0) <= 60:
+        raise ValueError('Linha de base ociosa deve ter de 0 a 60 s.')
+    if type(config.get('gc_log', False)) is not bool:
+        raise ValueError('gc_log deve ser verdadeiro ou falso.')
     if type(config['process_timeout_seconds']) is not int or config['process_timeout_seconds'] < 1:
         raise ValueError('Limite de duração inválido.')
     if category == 'oficial' and config.get('protocol_status') != 'fixado':
@@ -151,9 +160,10 @@ def stop_group(proc):
         proc.wait()
 
 
-def process(command, cwd, env, stdout, stderr, timeout):
+def process(command, cwd, env, stdout, stderr, timeout, cpus=None):
+    pin = (lambda: os.sched_setaffinity(0, cpus)) if cpus else None
     with stdout.open('x') as out, stderr.open('x') as err:
-        proc = subprocess.Popen(command, cwd=cwd, env=env, stdout=out, stderr=err, start_new_session=True)
+        proc = subprocess.Popen(command, cwd=cwd, env=env, stdout=out, stderr=err, start_new_session=True, preexec_fn=pin)
         try:
             return proc.wait(timeout=timeout)
         except BaseException as error:
@@ -162,40 +172,93 @@ def process(command, cwd, env, stdout, stderr, timeout):
             raise
 
 
-def require_result(run, spec, selection, config, app, params, configuration, category):
+def require_result(run, spec, selection, config, app, params, configuration, category, cpus=None):
     meter = run/'medidor'
     identity = json.loads((meter/'jvm.json').read_text())
     require_identity(identity, spec, selection)
     if identity['max_heap_bytes'] != heap_bytes(params['heap_max']):
         raise ValueError('O heap máximo efetivo diverge da configuração.')
+    if cpus and identity.get('available_processors') != len(cpus):
+        raise ValueError('A JVM não ficou restrita aos núcleos escolhidos.')
     summary = json.loads((meter/'summary.json').read_text())
     metadata = json.loads((meter/'metadata.json').read_text())
     iterations = [json.loads(x) for x in (meter/'iterations.jsonl').read_text().splitlines()]
-    if summary['status'] != 'measurement_valid' or summary['failure'] is not None or summary['application'] != app or summary['measured_iterations'] != 1:
+    warm, count = warmups(config, app), measured_count(config)
+    if summary['status'] != 'measurement_valid' or summary['failure'] is not None or summary['application'] != app or summary['measured_iterations'] != count:
         raise ValueError('Resumo do medidor inválido.')
-    if len(iterations) != config['warmup_iterations'] + 1:
+    if len(iterations) != warm + count:
         raise ValueError('Quantidade de iterações inesperada.')
-    if any(not x['warmup'] or x['energy_j'] is not None or x['time_s'] is not None or x['status'] != 'warmup_valid' or not x['dacapo_valid'] for x in iterations[:-1]):
+    if any(not x['warmup'] or x['energy_j'] is not None or x['time_s'] is not None or x['status'] != 'warmup_valid' or not x['dacapo_valid'] for x in iterations[:warm]):
         raise ValueError('Preparação inválida ou confundida com medição.')
-    measured = iterations[-1]
-    if measured['warmup'] or measured['status'] != 'measurement_valid' or not measured['dacapo_valid'] or any(not isinstance(measured[k], (int, float)) or not math.isfinite(measured[k]) or measured[k] <= 0 for k in ['energy_j','time_s']):
-        raise ValueError('Tarefa medida inválida.')
+    measured = iterations[warm:]
+    for x in measured:
+        if x['warmup'] or x['status'] != 'measurement_valid' or not x['dacapo_valid'] or any(not isinstance(x[k], (int, float)) or not math.isfinite(x[k]) or x[k] <= 0 for k in ['energy_j','time_s']):
+            raise ValueError('Tarefa medida inválida.')
     if metadata['configuration'] != configuration or metadata['category'] != category or metadata['dacapo_build_version'] != config['dacapo']['version']:
         raise ValueError('Configuração, categoria ou versão da suíte divergente.')
     if any(x['application'] != app or x['failure'] is not None for x in iterations):
         raise ValueError('Identidade ou falha nas iterações diverge do esperado.')
     options = metadata['dacapo_parameters']
-    if options['input_size'] != params['input'] or int(options['thread_count']) != params['threads'] or options['iterations'] != config['warmup_iterations']+1 or options['methodology'] != 'ITERATE' or not options['validation'] or not options['validate_output'] or options['ignore_validation_failure']:
+    if options['input_size'] != params['input'] or int(options['thread_count']) != params['threads'] or options['iterations'] != warm+count or options.get('measured_iterations', 1) != count or options['methodology'] != 'ITERATE' or not options['validation'] or not options['validate_output'] or options['ignore_validation_failure']:
         raise ValueError('Parâmetros ou validação DaCapo divergentes.')
     for name in ['meter','dacapo']:
         if metadata[name+'_artifact']['sha256'] != config[name]['sha256']:
             raise ValueError('Artefato efetivamente usado diverge da configuração.')
+    # The process is the statistical unit: its observation is the mean of its measured iterations.
     return {'java_runtime_version': identity['java_runtime_version'], 'application': app,
-            'energy_j': measured['energy_j'], 'time_s': measured['time_s'], 'validation': True}
+            'energy_j': sum(x['energy_j'] for x in measured) / count, 'time_s': sum(x['time_s'] for x in measured) / count,
+            'measured_energy_j': [x['energy_j'] for x in measured], 'measured_time_s': [x['time_s'] for x in measured],
+            'warmup_dacapo_ms': [x['dacapo_duration_ms'] for x in iterations[:warm]],
+            'measured_dacapo_ms': [x['dacapo_duration_ms'] for x in measured],
+            'available_processors': identity.get('available_processors'), 'validation': True}
 
 
 def heap_bytes(value):
     return int(value[:-1]) * {'k':1024, 'm':1024**2, 'g':1024**3}[value[-1].lower()]
+
+
+def warmups(config, app):
+    """Per-application warmup count; the global value is the default."""
+    return config['applications'][app].get('warmup_iterations', config['warmup_iterations'])
+
+
+def measured_count(config):
+    return config.get('measured_iterations', 1)
+
+
+AFFINITY_POLICIES = (None, 'cpu_core_um_por_nucleo')
+
+
+def cpu_list(text):
+    cpus = set()
+    for part in text.strip().split(','):
+        first, _, last = part.partition('-')
+        cpus.update(range(int(first), int(last or first) + 1))
+    return cpus
+
+
+def affinity_cpus(policy, sysfs=Path('/sys')):
+    """P-cores only (Intel hybrid cpu_core PMU), one logical CPU per physical core."""
+    if policy is None:
+        return None
+    performance = cpu_list((sysfs/'devices/cpu_core/cpus').read_text())
+    chosen = sorted(cpu for cpu in performance
+                    if cpu == min(cpu_list((sysfs/f'devices/system/cpu/cpu{cpu}/topology/core_cpus_list').read_text())))
+    if not chosen:
+        raise ValueError('Nenhum núcleo de desempenho encontrado para a afinidade.')
+    return chosen
+
+
+def idle_baseline(directory, seconds):
+    """Package energy with no workload running, just before the JVM starts."""
+    energy = directory/'energy_uj'
+    limit = int((directory/'max_energy_range_uj').read_text())
+    first, before = int(energy.read_text()), time.monotonic_ns()
+    time.sleep(seconds)
+    last, after = int(energy.read_text()), time.monotonic_ns()
+    joules = ((last - first) % limit) / 1e6
+    return {'seconds': (after - before) / 1e9, 'energy_j': joules, 'mean_power_w': joules / ((after - before) / 1e9),
+            'first_energy_uj': first, 'last_energy_uj': last}
 
 
 
@@ -209,7 +272,17 @@ def host_state():
     for directory in Path('/sys/class/power_supply').glob('*'):
         if read(directory/'type') == 'Mains':
             supplies.append({'name':directory.name, 'online':read(directory/'online')})
+    vmstat = dict(line.split() for line in (read(Path('/proc/vmstat')) or '').splitlines() if len(line.split()) == 2)
+    try:
+        profile = subprocess.run(['powerprofilesctl', 'get'], capture_output=True, text=True, timeout=5).stdout.strip() or None
+    except (OSError, subprocess.SubprocessError):
+        profile = None
+    cpufreq = Path('/sys/devices/system/cpu/cpu0/cpufreq')
     return {'at_utc':stamp(), 'mains':supplies,
+            'swap_pages':{k:int(vmstat[k]) for k in ['pswpin','pswpout'] if k in vmstat},
+            'power_profile':profile, 'platform_profile':read(Path('/sys/firmware/acpi/platform_profile')),
+            'no_turbo':read(Path('/sys/devices/system/cpu/intel_pstate/no_turbo')),
+            'governor':read(cpufreq/'scaling_governor'), 'energy_performance_preference':read(cpufreq/'energy_performance_preference'),
             'meminfo':read(Path('/proc/meminfo')), 'loadavg':read(Path('/proc/loadavg')),
             'thermal_zones':[{'name':d.name, 'type':read(d/'type'), 'temperature_millicelsius':read(d/'temp')}
                              for d in Path('/sys/class/thermal').glob('thermal_zone*')]}
@@ -318,28 +391,39 @@ def main(argv=None):
                     raise ValueError('SHA-256 divergente para '+name)
                 artifacts[name] = {'path':str(path), 'sha256':actual}
             create_json(output/'artifacts.json',artifacts)
-            command = [selection['java_executable'], '-Xms'+params['heap_initial'], '-Xmx'+params['heap_max'], *flags,
+            cpus = affinity_cpus(config.get('cpu_affinity'))
+            result['cpu_affinity'] = {'policy':config.get('cpu_affinity'), 'cpus':cpus}
+            gc_log = []
+            if config.get('gc_log'):
+                if ':' in str(output):
+                    raise ValueError('Caminho de saída com ":" não pode receber o log de GC.')
+                gc_log = ['-Xlog:gc:file='+str(output/'gc.log')]
+            command = [selection['java_executable'], '-Xms'+params['heap_initial'], '-Xmx'+params['heap_max'], *flags, *gc_log,
                        '-Dstudy.configuration='+args.configuracao, '-Dstudy.category='+CATEGORIES[args.categoria][1],
                        '-Dstudy.sessionId='+args.sessao, '-Dstudy.runId='+output.name,
                        '-Dstudy.output='+str(output/'medidor'), '-Dstudy.raplDir='+str(rapl),
                        '-Dstudy.sampleMillis='+str(config['sample_interval_ms']), '-Dstudy.maxGapMillis='+str(config['max_gap_ms']),
-                       '-Dstudy.powerUpperBoundW='+str(config['assumed_power_upper_bound_w'])]
+                       '-Dstudy.powerUpperBoundW='+str(config['assumed_power_upper_bound_w']),
+                       '-Dstudy.measuredIterations='+str(measured_count(config))]
             for key, value in [('blockId',args.bloco), ('order',args.ordem)]:
                 if value is not None:
                     command += ['-Dstudy.'+key+'='+str(value)]
             command += ['-jar', artifacts['meter']['path'], '-c', 'br.edu.utfpr.javaenergy.EnergyCallback',
-                        '-n', str(config['warmup_iterations']+1), '-s', params['input'], '-t', str(params['threads']),
+                        '-n', str(warmups(config, args.aplicacao)+measured_count(config)), '-s', params['input'], '-t', str(params['threads']),
                         '--scratch-directory', str(output/'scratch'), args.aplicacao]
-            create_json(output/'command.json', {'command':command, 'cwd':str(ROOT), 'timeout_seconds':config['process_timeout_seconds']})
+            create_json(output/'command.json', {'command':command, 'cwd':str(ROOT), 'timeout_seconds':config['process_timeout_seconds'], 'cpu_affinity':cpus})
+            if config.get('idle_baseline_seconds'):
+                result['idle_baseline'] = idle_baseline(rapl, config['idle_baseline_seconds'])
+                create_json(output/'idle-baseline.json', result['idle_baseline'])
             result['events'].append({'phase':'workload_launch', 'at_utc':stamp()})
             result['workload_launched'] = True # Exact measurement boundaries remain in the Java records.
-            result['process_exit_code'] = process(command, ROOT, env, output/'stdout.log', output/'stderr.log', config['process_timeout_seconds'])
+            result['process_exit_code'] = process(command, ROOT, env, output/'stdout.log', output/'stderr.log', config['process_timeout_seconds'], cpus)
             state = host_state()
             create_json(output/'system-after.json', state)
             require_mains(state)
             if result['process_exit_code'] != 0:
                 raise ValueError('Processo Java terminou com erro; registros preservados.')
-            result['verified_measurement'] = require_result(output, spec, selection, config, args.aplicacao, params, args.configuracao, CATEGORIES[args.categoria][1])
+            result['verified_measurement'] = require_result(output, spec, selection, config, args.aplicacao, params, args.configuracao, CATEGORIES[args.categoria][1], cpus)
             result['measurement_verified'] = True
             result['status'] = 'success'
             code = 0

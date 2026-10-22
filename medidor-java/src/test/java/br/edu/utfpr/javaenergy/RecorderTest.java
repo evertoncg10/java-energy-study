@@ -55,6 +55,31 @@ class RecorderTest {
         assertTrue(summary.contains("\"requires_external_exit_code_check\":true"));
     }
 
+    @Test void requiresEveryExpectedMeasuredIteration() throws Exception {
+        Path output = temporary.resolve("run");
+        var recorder = new RunRecorder(output);
+        recorder.expectMeasured(3);
+        recorder.iteration(Map.of("application", "pmd", "warmup", true), true, true);
+        recorder.iteration(Map.of("application", "pmd", "warmup", false), true, false);
+        recorder.iteration(Map.of("application", "pmd", "warmup", false), true, false);
+        recorder.finish();
+        String summary = Files.readString(output.resolve("summary.json"));
+        assertTrue(summary.contains("\"status\":\"failure\""));
+        assertTrue(summary.contains("Expected exactly 3 measured iteration(s)"));
+    }
+
+    @Test void acceptsThreeMeasuredIterationsWhenExpected() throws Exception {
+        Path output = temporary.resolve("run");
+        var recorder = new RunRecorder(output);
+        recorder.expectMeasured(3);
+        recorder.iteration(Map.of("application", "pmd", "warmup", true), true, true);
+        for (int i = 0; i < 3; i++) recorder.iteration(Map.of("application", "pmd", "warmup", false), true, false);
+        recorder.finish();
+        String summary = Files.readString(output.resolve("summary.json"));
+        assertTrue(summary.contains("\"status\":\"measurement_valid\""));
+        assertTrue(summary.contains("\"measured_iterations\":3"));
+    }
+
     @Test void encodesControlCharactersNullAndUnicodeWithoutInvalidJsonNumbers() {
         var record = new LinkedHashMap<String, Object>();
         record.put("text", "linha\n\"\\\t\u0001á😀");
