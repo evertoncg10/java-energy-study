@@ -66,7 +66,7 @@
   "assumed_power_upper_bound_w": 1000,
   "meter": {
     "path": "medidor-java/target/java-energy-meter-0.1.0.jar",
-    "sha256": "ATUALIZAR_APOS_COMPILAR"
+    "sha256": "415ddd802fbcde66e77e2f7c1262e79680d92b8fef7a49468a1559ff26339995"
   },
   "dacapo": {
     "path": "ferramentas/dacapo/dacapo-23.11-MR2-chopin.jar",
