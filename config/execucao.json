@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "protocol_status": "provisorio",
+  "protocol_status": "fixado",
   "configurations": {
     "A": {"sdkman_id": "17.0.19-tem", "java_feature": 17, "java_version": "17.0.19", "runtime_version": "17.0.19+10", "compact_headers": null},
     "B": {"sdkman_id": "21.0.11-tem", "java_feature": 21, "java_version": "21.0.11", "runtime_version": "21.0.11+10-LTS", "compact_headers": null},
@@ -8,16 +8,21 @@
     "D": {"sdkman_id": "25.0.3-tem", "java_feature": 25, "java_version": "25.0.3", "runtime_version": "25.0.3+9-LTS", "compact_headers": true}
   },
   "applications": {
-    "avrora": {"input": "default", "threads": 1, "heap_initial": "256m", "heap_max": "1g"},
-    "lusearch": {"input": "default", "threads": 1, "heap_initial": "256m", "heap_max": "1g"},
-    "pmd": {"input": "default", "threads": 1, "heap_initial": "256m", "heap_max": "1g"}
+    "avrora": {"input": "default", "threads": 1, "heap_initial": "1g", "heap_max": "1g", "warmup_iterations": 12, "role": "exploratorio"},
+    "lusearch": {"input": "default", "threads": 1, "heap_initial": "1g", "heap_max": "1g", "warmup_iterations": 1, "role": "principal"},
+    "pmd": {"input": "default", "threads": 1, "heap_initial": "1g", "heap_max": "1g", "warmup_iterations": 7, "role": "principal"}
   },
   "warmup_iterations": 1,
+  "measured_iterations": 3,
+  "cpu_affinity": "cpu_core_um_por_nucleo",
+  "idle_baseline_seconds": 10,
+  "gc_log": true,
+  "session": {"blocks": 15, "pause_min_seconds": 10, "idle_plus_celsius": 8.0, "max_wait_seconds": 120},
   "process_timeout_seconds": 600,
   "rapl_directory": "/sys/class/powercap/intel-rapl:0",
   "sample_interval_ms": 100,
   "max_gap_ms": 10000,
   "assumed_power_upper_bound_w": 1000,
-  "meter": {"path": "medidor-java/target/java-energy-meter-0.1.0.jar", "sha256": "bcbfa9695fbeb4590829f5124c5b90e6aedf08dfea47085aaac134af274ba700"},
+  "meter": {"path": "medidor-java/target/java-energy-meter-0.1.0.jar", "sha256": "415ddd802fbcde66e77e2f7c1262e79680d92b8fef7a49468a1559ff26339995"},
   "dacapo": {"path": "ferramentas/dacapo/dacapo-23.11-MR2-chopin.jar", "version": "23.11-MR2-chopin", "sha256": "c488cc61fcd02bb04b87e601fd80517b8b0991c0baf564cae17538fdc1edb792"}
 }

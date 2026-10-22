@@ -97,8 +97,15 @@ def require_config(config, category):
         raise ValueError('gc_log deve ser verdadeiro ou falso.')
     if type(config['process_timeout_seconds']) is not int or config['process_timeout_seconds'] < 1:
         raise ValueError('Limite de duração inválido.')
+    roles = [params.get('role', 'principal') for params in config['applications'].values()]
+    if any(role not in ROLES for role in roles):
+        raise ValueError('Papel de aplicação desconhecido (principal ou exploratorio).')
     if category == 'oficial' and config.get('protocol_status') != 'fixado':
         raise ValueError('Coleta oficial bloqueada: protocolo provisório. Fixar regras na T13 antes da coleta.')
+    if category == 'oficial':
+        session = config.get('session', {})
+        if 'principal' not in roles or type(session.get('blocks')) is not int or session['blocks'] < 1:
+            raise ValueError('Protocolo oficial exige ao menos uma aplicação principal e a quantidade de blocos.')
 
 
 def permission_command(energy):
@@ -227,6 +234,7 @@ def measured_count(config):
 
 
 AFFINITY_POLICIES = (None, 'cpu_core_um_por_nucleo')
+ROLES = ('principal', 'exploratorio')  # Exploratory applications run in the same blocks but stay out of the conclusions
 
 
 def cpu_list(text):

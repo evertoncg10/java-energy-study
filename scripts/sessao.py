@@ -19,14 +19,21 @@ spec.loader.exec_module(run)
 
 
 def make_plan(config, config_path, category, blocks, seed, applications=None, pause=10, delta=8.0, max_wait=120,
-              idle_seconds=60, session_warmup=('pmd', 'B'), budget=None):
+              idle_seconds=60, session_warmup=('pmd', 'B'), budget=None, first_block=1):
     """Every block holds each application × configuration once, in an order drawn from the seed."""
     applications = applications or sorted(config['applications'])
-    if any(app not in config['applications'] for app in applications) or blocks < 1:
+    if any(app not in config['applications'] for app in applications) or blocks < 1 or first_block < 1:
         raise ValueError('Aplicações ou quantidade de blocos inválidas.')
+    if category == 'oficial':
+        # Official sessions split the frozen design; block numbers continue across sessions.
+        fixed = config['session']
+        if sorted(applications) != sorted(config['applications']) or first_block + blocks - 1 > fixed['blocks']:
+            raise ValueError('Sessão oficial deve usar todas as aplicações e caber nos %d blocos fixados.' % fixed['blocks'])
+        if (pause, delta, max_wait) != (fixed['pause_min_seconds'], fixed['idle_plus_celsius'], fixed['max_wait_seconds']):
+            raise ValueError('Pausa e limite térmico da sessão oficial devem ser os fixados na configuração.')
     rng = random.Random(seed)
     runs = []
-    for block in range(1, blocks + 1):
+    for block in range(first_block, first_block + blocks):
         cells = [(app, conf) for app in applications for conf in 'ABCD']
         rng.shuffle(cells)
         for app, conf in cells:
@@ -36,7 +43,8 @@ def make_plan(config, config_path, category, blocks, seed, applications=None, pa
     parent = ROOT/'dados'/run.CATEGORIES[category][0]
     return {'schema_version': 1, 'created_at_utc': run.stamp(), 'category': category,
             'config': str(Path(config_path).resolve()), 'config_sha256': run.sha256(Path(config_path)),
-            'output': str(parent/stamp), 'seed': seed, 'blocks': blocks, 'applications': applications,
+            'output': str(parent/stamp), 'seed': seed, 'blocks': blocks, 'first_block': first_block,
+            'applications': applications,
             'session_warmup': {'application': session_warmup[0], 'configuration': session_warmup[1],
                                'name': 'aquecimento-maquina', 'analyzed': False},
             'pause_min_seconds': pause, 'thermal_gate': {'sensor': 'x86_pkg_temp', 'idle_plus_celsius': delta,
@@ -143,7 +151,8 @@ def run_session(plan_path, resume=False):
         warm = plan['session_warmup']
         attempt({'application': warm['application'], 'configuration': warm['configuration']}, 0, 0,
                 warm['name']+('-'+session if resume else ''))
-        for block in range(1, plan['blocks'] + 1):
+        first = plan.get('first_block', 1)
+        for block in range(first, first + plan['blocks']):
             failed = []
             for entry in (x for x in plan['runs'] if x['block'] == block):
                 if entry['name'] in done:
@@ -174,9 +183,10 @@ def main(argv=None):
     p.add_argument('--blocos', type=int, required=True)
     p.add_argument('--semente', type=int, required=True)
     p.add_argument('--aplicacoes', nargs='+')
-    p.add_argument('--pausa-minima', type=int, default=10)
-    p.add_argument('--acima-da-ociosa', type=float, default=8.0)
-    p.add_argument('--espera-maxima', type=int, default=120)
+    p.add_argument('--primeiro-bloco', type=int, default=1, help='Número do primeiro bloco, para continuar a numeração entre sessões.')
+    p.add_argument('--pausa-minima', type=int)
+    p.add_argument('--acima-da-ociosa', type=float)
+    p.add_argument('--espera-maxima', type=int)
     p.add_argument('--orcamento-segundos', type=int)
     p.add_argument('--plano', type=Path, required=True, help='Arquivo novo onde o plano é gravado antes da execução.')
     e = sub.add_parser('executar')
@@ -186,8 +196,12 @@ def main(argv=None):
     if args.modo == 'planejar':
         config = json.loads(args.config.read_text())
         run.require_config(config, args.categoria)
+        fixed = config.get('session', {})
+        pause = args.pausa_minima if args.pausa_minima is not None else fixed.get('pause_min_seconds', 10)
+        delta = args.acima_da_ociosa if args.acima_da_ociosa is not None else fixed.get('idle_plus_celsius', 8.0)
+        wait = args.espera_maxima if args.espera_maxima is not None else fixed.get('max_wait_seconds', 120)
         plan = make_plan(config, args.config, args.categoria, args.blocos, args.semente, args.aplicacoes,
-                         args.pausa_minima, args.acima_da_ociosa, args.espera_maxima, budget=args.orcamento_segundos)
+                         pause, delta, wait, budget=args.orcamento_segundos, first_block=args.primeiro_bloco)
         args.plano.parent.mkdir(parents=True, exist_ok=True)
         run.create_json(args.plano, plan)
         print('PLANO='+str(args.plano)+' processos='+str(len(plan['runs'])+1)+' saida='+plan['output'])

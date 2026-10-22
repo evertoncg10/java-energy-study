@@ -51,6 +51,7 @@ class ExecutionTest(unittest.TestCase):
             run.require_identity(self.identity,self.config['configurations']['D'],self.selection)
 
     def test_official_collection_requires_frozen_protocol(self):
+        self.config['protocol_status'] = 'provisorio'
         with self.assertRaisesRegex(ValueError,'protocolo provisório'):
             run.require_config(self.config,'oficial')
 

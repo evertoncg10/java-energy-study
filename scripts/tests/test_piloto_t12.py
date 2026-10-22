@@ -53,10 +53,14 @@ class ConfigTest(unittest.TestCase):
 
     def test_per_application_warmup_overrides_global(self):
         self.assertEqual(run.warmups(PILOT, 'lusearch'), 5)
-        self.assertEqual(run.warmups(CONFIG, 'pmd'), CONFIG['warmup_iterations'])
+        old = copy.deepcopy(PILOT)
+        del old['applications']['pmd']['warmup_iterations']
+        self.assertEqual(run.warmups(old, 'pmd'), old['warmup_iterations'])
 
     def test_old_configs_keep_one_measured_iteration(self):
-        self.assertEqual(run.measured_count(CONFIG), 1)
+        old = copy.deepcopy(PILOT)
+        del old['measured_iterations']
+        self.assertEqual(run.measured_count(old), 1)
 
     def test_rejects_unknown_affinity_and_bad_measured_count(self):
         bad = copy.deepcopy(PILOT)
@@ -67,6 +71,43 @@ class ConfigTest(unittest.TestCase):
         bad['measured_iterations'] = 0
         with self.assertRaisesRegex(ValueError, 'medidas'):
             run.require_config(bad, 'piloto')
+
+
+class OfficialConfigTest(unittest.TestCase):
+    def test_frozen_protocol_matches_t12_decision(self):
+        run.require_config(CONFIG, 'oficial')
+        self.assertEqual({a: run.warmups(CONFIG, a) for a in CONFIG['applications']}, {'avrora': 12, 'lusearch': 1, 'pmd': 7})
+        self.assertEqual({a: p['role'] for a, p in CONFIG['applications'].items()},
+                         {'avrora': 'exploratorio', 'lusearch': 'principal', 'pmd': 'principal'})
+        self.assertEqual(run.measured_count(CONFIG), 3)
+        self.assertEqual(CONFIG['meter']['sha256'], PILOT['meter']['sha256'])
+
+    def test_rejects_unknown_role_and_official_without_main_application(self):
+        bad = copy.deepcopy(CONFIG)
+        bad['applications']['pmd']['role'] = 'secundario'
+        with self.assertRaisesRegex(ValueError, 'Papel'):
+            run.require_config(bad, 'oficial')
+        bad = copy.deepcopy(CONFIG)
+        for params in bad['applications'].values():
+            params['role'] = 'exploratorio'
+        with self.assertRaisesRegex(ValueError, 'principal'):
+            run.require_config(bad, 'oficial')
+
+    def test_official_sessions_continue_block_numbers_within_the_design(self):
+        path = SCRIPTS.parent/'config/execucao.json'
+        plan = session.make_plan(CONFIG, path, 'oficial', 4, 1, first_block=5)
+        self.assertEqual(sorted({r['block'] for r in plan['runs']}), [5, 6, 7, 8])
+        self.assertTrue(plan['runs'][0]['name'].startswith('b05-'))
+        self.assertEqual(len(plan['runs']), 48)
+        with self.assertRaisesRegex(ValueError, '15 blocos'):
+            session.make_plan(CONFIG, path, 'oficial', 4, 1, first_block=13)
+
+    def test_official_session_keeps_frozen_cooling(self):
+        path = SCRIPTS.parent/'config/execucao.json'
+        with self.assertRaisesRegex(ValueError, 'fixados'):
+            session.make_plan(CONFIG, path, 'oficial', 3, 1, pause=5)
+        with self.assertRaisesRegex(ValueError, '15 blocos'):
+            session.make_plan(CONFIG, path, 'oficial', 3, 1, applications=['pmd'])
 
 
 class ResultTest(unittest.TestCase):
