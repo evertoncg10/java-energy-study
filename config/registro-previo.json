@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "registrado_em": "2026-10-23",
+  "antes_da_sessao": "T16 (sessão 1), 2026-10-24 14:00 America/Sao_Paulo",
+  "metodologia": "Design Science Research com avaliação experimental (forma híbrida)",
+  "artefato": "PAE-JVM – Protocolo de Avaliação Energética de configurações da JVM (medidor integrado ao DaCapo, seleção verificada do JDK, orquestrador de sessões, regras de ruído, falha e análise)",
+  "protocolo_coleta": "config/execucao.json (protocol_status fixado na T13), sem alteração",
+  "pergunta_projeto": "Como avaliar, de forma confiável e reprodutível, o efeito de versões e opções da JVM sobre a energia e o tempo de execução em um computador pessoal sem medidor externo?",
+  "perguntas_conhecimento": {
+    "QC1": "Ao ativar os cabeçalhos compactos no Eclipse Temurin 25, o que muda na energia do processador e no tempo de execução da mesma tarefa, e essa mudança segue o mecanismo esperado (menor ocupação de memória e menos trabalho de coleta de lixo)?",
+    "QC2": "Nas atualizações do Temurin 17 para o 21 e do 21 para o 25, a mudança de energia acompanha a mudança de tempo?"
+  },
+  "aplicacoes_principais": [
+    "lusearch",
+    "pmd"
+  ],
+  "aplicacoes_exploratorias": [
+    "avrora"
+  ],
+  "intervalo_confianca": {
+    "tipo": "bootstrap pareado por bloco",
+    "nivel": 0.95,
+    "reamostragens": 10000
+  },
+  "criterios_avaliacao_artefato": {
+    "E1_repetibilidade": {
+      "medida": "CV da energia por aplicação x configuração",
+      "limite": "<= 5% nas principais"
+    },
+    "E2_reprodutibilidade_sessoes": {
+      "medida": "maior/menor mediana de energia entre sessões - 1",
+      "limite": "<= 5% nas principais"
+    },
+    "E3_sensibilidade": {
+      "medida": "meia-largura do IC 95% da razão D/C da energia",
+      "limite": "<= 3 pontos percentuais nas principais"
+    },
+    "E4_intrusao": {
+      "medida": "tempo médio das iterações medidas / tempo da última preparação - 1",
+      "limite": "mediana <= 2% nas principais"
+    },
+    "E5_rastreabilidade": {
+      "medida": "processos com evidência completa",
+      "limite": "100%"
+    },
+    "E6_viabilidade": {
+      "medida": "tempo de máquina por sessão e proporção de falhas",
+      "limite": "<= 1h30 por sessão; falhas <= 5%"
+    },
+    "E7_comparacao_ingenua": {
+      "medida": "conclusão e variação de uma medição sem preparação, sem núcleos fixos e sem sorteio",
+      "limite": "descritivo",
+      "planejado": "sessão curta (cerca de 1 h de máquina) entre 31/10 e 13/11/2026, fora da amostra oficial"
+    }
+  },
+  "hipoteses": {
+    "H1": {
+      "enunciado": "Energia do pacote menor em D do que em C.",
+      "medida": "razão D/C da energia",
+      "apoiada_se": "IC 95% todo abaixo de 1",
+      "refutada_se": "IC 95% todo acima de 1"
+    },
+    "H2": {
+      "enunciado": "Mudança de energia D/C acompanha a de tempo; potência média sem mudança relevante.",
+      "medida": "razão D/C da potência média",
+      "apoiada_se": "IC 95% dentro de [0.98, 1.02]",
+      "refutada_se": "IC 95% não contém 1"
+    },
+    "H3a": {
+      "enunciado": "Menor ocupação do heap após coleta em D.",
+      "medida": "razão D/C da mediana do heap após coleta (processo inteiro)",
+      "apoiada_se": "IC 95% todo abaixo de 1"
+    },
+    "H3b": {
+      "enunciado": "Menos coletas ou menos tempo de pausa em D.",
+      "medida": "razões D/C do número de coletas e da soma das pausas (processo inteiro)",
+      "apoiada_se": "IC 95% de ao menos uma razão todo abaixo de 1"
+    },
+    "H4": {
+      "enunciado": "Maior redução de energia na aplicação com maior redução de heap.",
+      "tipo": "exploratória, descritiva"
+    },
+    "H5": {
+      "enunciado": "Em B/A e C/B a mudança de energia acompanha a de tempo.",
+      "medida": "razões de potência B/A e C/B",
+      "tipo": "exploratória",
+      "apoiada_se": "IC 95% dentro de [0.98, 1.02]"
+    }
+  },
+  "regra": "Hipóteses, medidas e limites não são alterados depois de ver dados oficiais. Qualquer desvio é registrado e relatado como desvio."
+}
