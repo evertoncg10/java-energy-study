@@ -51,6 +51,16 @@ class ManifestTest(unittest.TestCase):
             self.assertEqual(manifesto.check(base, data),
                              ['faltando: progresso.jsonl', 'a mais: extra.txt', 'alterado: b01-001-pmd-D/resultado.json'])
 
+    def test_check_can_ignore_scratch_left_out_of_git(self):
+        with tempfile.TemporaryDirectory() as temp:
+            base = fake_session(Path(temp))
+            (base/'b01-001-pmd-D/scratch').mkdir()
+            (base/'b01-001-pmd-D/scratch/stdout.log').write_text('saida da carga')
+            data = manifesto.make_manifest(base)
+            (base/'b01-001-pmd-D/scratch/stdout.log').unlink()
+            self.assertEqual(manifesto.check(base, data), ['faltando: b01-001-pmd-D/scratch/stdout.log'])
+            self.assertEqual(manifesto.check(base, data, skip_scratch=True), [])
+
     def test_cli_never_overwrites_and_rejects_output_inside_session(self):
         with tempfile.TemporaryDirectory() as temp:
             base = fake_session(Path(temp))

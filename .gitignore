@@ -44,6 +44,8 @@ ferramentas/**/*.tgz
 /ferramentas/dacapo/
 /scratch/
 /dados/verificacao/*
+# Pasta de trabalho do DaCapo (saídas das cargas): entra no manifesto e no pacote completo, fica fora do Git
+/dados/**/scratch/
 
 # Documentação e configuração de editor mantidas na pasta local de documentos
 *.md
