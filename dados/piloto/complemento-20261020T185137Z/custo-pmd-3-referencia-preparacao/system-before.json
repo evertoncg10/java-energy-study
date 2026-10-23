@@ -1,0 +1,63 @@
+{
+  "at_utc": "2026-10-20T18:55:10.267400+00:00",
+  "mains": [
+    {
+      "name": "ACAD",
+      "online": "1"
+    }
+  ],
+  "meminfo": "MemTotal:       16081556 kB\nMemFree:         2333360 kB\nMemAvailable:    8532396 kB\nBuffers:          313248 kB\nCached:          6845124 kB\nSwapCached:       356636 kB\nActive:          4225980 kB\nInactive:        7193124 kB\nActive(anon):    3148852 kB\nInactive(anon):  1874456 kB\nActive(file):    1077128 kB\nInactive(file):  5318668 kB\nUnevictable:      525196 kB\nMlocked:              48 kB\nSwapTotal:      32767996 kB\nSwapFree:       30449488 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:              4068 kB\nWriteback:            20 kB\nAnonPages:       4752508 kB\nMapped:           945460 kB\nShmem:            762592 kB\nKReclaimable:     430512 kB\nSlab:             763472 kB\nSReclaimable:     430068 kB\nSUnreclaim:       333404 kB\nKernelStack:       29360 kB\nPageTables:        95616 kB\nSecPageTables:     10632 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    40808772 kB\nCommitted_AS:   31608712 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:      143884 kB\nVmallocChunk:          0 kB\nPercpu:            22160 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:         0 kB\nShmemHugePages:   493568 kB\nShmemPmdMapped:        0 kB\nFileHugePages:     77824 kB\nFilePmdMapped:         0 kB\nCmaTotal:              0 kB\nCmaFree:          710048 kB\nUnaccepted:            0 kB\nBalloon:               0 kB\nGPUActive:             0 kB\nGPUReclaim:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:     1224960 kB\nDirectMap2M:    14217216 kB\nDirectMap1G:     1048576 kB",
+  "loadavg": "2.40 2.15 2.10 1/1812 54854",
+  "thermal_zones": [
+    {
+      "name": "thermal_zone2",
+      "type": "INT3400 Thermal",
+      "temperature_millicelsius": "20000"
+    },
+    {
+      "name": "thermal_zone0",
+      "type": "acpitz",
+      "temperature_millicelsius": "77000"
+    },
+    {
+      "name": "thermal_zone9",
+      "type": "iwlwifi_1",
+      "temperature_millicelsius": "49000"
+    },
+    {
+      "name": "thermal_zone7",
+      "type": "TCPU_PCI",
+      "temperature_millicelsius": "77000"
+    },
+    {
+      "name": "thermal_zone5",
+      "type": "SEN5",
+      "temperature_millicelsius": "65050"
+    },
+    {
+      "name": "thermal_zone3",
+      "type": "SEN3",
+      "temperature_millicelsius": "71050"
+    },
+    {
+      "name": "thermal_zone1",
+      "type": "SEN2",
+      "temperature_millicelsius": "57050"
+    },
+    {
+      "name": "thermal_zone8",
+      "type": "x86_pkg_temp",
+      "temperature_millicelsius": "77000"
+    },
+    {
+      "name": "thermal_zone6",
+      "type": "TCPU",
+      "temperature_millicelsius": "77050"
+    },
+    {
+      "name": "thermal_zone4",
+      "type": "SEN4",
+      "temperature_millicelsius": "62050"
+    }
+  ]
+}

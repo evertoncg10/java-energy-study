@@ -1,0 +1,22 @@
+{
+  "category": "pilot",
+  "kind": "overhead_reference",
+  "exit_code": 0,
+  "valid": true,
+  "final_dacapo_duration_ms": 19239,
+  "warmup_durations_ms": [
+    [
+      "1",
+      "18862"
+    ],
+    [
+      "2",
+      "18869"
+    ],
+    [
+      "3",
+      "19380"
+    ]
+  ],
+  "process_wall_seconds": 77.86929665500065
+}

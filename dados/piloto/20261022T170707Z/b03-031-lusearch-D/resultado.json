@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "started_at_utc": "2026-10-22T17:58:07.711897+00:00",
+  "mode": "executar",
+  "configuration": "D",
+  "category": "pilot",
+  "application": "lusearch",
+  "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/20261022T170707Z/b03-031-lusearch-D",
+  "status": "success",
+  "events": [
+    {
+      "phase": "sdkman_selected",
+      "at_utc": "2026-10-22T17:58:07.777055+00:00",
+      "jdk": "25.0.3-tem",
+      "java": "/home/everton/.sdkman/candidates/java/25.0.3-tem/bin/java"
+    },
+    {
+      "phase": "java_identity_verified",
+      "at_utc": "2026-10-22T17:58:07.844146+00:00"
+    },
+    {
+      "phase": "rapl_after_sdkman",
+      "at_utc": "2026-10-22T17:58:07.844391+00:00",
+      "directory": "/sys/devices/virtual/powercap/intel-rapl/intel-rapl:0",
+      "domain": "package-0",
+      "release_requested": false,
+      "release_performed": false,
+      "first_energy_uj": 56179210123,
+      "last_energy_uj": 56179554239,
+      "before_nanos": 18658380151670,
+      "after_nanos": 18658430778794,
+      "range_uj": 262143328850,
+      "uid": 1000,
+      "mode": "0o400",
+      "readable": true
+    },
+    {
+      "phase": "workload_launch",
+      "at_utc": "2026-10-22T17:58:17.965051+00:00"
+    }
+  ],
+  "process_exit_code": 0,
+  "workload_launched": true,
+  "measurement_verified": true,
+  "session_id": "20261022T170707Z",
+  "block_id": "3",
+  "order": 31,
+  "config_sha256": "215e839d3b9880691fbdc48f9c2d14b7ee67c92f22f7df19c990b3d1758c72f4",
+  "sdkman_command": [
+    "bash",
+    "/home/everton/Documentos/Projetos_Java/java-energy-study/scripts/selecionar-java.sh",
+    "/home/everton/.sdkman",
+    "25.0.3-tem",
+    "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/20261022T170707Z/b03-031-lusearch-D/sdkman.json"
+  ],
+  "cpu_affinity": {
+    "policy": "cpu_core_um_por_nucleo",
+    "cpus": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10
+    ]
+  },
+  "idle_baseline": {
+    "seconds": 10.000696546,
+    "energy_j": 56.619057,
+    "mean_power_w": 5.6615113496915415,
+    "first_energy_uj": 56180795690,
+    "last_energy_uj": 56237414747
+  },
+  "verified_measurement": {
+    "java_runtime_version": "25.0.3+9-LTS",
+    "application": "lusearch",
+    "energy_j": 586.2850183333334,
+    "time_s": 18.038680985333333,
+    "measured_energy_j": [
+      587.698935,
+      587.867392,
+      583.288728
+    ],
+    "measured_time_s": [
+      18.080843888,
+      17.944374627,
+      18.090824441
+    ],
+    "warmup_dacapo_ms": [
+      18252,
+      17878,
+      17935,
+      17951,
+      17950
+    ],
+    "measured_dacapo_ms": [
+      18081,
+      17944,
+      18091
+    ],
+    "available_processors": 6,
+    "validation": true
+  },
+  "finished_at_utc": "2026-10-22T18:00:43.698039+00:00",
+  "total_wall_seconds": 155.98613863500213,
+  "wrapper_exit_code": 0
+}

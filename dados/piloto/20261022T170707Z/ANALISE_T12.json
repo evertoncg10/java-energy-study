@@ -1,0 +1,345 @@
+{
+  "session": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/20261022T170707Z",
+  "category": "piloto",
+  "config_sha256": "215e839d3b9880691fbdc48f9c2d14b7ee67c92f22f7df19c990b3d1758c72f4",
+  "rules": {
+    "tolerance": 0.03,
+    "tail": 3,
+    "min_stable": 5,
+    "warmup_caps": {
+      "avrora": 15,
+      "pmd": 15,
+      "lusearch": 6
+    },
+    "max_mde_at_30": 0.1,
+    "target_delta": 0.05,
+    "n_range": [
+      15,
+      30
+    ]
+  },
+  "failures": [],
+  "applications": {
+    "avrora": {
+      "processes": 12,
+      "failures": 0,
+      "warmup": {
+        "warmup_iterations": 14,
+        "plateau_reached": false,
+        "within_cap": true,
+        "cap": 15,
+        "by_configuration": {
+          "A": {
+            "median_curve_ms": [
+              3245,
+              3842,
+              3954,
+              3920,
+              3968,
+              3889,
+              3980,
+              3960,
+              4041,
+              3932,
+              4000,
+              3973,
+              3969,
+              3640,
+              3604
+            ],
+            "plateau_start": 14,
+            "stable_iterations": 2
+          },
+          "B": {
+            "median_curve_ms": [
+              3063,
+              3648,
+              3903,
+              3843,
+              4005,
+              4019,
+              4009,
+              3827,
+              4028,
+              4004,
+              4028,
+              4002,
+              3997,
+              3994,
+              3990
+            ],
+            "plateau_start": 9,
+            "stable_iterations": 7
+          },
+          "C": {
+            "median_curve_ms": [
+              3047,
+              3522,
+              3728,
+              3677,
+              3794,
+              3739,
+              3674,
+              3726,
+              3770,
+              3710,
+              3718,
+              3796,
+              3802,
+              3800,
+              3795
+            ],
+            "plateau_start": 8,
+            "stable_iterations": 8
+          },
+          "D": {
+            "median_curve_ms": [
+              3249,
+              3540,
+              3769,
+              3665,
+              3725,
+              3789,
+              3753,
+              3686,
+              3721,
+              3806,
+              3784,
+              3775,
+              3716,
+              3812,
+              3817
+            ],
+            "plateau_start": 9,
+            "stable_iterations": 7
+          }
+        }
+      },
+      "energy_cv": 0.03754687886070558,
+      "energy_cv_first_measured_only": 0.032377617706423036,
+      "time_cv": 0.025804341581734645,
+      "degrees_of_freedom": 8,
+      "smallest_detectable_at_30": 0.027144774818854932,
+      "keep": false,
+      "processes_needed": 15,
+      "overhead_pct": {
+        "median": -0.4146969459156713,
+        "min": -10.98814229249012,
+        "max": 1.6014234875444844,
+        "plateau_reached": false
+      },
+      "seconds_per_process_estimate": 85.58512956099862,
+      "idle_baseline_power_w": 5.2561861124062705
+    },
+    "lusearch": {
+      "processes": 12,
+      "failures": 0,
+      "warmup": {
+        "warmup_iterations": 1,
+        "plateau_reached": true,
+        "within_cap": true,
+        "cap": 6,
+        "by_configuration": {
+          "A": {
+            "median_curve_ms": [
+              19114,
+              18856,
+              18759,
+              18677,
+              18668,
+              18734,
+              18842,
+              18865
+            ],
+            "plateau_start": 1,
+            "stable_iterations": 8
+          },
+          "B": {
+            "median_curve_ms": [
+              18197,
+              17737,
+              17701,
+              17783,
+              17768,
+              17824,
+              17811,
+              17844
+            ],
+            "plateau_start": 1,
+            "stable_iterations": 8
+          },
+          "C": {
+            "median_curve_ms": [
+              18355,
+              18003,
+              18100,
+              18152,
+              17963,
+              18184,
+              18174,
+              18145
+            ],
+            "plateau_start": 1,
+            "stable_iterations": 8
+          },
+          "D": {
+            "median_curve_ms": [
+              18252,
+              17878,
+              17935,
+              17867,
+              17950,
+              17960,
+              18093,
+              18091
+            ],
+            "plateau_start": 1,
+            "stable_iterations": 8
+          }
+        }
+      },
+      "energy_cv": 0.023387897682320597,
+      "energy_cv_first_measured_only": 0.03622380644560693,
+      "time_cv": 0.008171340056557064,
+      "degrees_of_freedom": 8,
+      "smallest_detectable_at_30": 0.016908441802267065,
+      "keep": true,
+      "processes_needed": 15,
+      "overhead_pct": {
+        "median": 0.4711073753297157,
+        "min": -0.2822201317027262,
+        "max": 1.2303067416355784,
+        "plateau_reached": true
+      },
+      "seconds_per_process_estimate": 94.52505927950007,
+      "idle_baseline_power_w": 5.362315531659801
+    },
+    "pmd": {
+      "processes": 12,
+      "failures": 0,
+      "warmup": {
+        "warmup_iterations": 7,
+        "plateau_reached": true,
+        "within_cap": true,
+        "cap": 15,
+        "by_configuration": {
+          "A": {
+            "median_curve_ms": [
+              5567,
+              3683,
+              3265,
+              3212,
+              3183,
+              3184,
+              3152,
+              3143,
+              3139,
+              3132,
+              3120,
+              3123,
+              3114,
+              3117,
+              3095
+            ],
+            "plateau_start": 5,
+            "stable_iterations": 11
+          },
+          "B": {
+            "median_curve_ms": [
+              5258,
+              3340,
+              3057,
+              3022,
+              2982,
+              2975,
+              2957,
+              2948,
+              2952,
+              2965,
+              2938,
+              2924,
+              2908,
+              2915,
+              2910
+            ],
+            "plateau_start": 5,
+            "stable_iterations": 11
+          },
+          "C": {
+            "median_curve_ms": [
+              4928,
+              3043,
+              2852,
+              2834,
+              2804,
+              2789,
+              2793,
+              2755,
+              2770,
+              2756,
+              2752,
+              2745,
+              2722,
+              2763,
+              2730
+            ],
+            "plateau_start": 5,
+            "stable_iterations": 11
+          },
+          "D": {
+            "median_curve_ms": [
+              4891,
+              3056,
+              2901,
+              2848,
+              2857,
+              2843,
+              2813,
+              2794,
+              2820,
+              2798,
+              2808,
+              2785,
+              2802,
+              2757,
+              2758
+            ],
+            "plateau_start": 7,
+            "stable_iterations": 9
+          }
+        }
+      },
+      "energy_cv": 0.011250750763494003,
+      "energy_cv_first_measured_only": 0.011959794768437488,
+      "time_cv": 0.006577978384830226,
+      "degrees_of_freedom": 8,
+      "smallest_detectable_at_30": 0.008133807796677293,
+      "keep": true,
+      "processes_needed": 15,
+      "overhead_pct": {
+        "median": -0.34842993180589366,
+        "min": -1.17423040304665,
+        "max": 1.1131059245960584,
+        "plateau_reached": true
+      },
+      "seconds_per_process_estimate": 49.94397379049903,
+      "idle_baseline_power_w": 5.261960100155137
+    }
+  },
+  "decision": {
+    "applications": [
+      "lusearch",
+      "pmd"
+    ],
+    "processes_per_cell": 15,
+    "warmup_iterations": {
+      "lusearch": 1,
+      "pmd": 7
+    },
+    "estimated_collection_hours": 2.4078172178333186
+  },
+  "thermal": {
+    "timeouts": 0,
+    "median_wait_seconds": 0.0016854175009939354
+  }
+}

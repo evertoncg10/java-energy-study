@@ -1,0 +1,251 @@
+{
+  "created_at": "2026-10-20T18:19:29.218101+00:00",
+  "status": "preparado_aguardando_fechamento_programas",
+  "scientific_data": false,
+  "repository": "/home/everton/Documentos/Projetos_Java/java-energy-study",
+  "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/20261020T181929Z",
+  "config": "/home/everton/Documentos/Artigo_Escrita_Academica/Arquivos_Planejamento/Docs/07_Evidencias/T11/20261020T181929Z/config-piloto.json",
+  "seed": 20261020,
+  "core_runs": [
+    {
+      "block": 1,
+      "application": "avrora",
+      "configuration": "C",
+      "order": 1
+    },
+    {
+      "block": 1,
+      "application": "avrora",
+      "configuration": "A",
+      "order": 2
+    },
+    {
+      "block": 1,
+      "application": "avrora",
+      "configuration": "D",
+      "order": 3
+    },
+    {
+      "block": 1,
+      "application": "avrora",
+      "configuration": "B",
+      "order": 4
+    },
+    {
+      "block": 1,
+      "application": "pmd",
+      "configuration": "B",
+      "order": 5
+    },
+    {
+      "block": 1,
+      "application": "pmd",
+      "configuration": "C",
+      "order": 6
+    },
+    {
+      "block": 1,
+      "application": "pmd",
+      "configuration": "A",
+      "order": 7
+    },
+    {
+      "block": 1,
+      "application": "pmd",
+      "configuration": "D",
+      "order": 8
+    },
+    {
+      "block": 1,
+      "application": "lusearch",
+      "configuration": "C",
+      "order": 9
+    },
+    {
+      "block": 1,
+      "application": "lusearch",
+      "configuration": "D",
+      "order": 10
+    },
+    {
+      "block": 1,
+      "application": "lusearch",
+      "configuration": "B",
+      "order": 11
+    },
+    {
+      "block": 1,
+      "application": "lusearch",
+      "configuration": "A",
+      "order": 12
+    },
+    {
+      "block": 2,
+      "application": "lusearch",
+      "configuration": "B",
+      "order": 13
+    },
+    {
+      "block": 2,
+      "application": "lusearch",
+      "configuration": "C",
+      "order": 14
+    },
+    {
+      "block": 2,
+      "application": "lusearch",
+      "configuration": "A",
+      "order": 15
+    },
+    {
+      "block": 2,
+      "application": "lusearch",
+      "configuration": "D",
+      "order": 16
+    },
+    {
+      "block": 2,
+      "application": "pmd",
+      "configuration": "D",
+      "order": 17
+    },
+    {
+      "block": 2,
+      "application": "pmd",
+      "configuration": "C",
+      "order": 18
+    },
+    {
+      "block": 2,
+      "application": "pmd",
+      "configuration": "A",
+      "order": 19
+    },
+    {
+      "block": 2,
+      "application": "pmd",
+      "configuration": "B",
+      "order": 20
+    },
+    {
+      "block": 2,
+      "application": "avrora",
+      "configuration": "B",
+      "order": 21
+    },
+    {
+      "block": 2,
+      "application": "avrora",
+      "configuration": "C",
+      "order": 22
+    },
+    {
+      "block": 2,
+      "application": "avrora",
+      "configuration": "D",
+      "order": 23
+    },
+    {
+      "block": 2,
+      "application": "avrora",
+      "configuration": "A",
+      "order": 24
+    }
+  ],
+  "overhead_pairs": [
+    {
+      "pair": 1,
+      "application": "avrora",
+      "configuration": "B",
+      "arms": [
+        "instrumentado",
+        "referencia"
+      ]
+    },
+    {
+      "pair": 1,
+      "application": "lusearch",
+      "configuration": "B",
+      "arms": [
+        "instrumentado",
+        "referencia"
+      ]
+    },
+    {
+      "pair": 1,
+      "application": "pmd",
+      "configuration": "B",
+      "arms": [
+        "instrumentado",
+        "referencia"
+      ]
+    },
+    {
+      "pair": 2,
+      "application": "pmd",
+      "configuration": "B",
+      "arms": [
+        "referencia",
+        "instrumentado"
+      ]
+    },
+    {
+      "pair": 2,
+      "application": "lusearch",
+      "configuration": "B",
+      "arms": [
+        "instrumentado",
+        "referencia"
+      ]
+    },
+    {
+      "pair": 2,
+      "application": "avrora",
+      "configuration": "B",
+      "arms": [
+        "referencia",
+        "instrumentado"
+      ]
+    },
+    {
+      "pair": 3,
+      "application": "lusearch",
+      "configuration": "B",
+      "arms": [
+        "referencia",
+        "instrumentado"
+      ]
+    },
+    {
+      "pair": 3,
+      "application": "pmd",
+      "configuration": "B",
+      "arms": [
+        "instrumentado",
+        "referencia"
+      ]
+    },
+    {
+      "pair": 3,
+      "application": "avrora",
+      "configuration": "B",
+      "arms": [
+        "referencia",
+        "instrumentado"
+      ]
+    }
+  ],
+  "warmup_iterations": 3,
+  "measured_iterations_per_process": 1,
+  "pause_seconds": 10,
+  "session_limit_seconds": 1800,
+  "execution_precondition": "Pesquisador confirmar notebook na tomada e sem uso concorrente por cerca de 30 minutos. Não fechar programas automaticamente.",
+  "limits": [
+    "Duas repetições por combinação são triagem, não determinam estabilidade nem tamanho amostral final.",
+    "Três preparações são candidatas; examinar sua trajetória antes de definir protocolo.",
+    "Custo temporal do conjunto de instrumentação, não precisão energética nem calibração externa.",
+    "RAPL mede pacote do processador incluindo outros processos; não energia exclusiva do Java ou de todo notebook."
+  ],
+  "prior_interrupted_session": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/20261020T181145Z",
+  "restart_reason": "Erro do orquestrador corrigido; reinício completo após fechamento de aplicativos solicitado pelo pesquisador."
+}

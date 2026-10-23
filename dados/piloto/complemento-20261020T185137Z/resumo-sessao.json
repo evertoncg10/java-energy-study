@@ -1,0 +1,514 @@
+{
+  "status": "complete",
+  "failure": null,
+  "category": "pilot",
+  "scientific_comparison_data": false,
+  "elapsed_seconds": 296.11611635600275,
+  "java_default_preserved": true,
+  "records": [
+    {
+      "name": "custo-lusearch-3-referencia-preparacao",
+      "kind": "preparar",
+      "application": "lusearch",
+      "configuration": "B",
+      "code": 0,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/complemento-20261020T185137Z/custo-lusearch-3-referencia-preparacao",
+      "wall_seconds": 0.21491671200055862,
+      "result": {
+        "schema_version": 1,
+        "started_at_utc": "2026-10-20T18:51:47.899670+00:00",
+        "mode": "preparar",
+        "configuration": "B",
+        "category": "pilot",
+        "application": null,
+        "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/complemento-20261020T185137Z/custo-lusearch-3-referencia-preparacao",
+        "status": "prepared",
+        "events": [
+          {
+            "phase": "sdkman_selected",
+            "at_utc": "2026-10-20T18:51:47.964826+00:00",
+            "jdk": "21.0.11-tem",
+            "java": "/home/everton/.sdkman/candidates/java/21.0.11-tem/bin/java"
+          },
+          {
+            "phase": "java_identity_verified",
+            "at_utc": "2026-10-20T18:51:47.998293+00:00"
+          },
+          {
+            "phase": "rapl_after_sdkman",
+            "at_utc": "2026-10-20T18:51:47.998560+00:00",
+            "directory": "/sys/devices/virtual/powercap/intel-rapl/intel-rapl:0",
+            "domain": "package-0",
+            "release_requested": false,
+            "release_performed": false,
+            "first_energy_uj": 104780217601,
+            "last_energy_uj": 104781290963,
+            "before_nanos": 26504401342401,
+            "after_nanos": 26504451943728,
+            "range_uj": 262143328850,
+            "uid": 1000,
+            "mode": "0o400",
+            "readable": true
+          }
+        ],
+        "process_exit_code": null,
+        "workload_launched": false,
+        "measurement_verified": false,
+        "session_id": "complemento-20261020T185137Z",
+        "block_id": "custo-3",
+        "order": 1,
+        "config_sha256": "aab9342c49416c653f2f4bfd456b32e4f75822d0e48f45f50c31b9f13dd91b07",
+        "sdkman_command": [
+          "bash",
+          "/home/everton/Documentos/Projetos_Java/java-energy-study/scripts/selecionar-java.sh",
+          "/home/everton/.sdkman",
+          "21.0.11-tem",
+          "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/complemento-20261020T185137Z/custo-lusearch-3-referencia-preparacao/sdkman.json"
+        ],
+        "finished_at_utc": "2026-10-20T18:51:48.053712+00:00",
+        "total_wall_seconds": 0.154041618003248,
+        "wrapper_exit_code": 0
+      }
+    },
+    {
+      "name": "custo-lusearch-3-referencia",
+      "kind": "reference",
+      "application": "lusearch",
+      "configuration": "B",
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/complemento-20261020T185137Z/custo-lusearch-3-referencia",
+      "result": {
+        "category": "pilot",
+        "kind": "overhead_reference",
+        "exit_code": 0,
+        "valid": true,
+        "final_dacapo_duration_ms": 18635,
+        "warmup_durations_ms": [
+          [
+            "1",
+            "18996"
+          ],
+          [
+            "2",
+            "18701"
+          ],
+          [
+            "3",
+            "18802"
+          ]
+        ],
+        "process_wall_seconds": 76.68697884400171
+      }
+    },
+    {
+      "name": "custo-lusearch-3-instrumentado",
+      "kind": "executar",
+      "application": "lusearch",
+      "configuration": "B",
+      "code": 0,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/complemento-20261020T185137Z/custo-lusearch-3-instrumentado",
+      "wall_seconds": 78.0024394280008,
+      "result": {
+        "schema_version": 1,
+        "started_at_utc": "2026-10-20T18:53:14.835112+00:00",
+        "mode": "executar",
+        "configuration": "B",
+        "category": "pilot",
+        "application": "lusearch",
+        "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/complemento-20261020T185137Z/custo-lusearch-3-instrumentado",
+        "status": "success",
+        "events": [
+          {
+            "phase": "sdkman_selected",
+            "at_utc": "2026-10-20T18:53:14.900333+00:00",
+            "jdk": "21.0.11-tem",
+            "java": "/home/everton/.sdkman/candidates/java/21.0.11-tem/bin/java"
+          },
+          {
+            "phase": "java_identity_verified",
+            "at_utc": "2026-10-20T18:53:14.933423+00:00"
+          },
+          {
+            "phase": "rapl_after_sdkman",
+            "at_utc": "2026-10-20T18:53:14.933561+00:00",
+            "directory": "/sys/devices/virtual/powercap/intel-rapl/intel-rapl:0",
+            "domain": "package-0",
+            "release_requested": false,
+            "release_performed": false,
+            "first_energy_uj": 107851653525,
+            "last_energy_uj": 107852824298,
+            "before_nanos": 26591336443085,
+            "after_nanos": 26591386798005,
+            "range_uj": 262143328850,
+            "uid": 1000,
+            "mode": "0o400",
+            "readable": true
+          },
+          {
+            "phase": "workload_launch",
+            "at_utc": "2026-10-20T18:53:14.999218+00:00"
+          }
+        ],
+        "process_exit_code": 0,
+        "workload_launched": true,
+        "measurement_verified": true,
+        "session_id": "complemento-20261020T185137Z",
+        "block_id": "custo-3",
+        "order": 3,
+        "config_sha256": "aab9342c49416c653f2f4bfd456b32e4f75822d0e48f45f50c31b9f13dd91b07",
+        "sdkman_command": [
+          "bash",
+          "/home/everton/Documentos/Projetos_Java/java-energy-study/scripts/selecionar-java.sh",
+          "/home/everton/.sdkman",
+          "21.0.11-tem",
+          "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/complemento-20261020T185137Z/custo-lusearch-3-instrumentado/sdkman.json"
+        ],
+        "verified_measurement": {
+          "java_runtime_version": "21.0.11+10-LTS",
+          "application": "lusearch",
+          "energy_j": 660.124591,
+          "time_s": 19.28167416,
+          "validation": true
+        },
+        "finished_at_utc": "2026-10-20T18:54:32.775474+00:00",
+        "total_wall_seconds": 77.94037052000203,
+        "wrapper_exit_code": 0
+      }
+    },
+    {
+      "name": "custo-pmd-3-instrumentado",
+      "kind": "executar",
+      "application": "pmd",
+      "configuration": "B",
+      "code": 0,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/complemento-20261020T185137Z/custo-pmd-3-instrumentado",
+      "wall_seconds": 17.20763621199876,
+      "result": {
+        "schema_version": 1,
+        "started_at_utc": "2026-10-20T18:54:42.855709+00:00",
+        "mode": "executar",
+        "configuration": "B",
+        "category": "pilot",
+        "application": "pmd",
+        "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/complemento-20261020T185137Z/custo-pmd-3-instrumentado",
+        "status": "success",
+        "events": [
+          {
+            "phase": "sdkman_selected",
+            "at_utc": "2026-10-20T18:54:42.920730+00:00",
+            "jdk": "21.0.11-tem",
+            "java": "/home/everton/.sdkman/candidates/java/21.0.11-tem/bin/java"
+          },
+          {
+            "phase": "java_identity_verified",
+            "at_utc": "2026-10-20T18:54:42.988124+00:00"
+          },
+          {
+            "phase": "rapl_after_sdkman",
+            "at_utc": "2026-10-20T18:54:42.988590+00:00",
+            "directory": "/sys/devices/virtual/powercap/intel-rapl/intel-rapl:0",
+            "domain": "package-0",
+            "release_requested": false,
+            "release_performed": false,
+            "first_energy_uj": 110794853022,
+            "last_energy_uj": 110795366265,
+            "before_nanos": 26679391565845,
+            "after_nanos": 26679442031615,
+            "range_uj": 262143328850,
+            "uid": 1000,
+            "mode": "0o400",
+            "readable": true
+          },
+          {
+            "phase": "workload_launch",
+            "at_utc": "2026-10-20T18:54:43.052486+00:00"
+          }
+        ],
+        "process_exit_code": 0,
+        "workload_launched": true,
+        "measurement_verified": true,
+        "session_id": "complemento-20261020T185137Z",
+        "block_id": "custo-3",
+        "order": 4,
+        "config_sha256": "aab9342c49416c653f2f4bfd456b32e4f75822d0e48f45f50c31b9f13dd91b07",
+        "sdkman_command": [
+          "bash",
+          "/home/everton/Documentos/Projetos_Java/java-energy-study/scripts/selecionar-java.sh",
+          "/home/everton/.sdkman",
+          "21.0.11-tem",
+          "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/complemento-20261020T185137Z/custo-pmd-3-instrumentado/sdkman.json"
+        ],
+        "verified_measurement": {
+          "java_runtime_version": "21.0.11+10-LTS",
+          "application": "pmd",
+          "energy_j": 134.412132,
+          "time_s": 3.415186971,
+          "validation": true
+        },
+        "finished_at_utc": "2026-10-20T18:54:59.964914+00:00",
+        "total_wall_seconds": 17.10920192300182,
+        "wrapper_exit_code": 0
+      }
+    },
+    {
+      "name": "custo-pmd-3-referencia-preparacao",
+      "kind": "preparar",
+      "application": "pmd",
+      "configuration": "B",
+      "code": 0,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/complemento-20261020T185137Z/custo-pmd-3-referencia-preparacao",
+      "wall_seconds": 0.26597262699942803,
+      "result": {
+        "schema_version": 1,
+        "started_at_utc": "2026-10-20T18:55:10.083854+00:00",
+        "mode": "preparar",
+        "configuration": "B",
+        "category": "pilot",
+        "application": null,
+        "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/complemento-20261020T185137Z/custo-pmd-3-referencia-preparacao",
+        "status": "prepared",
+        "events": [
+          {
+            "phase": "sdkman_selected",
+            "at_utc": "2026-10-20T18:55:10.149078+00:00",
+            "jdk": "21.0.11-tem",
+            "java": "/home/everton/.sdkman/candidates/java/21.0.11-tem/bin/java"
+          },
+          {
+            "phase": "java_identity_verified",
+            "at_utc": "2026-10-20T18:55:10.215725+00:00"
+          },
+          {
+            "phase": "rapl_after_sdkman",
+            "at_utc": "2026-10-20T18:55:10.216040+00:00",
+            "directory": "/sys/devices/virtual/powercap/intel-rapl/intel-rapl:0",
+            "domain": "package-0",
+            "release_requested": false,
+            "release_performed": false,
+            "first_energy_uj": 111757857331,
+            "last_energy_uj": 111758303680,
+            "before_nanos": 26706618886637,
+            "after_nanos": 26706669159696,
+            "range_uj": 262143328850,
+            "uid": 1000,
+            "mode": "0o400",
+            "readable": true
+          }
+        ],
+        "process_exit_code": null,
+        "workload_launched": false,
+        "measurement_verified": false,
+        "session_id": "complemento-20261020T185137Z",
+        "block_id": "custo-3",
+        "order": 5,
+        "config_sha256": "aab9342c49416c653f2f4bfd456b32e4f75822d0e48f45f50c31b9f13dd91b07",
+        "sdkman_command": [
+          "bash",
+          "/home/everton/Documentos/Projetos_Java/java-energy-study/scripts/selecionar-java.sh",
+          "/home/everton/.sdkman",
+          "21.0.11-tem",
+          "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/complemento-20261020T185137Z/custo-pmd-3-referencia-preparacao/sdkman.json"
+        ],
+        "finished_at_utc": "2026-10-20T18:55:10.271248+00:00",
+        "total_wall_seconds": 0.18740198700106703,
+        "wrapper_exit_code": 0
+      }
+    },
+    {
+      "name": "custo-pmd-3-referencia",
+      "kind": "reference",
+      "application": "pmd",
+      "configuration": "B",
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/complemento-20261020T185137Z/custo-pmd-3-referencia",
+      "result": {
+        "category": "pilot",
+        "kind": "overhead_reference",
+        "exit_code": 0,
+        "valid": true,
+        "final_dacapo_duration_ms": 3448,
+        "warmup_durations_ms": [
+          [
+            "1",
+            "5777"
+          ],
+          [
+            "2",
+            "3576"
+          ],
+          [
+            "3",
+            "3406"
+          ]
+        ],
+        "process_wall_seconds": 16.663487013000122
+      }
+    },
+    {
+      "name": "custo-avrora-3-referencia-preparacao",
+      "kind": "preparar",
+      "application": "avrora",
+      "configuration": "B",
+      "code": 0,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/complemento-20261020T185137Z/custo-avrora-3-referencia-preparacao",
+      "wall_seconds": 0.2661117940006079,
+      "result": {
+        "schema_version": 1,
+        "started_at_utc": "2026-10-20T18:55:37.034803+00:00",
+        "mode": "preparar",
+        "configuration": "B",
+        "category": "pilot",
+        "application": null,
+        "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/complemento-20261020T185137Z/custo-avrora-3-referencia-preparacao",
+        "status": "prepared",
+        "events": [
+          {
+            "phase": "sdkman_selected",
+            "at_utc": "2026-10-20T18:55:37.100051+00:00",
+            "jdk": "21.0.11-tem",
+            "java": "/home/everton/.sdkman/candidates/java/21.0.11-tem/bin/java"
+          },
+          {
+            "phase": "java_identity_verified",
+            "at_utc": "2026-10-20T18:55:37.167004+00:00"
+          },
+          {
+            "phase": "rapl_after_sdkman",
+            "at_utc": "2026-10-20T18:55:37.167376+00:00",
+            "directory": "/sys/devices/virtual/powercap/intel-rapl/intel-rapl:0",
+            "domain": "package-0",
+            "release_requested": false,
+            "release_performed": false,
+            "first_energy_uj": 112686826450,
+            "last_energy_uj": 112687441682,
+            "before_nanos": 26733570339205,
+            "after_nanos": 26733620810811,
+            "range_uj": 262143328850,
+            "uid": 1000,
+            "mode": "0o400",
+            "readable": true
+          }
+        ],
+        "process_exit_code": null,
+        "workload_launched": false,
+        "measurement_verified": false,
+        "session_id": "complemento-20261020T185137Z",
+        "block_id": "custo-3",
+        "order": 7,
+        "config_sha256": "aab9342c49416c653f2f4bfd456b32e4f75822d0e48f45f50c31b9f13dd91b07",
+        "sdkman_command": [
+          "bash",
+          "/home/everton/Documentos/Projetos_Java/java-energy-study/scripts/selecionar-java.sh",
+          "/home/everton/.sdkman",
+          "21.0.11-tem",
+          "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/complemento-20261020T185137Z/custo-avrora-3-referencia-preparacao/sdkman.json"
+        ],
+        "finished_at_utc": "2026-10-20T18:55:37.222370+00:00",
+        "total_wall_seconds": 0.18757252000068547,
+        "wrapper_exit_code": 0
+      }
+    },
+    {
+      "name": "custo-avrora-3-referencia",
+      "kind": "reference",
+      "application": "avrora",
+      "configuration": "B",
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/complemento-20261020T185137Z/custo-avrora-3-referencia",
+      "result": {
+        "category": "pilot",
+        "kind": "overhead_reference",
+        "exit_code": 0,
+        "valid": true,
+        "final_dacapo_duration_ms": 5857,
+        "warmup_durations_ms": [
+          [
+            "1",
+            "4861"
+          ],
+          [
+            "2",
+            "5870"
+          ],
+          [
+            "3",
+            "6272"
+          ]
+        ],
+        "process_wall_seconds": 23.07471692499894
+      }
+    },
+    {
+      "name": "custo-avrora-3-instrumentado",
+      "kind": "executar",
+      "application": "avrora",
+      "configuration": "B",
+      "code": 0,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/complemento-20261020T185137Z/custo-avrora-3-instrumentado",
+      "wall_seconds": 23.613302087000193,
+      "result": {
+        "schema_version": 1,
+        "started_at_utc": "2026-10-20T18:56:10.393612+00:00",
+        "mode": "executar",
+        "configuration": "B",
+        "category": "pilot",
+        "application": "avrora",
+        "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/complemento-20261020T185137Z/custo-avrora-3-instrumentado",
+        "status": "success",
+        "events": [
+          {
+            "phase": "sdkman_selected",
+            "at_utc": "2026-10-20T18:56:10.458946+00:00",
+            "jdk": "21.0.11-tem",
+            "java": "/home/everton/.sdkman/candidates/java/21.0.11-tem/bin/java"
+          },
+          {
+            "phase": "java_identity_verified",
+            "at_utc": "2026-10-20T18:56:10.526455+00:00"
+          },
+          {
+            "phase": "rapl_after_sdkman",
+            "at_utc": "2026-10-20T18:56:10.526873+00:00",
+            "directory": "/sys/devices/virtual/powercap/intel-rapl/intel-rapl:0",
+            "domain": "package-0",
+            "release_requested": false,
+            "release_performed": false,
+            "first_energy_uj": 113171010940,
+            "last_energy_uj": 113171518507,
+            "before_nanos": 26766929698191,
+            "after_nanos": 26766980086860,
+            "range_uj": 262143328850,
+            "uid": 1000,
+            "mode": "0o400",
+            "readable": true
+          },
+          {
+            "phase": "workload_launch",
+            "at_utc": "2026-10-20T18:56:10.590457+00:00"
+          }
+        ],
+        "process_exit_code": 0,
+        "workload_launched": true,
+        "measurement_verified": true,
+        "session_id": "complemento-20261020T185137Z",
+        "block_id": "custo-3",
+        "order": 9,
+        "config_sha256": "aab9342c49416c653f2f4bfd456b32e4f75822d0e48f45f50c31b9f13dd91b07",
+        "sdkman_command": [
+          "bash",
+          "/home/everton/Documentos/Projetos_Java/java-energy-study/scripts/selecionar-java.sh",
+          "/home/everton/.sdkman",
+          "21.0.11-tem",
+          "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/complemento-20261020T185137Z/custo-avrora-3-instrumentado/sdkman.json"
+        ],
+        "verified_measurement": {
+          "java_runtime_version": "21.0.11+10-LTS",
+          "application": "avrora",
+          "energy_j": 101.410568,
+          "time_s": 5.683234114,
+          "validation": true
+        },
+        "finished_at_utc": "2026-10-20T18:56:33.913261+00:00",
+        "total_wall_seconds": 23.519666725002025,
+        "wrapper_exit_code": 0
+      }
+    }
+  ]
+}
