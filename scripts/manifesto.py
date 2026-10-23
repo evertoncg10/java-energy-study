@@ -81,10 +81,15 @@ def make_manifest(folder, plan=None):
     return manifest
 
 
-def check(folder, manifest):
+def in_scratch(path):
+    return 'scratch' in path.split('/')[:-1]
+
+
+def check(folder, manifest, skip_scratch=False):
+    # skip_scratch: checking a Git copy, where the DaCapo scratch folders are left out by .gitignore.
     folder = Path(folder).resolve()
-    expected = {f['path']: f for f in manifest['files']}
-    found = {f['path']: f for f in list_files(folder)}
+    expected = {f['path']: f for f in manifest['files'] if not (skip_scratch and in_scratch(f['path']))}
+    found = {f['path']: f for f in list_files(folder) if not (skip_scratch and in_scratch(f['path']))}
     problems = []
     for path in sorted(expected.keys() - found.keys()):
         problems.append('faltando: '+path)
@@ -106,6 +111,7 @@ def main(argv=None):
     c = sub.add_parser('conferir')
     c.add_argument('--sessao', type=Path, required=True)
     c.add_argument('--manifesto', type=Path, required=True)
+    c.add_argument('--sem-scratch', action='store_true', help='Ignorar as pastas scratch, ausentes na cópia do Git.')
     args = parser.parse_args(argv)
     if args.modo == 'gerar':
         if args.saida.resolve().is_relative_to(args.sessao.resolve()):
@@ -121,7 +127,7 @@ def main(argv=None):
         print('SHA256_PASTA='+manifest['folder_sha256'])
         return 0
     manifest = json.loads(args.manifesto.read_text(encoding='utf-8'))
-    problems = check(args.sessao, manifest)
+    problems = check(args.sessao, manifest, args.sem_scratch)
     for problem in problems:
         print(problem)
     print('CONFERE' if not problems else 'NAO_CONFERE (%d diferenças)' % len(problems))
