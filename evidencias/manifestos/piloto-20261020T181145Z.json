@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-23T12:13:31.286258+00:00",
+  "session_folder": "20261020T181145Z",
+  "session_path_in_repository": "dados/piloto/20261020T181145Z",
+  "summary": {
+    "category": null,
+    "seed": 20261020,
+    "first_block": null,
+    "blocks": null,
+    "planned_processes": 0,
+    "plan_created_at_utc": null,
+    "first_environment_at_utc": "2026-10-20T18:18:06.249009+00:00",
+    "last_environment_at_utc": "2026-10-20T18:18:27.667332+00:00",
+    "attempts": 0,
+    "successes": 0,
+    "failures": [],
+    "retries": [],
+    "sessions": []
+  },
+  "file_count": 37,
+  "total_bytes": 5610826,
+  "folder_sha256": "d09d307376c6790cde2a2e38a502823f3a5af18be275297c259283c13b1daf82",
+  "files": [
+    {
+      "path": "ambiente-final.json",
+      "bytes": 13349,
+      "sha256": "9689dd6f7b90648714074a02d50fedb83fd64a8de0e6443d6d2db6d4322b1036"
+    },
+    {
+      "path": "ambiente-inicial.json",
+      "bytes": 13349,
+      "sha256": "58eafbebc6463aa8753bfc4cd6349100a7050c6107c4099d8b6014a493265295"
+    },
+    {
+      "path": "core-01-avrora-C/artifacts.json",
+      "bytes": 441,
+      "sha256": "8c45281f959a3ca1c93dbc9010c1980a85164fcb4ef9bd9628ee034ee62c5548"
+    },
+    {
+      "path": "core-01-avrora-C/automation.json",
+      "bytes": 320,
+      "sha256": "f1b94f1f9bd7cc6c9d33a2989a526142c41023e9c722b9f9eb16b270e8a2a18d"
+    },
+    {
+      "path": "core-01-avrora-C/command.json",
+      "bytes": 1174,
+      "sha256": "4affba7a9522c4ad11045f62ac4a7a1244b4ef575d06520451bff74d618fcf7e"
+    },
+    {
+      "path": "core-01-avrora-C/config.json",
+      "bytes": 1767,
+      "sha256": "aab9342c49416c653f2f4bfd456b32e4f75822d0e48f45f50c31b9f13dd91b07"
+    },
+    {
+      "path": "core-01-avrora-C/java-preflight.json",
+      "bytes": 241,
+      "sha256": "5a2f1132b74526e55ccbcd3fd6e8a11bc423e4d594f0b6712f65b2a8a5fa2e32"
+    },
+    {
+      "path": "core-01-avrora-C/java-preflight.stderr.log",
+      "bytes": 2160,
+      "sha256": "9683fab048d99b98c8e39c2fa3bc58effd451060ee809aaac8c48fc9b1123568"
+    },
+    {
+      "path": "core-01-avrora-C/java-preflight.stdout.log",
+      "bytes": 59069,
+      "sha256": "5aaf88d248d7db27388cb99bd08e83cf91669ffd63705079ac2944d273e965d3"
+    },
+    {
+      "path": "core-01-avrora-C/medidor/iteration-1.started.json",
+      "bytes": 101,
+      "sha256": "11c3c6f8fd9146928b4acef656ae858faed48707927608ce587ff5af6495db9d"
+    },
+    {
+      "path": "core-01-avrora-C/medidor/iteration-2.started.json",
+      "bytes": 101,
+      "sha256": "42caa39abe061780aebfc1f78c4ed50663367ec3f1f9d69f60c321889c56b0af"
+    },
+    {
+      "path": "core-01-avrora-C/medidor/iteration-3.started.json",
+      "bytes": 101,
+      "sha256": "955e38e088fe292c0ee45980aa1f255d723f901a5dd30438a42bc6d1e4e78a18"
+    },
+    {
+      "path": "core-01-avrora-C/medidor/iteration-4.samples.json",
+      "bytes": 2399,
+      "sha256": "a87af67c473ad6d1f7c447e22453f5743e019e8073896378af00004b26ba710c"
+    },
+    {
+      "path": "core-01-avrora-C/medidor/iteration-4.started.json",
+      "bytes": 102,
+      "sha256": "b237e0d1ce9b5f8b08eb9bdade43630196320dbe72953dbe388269c15c7240a5"
+    },
+    {
+      "path": "core-01-avrora-C/medidor/iterations.jsonl",
+      "bytes": 1114,
+      "sha256": "bd609b558268ef74a08a8f2683d67537a7fe83314163a42c35bb9bd208461811"
+    },
+    {
+      "path": "core-01-avrora-C/medidor/jvm.json",
+      "bytes": 1916,
+      "sha256": "75182f7a77c54bec353f7999b131ea399c57024af4f769e97ab542faf34131b2"
+    },
+    {
+      "path": "core-01-avrora-C/medidor/metadata.json",
+      "bytes": 1608,
+      "sha256": "919c9ea5b9694204650a1b71252d2cee25ef34795eea7437289a49df5abaf36a"
+    },
+    {
+      "path": "core-01-avrora-C/medidor/summary.json",
+      "bytes": 204,
+      "sha256": "3b7845ce4a4eeec0ef2a59fdab9b1eed9c2522c64b1ab0359748a538a29d144a"
+    },
+    {
+      "path": "core-01-avrora-C/resultado.json",
+      "bytes": 2114,
+      "sha256": "127e20497cee161bb8060a47d54ed88c9df769416660a002b27fd73eceb89a2f"
+    },
+    {
+      "path": "core-01-avrora-C/scratch/stdout.log",
+      "bytes": 1366662,
+      "sha256": "87e986823d8f81cf5431ac3fd96b2a71b532bc37a06cb6a1a25a1032d33b1a87"
+    },
+    {
+      "path": "core-01-avrora-C/scratch/stdout.log.1",
+      "bytes": 1366662,
+      "sha256": "7abdba9de57483dd2cd29609d62aeabf0d8452a7ef184fed9a4ecb9bc0fb48f9"
+    },
+    {
+      "path": "core-01-avrora-C/scratch/stdout.log.2",
+      "bytes": 1366662,
+      "sha256": "6d5136f5caeefcfe2a2443dc114094cffc0821d40ecd482a1e88633060858fe3"
+    },
+    {
+      "path": "core-01-avrora-C/scratch/stdout.log.3",
+      "bytes": 1366662,
+      "sha256": "1508dee97a9f37c605a4aadfac30566dea578796cf721a1f25f2db3bfd461281"
+    },
+    {
+      "path": "core-01-avrora-C/sdkman.json",
+      "bytes": 342,
+      "sha256": "4053e105029f16c90ba4838bc6ab2f3fea92088fde894e624a1f89bf8268d92a"
+    },
+    {
+      "path": "core-01-avrora-C/sdkman.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "core-01-avrora-C/sdkman.stdout.log",
+      "bytes": 200,
+      "sha256": "5189c7a1440940cd340a25083eabad7b99a248d2050a2e9ea200c220e07c430f"
+    },
+    {
+      "path": "core-01-avrora-C/started.json",
+      "bytes": 97,
+      "sha256": "9d547da6ef3d3d4ae0b4d10cf968b59a5f107aad5177f540b799d320e981d9c4"
+    },
+    {
+      "path": "core-01-avrora-C/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "core-01-avrora-C/stdout.log",
+      "bytes": 594,
+      "sha256": "afee04e826f111d1cb1d6e69d85380a1876c6c287187dc93dd28a88347f7e21e"
+    },
+    {
+      "path": "core-01-avrora-C/system-after.json",
+      "bytes": 3048,
+      "sha256": "6dae9875baef0c5eecb708fc745556c1d5ce4930f1d59df10b174c9bf849b4d1"
+    },
+    {
+      "path": "core-01-avrora-C/system-before.json",
+      "bytes": 3048,
+      "sha256": "a564e5bfbbb8189a985b9f334e84eaeae1c9da31cf626df264ccd6c1151cc063"
+    },
+    {
+      "path": "core-01-avrora-C-ambiente-depois.json",
+      "bytes": 13349,
+      "sha256": "2ef4ccef7ed3b70413a3a79dc036919f8040670d1e868ef78d79dfbb1cfe6c27"
+    },
+    {
+      "path": "core-01-avrora-C-cli.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "core-01-avrora-C-cli.stdout.log",
+      "bytes": 156,
+      "sha256": "175027b17650a5d9badf833a140fc5633f7fd02e85725f427db7a3b71a9bdef4"
+    },
+    {
+      "path": "core-1-ambiente-antes.json",
+      "bytes": 13349,
+      "sha256": "c22bf1829049071df849a6cade42c8a471c3b7cc066acaf4371b7e9d03582015"
+    },
+    {
+      "path": "plano-antes-execucao.json",
+      "bytes": 5263,
+      "sha256": "716cb3419a8a1de52f455a9249a903672806b9d897bb56ae8ba6f524944f85fb"
+    },
+    {
+      "path": "resumo-sessao.json",
+      "bytes": 3102,
+      "sha256": "5e66e728d7ba263484d22cd9565ad5ed62a9d6e3a465a9f70d00153c3378f1e4"
+    }
+  ]
+}

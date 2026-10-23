@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "started_at_utc": "2026-10-20T18:20:36.634533+00:00",
+  "mode": "executar",
+  "configuration": "C",
+  "category": "pilot",
+  "application": "avrora",
+  "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/20261020T181929Z/core-01-avrora-C",
+  "status": "success",
+  "events": [
+    {
+      "phase": "sdkman_selected",
+      "at_utc": "2026-10-20T18:20:36.699972+00:00",
+      "jdk": "25.0.3-tem",
+      "java": "/home/everton/.sdkman/candidates/java/25.0.3-tem/bin/java"
+    },
+    {
+      "phase": "java_identity_verified",
+      "at_utc": "2026-10-20T18:20:36.766816+00:00"
+    },
+    {
+      "phase": "rapl_after_sdkman",
+      "at_utc": "2026-10-20T18:20:36.767117+00:00",
+      "directory": "/sys/devices/virtual/powercap/intel-rapl/intel-rapl:0",
+      "domain": "package-0",
+      "release_requested": false,
+      "release_performed": false,
+      "first_energy_uj": 50783026123,
+      "last_energy_uj": 50783542296,
+      "before_nanos": 24633169892523,
+      "after_nanos": 24633220262205,
+      "range_uj": 262143328850,
+      "uid": 1000,
+      "mode": "0o400",
+      "readable": true
+    },
+    {
+      "phase": "workload_launch",
+      "at_utc": "2026-10-20T18:20:36.832040+00:00"
+    }
+  ],
+  "process_exit_code": 0,
+  "workload_launched": true,
+  "measurement_verified": true,
+  "session_id": "20261020T181929Z",
+  "block_id": "1",
+  "order": 1,
+  "config_sha256": "aab9342c49416c653f2f4bfd456b32e4f75822d0e48f45f50c31b9f13dd91b07",
+  "sdkman_command": [
+    "bash",
+    "/home/everton/Documentos/Projetos_Java/java-energy-study/scripts/selecionar-java.sh",
+    "/home/everton/.sdkman",
+    "25.0.3-tem",
+    "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/20261020T181929Z/core-01-avrora-C/sdkman.json"
+  ],
+  "verified_measurement": {
+    "java_runtime_version": "25.0.3+9-LTS",
+    "application": "avrora",
+    "energy_j": 75.8756,
+    "time_s": 5.569813908,
+    "validation": true
+  },
+  "finished_at_utc": "2026-10-20T18:20:58.197530+00:00",
+  "total_wall_seconds": 21.56300368200027,
+  "wrapper_exit_code": 0
+}

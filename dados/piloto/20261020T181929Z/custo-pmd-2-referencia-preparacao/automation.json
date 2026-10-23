@@ -1,0 +1,7 @@
+{
+  "source_sha256": {
+    "scripts/executar.py": "0e8c4f8e6c4a076265ea2b666f373b14a4eb4dd26c3671f14790bbb4922e18b1",
+    "scripts/executar.sh": "9ce4d7a6236d4f512bb8526811207e1fbb79f4212b988bbc60fc1e992f717cbf",
+    "scripts/selecionar-java.sh": "1e809750e802c20cd080e3f27037d8a3b0cddfe28876970c17b671340a6ce351"
+  }
+}

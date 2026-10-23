@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "started_at_utc": "2026-10-20T18:49:23.372052+00:00",
+  "mode": "preparar",
+  "configuration": "B",
+  "category": "pilot",
+  "application": null,
+  "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/20261020T181929Z/custo-avrora-2-referencia-preparacao",
+  "status": "prepared",
+  "events": [
+    {
+      "phase": "sdkman_selected",
+      "at_utc": "2026-10-20T18:49:23.437086+00:00",
+      "jdk": "21.0.11-tem",
+      "java": "/home/everton/.sdkman/candidates/java/21.0.11-tem/bin/java"
+    },
+    {
+      "phase": "java_identity_verified",
+      "at_utc": "2026-10-20T18:49:23.504655+00:00"
+    },
+    {
+      "phase": "rapl_after_sdkman",
+      "at_utc": "2026-10-20T18:49:23.505119+00:00",
+      "directory": "/sys/devices/virtual/powercap/intel-rapl/intel-rapl:0",
+      "domain": "package-0",
+      "release_requested": false,
+      "release_performed": false,
+      "first_energy_uj": 102903481073,
+      "last_energy_uj": 102904124931,
+      "before_nanos": 26359908023535,
+      "after_nanos": 26359958395226,
+      "range_uj": 262143328850,
+      "uid": 1000,
+      "mode": "0o400",
+      "readable": true
+    }
+  ],
+  "process_exit_code": null,
+  "workload_launched": false,
+  "measurement_verified": false,
+  "session_id": "20261020T181929Z",
+  "block_id": "custo-2",
+  "order": 40,
+  "config_sha256": "aab9342c49416c653f2f4bfd456b32e4f75822d0e48f45f50c31b9f13dd91b07",
+  "sdkman_command": [
+    "bash",
+    "/home/everton/Documentos/Projetos_Java/java-energy-study/scripts/selecionar-java.sh",
+    "/home/everton/.sdkman",
+    "21.0.11-tem",
+    "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/20261020T181929Z/custo-avrora-2-referencia-preparacao/sdkman.json"
+  ],
+  "finished_at_utc": "2026-10-20T18:49:23.559985+00:00",
+  "total_wall_seconds": 0.18793961800110992,
+  "wrapper_exit_code": 0
+}

@@ -1,0 +1,284 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-22T17:07:07.646850+00:00",
+  "category": "piloto",
+  "config": "/home/everton/Documentos/Projetos_Java/java-energy-study/config/piloto-t12.json",
+  "config_sha256": "215e839d3b9880691fbdc48f9c2d14b7ee67c92f22f7df19c990b3d1758c72f4",
+  "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/20261022T170707Z",
+  "seed": 20261024,
+  "blocks": 3,
+  "applications": [
+    "avrora",
+    "lusearch",
+    "pmd"
+  ],
+  "session_warmup": {
+    "application": "pmd",
+    "configuration": "B",
+    "name": "aquecimento-maquina",
+    "analyzed": false
+  },
+  "pause_min_seconds": 10,
+  "thermal_gate": {
+    "sensor": "x86_pkg_temp",
+    "idle_plus_celsius": 8.0,
+    "max_wait_seconds": 120,
+    "idle_reference_seconds": 60
+  },
+  "failure_retries": 1,
+  "session_limit_seconds": null,
+  "runs": [
+    {
+      "block": 1,
+      "order": 1,
+      "application": "avrora",
+      "configuration": "D",
+      "name": "b01-001-avrora-D"
+    },
+    {
+      "block": 1,
+      "order": 2,
+      "application": "pmd",
+      "configuration": "C",
+      "name": "b01-002-pmd-C"
+    },
+    {
+      "block": 1,
+      "order": 3,
+      "application": "lusearch",
+      "configuration": "C",
+      "name": "b01-003-lusearch-C"
+    },
+    {
+      "block": 1,
+      "order": 4,
+      "application": "lusearch",
+      "configuration": "B",
+      "name": "b01-004-lusearch-B"
+    },
+    {
+      "block": 1,
+      "order": 5,
+      "application": "lusearch",
+      "configuration": "D",
+      "name": "b01-005-lusearch-D"
+    },
+    {
+      "block": 1,
+      "order": 6,
+      "application": "pmd",
+      "configuration": "A",
+      "name": "b01-006-pmd-A"
+    },
+    {
+      "block": 1,
+      "order": 7,
+      "application": "pmd",
+      "configuration": "D",
+      "name": "b01-007-pmd-D"
+    },
+    {
+      "block": 1,
+      "order": 8,
+      "application": "avrora",
+      "configuration": "A",
+      "name": "b01-008-avrora-A"
+    },
+    {
+      "block": 1,
+      "order": 9,
+      "application": "lusearch",
+      "configuration": "A",
+      "name": "b01-009-lusearch-A"
+    },
+    {
+      "block": 1,
+      "order": 10,
+      "application": "avrora",
+      "configuration": "B",
+      "name": "b01-010-avrora-B"
+    },
+    {
+      "block": 1,
+      "order": 11,
+      "application": "avrora",
+      "configuration": "C",
+      "name": "b01-011-avrora-C"
+    },
+    {
+      "block": 1,
+      "order": 12,
+      "application": "pmd",
+      "configuration": "B",
+      "name": "b01-012-pmd-B"
+    },
+    {
+      "block": 2,
+      "order": 13,
+      "application": "avrora",
+      "configuration": "A",
+      "name": "b02-013-avrora-A"
+    },
+    {
+      "block": 2,
+      "order": 14,
+      "application": "lusearch",
+      "configuration": "B",
+      "name": "b02-014-lusearch-B"
+    },
+    {
+      "block": 2,
+      "order": 15,
+      "application": "avrora",
+      "configuration": "B",
+      "name": "b02-015-avrora-B"
+    },
+    {
+      "block": 2,
+      "order": 16,
+      "application": "pmd",
+      "configuration": "C",
+      "name": "b02-016-pmd-C"
+    },
+    {
+      "block": 2,
+      "order": 17,
+      "application": "lusearch",
+      "configuration": "A",
+      "name": "b02-017-lusearch-A"
+    },
+    {
+      "block": 2,
+      "order": 18,
+      "application": "pmd",
+      "configuration": "D",
+      "name": "b02-018-pmd-D"
+    },
+    {
+      "block": 2,
+      "order": 19,
+      "application": "avrora",
+      "configuration": "D",
+      "name": "b02-019-avrora-D"
+    },
+    {
+      "block": 2,
+      "order": 20,
+      "application": "lusearch",
+      "configuration": "D",
+      "name": "b02-020-lusearch-D"
+    },
+    {
+      "block": 2,
+      "order": 21,
+      "application": "pmd",
+      "configuration": "B",
+      "name": "b02-021-pmd-B"
+    },
+    {
+      "block": 2,
+      "order": 22,
+      "application": "avrora",
+      "configuration": "C",
+      "name": "b02-022-avrora-C"
+    },
+    {
+      "block": 2,
+      "order": 23,
+      "application": "pmd",
+      "configuration": "A",
+      "name": "b02-023-pmd-A"
+    },
+    {
+      "block": 2,
+      "order": 24,
+      "application": "lusearch",
+      "configuration": "C",
+      "name": "b02-024-lusearch-C"
+    },
+    {
+      "block": 3,
+      "order": 25,
+      "application": "pmd",
+      "configuration": "C",
+      "name": "b03-025-pmd-C"
+    },
+    {
+      "block": 3,
+      "order": 26,
+      "application": "pmd",
+      "configuration": "D",
+      "name": "b03-026-pmd-D"
+    },
+    {
+      "block": 3,
+      "order": 27,
+      "application": "avrora",
+      "configuration": "D",
+      "name": "b03-027-avrora-D"
+    },
+    {
+      "block": 3,
+      "order": 28,
+      "application": "avrora",
+      "configuration": "C",
+      "name": "b03-028-avrora-C"
+    },
+    {
+      "block": 3,
+      "order": 29,
+      "application": "pmd",
+      "configuration": "B",
+      "name": "b03-029-pmd-B"
+    },
+    {
+      "block": 3,
+      "order": 30,
+      "application": "pmd",
+      "configuration": "A",
+      "name": "b03-030-pmd-A"
+    },
+    {
+      "block": 3,
+      "order": 31,
+      "application": "lusearch",
+      "configuration": "D",
+      "name": "b03-031-lusearch-D"
+    },
+    {
+      "block": 3,
+      "order": 32,
+      "application": "lusearch",
+      "configuration": "C",
+      "name": "b03-032-lusearch-C"
+    },
+    {
+      "block": 3,
+      "order": 33,
+      "application": "avrora",
+      "configuration": "A",
+      "name": "b03-033-avrora-A"
+    },
+    {
+      "block": 3,
+      "order": 34,
+      "application": "avrora",
+      "configuration": "B",
+      "name": "b03-034-avrora-B"
+    },
+    {
+      "block": 3,
+      "order": 35,
+      "application": "lusearch",
+      "configuration": "A",
+      "name": "b03-035-lusearch-A"
+    },
+    {
+      "block": 3,
+      "order": 36,
+      "application": "lusearch",
+      "configuration": "B",
+      "name": "b03-036-lusearch-B"
+    }
+  ]
+}

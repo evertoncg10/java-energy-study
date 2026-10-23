@@ -1,0 +1,25 @@
+{
+  "command": [
+    "/home/everton/.sdkman/candidates/java/21.0.11-tem/bin/java",
+    "-Xms256m",
+    "-Xmx1g",
+    "-XX:+UseG1GC",
+    "-jar",
+    "/home/everton/Documentos/Projetos_Java/java-energy-study/medidor-java/target/java-energy-meter-0.1.0.jar",
+    "-n",
+    "4",
+    "-s",
+    "default",
+    "-t",
+    "1",
+    "--scratch-directory",
+    "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/20261020T181929Z/custo-avrora-1-referencia/scratch",
+    "avrora"
+  ],
+  "category": "pilot",
+  "purpose": "overhead_reference_default_callback",
+  "artifacts": {
+    "meter": "/home/everton/Documentos/Projetos_Java/java-energy-study/medidor-java/target/java-energy-meter-0.1.0.jar",
+    "dacapo": "/home/everton/Documentos/Projetos_Java/java-energy-study/ferramentas/dacapo/dacapo-23.11-MR2-chopin.jar"
+  }
+}

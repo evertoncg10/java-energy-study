@@ -1,0 +1,54 @@
+{
+  "created_at": "2026-10-20T18:51:37.846003+00:00",
+  "status": "complemento_autorizado",
+  "scientific_data": false,
+  "repository": "/home/everton/Documentos/Projetos_Java/java-energy-study",
+  "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/complemento-20261020T185137Z",
+  "config": "/home/everton/Documentos/Artigo_Escrita_Academica/Arquivos_Planejamento/Docs/07_Evidencias/T11/complemento-20261020T185137Z/config-piloto.json",
+  "seed": 20261020,
+  "core_runs": [],
+  "overhead_pairs": [
+    {
+      "pair": 3,
+      "application": "lusearch",
+      "configuration": "B",
+      "arms": [
+        "referencia",
+        "instrumentado"
+      ]
+    },
+    {
+      "pair": 3,
+      "application": "pmd",
+      "configuration": "B",
+      "arms": [
+        "instrumentado",
+        "referencia"
+      ]
+    },
+    {
+      "pair": 3,
+      "application": "avrora",
+      "configuration": "B",
+      "arms": [
+        "referencia",
+        "instrumentado"
+      ]
+    }
+  ],
+  "warmup_iterations": 3,
+  "measured_iterations_per_process": 1,
+  "pause_seconds": 10,
+  "session_limit_seconds": 600,
+  "execution_precondition": "Pesquisador confirmar notebook na tomada e sem uso concorrente por cerca de 30 minutos. Não fechar programas automaticamente.",
+  "limits": [
+    "Duas repetições por combinação são triagem, não determinam estabilidade nem tamanho amostral final.",
+    "Três preparações são candidatas; examinar sua trajetória antes de definir protocolo.",
+    "Custo temporal do conjunto de instrumentação, não precisão energética nem calibração externa.",
+    "RAPL mede pacote do processador incluindo outros processos; não energia exclusiva do Java ou de todo notebook."
+  ],
+  "prior_interrupted_session": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/piloto/20261020T181145Z",
+  "restart_reason": "Erro do orquestrador corrigido; reinício completo após fechamento de aplicativos solicitado pelo pesquisador.",
+  "prior_session": "/home/everton/Documentos/Artigo_Escrita_Academica/Arquivos_Planejamento/Docs/07_Evidencias/T11/20261020T181929Z",
+  "purpose": "Completar somente os três pares pendentes da ordem pré-registrada."
+}
