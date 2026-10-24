@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "started_at_utc": "2026-10-24T17:24:09.438430+00:00",
+  "mode": "executar",
+  "configuration": "D",
+  "category": "official",
+  "application": "avrora",
+  "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215204Z/b04-044-avrora-D",
+  "status": "success",
+  "events": [
+    {
+      "phase": "sdkman_selected",
+      "at_utc": "2026-10-24T17:24:09.503737+00:00",
+      "jdk": "25.0.3-tem",
+      "java": "/home/everton/.sdkman/candidates/java/25.0.3-tem/bin/java"
+    },
+    {
+      "phase": "java_identity_verified",
+      "at_utc": "2026-10-24T17:24:09.570516+00:00"
+    },
+    {
+      "phase": "rapl_after_sdkman",
+      "at_utc": "2026-10-24T17:24:09.570734+00:00",
+      "directory": "/sys/devices/virtual/powercap/intel-rapl/intel-rapl:0",
+      "domain": "package-0",
+      "release_requested": false,
+      "release_performed": false,
+      "first_energy_uj": 82148192532,
+      "last_energy_uj": 82148683802,
+      "before_nanos": 3808902423450,
+      "after_nanos": 3808952784084,
+      "range_uj": 262143328850,
+      "uid": 1000,
+      "mode": "0o400",
+      "readable": true
+    },
+    {
+      "phase": "workload_launch",
+      "at_utc": "2026-10-24T17:24:19.685394+00:00"
+    }
+  ],
+  "process_exit_code": 0,
+  "workload_launched": true,
+  "measurement_verified": true,
+  "session_id": "20261022T215204Z",
+  "block_id": "4",
+  "order": 44,
+  "config_sha256": "c92c0913caacd052ac0b4a53b6cbc70c7ebcaafbac0c2eac90bafffb8875ab14",
+  "sdkman_command": [
+    "bash",
+    "/home/everton/Documentos/Projetos_Java/java-energy-study/scripts/selecionar-java.sh",
+    "/home/everton/.sdkman",
+    "25.0.3-tem",
+    "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215204Z/b04-044-avrora-D/sdkman.json"
+  ],
+  "cpu_affinity": {
+    "policy": "cpu_core_um_por_nucleo",
+    "cpus": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10
+    ]
+  },
+  "idle_baseline": {
+    "seconds": 10.000642433,
+    "energy_j": 64.943315,
+    "mean_power_w": 6.49391430951484,
+    "first_energy_uj": 82150144126,
+    "last_energy_uj": 82215087441
+  },
+  "verified_measurement": {
+    "java_runtime_version": "25.0.3+9-LTS",
+    "application": "avrora",
+    "energy_j": 45.548263999999996,
+    "time_s": 3.6719871266666666,
+    "measured_energy_j": [
+      45.377813,
+      46.022893,
+      45.244086
+    ],
+    "measured_time_s": [
+      3.714076718,
+      3.656025379,
+      3.645859283
+    ],
+    "warmup_dacapo_ms": [
+      2675,
+      3430,
+      3479,
+      3503,
+      3612,
+      3582,
+      3624,
+      3718,
+      3745,
+      3685,
+      3723,
+      3680
+    ],
+    "measured_dacapo_ms": [
+      3714,
+      3656,
+      3646
+    ],
+    "available_processors": 6,
+    "validation": true
+  },
+  "finished_at_utc": "2026-10-24T17:25:13.581665+00:00",
+  "total_wall_seconds": 64.14323184599971,
+  "wrapper_exit_code": 0
+}

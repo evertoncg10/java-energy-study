@@ -1,0 +1,8 @@
+{
+  "java_version": "17.0.19",
+  "java_runtime_version": "17.0.19+10",
+  "java_vendor": "Eclipse Adoptium",
+  "java_home": "/home/everton/.sdkman/candidates/java/17.0.19-tem",
+  "use_g1_gc": "true",
+  "use_compact_object_headers": null
+}

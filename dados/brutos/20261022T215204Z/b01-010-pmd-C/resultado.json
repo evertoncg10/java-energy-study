@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "started_at_utc": "2026-10-24T16:43:26.505434+00:00",
+  "mode": "executar",
+  "configuration": "C",
+  "category": "official",
+  "application": "pmd",
+  "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215204Z/b01-010-pmd-C",
+  "status": "success",
+  "events": [
+    {
+      "phase": "sdkman_selected",
+      "at_utc": "2026-10-24T16:43:26.570377+00:00",
+      "jdk": "25.0.3-tem",
+      "java": "/home/everton/.sdkman/candidates/java/25.0.3-tem/bin/java"
+    },
+    {
+      "phase": "java_identity_verified",
+      "at_utc": "2026-10-24T16:43:26.637413+00:00"
+    },
+    {
+      "phase": "rapl_after_sdkman",
+      "at_utc": "2026-10-24T16:43:26.637742+00:00",
+      "directory": "/sys/devices/virtual/powercap/intel-rapl/intel-rapl:0",
+      "domain": "package-0",
+      "release_requested": false,
+      "release_performed": false,
+      "first_energy_uj": 26707080189,
+      "last_energy_uj": 26707561145,
+      "before_nanos": 1365969519733,
+      "after_nanos": 1366019836618,
+      "range_uj": 262143328850,
+      "uid": 1000,
+      "mode": "0o400",
+      "readable": true
+    },
+    {
+      "phase": "workload_launch",
+      "at_utc": "2026-10-24T16:43:36.749425+00:00"
+    }
+  ],
+  "process_exit_code": 0,
+  "workload_launched": true,
+  "measurement_verified": true,
+  "session_id": "20261022T215204Z",
+  "block_id": "1",
+  "order": 10,
+  "config_sha256": "c92c0913caacd052ac0b4a53b6cbc70c7ebcaafbac0c2eac90bafffb8875ab14",
+  "sdkman_command": [
+    "bash",
+    "/home/everton/Documentos/Projetos_Java/java-energy-study/scripts/selecionar-java.sh",
+    "/home/everton/.sdkman",
+    "25.0.3-tem",
+    "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215204Z/b01-010-pmd-C/sdkman.json"
+  ],
+  "cpu_affinity": {
+    "policy": "cpu_core_um_por_nucleo",
+    "cpus": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10
+    ]
+  },
+  "idle_baseline": {
+    "seconds": 10.000998596,
+    "energy_j": 64.396319,
+    "mean_power_w": 6.438988905143528,
+    "first_energy_uj": 26709124251,
+    "last_energy_uj": 26773520570
+  },
+  "verified_measurement": {
+    "java_runtime_version": "25.0.3+9-LTS",
+    "application": "pmd",
+    "energy_j": 98.01781533333333,
+    "time_s": 2.7584525223333336,
+    "measured_energy_j": [
+      98.082146,
+      96.916988,
+      99.054312
+    ],
+    "measured_time_s": [
+      2.778461086,
+      2.753534554,
+      2.743361927
+    ],
+    "warmup_dacapo_ms": [
+      5056,
+      3080,
+      2865,
+      2818,
+      2801,
+      2793,
+      2772
+    ],
+    "measured_dacapo_ms": [
+      2779,
+      2753,
+      2743
+    ],
+    "available_processors": 6,
+    "validation": true
+  },
+  "finished_at_utc": "2026-10-24T16:44:07.940513+00:00",
+  "total_wall_seconds": 41.435076213,
+  "wrapper_exit_code": 0
+}
