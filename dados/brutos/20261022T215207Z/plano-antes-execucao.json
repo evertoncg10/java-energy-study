@@ -1,0 +1,369 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-22T21:52:07.973648+00:00",
+  "category": "oficial",
+  "config": "/home/everton/Documentos/Projetos_Java/java-energy-study/config/execucao.json",
+  "config_sha256": "c92c0913caacd052ac0b4a53b6cbc70c7ebcaafbac0c2eac90bafffb8875ab14",
+  "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215207Z",
+  "seed": 20261102,
+  "blocks": 4,
+  "first_block": 5,
+  "applications": [
+    "avrora",
+    "lusearch",
+    "pmd"
+  ],
+  "session_warmup": {
+    "application": "pmd",
+    "configuration": "B",
+    "name": "aquecimento-maquina",
+    "analyzed": false
+  },
+  "pause_min_seconds": 10,
+  "thermal_gate": {
+    "sensor": "x86_pkg_temp",
+    "idle_plus_celsius": 8.0,
+    "max_wait_seconds": 120,
+    "idle_reference_seconds": 60
+  },
+  "failure_retries": 1,
+  "session_limit_seconds": null,
+  "runs": [
+    {
+      "block": 5,
+      "order": 1,
+      "application": "lusearch",
+      "configuration": "B",
+      "name": "b05-001-lusearch-B"
+    },
+    {
+      "block": 5,
+      "order": 2,
+      "application": "lusearch",
+      "configuration": "A",
+      "name": "b05-002-lusearch-A"
+    },
+    {
+      "block": 5,
+      "order": 3,
+      "application": "pmd",
+      "configuration": "A",
+      "name": "b05-003-pmd-A"
+    },
+    {
+      "block": 5,
+      "order": 4,
+      "application": "pmd",
+      "configuration": "D",
+      "name": "b05-004-pmd-D"
+    },
+    {
+      "block": 5,
+      "order": 5,
+      "application": "lusearch",
+      "configuration": "D",
+      "name": "b05-005-lusearch-D"
+    },
+    {
+      "block": 5,
+      "order": 6,
+      "application": "avrora",
+      "configuration": "A",
+      "name": "b05-006-avrora-A"
+    },
+    {
+      "block": 5,
+      "order": 7,
+      "application": "avrora",
+      "configuration": "D",
+      "name": "b05-007-avrora-D"
+    },
+    {
+      "block": 5,
+      "order": 8,
+      "application": "pmd",
+      "configuration": "C",
+      "name": "b05-008-pmd-C"
+    },
+    {
+      "block": 5,
+      "order": 9,
+      "application": "avrora",
+      "configuration": "C",
+      "name": "b05-009-avrora-C"
+    },
+    {
+      "block": 5,
+      "order": 10,
+      "application": "lusearch",
+      "configuration": "C",
+      "name": "b05-010-lusearch-C"
+    },
+    {
+      "block": 5,
+      "order": 11,
+      "application": "avrora",
+      "configuration": "B",
+      "name": "b05-011-avrora-B"
+    },
+    {
+      "block": 5,
+      "order": 12,
+      "application": "pmd",
+      "configuration": "B",
+      "name": "b05-012-pmd-B"
+    },
+    {
+      "block": 6,
+      "order": 13,
+      "application": "avrora",
+      "configuration": "B",
+      "name": "b06-013-avrora-B"
+    },
+    {
+      "block": 6,
+      "order": 14,
+      "application": "lusearch",
+      "configuration": "B",
+      "name": "b06-014-lusearch-B"
+    },
+    {
+      "block": 6,
+      "order": 15,
+      "application": "avrora",
+      "configuration": "A",
+      "name": "b06-015-avrora-A"
+    },
+    {
+      "block": 6,
+      "order": 16,
+      "application": "pmd",
+      "configuration": "C",
+      "name": "b06-016-pmd-C"
+    },
+    {
+      "block": 6,
+      "order": 17,
+      "application": "lusearch",
+      "configuration": "D",
+      "name": "b06-017-lusearch-D"
+    },
+    {
+      "block": 6,
+      "order": 18,
+      "application": "pmd",
+      "configuration": "D",
+      "name": "b06-018-pmd-D"
+    },
+    {
+      "block": 6,
+      "order": 19,
+      "application": "lusearch",
+      "configuration": "A",
+      "name": "b06-019-lusearch-A"
+    },
+    {
+      "block": 6,
+      "order": 20,
+      "application": "lusearch",
+      "configuration": "C",
+      "name": "b06-020-lusearch-C"
+    },
+    {
+      "block": 6,
+      "order": 21,
+      "application": "pmd",
+      "configuration": "A",
+      "name": "b06-021-pmd-A"
+    },
+    {
+      "block": 6,
+      "order": 22,
+      "application": "avrora",
+      "configuration": "C",
+      "name": "b06-022-avrora-C"
+    },
+    {
+      "block": 6,
+      "order": 23,
+      "application": "pmd",
+      "configuration": "B",
+      "name": "b06-023-pmd-B"
+    },
+    {
+      "block": 6,
+      "order": 24,
+      "application": "avrora",
+      "configuration": "D",
+      "name": "b06-024-avrora-D"
+    },
+    {
+      "block": 7,
+      "order": 25,
+      "application": "lusearch",
+      "configuration": "A",
+      "name": "b07-025-lusearch-A"
+    },
+    {
+      "block": 7,
+      "order": 26,
+      "application": "lusearch",
+      "configuration": "B",
+      "name": "b07-026-lusearch-B"
+    },
+    {
+      "block": 7,
+      "order": 27,
+      "application": "pmd",
+      "configuration": "A",
+      "name": "b07-027-pmd-A"
+    },
+    {
+      "block": 7,
+      "order": 28,
+      "application": "lusearch",
+      "configuration": "C",
+      "name": "b07-028-lusearch-C"
+    },
+    {
+      "block": 7,
+      "order": 29,
+      "application": "avrora",
+      "configuration": "C",
+      "name": "b07-029-avrora-C"
+    },
+    {
+      "block": 7,
+      "order": 30,
+      "application": "avrora",
+      "configuration": "D",
+      "name": "b07-030-avrora-D"
+    },
+    {
+      "block": 7,
+      "order": 31,
+      "application": "lusearch",
+      "configuration": "D",
+      "name": "b07-031-lusearch-D"
+    },
+    {
+      "block": 7,
+      "order": 32,
+      "application": "avrora",
+      "configuration": "A",
+      "name": "b07-032-avrora-A"
+    },
+    {
+      "block": 7,
+      "order": 33,
+      "application": "pmd",
+      "configuration": "B",
+      "name": "b07-033-pmd-B"
+    },
+    {
+      "block": 7,
+      "order": 34,
+      "application": "pmd",
+      "configuration": "D",
+      "name": "b07-034-pmd-D"
+    },
+    {
+      "block": 7,
+      "order": 35,
+      "application": "avrora",
+      "configuration": "B",
+      "name": "b07-035-avrora-B"
+    },
+    {
+      "block": 7,
+      "order": 36,
+      "application": "pmd",
+      "configuration": "C",
+      "name": "b07-036-pmd-C"
+    },
+    {
+      "block": 8,
+      "order": 37,
+      "application": "avrora",
+      "configuration": "C",
+      "name": "b08-037-avrora-C"
+    },
+    {
+      "block": 8,
+      "order": 38,
+      "application": "pmd",
+      "configuration": "B",
+      "name": "b08-038-pmd-B"
+    },
+    {
+      "block": 8,
+      "order": 39,
+      "application": "avrora",
+      "configuration": "A",
+      "name": "b08-039-avrora-A"
+    },
+    {
+      "block": 8,
+      "order": 40,
+      "application": "pmd",
+      "configuration": "D",
+      "name": "b08-040-pmd-D"
+    },
+    {
+      "block": 8,
+      "order": 41,
+      "application": "lusearch",
+      "configuration": "B",
+      "name": "b08-041-lusearch-B"
+    },
+    {
+      "block": 8,
+      "order": 42,
+      "application": "lusearch",
+      "configuration": "C",
+      "name": "b08-042-lusearch-C"
+    },
+    {
+      "block": 8,
+      "order": 43,
+      "application": "lusearch",
+      "configuration": "D",
+      "name": "b08-043-lusearch-D"
+    },
+    {
+      "block": 8,
+      "order": 44,
+      "application": "lusearch",
+      "configuration": "A",
+      "name": "b08-044-lusearch-A"
+    },
+    {
+      "block": 8,
+      "order": 45,
+      "application": "avrora",
+      "configuration": "B",
+      "name": "b08-045-avrora-B"
+    },
+    {
+      "block": 8,
+      "order": 46,
+      "application": "pmd",
+      "configuration": "A",
+      "name": "b08-046-pmd-A"
+    },
+    {
+      "block": 8,
+      "order": 47,
+      "application": "avrora",
+      "configuration": "D",
+      "name": "b08-047-avrora-D"
+    },
+    {
+      "block": 8,
+      "order": 48,
+      "application": "pmd",
+      "configuration": "C",
+      "name": "b08-048-pmd-C"
+    }
+  ]
+}
