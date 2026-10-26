@@ -84,6 +84,8 @@ def check_run(folder, entry, plan, config):
     on_ac = all(m.get('online') == '1' for m in before.get('mains', []) + after.get('mains', []))
     if not on_ac:
         problems.append('%s: fora da tomada' % name)
+    if not measured.get('energy_j') or not measured.get('time_s'):
+        return problems, None  # Already reported; kept out of the descriptive tables.
     swap = sum(after['swap_pages'][k] - before['swap_pages'][k] for k in ('pswpin', 'pswpout'))
     times = [i['time_s'] for i in meas]
     row = {'name': name, 'block': entry['block'], 'application': entry['application'], 'configuration': entry['configuration'],
