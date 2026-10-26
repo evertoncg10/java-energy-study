@@ -1,0 +1,398 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-26T18:16:43.143955+00:00",
+  "problems": [],
+  "processes": 144,
+  "attempts": 147,
+  "failures": 0,
+  "sessions": [
+    {
+      "session": "20261022T215204Z",
+      "seed": 20261101,
+      "first_block": 1,
+      "folder_sha256": "4d6c7dcdd45350bc75fc295ddf76e71662bd1810030aec46fab41a3e2baacf7c",
+      "first_environment_at_utc": "2026-10-24T16:29:30.121493+00:00",
+      "checked_processes": 48,
+      "attempts": 49,
+      "failures": [],
+      "retries": [],
+      "elapsed_minutes": 61.41750016885,
+      "idle_celsius": 64.0,
+      "median_idle_power_w": 6.480761868920137
+    },
+    {
+      "session": "20261022T215207Z",
+      "seed": 20261102,
+      "first_block": 5,
+      "folder_sha256": "58772ed344a8f67173a7010f2e1bcd371cdc293fa9b538334495d0de1fca4544",
+      "first_environment_at_utc": "2026-10-25T19:34:49.912634+00:00",
+      "checked_processes": 48,
+      "attempts": 49,
+      "failures": [],
+      "retries": [],
+      "elapsed_minutes": 61.46394181933333,
+      "idle_celsius": 69.0,
+      "median_idle_power_w": 6.452394599697843
+    },
+    {
+      "session": "20261022T215211Z",
+      "seed": 20261103,
+      "first_block": 9,
+      "folder_sha256": "70deb212938af8a22371121825b943cff37ae2c2b5d19ec614cf60fbc74da872",
+      "first_environment_at_utc": "2026-10-26T17:00:39.694868+00:00",
+      "checked_processes": 48,
+      "attempts": 49,
+      "failures": [],
+      "retries": [],
+      "elapsed_minutes": 61.533926063483335,
+      "idle_celsius": 71.0,
+      "median_idle_power_w": 4.707717302973168
+    }
+  ],
+  "e2": {
+    "limit": 0.05,
+    "sessions": 3,
+    "max_spread_energy_main": 0.05231965627752544,
+    "cells_above_limit": [
+      "pmd-A"
+    ]
+  },
+  "cells": [
+    {
+      "application": "avrora",
+      "role": "exploratorio",
+      "configuration": "A",
+      "sessions": [
+        {
+          "session": "20261022T215204Z",
+          "energy_j": 50.35658083333333,
+          "time_s": 3.7526496665,
+          "power_w": 13.404877124323598
+        },
+        {
+          "session": "20261022T215207Z",
+          "energy_j": 47.38480716666666,
+          "time_s": 3.7965980656666667,
+          "power_w": 12.454906930864222
+        },
+        {
+          "session": "20261022T215211Z",
+          "energy_j": 41.94372,
+          "time_s": 3.846194225833333,
+          "power_w": 10.84077576206856
+        }
+      ],
+      "spread_energy": 0.2005749807917212,
+      "spread_time": 0.02492760253332671,
+      "spread_power": 0.23652378930544127
+    },
+    {
+      "application": "avrora",
+      "role": "exploratorio",
+      "configuration": "B",
+      "sessions": [
+        {
+          "session": "20261022T215204Z",
+          "energy_j": 48.636472,
+          "time_s": 3.956913398666667,
+          "power_w": 12.320852883333277
+        },
+        {
+          "session": "20261022T215207Z",
+          "energy_j": 47.43680916666666,
+          "time_s": 3.8279009889999998,
+          "power_w": 12.35091964901103
+        },
+        {
+          "session": "20261022T215211Z",
+          "energy_j": 42.25279116666667,
+          "time_s": 3.9184623949999997,
+          "power_w": 10.774129733327996
+        }
+      ],
+      "spread_energy": 0.15108305645780473,
+      "spread_time": 0.03370317310646276,
+      "spread_power": 0.1463496314514845
+    },
+    {
+      "application": "avrora",
+      "role": "exploratorio",
+      "configuration": "C",
+      "sessions": [
+        {
+          "session": "20261022T215204Z",
+          "energy_j": 45.791315499999996,
+          "time_s": 3.670364732333333,
+          "power_w": 12.501702732298067
+        },
+        {
+          "session": "20261022T215207Z",
+          "energy_j": 45.921391,
+          "time_s": 3.6757635840000003,
+          "power_w": 12.490948713830921
+        },
+        {
+          "session": "20261022T215211Z",
+          "energy_j": 39.955148666666666,
+          "time_s": 3.6435603218333332,
+          "power_w": 10.826996084792558
+        }
+      ],
+      "spread_energy": 0.1493234922764981,
+      "spread_time": 0.008838405109885317,
+      "spread_power": 0.15467878942505364
+    },
+    {
+      "application": "avrora",
+      "role": "exploratorio",
+      "configuration": "D",
+      "sessions": [
+        {
+          "session": "20261022T215204Z",
+          "energy_j": 46.60904216666667,
+          "time_s": 3.680647198,
+          "power_w": 12.619083207388286
+        },
+        {
+          "session": "20261022T215207Z",
+          "energy_j": 45.7677865,
+          "time_s": 3.6675555286666666,
+          "power_w": 12.440398586754267
+        },
+        {
+          "session": "20261022T215211Z",
+          "energy_j": 40.7784805,
+          "time_s": 3.7141105874999996,
+          "power_w": 11.054751456009225
+        }
+      ],
+      "spread_energy": 0.1429813370968216,
+      "spread_time": 0.012693757045924903,
+      "spread_power": 0.14150763656732512
+    },
+    {
+      "application": "lusearch",
+      "role": "principal",
+      "configuration": "A",
+      "sessions": [
+        {
+          "session": "20261022T215204Z",
+          "energy_j": 626.4228754999999,
+          "time_s": 18.6616890615,
+          "power_w": 33.60590608818081
+        },
+        {
+          "session": "20261022T215207Z",
+          "energy_j": 636.0070185,
+          "time_s": 18.74581075816667,
+          "power_w": 33.92799184397683
+        },
+        {
+          "session": "20261022T215211Z",
+          "energy_j": 612.0027258333332,
+          "time_s": 18.73343969816667,
+          "power_w": 32.668989436672405
+        }
+      ],
+      "spread_energy": 0.039222525739540215,
+      "spread_time": 0.004507721481664673,
+      "spread_power": 0.03853814975651293
+    },
+    {
+      "application": "lusearch",
+      "role": "principal",
+      "configuration": "B",
+      "sessions": [
+        {
+          "session": "20261022T215204Z",
+          "energy_j": 585.859747,
+          "time_s": 17.726405659166666,
+          "power_w": 33.12036357483781
+        },
+        {
+          "session": "20261022T215207Z",
+          "energy_j": 585.9699351666666,
+          "time_s": 17.728158856333337,
+          "power_w": 33.07291785816405
+        },
+        {
+          "session": "20261022T215211Z",
+          "energy_j": 571.3002849999999,
+          "time_s": 17.739752892166667,
+          "power_w": 32.20485755393663
+        }
+      ],
+      "spread_energy": 0.025677652456740363,
+      "spread_time": 0.0007529576642120173,
+      "spread_power": 0.02842757554098463
+    },
+    {
+      "application": "lusearch",
+      "role": "principal",
+      "configuration": "C",
+      "sessions": [
+        {
+          "session": "20261022T215204Z",
+          "energy_j": 599.6844288333333,
+          "time_s": 17.882229870333333,
+          "power_w": 33.510711806121556
+        },
+        {
+          "session": "20261022T215207Z",
+          "energy_j": 601.1726556666667,
+          "time_s": 17.893524546000002,
+          "power_w": 33.646961368117246
+        },
+        {
+          "session": "20261022T215211Z",
+          "energy_j": 583.8795171666667,
+          "time_s": 17.8638814665,
+          "power_w": 32.6113881817422
+        }
+      ],
+      "spread_energy": 0.029617648832616528,
+      "spread_time": 0.0016593862624756373,
+      "spread_power": 0.03175495568001674
+    },
+    {
+      "application": "lusearch",
+      "role": "principal",
+      "configuration": "D",
+      "sessions": [
+        {
+          "session": "20261022T215204Z",
+          "energy_j": 598.0107575,
+          "time_s": 17.793234374,
+          "power_w": 33.65473305393034
+        },
+        {
+          "session": "20261022T215207Z",
+          "energy_j": 603.5685028333332,
+          "time_s": 17.832263972333337,
+          "power_w": 33.69376352626158
+        },
+        {
+          "session": "20261022T215211Z",
+          "energy_j": 584.6737046666667,
+          "time_s": 17.826995746999998,
+          "power_w": 32.61388207035303
+        }
+      ],
+      "spread_energy": 0.03231682563428917,
+      "spread_time": 0.0021935077970065553,
+      "spread_power": 0.033111098322459176
+    },
+    {
+      "application": "pmd",
+      "role": "principal",
+      "configuration": "A",
+      "sessions": [
+        {
+          "session": "20261022T215204Z",
+          "energy_j": 108.28464500000001,
+          "time_s": 3.1053644951666666,
+          "power_w": 34.738627705685495
+        },
+        {
+          "session": "20261022T215207Z",
+          "energy_j": 109.20443216666666,
+          "time_s": 3.107670907666667,
+          "power_w": 34.963472221968935
+        },
+        {
+          "session": "20261022T215211Z",
+          "energy_j": 103.77496183333335,
+          "time_s": 3.1145903585,
+          "power_w": 33.19414418481132
+        }
+      ],
+      "spread_energy": 0.05231965627752544,
+      "spread_time": 0.0029709437805749417,
+      "spread_power": 0.053302414645990615
+    },
+    {
+      "application": "pmd",
+      "role": "principal",
+      "configuration": "B",
+      "sessions": [
+        {
+          "session": "20261022T215204Z",
+          "energy_j": 103.39078750000002,
+          "time_s": 2.9413352625,
+          "power_w": 35.22123440816551
+        },
+        {
+          "session": "20261022T215207Z",
+          "energy_j": 104.66501533333334,
+          "time_s": 2.9523188701666667,
+          "power_w": 35.515418565740916
+        },
+        {
+          "session": "20261022T215211Z",
+          "energy_j": 100.66831116666667,
+          "time_s": 2.9496833065,
+          "power_w": 34.20888084619011
+        }
+      ],
+      "spread_energy": 0.03970171070069628,
+      "spread_time": 0.0037342249986596077,
+      "spread_power": 0.038192939588560515
+    },
+    {
+      "application": "pmd",
+      "role": "principal",
+      "configuration": "C",
+      "sessions": [
+        {
+          "session": "20261022T215204Z",
+          "energy_j": 98.045444,
+          "time_s": 2.758752457,
+          "power_w": 35.69663298041695
+        },
+        {
+          "session": "20261022T215207Z",
+          "energy_j": 98.98046950000001,
+          "time_s": 2.7630037305000004,
+          "power_w": 35.8710844020172
+        },
+        {
+          "session": "20261022T215211Z",
+          "energy_j": 95.68366383333333,
+          "time_s": 2.748518594666667,
+          "power_w": 34.81275426970326
+        }
+      ],
+      "spread_energy": 0.034455261583724806,
+      "spread_time": 0.005270161119317551,
+      "spread_power": 0.030400643514580494
+    },
+    {
+      "application": "pmd",
+      "role": "principal",
+      "configuration": "D",
+      "sessions": [
+        {
+          "session": "20261022T215204Z",
+          "energy_j": 99.415751,
+          "time_s": 2.7733420785,
+          "power_w": 35.77236507582859
+        },
+        {
+          "session": "20261022T215207Z",
+          "energy_j": 99.86616866666665,
+          "time_s": 2.7842416275,
+          "power_w": 35.87571014060167
+        },
+        {
+          "session": "20261022T215211Z",
+          "energy_j": 95.95357116666668,
+          "time_s": 2.768472210666667,
+          "power_w": 34.65942418465876
+        }
+      ],
+      "spread_energy": 0.040775944578487655,
+      "spread_time": 0.005696071924643276,
+      "spread_power": 0.03509250325287483
+    }
+  ]
+}
