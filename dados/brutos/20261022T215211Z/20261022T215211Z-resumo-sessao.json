@@ -1,0 +1,1006 @@
+{
+  "status": "complete",
+  "failure": null,
+  "category": "oficial",
+  "elapsed_seconds": 3692.035563809,
+  "idle_temperature": {
+    "seconds": 60,
+    "median_celsius": 71.0,
+    "readings": [
+      75.0,
+      75.0,
+      75.0,
+      74.0,
+      75.0,
+      74.0,
+      74.0,
+      72.0,
+      74.0,
+      72.0,
+      74.0,
+      72.0,
+      74.0,
+      72.0,
+      72.0,
+      72.0,
+      71.0,
+      72.0,
+      72.0,
+      72.0,
+      72.0,
+      72.0,
+      72.0,
+      71.0,
+      72.0,
+      71.0,
+      71.0,
+      71.0,
+      71.0,
+      71.0,
+      72.0,
+      71.0,
+      71.0,
+      71.0,
+      71.0,
+      71.0,
+      71.0,
+      70.0,
+      71.0,
+      71.0,
+      70.0,
+      71.0,
+      71.0,
+      70.0,
+      70.0,
+      69.0,
+      69.0,
+      71.0,
+      70.0,
+      70.0,
+      70.0,
+      70.0,
+      69.0,
+      69.0,
+      69.0,
+      69.0,
+      69.0,
+      69.0,
+      69.0,
+      69.0
+    ]
+  },
+  "thermal_limit_celsius": 79.0,
+  "records": [
+    {
+      "name": "aquecimento-maquina",
+      "application": "pmd",
+      "configuration": "B",
+      "block": 0,
+      "order": 0,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/aquecimento-maquina",
+      "wall_seconds": 43.64394852999999,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 69.0,
+        "end_celsius": 69.0,
+        "waited_seconds": 0.0020067339999911837,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b09-001-lusearch-D",
+      "application": "lusearch",
+      "configuration": "D",
+      "block": 9,
+      "order": 1,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b09-001-lusearch-D",
+      "wall_seconds": 84.54596798400001,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 71.0,
+        "end_celsius": 71.0,
+        "waited_seconds": 0.001982955000016773,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b09-002-lusearch-B",
+      "application": "lusearch",
+      "configuration": "B",
+      "block": 9,
+      "order": 2,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b09-002-lusearch-B",
+      "wall_seconds": 83.60743517700001,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 71.0,
+        "end_celsius": 71.0,
+        "waited_seconds": 0.0016778300000055424,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b09-003-pmd-A",
+      "application": "pmd",
+      "configuration": "A",
+      "block": 9,
+      "order": 3,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b09-003-pmd-A",
+      "wall_seconds": 45.74821306000001,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 72.0,
+        "end_celsius": 72.0,
+        "waited_seconds": 0.0018582469999728346,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b09-004-avrora-A",
+      "application": "avrora",
+      "configuration": "A",
+      "block": 9,
+      "order": 4,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b09-004-avrora-A",
+      "wall_seconds": 67.05919974200003,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 72.0,
+        "end_celsius": 72.0,
+        "waited_seconds": 0.0016529779999245875,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b09-005-pmd-D",
+      "application": "pmd",
+      "configuration": "D",
+      "block": 9,
+      "order": 5,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b09-005-pmd-D",
+      "wall_seconds": 41.628478632,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 68.0,
+        "end_celsius": 68.0,
+        "waited_seconds": 0.0017471830000204136,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b09-006-lusearch-C",
+      "application": "lusearch",
+      "configuration": "C",
+      "block": 9,
+      "order": 6,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b09-006-lusearch-C",
+      "wall_seconds": 83.70154360200002,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 69.0,
+        "end_celsius": 69.0,
+        "waited_seconds": 0.0017452280000043174,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b09-007-lusearch-A",
+      "application": "lusearch",
+      "configuration": "A",
+      "block": 9,
+      "order": 7,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b09-007-lusearch-A",
+      "wall_seconds": 87.22679674599999,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 70.0,
+        "end_celsius": 70.0,
+        "waited_seconds": 0.0018270640000537242,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b09-008-avrora-D",
+      "application": "avrora",
+      "configuration": "D",
+      "block": 9,
+      "order": 8,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b09-008-avrora-D",
+      "wall_seconds": 64.441466741,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 71.0,
+        "end_celsius": 71.0,
+        "waited_seconds": 0.001220901000010599,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b09-009-pmd-B",
+      "application": "pmd",
+      "configuration": "B",
+      "block": 9,
+      "order": 9,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b09-009-pmd-B",
+      "wall_seconds": 43.389003045000095,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 67.0,
+        "end_celsius": 67.0,
+        "waited_seconds": 0.0023169099999904574,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b09-010-pmd-C",
+      "application": "pmd",
+      "configuration": "C",
+      "block": 9,
+      "order": 10,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b09-010-pmd-C",
+      "wall_seconds": 41.271944985999994,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 69.0,
+        "end_celsius": 69.0,
+        "waited_seconds": 0.0016048219999902358,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b09-011-avrora-C",
+      "application": "avrora",
+      "configuration": "C",
+      "block": 9,
+      "order": 11,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b09-011-avrora-C",
+      "wall_seconds": 64.19485307700006,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 69.0,
+        "end_celsius": 69.0,
+        "waited_seconds": 0.0013880070000595879,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b09-012-avrora-B",
+      "application": "avrora",
+      "configuration": "B",
+      "block": 9,
+      "order": 12,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b09-012-avrora-B",
+      "wall_seconds": 67.00368024499994,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 64.0,
+        "end_celsius": 64.0,
+        "waited_seconds": 0.0016410709999945539,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b10-013-avrora-A",
+      "application": "avrora",
+      "configuration": "A",
+      "block": 10,
+      "order": 13,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b10-013-avrora-A",
+      "wall_seconds": 67.85377238799992,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 63.0,
+        "end_celsius": 63.0,
+        "waited_seconds": 0.001704792999817073,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b10-014-lusearch-A",
+      "application": "lusearch",
+      "configuration": "A",
+      "block": 10,
+      "order": 14,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b10-014-lusearch-A",
+      "wall_seconds": 87.42249893200005,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 62.0,
+        "end_celsius": 62.0,
+        "waited_seconds": 0.0016843189998780872,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b10-015-lusearch-C",
+      "application": "lusearch",
+      "configuration": "C",
+      "block": 10,
+      "order": 15,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b10-015-lusearch-C",
+      "wall_seconds": 83.54895702299996,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 68.0,
+        "end_celsius": 68.0,
+        "waited_seconds": 0.0014479169999503938,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b10-016-lusearch-B",
+      "application": "lusearch",
+      "configuration": "B",
+      "block": 10,
+      "order": 16,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b10-016-lusearch-B",
+      "wall_seconds": 83.526387806,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 69.0,
+        "end_celsius": 69.0,
+        "waited_seconds": 0.0019846469999720284,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b10-017-lusearch-D",
+      "application": "lusearch",
+      "configuration": "D",
+      "block": 10,
+      "order": 17,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b10-017-lusearch-D",
+      "wall_seconds": 83.5895225490001,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 69.0,
+        "end_celsius": 69.0,
+        "waited_seconds": 0.0019325779999235237,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b10-018-pmd-B",
+      "application": "pmd",
+      "configuration": "B",
+      "block": 10,
+      "order": 18,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b10-018-pmd-B",
+      "wall_seconds": 43.402636881000035,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 69.0,
+        "end_celsius": 69.0,
+        "waited_seconds": 0.0014632699999310717,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b10-019-avrora-D",
+      "application": "avrora",
+      "configuration": "D",
+      "block": 10,
+      "order": 19,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b10-019-avrora-D",
+      "wall_seconds": 64.05080877900014,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 70.0,
+        "end_celsius": 70.0,
+        "waited_seconds": 0.0019089410000106,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b10-020-avrora-C",
+      "application": "avrora",
+      "configuration": "C",
+      "block": 10,
+      "order": 20,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b10-020-avrora-C",
+      "wall_seconds": 65.15063380600009,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 66.0,
+        "end_celsius": 66.0,
+        "waited_seconds": 0.0017513359998702072,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b10-021-avrora-B",
+      "application": "avrora",
+      "configuration": "B",
+      "block": 10,
+      "order": 21,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b10-021-avrora-B",
+      "wall_seconds": 67.60112436300005,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 64.0,
+        "end_celsius": 64.0,
+        "waited_seconds": 0.0014858259999073198,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b10-022-pmd-D",
+      "application": "pmd",
+      "configuration": "D",
+      "block": 10,
+      "order": 22,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b10-022-pmd-D",
+      "wall_seconds": 41.402191496999876,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 62.0,
+        "end_celsius": 62.0,
+        "waited_seconds": 0.0019432740000411286,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b10-023-pmd-C",
+      "application": "pmd",
+      "configuration": "C",
+      "block": 10,
+      "order": 23,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b10-023-pmd-C",
+      "wall_seconds": 41.04635471500001,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 66.0,
+        "end_celsius": 66.0,
+        "waited_seconds": 0.0016338349998932244,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b10-024-pmd-A",
+      "application": "pmd",
+      "configuration": "A",
+      "block": 10,
+      "order": 24,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b10-024-pmd-A",
+      "wall_seconds": 45.25900328199987,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 67.0,
+        "end_celsius": 67.0,
+        "waited_seconds": 0.0017335259999526897,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b11-025-avrora-C",
+      "application": "avrora",
+      "configuration": "C",
+      "block": 11,
+      "order": 25,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b11-025-avrora-C",
+      "wall_seconds": 64.01250056900017,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 68.0,
+        "end_celsius": 68.0,
+        "waited_seconds": 0.0019029459999728715,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b11-026-pmd-B",
+      "application": "pmd",
+      "configuration": "B",
+      "block": 11,
+      "order": 26,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b11-026-pmd-B",
+      "wall_seconds": 43.39428296799997,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 63.0,
+        "end_celsius": 63.0,
+        "waited_seconds": 0.0023348250001618,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b11-027-avrora-B",
+      "application": "avrora",
+      "configuration": "B",
+      "block": 11,
+      "order": 27,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b11-027-avrora-B",
+      "wall_seconds": 68.3240547409996,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 66.0,
+        "end_celsius": 66.0,
+        "waited_seconds": 0.0019153420003021893,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b11-028-lusearch-C",
+      "application": "lusearch",
+      "configuration": "C",
+      "block": 11,
+      "order": 28,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b11-028-lusearch-C",
+      "wall_seconds": 83.57736154299982,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 63.0,
+        "end_celsius": 63.0,
+        "waited_seconds": 0.0014251540001168905,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b11-029-pmd-C",
+      "application": "pmd",
+      "configuration": "C",
+      "block": 11,
+      "order": 29,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b11-029-pmd-C",
+      "wall_seconds": 41.127214860000095,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 67.0,
+        "end_celsius": 67.0,
+        "waited_seconds": 0.0025420100000701495,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b11-030-avrora-A",
+      "application": "avrora",
+      "configuration": "A",
+      "block": 11,
+      "order": 30,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b11-030-avrora-A",
+      "wall_seconds": 67.1880380890002,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 68.0,
+        "end_celsius": 68.0,
+        "waited_seconds": 0.001884368999981234,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b11-031-lusearch-A",
+      "application": "lusearch",
+      "configuration": "A",
+      "block": 11,
+      "order": 31,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b11-031-lusearch-A",
+      "wall_seconds": 86.49923346100013,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 64.0,
+        "end_celsius": 64.0,
+        "waited_seconds": 0.0022186490000422054,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b11-032-pmd-A",
+      "application": "pmd",
+      "configuration": "A",
+      "block": 11,
+      "order": 32,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b11-032-pmd-A",
+      "wall_seconds": 45.450052940000205,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 67.0,
+        "end_celsius": 67.0,
+        "waited_seconds": 0.0014749570000276435,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b11-033-avrora-D",
+      "application": "avrora",
+      "configuration": "D",
+      "block": 11,
+      "order": 33,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b11-033-avrora-D",
+      "wall_seconds": 64.2111876490003,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 68.0,
+        "end_celsius": 68.0,
+        "waited_seconds": 0.0012769669997396704,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b11-034-pmd-D",
+      "application": "pmd",
+      "configuration": "D",
+      "block": 11,
+      "order": 34,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b11-034-pmd-D",
+      "wall_seconds": 41.1968566139999,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 64.0,
+        "end_celsius": 64.0,
+        "waited_seconds": 0.0020480150001276343,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b11-035-lusearch-B",
+      "application": "lusearch",
+      "configuration": "B",
+      "block": 11,
+      "order": 35,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b11-035-lusearch-B",
+      "wall_seconds": 83.0483025829999,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 64.0,
+        "end_celsius": 64.0,
+        "waited_seconds": 0.0014590299997507827,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b11-036-lusearch-D",
+      "application": "lusearch",
+      "configuration": "D",
+      "block": 11,
+      "order": 36,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b11-036-lusearch-D",
+      "wall_seconds": 83.45874048799988,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 68.0,
+        "end_celsius": 68.0,
+        "waited_seconds": 0.0016929149996940396,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b12-037-pmd-D",
+      "application": "pmd",
+      "configuration": "D",
+      "block": 12,
+      "order": 37,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b12-037-pmd-D",
+      "wall_seconds": 41.53632367,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 69.0,
+        "end_celsius": 69.0,
+        "waited_seconds": 0.0017223630002263235,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b12-038-pmd-C",
+      "application": "pmd",
+      "configuration": "C",
+      "block": 12,
+      "order": 38,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b12-038-pmd-C",
+      "wall_seconds": 41.272319346999666,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 68.0,
+        "end_celsius": 68.0,
+        "waited_seconds": 0.0015647489999537356,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b12-039-lusearch-A",
+      "application": "lusearch",
+      "configuration": "A",
+      "block": 12,
+      "order": 39,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b12-039-lusearch-A",
+      "wall_seconds": 87.87793147399998,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 69.0,
+        "end_celsius": 69.0,
+        "waited_seconds": 0.0014968119999139162,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b12-040-pmd-B",
+      "application": "pmd",
+      "configuration": "B",
+      "block": 12,
+      "order": 40,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b12-040-pmd-B",
+      "wall_seconds": 43.49713543000007,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 70.0,
+        "end_celsius": 70.0,
+        "waited_seconds": 0.0020511829998213216,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b12-041-lusearch-B",
+      "application": "lusearch",
+      "configuration": "B",
+      "block": 12,
+      "order": 41,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b12-041-lusearch-B",
+      "wall_seconds": 83.1654088360001,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 69.0,
+        "end_celsius": 69.0,
+        "waited_seconds": 0.0024265010001727205,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b12-042-avrora-A",
+      "application": "avrora",
+      "configuration": "A",
+      "block": 12,
+      "order": 42,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b12-042-avrora-A",
+      "wall_seconds": 67.256359643,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 69.0,
+        "end_celsius": 69.0,
+        "waited_seconds": 0.002275353999721119,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b12-043-avrora-C",
+      "application": "avrora",
+      "configuration": "C",
+      "block": 12,
+      "order": 43,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b12-043-avrora-C",
+      "wall_seconds": 64.87331210599996,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 67.0,
+        "end_celsius": 67.0,
+        "waited_seconds": 0.0013297119999151619,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b12-044-lusearch-C",
+      "application": "lusearch",
+      "configuration": "C",
+      "block": 12,
+      "order": 44,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b12-044-lusearch-C",
+      "wall_seconds": 84.00373436300015,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 64.0,
+        "end_celsius": 64.0,
+        "waited_seconds": 0.002171322999856784,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b12-045-avrora-B",
+      "application": "avrora",
+      "configuration": "B",
+      "block": 12,
+      "order": 45,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b12-045-avrora-B",
+      "wall_seconds": 67.7346404519999,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 68.0,
+        "end_celsius": 68.0,
+        "waited_seconds": 0.002067436999823258,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b12-046-avrora-D",
+      "application": "avrora",
+      "configuration": "D",
+      "block": 12,
+      "order": 46,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b12-046-avrora-D",
+      "wall_seconds": 65.21671636300016,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 63.0,
+        "end_celsius": 63.0,
+        "waited_seconds": 0.001939895000305114,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b12-047-lusearch-D",
+      "application": "lusearch",
+      "configuration": "D",
+      "block": 12,
+      "order": 47,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b12-047-lusearch-D",
+      "wall_seconds": 83.42640271100026,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 62.0,
+        "end_celsius": 62.0,
+        "waited_seconds": 0.0016031650002332754,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "b12-048-pmd-A",
+      "application": "pmd",
+      "configuration": "A",
+      "block": 12,
+      "order": 48,
+      "code": 0,
+      "success": true,
+      "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/brutos/20261022T215211Z/b12-048-pmd-A",
+      "wall_seconds": 45.909834966999824,
+      "failure": null,
+      "cooling": {
+        "limit_celsius": 79.0,
+        "start_celsius": 66.0,
+        "end_celsius": 66.0,
+        "waited_seconds": 0.0015613860000485147,
+        "timed_out": false
+      }
+    }
+  ]
+}
