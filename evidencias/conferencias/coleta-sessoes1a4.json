@@ -1,0 +1,487 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-29T17:46:33.158814+00:00",
+  "problems": [],
+  "processes": 180,
+  "attempts": 184,
+  "failures": 0,
+  "sessions": [
+    {
+      "session": "20261022T215204Z",
+      "seed": 20261101,
+      "first_block": 1,
+      "folder_sha256": "4d6c7dcdd45350bc75fc295ddf76e71662bd1810030aec46fab41a3e2baacf7c",
+      "first_environment_at_utc": "2026-10-24T16:29:30.121493+00:00",
+      "checked_processes": 48,
+      "attempts": 49,
+      "failures": [],
+      "retries": [],
+      "elapsed_minutes": 61.41750016885,
+      "idle_celsius": 64.0,
+      "median_idle_power_w": 6.480761868920137
+    },
+    {
+      "session": "20261022T215207Z",
+      "seed": 20261102,
+      "first_block": 5,
+      "folder_sha256": "58772ed344a8f67173a7010f2e1bcd371cdc293fa9b538334495d0de1fca4544",
+      "first_environment_at_utc": "2026-10-25T19:34:49.912634+00:00",
+      "checked_processes": 48,
+      "attempts": 49,
+      "failures": [],
+      "retries": [],
+      "elapsed_minutes": 61.46394181933333,
+      "idle_celsius": 69.0,
+      "median_idle_power_w": 6.452394599697843
+    },
+    {
+      "session": "20261022T215211Z",
+      "seed": 20261103,
+      "first_block": 9,
+      "folder_sha256": "70deb212938af8a22371121825b943cff37ae2c2b5d19ec614cf60fbc74da872",
+      "first_environment_at_utc": "2026-10-26T17:00:39.694868+00:00",
+      "checked_processes": 48,
+      "attempts": 49,
+      "failures": [],
+      "retries": [],
+      "elapsed_minutes": 61.533926063483335,
+      "idle_celsius": 71.0,
+      "median_idle_power_w": 4.707717302973168
+    },
+    {
+      "session": "20261022T215214Z",
+      "seed": 20261104,
+      "first_block": 13,
+      "folder_sha256": "7fd0d9403dab8f96b25a3fa59c724ca0664a0a15c1a042cae6a2ec957fb0f23a",
+      "first_environment_at_utc": "2026-10-29T16:55:23.276611+00:00",
+      "checked_processes": 36,
+      "attempts": 37,
+      "failures": [],
+      "retries": [],
+      "elapsed_minutes": 46.608798367300004,
+      "idle_celsius": 68.0,
+      "median_idle_power_w": 4.7196775250851655
+    }
+  ],
+  "e2": {
+    "limit": 0.05,
+    "sessions": 4,
+    "max_spread_energy_main": 0.06115619631444158,
+    "cells_above_limit": [
+      "lusearch-A",
+      "pmd-A",
+      "pmd-B",
+      "pmd-D"
+    ]
+  },
+  "cells": [
+    {
+      "application": "avrora",
+      "role": "exploratorio",
+      "configuration": "A",
+      "sessions": [
+        {
+          "session": "20261022T215204Z",
+          "energy_j": 50.35658083333333,
+          "time_s": 3.7526496665,
+          "power_w": 13.404877124323598
+        },
+        {
+          "session": "20261022T215207Z",
+          "energy_j": 47.38480716666666,
+          "time_s": 3.7965980656666667,
+          "power_w": 12.454906930864222
+        },
+        {
+          "session": "20261022T215211Z",
+          "energy_j": 41.94372,
+          "time_s": 3.846194225833333,
+          "power_w": 10.84077576206856
+        },
+        {
+          "session": "20261022T215214Z",
+          "energy_j": 39.913106,
+          "time_s": 3.7885206493333334,
+          "power_w": 10.636716566347367
+        }
+      ],
+      "spread_energy": 0.26165527767579233,
+      "spread_time": 0.02492760253332671,
+      "spread_power": 0.2602457761010748
+    },
+    {
+      "application": "avrora",
+      "role": "exploratorio",
+      "configuration": "B",
+      "sessions": [
+        {
+          "session": "20261022T215204Z",
+          "energy_j": 48.636472,
+          "time_s": 3.956913398666667,
+          "power_w": 12.320852883333277
+        },
+        {
+          "session": "20261022T215207Z",
+          "energy_j": 47.43680916666666,
+          "time_s": 3.8279009889999998,
+          "power_w": 12.35091964901103
+        },
+        {
+          "session": "20261022T215211Z",
+          "energy_j": 42.25279116666667,
+          "time_s": 3.9184623949999997,
+          "power_w": 10.774129733327996
+        },
+        {
+          "session": "20261022T215214Z",
+          "energy_j": 40.653623,
+          "time_s": 3.780264311,
+          "power_w": 10.754174749554966
+        }
+      ],
+      "spread_energy": 0.19636254805629494,
+      "spread_time": 0.04672929539679149,
+      "spread_power": 0.1484767484852465
+    },
+    {
+      "application": "avrora",
+      "role": "exploratorio",
+      "configuration": "C",
+      "sessions": [
+        {
+          "session": "20261022T215204Z",
+          "energy_j": 45.791315499999996,
+          "time_s": 3.670364732333333,
+          "power_w": 12.501702732298067
+        },
+        {
+          "session": "20261022T215207Z",
+          "energy_j": 45.921391,
+          "time_s": 3.6757635840000003,
+          "power_w": 12.490948713830921
+        },
+        {
+          "session": "20261022T215211Z",
+          "energy_j": 39.955148666666666,
+          "time_s": 3.6435603218333332,
+          "power_w": 10.826996084792558
+        },
+        {
+          "session": "20261022T215214Z",
+          "energy_j": 39.33121833333333,
+          "time_s": 3.6498631620000004,
+          "power_w": 10.767351226739475
+        }
+      ],
+      "spread_energy": 0.16755577238454045,
+      "spread_time": 0.008838405109885317,
+      "spread_power": 0.1610750377726633
+    },
+    {
+      "application": "avrora",
+      "role": "exploratorio",
+      "configuration": "D",
+      "sessions": [
+        {
+          "session": "20261022T215204Z",
+          "energy_j": 46.60904216666667,
+          "time_s": 3.680647198,
+          "power_w": 12.619083207388286
+        },
+        {
+          "session": "20261022T215207Z",
+          "energy_j": 45.7677865,
+          "time_s": 3.6675555286666666,
+          "power_w": 12.440398586754267
+        },
+        {
+          "session": "20261022T215211Z",
+          "energy_j": 40.7784805,
+          "time_s": 3.7141105874999996,
+          "power_w": 11.054751456009225
+        },
+        {
+          "session": "20261022T215214Z",
+          "energy_j": 38.717470999999996,
+          "time_s": 3.642281254666667,
+          "power_w": 10.706052831607748
+        }
+      ],
+      "spread_energy": 0.20382455162597446,
+      "spread_time": 0.01972097370056236,
+      "spread_power": 0.17868680510642077
+    },
+    {
+      "application": "lusearch",
+      "role": "principal",
+      "configuration": "A",
+      "sessions": [
+        {
+          "session": "20261022T215204Z",
+          "energy_j": 626.4228754999999,
+          "time_s": 18.6616890615,
+          "power_w": 33.60590608818081
+        },
+        {
+          "session": "20261022T215207Z",
+          "energy_j": 636.0070185,
+          "time_s": 18.74581075816667,
+          "power_w": 33.92799184397683
+        },
+        {
+          "session": "20261022T215211Z",
+          "energy_j": 612.0027258333332,
+          "time_s": 18.73343969816667,
+          "power_w": 32.668989436672405
+        },
+        {
+          "session": "20261022T215214Z",
+          "energy_j": 599.3528763333334,
+          "time_s": 18.741583399333333,
+          "power_w": 31.97984202096037
+        }
+      ],
+      "spread_energy": 0.06115619631444158,
+      "spread_time": 0.004507721481664673,
+      "spread_power": 0.06091805649757731
+    },
+    {
+      "application": "lusearch",
+      "role": "principal",
+      "configuration": "B",
+      "sessions": [
+        {
+          "session": "20261022T215204Z",
+          "energy_j": 585.859747,
+          "time_s": 17.726405659166666,
+          "power_w": 33.12036357483781
+        },
+        {
+          "session": "20261022T215207Z",
+          "energy_j": 585.9699351666666,
+          "time_s": 17.728158856333337,
+          "power_w": 33.07291785816405
+        },
+        {
+          "session": "20261022T215211Z",
+          "energy_j": 571.3002849999999,
+          "time_s": 17.739752892166667,
+          "power_w": 32.20485755393663
+        },
+        {
+          "session": "20261022T215214Z",
+          "energy_j": 571.6528336666667,
+          "time_s": 17.799449748333334,
+          "power_w": 32.059522292121876
+        }
+      ],
+      "spread_energy": 0.025677652456740363,
+      "spread_time": 0.004120637345839784,
+      "spread_power": 0.03308974079681226
+    },
+    {
+      "application": "lusearch",
+      "role": "principal",
+      "configuration": "C",
+      "sessions": [
+        {
+          "session": "20261022T215204Z",
+          "energy_j": 599.6844288333333,
+          "time_s": 17.882229870333333,
+          "power_w": 33.510711806121556
+        },
+        {
+          "session": "20261022T215207Z",
+          "energy_j": 601.1726556666667,
+          "time_s": 17.893524546000002,
+          "power_w": 33.646961368117246
+        },
+        {
+          "session": "20261022T215211Z",
+          "energy_j": 583.8795171666667,
+          "time_s": 17.8638814665,
+          "power_w": 32.6113881817422
+        },
+        {
+          "session": "20261022T215214Z",
+          "energy_j": 573.1328103333334,
+          "time_s": 18.04059373466667,
+          "power_w": 31.664997707178962
+        }
+      ],
+      "spread_energy": 0.048923818053664414,
+      "spread_time": 0.009892154093053884,
+      "spread_power": 0.06259162496288262
+    },
+    {
+      "application": "lusearch",
+      "role": "principal",
+      "configuration": "D",
+      "sessions": [
+        {
+          "session": "20261022T215204Z",
+          "energy_j": 598.0107575,
+          "time_s": 17.793234374,
+          "power_w": 33.65473305393034
+        },
+        {
+          "session": "20261022T215207Z",
+          "energy_j": 603.5685028333332,
+          "time_s": 17.832263972333337,
+          "power_w": 33.69376352626158
+        },
+        {
+          "session": "20261022T215211Z",
+          "energy_j": 584.6737046666667,
+          "time_s": 17.826995746999998,
+          "power_w": 32.61388207035303
+        },
+        {
+          "session": "20261022T215214Z",
+          "energy_j": 582.2950183333334,
+          "time_s": 18.031795266666666,
+          "power_w": 32.39523211861276
+        }
+      ],
+      "spread_energy": 0.03653385969347567,
+      "spread_time": 0.013407393375049148,
+      "spread_power": 0.04008402850439041
+    },
+    {
+      "application": "pmd",
+      "role": "principal",
+      "configuration": "A",
+      "sessions": [
+        {
+          "session": "20261022T215204Z",
+          "energy_j": 108.28464500000001,
+          "time_s": 3.1053644951666666,
+          "power_w": 34.738627705685495
+        },
+        {
+          "session": "20261022T215207Z",
+          "energy_j": 109.20443216666666,
+          "time_s": 3.107670907666667,
+          "power_w": 34.963472221968935
+        },
+        {
+          "session": "20261022T215211Z",
+          "energy_j": 103.77496183333335,
+          "time_s": 3.1145903585,
+          "power_w": 33.19414418481132
+        },
+        {
+          "session": "20261022T215214Z",
+          "energy_j": 103.67321633333334,
+          "time_s": 3.115110161,
+          "power_w": 33.06325785008852
+        }
+      ],
+      "spread_energy": 0.05335240893413773,
+      "spread_time": 0.0031383323434341914,
+      "spread_power": 0.057472085191850875
+    },
+    {
+      "application": "pmd",
+      "role": "principal",
+      "configuration": "B",
+      "sessions": [
+        {
+          "session": "20261022T215204Z",
+          "energy_j": 103.39078750000002,
+          "time_s": 2.9413352625,
+          "power_w": 35.22123440816551
+        },
+        {
+          "session": "20261022T215207Z",
+          "energy_j": 104.66501533333334,
+          "time_s": 2.9523188701666667,
+          "power_w": 35.515418565740916
+        },
+        {
+          "session": "20261022T215211Z",
+          "energy_j": 100.66831116666667,
+          "time_s": 2.9496833065,
+          "power_w": 34.20888084619011
+        },
+        {
+          "session": "20261022T215214Z",
+          "energy_j": 99.22348033333333,
+          "time_s": 2.937997417,
+          "power_w": 33.85813874138435
+        }
+      ],
+      "spread_energy": 0.05484120272459325,
+      "spread_time": 0.004874562885521572,
+      "spread_power": 0.04894775336043189
+    },
+    {
+      "application": "pmd",
+      "role": "principal",
+      "configuration": "C",
+      "sessions": [
+        {
+          "session": "20261022T215204Z",
+          "energy_j": 98.045444,
+          "time_s": 2.758752457,
+          "power_w": 35.69663298041695
+        },
+        {
+          "session": "20261022T215207Z",
+          "energy_j": 98.98046950000001,
+          "time_s": 2.7630037305000004,
+          "power_w": 35.8710844020172
+        },
+        {
+          "session": "20261022T215211Z",
+          "energy_j": 95.68366383333333,
+          "time_s": 2.748518594666667,
+          "power_w": 34.81275426970326
+        },
+        {
+          "session": "20261022T215214Z",
+          "energy_j": 95.112142,
+          "time_s": 2.7564355316666664,
+          "power_w": 34.50548395103979
+        }
+      ],
+      "spread_energy": 0.04067122681350188,
+      "spread_time": 0.005270161119317551,
+      "spread_power": 0.03957633090772106
+    },
+    {
+      "application": "pmd",
+      "role": "principal",
+      "configuration": "D",
+      "sessions": [
+        {
+          "session": "20261022T215204Z",
+          "energy_j": 99.415751,
+          "time_s": 2.7733420785,
+          "power_w": 35.77236507582859
+        },
+        {
+          "session": "20261022T215207Z",
+          "energy_j": 99.86616866666665,
+          "time_s": 2.7842416275,
+          "power_w": 35.87571014060167
+        },
+        {
+          "session": "20261022T215211Z",
+          "energy_j": 95.95357116666668,
+          "time_s": 2.768472210666667,
+          "power_w": 34.65942418465876
+        },
+        {
+          "session": "20261022T215214Z",
+          "energy_j": 94.35724133333333,
+          "time_s": 2.7701352043333336,
+          "power_w": 34.06232345111889
+        }
+      ],
+      "spread_energy": 0.058383726097630095,
+      "spread_time": 0.005696071924643276,
+      "spread_power": 0.05323731635879381
+    }
+  ]
+}
