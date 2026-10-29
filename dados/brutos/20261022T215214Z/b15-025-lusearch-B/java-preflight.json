@@ -1,0 +1,8 @@
+{
+  "java_version": "21.0.11",
+  "java_runtime_version": "21.0.11+10-LTS",
+  "java_vendor": "Eclipse Adoptium",
+  "java_home": "/home/everton/.sdkman/candidates/java/21.0.11-tem",
+  "use_g1_gc": "true",
+  "use_compact_object_headers": null
+}
