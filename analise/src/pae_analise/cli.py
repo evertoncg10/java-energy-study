@@ -127,8 +127,11 @@ def run_analysis(root: Path, output: Path, settings: AnalysisSettings, with_figu
             folder = output / "figuras"
             folder.mkdir()
             figuras.plot_ratios(comparisons, folder)
-            figuras.plot_energy(records, folder)
+            figuras.plot_decomposition(comparisons, folder)
+            figuras.plot_memory(comparisons, folder)
             figuras.plot_sessions(criteria["E2"], folder)
+            figuras.plot_energy(records, folder)
+            figuras.plot_flow(folder)
         else:
             print("Aviso: matplotlib não instalado; figuras não geradas (pip install -e .[figuras]).")
     print(text, end="")
