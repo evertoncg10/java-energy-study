@@ -26,6 +26,9 @@ where = ["src"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
+# Aviso interno do matplotlib 3.9 com o pyparsing 3.3 (nome antigo de função).
+# Não envolve este pacote; some quando o matplotlib for atualizado.
+filterwarnings = ["ignore:'enablePackrat' deprecated:DeprecationWarning:matplotlib._mathtext"]
 
 [tool.ruff]
 line-length = 120
