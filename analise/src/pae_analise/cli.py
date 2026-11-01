@@ -42,6 +42,7 @@ from pae_analise.relatorio import (
     summary_text,
     write_csv,
     write_json,
+    write_text,
 )
 
 log = logging.getLogger("pae_analise")
@@ -126,7 +127,7 @@ def run_analysis(root: Path, output: Path, settings: AnalysisSettings, with_figu
     write_json(output / "metadados.json", metadata(root, records, settings))
     text = summary_text(records, comparisons, criteria, hypotheses, h4, decomposition)
     text += "\n".join(sensibilidade.summary_lines(omnibus, contrasts)) + "\n"
-    (output / "resumo.txt").write_text(text, encoding="utf-8")
+    write_text(output / "resumo.txt", text)
 
     if with_figures:
         if figuras.available():

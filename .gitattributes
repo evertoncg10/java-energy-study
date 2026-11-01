@@ -1,0 +1,6 @@
+# Arquivos gravados exatamente como gerados (sem conversão de fim de linha no Windows),
+# para as somas SHA-256 dos manifestos e dos resultados baterem em qualquer sistema
+resultados/** -text
+dados/** -text
+evidencias/** -text
+config/** -text

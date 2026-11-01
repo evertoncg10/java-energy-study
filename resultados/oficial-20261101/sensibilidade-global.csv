@@ -1,0 +1,10 @@
+application,role,metric,label,blocks,friedman_chi2,friedman_df,friedman_p,anova_f,anova_df1,anova_df2,anova_p
+avrora,exploratorio,energy_j,energia,15,36.36,3,6.28441443329e-08,15.4863654557,3,42,6.26145706208e-07
+avrora,exploratorio,time_s,tempo,15,33.8,3,2.18345164504e-07,34.7882476727,3,42,1.84394232643e-11
+avrora,exploratorio,power_w,potência média,15,8.84,3,0.0314955762248,0.432751421856,3,42,0.730646992305
+lusearch,principal,energy_j,energia,15,37.16,3,4.2563236935e-08,119.448380986,3,42,1.36582218896e-20
+lusearch,principal,time_s,tempo,15,40.04,3,1.04490829322e-08,298.140473497,3,42,2.50630657422e-28
+lusearch,principal,power_w,potência média,15,9.72,3,0.0211025124141,4.97127643373,3,42,0.00483738466854
+pmd,principal,energy_j,energia,15,39.88,3,1.12977727174e-08,208.570646794,3,42,3.01728163259e-25
+pmd,principal,time_s,tempo,15,43.88,3,1.60041158104e-09,1563.99497512,3,42,4.24446581963e-43
+pmd,principal,power_w,potência média,15,35.72,3,8.58184914243e-08,35.6110974113,3,42,1.30186689622e-11

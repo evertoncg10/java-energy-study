@@ -1,0 +1,85 @@
+application,role,configuration,metric,label,n,median,mean,cv,min,max
+avrora,exploratorio,A,energy_j,energia (J),15,47.1012993333,45.2902594667,0.0980981304513,39.7775266667,53.1406106667
+avrora,exploratorio,A,time_s,tempo (s),15,3.79990903067,3.80076139467,0.0208835842419,3.61307666367,3.95547740867
+avrora,exploratorio,A,power_w,potência média (W),15,12.4043015542,11.9326793329,0.111901396897,10.5352747667,14.6786763573
+avrora,exploratorio,A,gc_heap_after_median_mb,heap após coleta (MB),15,3.0,3.0,0.0,3.0,3.0
+avrora,exploratorio,A,gc_pauses,número de coletas,15,16.0,16.0,0.0,16.0,16.0
+avrora,exploratorio,A,gc_pause_time_ms,tempo de pausas (ms),15,96.241,96.6314666667,0.0348983579657,89.711,103.503
+avrora,exploratorio,A,meter_overhead,sobrecarga do medidor,15,0.0012155943388,-0.00228494311632,-7.8312938456,-0.033918128655,0.0387852177095
+avrora,exploratorio,B,energy_j,energia (J),15,47.2541516667,45.7361527778,0.0873441131684,40.2101633333,53.9419596667
+avrora,exploratorio,B,time_s,tempo (s),15,3.883197513,3.88138689382,0.0279464361923,3.63676274367,4.08464146
+avrora,exploratorio,B,power_w,potência média (W),15,12.2401001824,11.7947433817,0.0965663118467,10.6422107391,14.8324109844
+avrora,exploratorio,B,gc_heap_after_median_mb,heap após coleta (MB),15,3.0,3.0,0.0,3.0,3.0
+avrora,exploratorio,B,gc_pauses,número de coletas,15,16.0,16.0,0.0,16.0,16.0
+avrora,exploratorio,B,gc_pause_time_ms,tempo de pausas (ms),15,98.597,98.9434,0.031730165382,93.823,104.583
+avrora,exploratorio,B,meter_overhead,sobrecarga do medidor,15,0.0025358516964,0.00218878013108,8.27491332979,-0.0366445916115,0.0494176087701
+avrora,exploratorio,C,energy_j,energia (J),15,44.324736,42.7969621111,0.0754995582875,38.4930856667,46.818077
+avrora,exploratorio,C,time_s,tempo (s),15,3.653479657,3.65464193711,0.0177635094938,3.52000635867,3.77880068767
+avrora,exploratorio,C,power_w,potência média (W),15,12.3770802543,11.71113623,0.0743129527871,10.6132359202,12.6109394259
+avrora,exploratorio,C,gc_heap_after_median_mb,heap após coleta (MB),15,3.0,3.0,0.0,3.0,3.0
+avrora,exploratorio,C,gc_pauses,número de coletas,15,16.0,16.0,0.0,16.0,16.0
+avrora,exploratorio,C,gc_pause_time_ms,tempo de pausas (ms),15,95.466,95.5610666667,0.052990775809,87.526,106.025
+avrora,exploratorio,C,meter_overhead,sobrecarga do medidor,15,-0.00118753996529,-0.00193419154919,-4.38015637867,-0.0144771153673,0.0156786343817
+avrora,exploratorio,D,energy_j,energia (J),15,44.888781,43.3290028889,0.074516252916,38.654849,47.297954
+avrora,exploratorio,D,time_s,tempo (s),15,3.68062105833,3.67202369051,0.0125230114736,3.57902289933,3.73258767533
+avrora,exploratorio,D,power_w,potência média (W),15,12.3612240947,11.8021199698,0.0765301026468,10.6128127669,13.0944296001
+avrora,exploratorio,D,gc_heap_after_median_mb,heap após coleta (MB),15,3.0,3.0,0.0,3.0,3.0
+avrora,exploratorio,D,gc_pauses,número de coletas,15,16.0,16.0,0.0,16.0,16.0
+avrora,exploratorio,D,gc_pause_time_ms,tempo de pausas (ms),15,96.752,96.5068,0.0270333375069,91.68,103.154
+avrora,exploratorio,D,meter_overhead,sobrecarga do medidor,15,0.00644341591796,0.00527062008464,2.64478739592,-0.0218275008837,0.0260198866276
+lusearch,principal,A,energy_j,energia (J),15,625.418504,620.038227978,0.0255614241705,594.160568333,643.98352
+lusearch,principal,A,time_s,tempo (s),15,18.7311031213,18.73357433,0.00865418065937,18.514829405,19.135403595
+lusearch,principal,A,power_w,potência média (W),15,33.4987881029,33.0978827393,0.0242608001683,31.5085944578,33.9358343652
+lusearch,principal,A,gc_heap_after_median_mb,heap após coleta (MB),15,22.0,22.0,0.0,22.0,22.0
+lusearch,principal,A,gc_pauses,número de coletas,15,158.0,158.0,0.0,158.0,158.0
+lusearch,principal,A,gc_pause_time_ms,tempo de pausas (ms),15,191.868,189.494533333,0.0289541882626,178.648,196.979
+lusearch,principal,A,meter_overhead,sobrecarga do medidor,15,-0.0226793248945,-0.0215267965281,-0.194045105401,-0.0283842417328,-0.0138216515821
+lusearch,principal,B,energy_j,energia (J),15,583.816986333,580.3618768,0.0162416015401,564.449828667,597.703975
+lusearch,principal,B,time_s,tempo (s),15,17.7346343003,17.7396112465,0.00338242267874,17.6303691713,17.8444983677
+lusearch,principal,B,power_w,potência média (W),15,32.9458322528,32.7164200309,0.0175141259785,31.9483073193,33.7026388522
+lusearch,principal,B,gc_heap_after_median_mb,heap após coleta (MB),15,22.0,22.0,0.0,22.0,22.0
+lusearch,principal,B,gc_pauses,número de coletas,15,154.0,154.0,0.0,154.0,154.0
+lusearch,principal,B,gc_pause_time_ms,tempo de pausas (ms),15,207.275,207.4768,0.0318625397793,196.956,221.842
+lusearch,principal,B,meter_overhead,sobrecarga do medidor,15,-0.0239417771178,-0.0238358829669,-0.157817272834,-0.0315958358402,-0.0180771635588
+lusearch,principal,C,energy_j,energia (J),15,595.628073667,590.763312511,0.0220141575422,569.130806333,613.178443667
+lusearch,principal,C,time_s,tempo (s),15,17.9138807597,17.9130980201,0.00502579857211,17.793554617,18.0998847887
+lusearch,principal,C,power_w,potência média (W),15,33.4452767353,32.9816262628,0.024500240091,31.5902941709,34.1410001718
+lusearch,principal,C,gc_heap_after_median_mb,heap após coleta (MB),15,22.0,22.0,0.0,22.0,22.0
+lusearch,principal,C,gc_pauses,número de coletas,15,154.0,154.0,0.0,154.0,154.0
+lusearch,principal,C,gc_pause_time_ms,tempo de pausas (ms),15,198.281,195.454533333,0.0402560107346,182.415,204.638
+lusearch,principal,C,meter_overhead,sobrecarga do medidor,15,-0.0212754350554,-0.0206749038786,-0.235437596093,-0.0296159017406,-0.0100816743236
+lusearch,principal,D,energy_j,energia (J),15,592.926664333,591.2931898,0.0193109628203,565.53263,605.274919333
+lusearch,principal,D,time_s,tempo (s),15,17.84550104,17.8881155076,0.00798047907056,17.729294525,18.2189164573
+lusearch,principal,D,power_w,potência média (W),15,33.4342668214,33.0582588959,0.0226540543154,31.3630795845,33.9400955718
+lusearch,principal,D,gc_heap_after_median_mb,heap após coleta (MB),15,22.0,22.0,0.0,22.0,22.0
+lusearch,principal,D,gc_pauses,número de coletas,15,150.0,150.6,0.00824779552999,150.0,153.0
+lusearch,principal,D,gc_pause_time_ms,tempo de pausas (ms),15,190.559,190.478266667,0.046220182086,172.438,207.46
+lusearch,principal,D,meter_overhead,sobrecarga do medidor,15,-0.0230887353296,-0.0228513281541,-0.193187588614,-0.0296332678454,-0.0103728010209
+pmd,principal,A,energy_j,energia (J),15,106.920258333,106.1703132,0.0257302818222,101.994917,109.910424333
+pmd,principal,A,time_s,tempo (s),15,3.10897519167,3.11674469851,0.0060833416239,3.09684008467,3.15845813833
+pmd,principal,A,power_w,potência média (W),15,34.4786466268,34.0659296501,0.0267722603113,32.935157842,35.3823091891
+pmd,principal,A,gc_heap_after_median_mb,heap após coleta (MB),15,18.0,18.0,0.0,18.0,18.0
+pmd,principal,A,gc_pauses,número de coletas,15,86.0,86.0666666667,0.00299998710008,86.0,87.0
+pmd,principal,A,gc_pause_time_ms,tempo de pausas (ms),15,302.62,305.056466667,0.028673978203,294.884,329.687
+pmd,principal,A,meter_overhead,sobrecarga do medidor,15,-0.00394414241552,-0.00439499232723,-0.777072977975,-0.0122946475888,0.00106360348862
+pmd,principal,B,energy_j,energia (J),15,102.611492667,102.667577089,0.0292470677899,98.2473886667,110.586875
+pmd,principal,B,time_s,tempo (s),15,2.94914381433,2.94749905149,0.0045211960219,2.92540814533,2.97586781733
+pmd,principal,B,power_w,potência média (W),15,34.9356352288,34.8309698665,0.0276011294238,33.4402569921,37.2920927649
+pmd,principal,B,gc_heap_after_median_mb,heap após coleta (MB),15,19.0,19.2333333333,0.0193212310128,19.0,20.0
+pmd,principal,B,gc_pauses,número de coletas,15,86.0,86.0,0.0,86.0,86.0
+pmd,principal,B,gc_pause_time_ms,tempo de pausas (ms),15,350.629,350.362,0.0164831470329,339.312,357.523
+pmd,principal,B,meter_overhead,sobrecarga do medidor,15,-0.00479375696767,-0.00439291234257,-0.734576500561,-0.00970548862115,0.00281817157029
+pmd,principal,C,energy_j,energia (J),15,97.952325,97.1259828,0.0223344467731,92.6490956667,100.891404
+pmd,principal,C,time_s,tempo (s),15,2.75813217533,2.75819336656,0.00504445302813,2.73490195567,2.787231092
+pmd,principal,C,power_w,potência média (W),15,35.4307644499,35.2140472693,0.0222413552134,33.2405504275,36.2677943017
+pmd,principal,C,gc_heap_after_median_mb,heap após coleta (MB),15,21.0,21.1333333333,0.0166498000919,21.0,22.0
+pmd,principal,C,gc_pauses,número de coletas,15,85.0,85.0,0.0,85.0,85.0
+pmd,principal,C,gc_pause_time_ms,tempo de pausas (ms),15,353.424,353.8284,0.0177903813509,343.215,369.427
+pmd,principal,C,meter_overhead,sobrecarga do medidor,15,-0.00108656283955,-0.00377692093183,-1.80874651783,-0.0255691768827,0.00384245917387
+pmd,principal,D,energy_j,energia (J),15,98.316541,97.7203077333,0.0266511969316,93.5943646667,102.505963
+pmd,principal,D,time_s,tempo (s),15,2.77129503067,2.7782990962,0.0067323219883,2.75971073667,2.83716152467
+pmd,principal,D,power_w,potência média (W),15,35.4943118999,35.1706983478,0.0232415279163,33.8251851331,36.1363299716
+pmd,principal,D,gc_heap_after_median_mb,heap após coleta (MB),15,19.0,19.0,0.0,19.0,19.0
+pmd,principal,D,gc_pauses,número de coletas,15,74.0,74.2666666667,0.00799304541793,74.0,76.0
+pmd,principal,D,gc_pause_time_ms,tempo de pausas (ms),15,304.998,305.963,0.0180924216115,295.05,315.754
+pmd,principal,D,meter_overhead,sobrecarga do medidor,15,-0.00358937544867,-0.00643396922081,-2.32906885404,-0.0562180579216,0.0132142857143

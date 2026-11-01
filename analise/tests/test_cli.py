@@ -55,3 +55,11 @@ def test_results_are_reproducible_with_the_same_seed(root: Path, tmp_path: Path)
 
 def test_find_root_walks_up(root: Path) -> None:
     assert find_root(root / "analise" / "src") == root
+
+
+def test_stable_rounds_floats_everywhere() -> None:
+    from pae_analise.relatorio import stable
+
+    assert stable(0.5338294217441397) == stable(0.5338294217441396) == 0.533829421744
+    assert stable({"a": [1.0000000000000002, "x", 3]}) == {"a": [1.0, "x", 3]}
+    assert stable(float("inf")) == float("inf")
