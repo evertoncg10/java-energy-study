@@ -1,0 +1,93 @@
+idêntico: base-oficial.csv
+idêntico: base-oficial.json
+idêntico: base-pilotos.csv
+idêntico: criterios.json
+idêntico: decomposicao.csv
+idêntico: descritiva.csv
+idêntico, exceto a data de criação do PDF: figuras/decomposicao.pdf
+idêntico: figuras/decomposicao.png
+idêntico, exceto a data de criação do PDF: figuras/energia.pdf
+idêntico: figuras/energia.png
+idêntico, exceto a data de criação do PDF: figuras/fluxo.pdf
+idêntico: figuras/fluxo.png
+idêntico, exceto a data de criação do PDF: figuras/memoria.pdf
+idêntico: figuras/memoria.png
+idêntico, exceto a data de criação do PDF: figuras/razoes.pdf
+idêntico: figuras/razoes.png
+idêntico, exceto a data de criação do PDF: figuras/sessoes.pdf
+idêntico: figuras/sessoes.png
+idêntico: h4.json
+DIFERENTE: hipoteses.csv
+    --- oficial-20261101/hipoteses.csv
+    +++ oficial-20261101-termos/hipoteses.csv
+    @@ -4,4 +4,4 @@
+    -H3a,avrora,exploratorio,não apoiada
+    -H3b,avrora,exploratorio,não apoiada
+    -H5 (B/A),avrora,exploratorio,inconclusiva
+    -H5 (C/B),avrora,exploratorio,inconclusiva
+    +H3a,avrora,exploratorio,não confirmada
+    +H3b,avrora,exploratorio,não confirmada
+    +H5 (B/A),avrora,exploratorio,não confirmada
+    +H5 (C/B),avrora,exploratorio,não confirmada
+    @@ -9,5 +9,5 @@
+    -H2,lusearch,principal,apoiada
+    -H3a,lusearch,principal,não apoiada
+    -H3b,lusearch,principal,apoiada
+    -H5 (B/A),lusearch,principal,refutada
+    -H5 (C/B),lusearch,principal,apoiada
+    +H2,lusearch,principal,confirmada
+    +H3a,lusearch,principal,não confirmada
+    +H3b,lusearch,principal,confirmada
+    +H5 (B/A),lusearch,principal,não confirmada
+    +H5 (C/B),lusearch,principal,confirmada
+    @@ -15,5 +15,5 @@
+    -H2,pmd,principal,apoiada
+    -H3a,pmd,principal,apoiada
+    -H3b,pmd,principal,apoiada
+    -H5 (B/A),pmd,principal,refutada
+    -H5 (C/B),pmd,principal,refutada
+    +H2,pmd,principal,confirmada
+    +H3a,pmd,principal,confirmada
+    +H3b,pmd,principal,confirmada
+    +H5 (B/A),pmd,principal,não confirmada
+    +H5 (C/B),pmd,principal,não confirmada
+metadados (data, plataforma e commit mudam); mesmos dados de entrada: sim
+idêntico: razoes.csv
+DIFERENTE: resumo.txt
+    --- oficial-20261101/resumo.txt
+    +++ oficial-20261101-termos/resumo.txt
+    @@ -51,4 +51,4 @@
+    -  H3a       avrora    não apoiada (exploratória)
+    -  H3b       avrora    não apoiada (exploratória)
+    -  H5 (B/A)  avrora    inconclusiva (exploratória)
+    -  H5 (C/B)  avrora    inconclusiva (exploratória)
+    +  H3a       avrora    não confirmada (exploratória)
+    +  H3b       avrora    não confirmada (exploratória)
+    +  H5 (B/A)  avrora    não confirmada (exploratória)
+    +  H5 (C/B)  avrora    não confirmada (exploratória)
+    @@ -56,5 +56,5 @@
+    -  H2        lusearch  apoiada
+    -  H3a       lusearch  não apoiada
+    -  H3b       lusearch  apoiada
+    -  H5 (B/A)  lusearch  refutada
+    -  H5 (C/B)  lusearch  apoiada
+    +  H2        lusearch  confirmada
+    +  H3a       lusearch  não confirmada
+    +  H3b       lusearch  confirmada
+    +  H5 (B/A)  lusearch  não confirmada
+    +  H5 (C/B)  lusearch  confirmada
+    @@ -62,5 +62,5 @@
+    -  H2        pmd       apoiada
+    -  H3a       pmd       apoiada
+    -  H3b       pmd       apoiada
+    -  H5 (B/A)  pmd       refutada
+    -  H5 (C/B)  pmd       refutada
+    +  H2        pmd       confirmada
+    +  H3a       pmd       confirmada
+    +  H3b       pmd       confirmada
+    +  H5 (B/A)  pmd       não confirmada
+    +  H5 (C/B)  pmd       não confirmada
+idêntico: sensibilidade-contrastes.csv
+idêntico: sensibilidade-global.csv
+
+Arquivos diferentes: 2

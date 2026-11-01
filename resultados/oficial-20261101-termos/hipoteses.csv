@@ -1,0 +1,19 @@
+hypothesis,application,role,decision
+H1,avrora,exploratorio,inconclusiva
+H2,avrora,exploratorio,inconclusiva
+H3a,avrora,exploratorio,não confirmada
+H3b,avrora,exploratorio,não confirmada
+H5 (B/A),avrora,exploratorio,não confirmada
+H5 (C/B),avrora,exploratorio,não confirmada
+H1,lusearch,principal,inconclusiva
+H2,lusearch,principal,confirmada
+H3a,lusearch,principal,não confirmada
+H3b,lusearch,principal,confirmada
+H5 (B/A),lusearch,principal,não confirmada
+H5 (C/B),lusearch,principal,confirmada
+H1,pmd,principal,inconclusiva
+H2,pmd,principal,confirmada
+H3a,pmd,principal,confirmada
+H3b,pmd,principal,confirmada
+H5 (B/A),pmd,principal,não confirmada
+H5 (C/B),pmd,principal,não confirmada
