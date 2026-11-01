@@ -1,0 +1,29 @@
+name: analise
+
+on:
+  push:
+    paths: ["analise/**", "dados/**", "config/**", ".github/workflows/analise.yml"]
+  pull_request:
+    paths: ["analise/**", "dados/**", "config/**", ".github/workflows/analise.yml"]
+
+jobs:
+  verificar:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: analise
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Instalar
+        run: python -m pip install -e ".[dev]"
+      - name: Estilo (ruff)
+        run: |
+          ruff check src tests
+          ruff format --check src tests
+      - name: Tipos (mypy)
+        run: mypy
+      - name: Testes (pytest)
+        run: pytest
