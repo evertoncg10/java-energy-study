@@ -1,0 +1,23 @@
+{
+  "energy_ratio": {
+    "avrora": 1.0127252873,
+    "lusearch": 0.995464603747,
+    "pmd": 1.00371829867
+  },
+  "heap_ratio": {
+    "avrora": 1.0,
+    "lusearch": 1.0,
+    "pmd": 0.904761904762
+  },
+  "order_by_energy_reduction": [
+    "lusearch",
+    "pmd",
+    "avrora"
+  ],
+  "order_by_heap_reduction": [
+    "pmd",
+    "avrora",
+    "lusearch"
+  ],
+  "same_order": false
+}
