@@ -1,0 +1,46 @@
+BASE OFICIAL PAE-JVM – LISTA DE FALHAS E OCORRÊNCIAS (T25)
+Fechamento: 01/11/2026
+
+1. Composição da base
+   - 4 sessões oficiais, 15 blocos completos, 180 processos (3 aplicações × 4 configurações × 15 blocos).
+   - Pastas: dados/brutos/20261022T215204Z (sessão 1, blocos 1–4, código 20261101)
+             dados/brutos/20261022T215207Z (sessão 2, blocos 5–8, código 20261102)
+             dados/brutos/20261022T215211Z (sessão 3, blocos 9–12, código 20261103)
+             dados/brutos/20261022T215214Z (sessão 4, blocos 13–15, código 20261104)
+   - Pilotos (T11 e T12) ficam em dados/piloto e em base separada (base-pilotos.csv); não entram na análise oficial.
+
+2. Originais preservados
+   - Nenhum arquivo bruto foi editado ou apagado. Os manifestos SHA-256 de evidencias/manifestos/sessao1..4.json
+     foram conferidos em 01/11/2026 com scripts/manifesto.py conferir --sem-scratch: as 4 sessões CONFEREM.
+   - Cópias completas (incluindo as pastas scratch do DaCapo) no Google Drive, pasta "Artigo Escrita Acadêmica":
+     sessao1..4-completa.tar.xz, com SHA-256 em evidencias/manifestos/pacote-sessao1..4.sha256.
+
+3. Falhas e tentativas
+   - 184 tentativas registradas = 180 processos medidos + 4 aquecimentos da máquina (1 por sessão, descartados por
+     desenho do protocolo).
+   - 0 falhas e 0 novas tentativas nas 4 sessões (evidencias/conferencias/coleta-sessoes1a4.json).
+   - Sessão 4: a primeira tentativa, em 29/10/2026, foi interrompida antes do aquecimento da máquina e não gerou
+     nenhuma medição. A pasta foi guardada fora do repositório (07_Evidencias/T24/sessao4-interrompida-20261029)
+     e não entra na base. A sessão foi executada por completo depois, com o mesmo plano.
+
+4. Critérios de validade (registro prévio) aplicados
+   - Regras: status de sucesso, medição verificada, energia e tempo presentes, 3 iterações medidas válidas,
+     validação do DaCapo, sem retorno do contador RAPL, gc.log do G1, versão do Java e opção de cabeçalhos
+     compactos iguais às da configuração, arquivos obrigatórios presentes.
+   - Resultado: 180 de 180 processos válidos. Nenhum processo foi excluído.
+
+5. Ocorrências relevantes para a interpretação
+   - E2 (estabilidade entre sessões) NÃO atendido: maior diferença de energia entre sessões de 6,1% nas
+     aplicações principais (lusearch-A, pmd-A, pmd-B, pmd-D acima de 5%). A potência ociosa caiu de cerca de
+     6,5 W (sessões 1 e 2) para 4,7 W (sessões 3 e 4). O limite registrado não foi alterado; a análise principal
+     usa razões pareadas por bloco, que comparam configurações dentro do mesmo bloco.
+   - E4 (sobrecarga do medidor): atendido pela regra registrada (mediana ≤ 2%), mas lusearch tem mediana de
+     cerca de −2,3%, o que indica aquecimento residual e não custo do medidor.
+   - Heap após a coleta no gc.log tem resolução de 1 MB; em lusearch e avrora a razão D/C sai 1,000 por limite
+     da medida (H3a "não apoiada" deve ser lida como "abaixo da resolução").
+   - avrora é exploratória (papel definido no registro prévio); seus resultados não decidem hipóteses principais.
+
+6. Fora da base oficial
+   - Sessão ingênua (T45, critério E7): será feita depois e analisada à parte, sem alterar esta base.
+   - Análise de sensibilidade (Friedman, ANOVA em blocos, t pareado, Wilcoxon): exploratória, fora do registro
+     prévio; não altera critérios nem decisões.

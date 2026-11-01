@@ -1,0 +1,16 @@
+BASE OFICIAL PAE-JVM – COMO OS RESULTADOS FORAM GERADOS (T25)
+
+Resultados oficiais: resultados/oficial-20261101/
+Comando (na raiz do repositório, com o pacote analise/ instalado):
+    pae-analise analisar --saida resultados/oficial-20261101
+Parâmetros registrados (padrão do programa): 10 000 reamostragens bootstrap, nível de 95%, código de sorteio 20261101.
+
+Identificação dos dados de entrada: campo input_sha256 de resultados/oficial-20261101/metadados.json
+(SHA-256 da lista ordenada de pastas de origem e SHA-256 de cada resultado.json).
+Somas de verificação de todos os arquivos de resultado: evidencias/base-oficial/resultados-oficial-20261101.sha256
+
+Para conferir que uma nova execução reproduz os números:
+    pae-analise analisar --saida resultados/conferencia --sem-figuras
+    cmp resultados/oficial-20261101/razoes.csv resultados/conferencia/razoes.csv
+
+Falhas, tentativas e ocorrências: evidencias/base-oficial/OCORRENCIAS.txt
