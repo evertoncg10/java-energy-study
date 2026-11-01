@@ -86,10 +86,33 @@ def test_hypothesis_rules_follow_the_registration() -> None:
     ]
     decisions = {r["hypothesis"]: r["decision"] for r in evaluate_hypotheses(rows)}
     assert decisions == {
-        "H1": "apoiada",
-        "H2": "apoiada",
-        "H3a": "não apoiada",
-        "H3b": "apoiada",
-        "H5 (B/A)": "refutada",
-        "H5 (C/B)": "inconclusiva",
+        "H1": "confirmada",
+        "H2": "confirmada",
+        "H3a": "não confirmada",
+        "H3b": "confirmada",
+        "H5 (B/A)": "não confirmada",
+        "H5 (C/B)": "não confirmada",
     }
+
+
+def test_only_h1_and_h2_can_be_refuted_or_inconclusive() -> None:
+    # H1 e H2 têm regra de refutação no registro prévio; H5 só tem a de confirmação.
+    refuted = [
+        _row("x", "energy_j", "D/C", 1.01, 1.04),
+        _row("x", "power_w", "D/C", 1.01, 1.03),
+        _row("x", "power_w", "B/A", 1.01, 1.03),
+    ]
+    decisions = {r["hypothesis"]: r["decision"] for r in evaluate_hypotheses(refuted)}
+    assert decisions["H1"] == "refutada"
+    assert decisions["H2"] == "refutada"
+    assert decisions["H5 (B/A)"] == "não confirmada"
+
+    unclear = [
+        _row("x", "energy_j", "D/C", 0.99, 1.01),
+        _row("x", "power_w", "D/C", 0.97, 1.01),
+        _row("x", "power_w", "C/B", 0.97, 1.01),
+    ]
+    decisions = {r["hypothesis"]: r["decision"] for r in evaluate_hypotheses(unclear)}
+    assert decisions["H1"] == "inconclusiva"
+    assert decisions["H2"] == "inconclusiva"
+    assert decisions["H5 (C/B)"] == "não confirmada"

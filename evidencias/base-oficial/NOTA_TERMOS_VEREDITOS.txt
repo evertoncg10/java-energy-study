@@ -1,0 +1,38 @@
+NOTA – PADRONIZAÇÃO DOS TERMOS DOS VEREDITOS (01/11/2026)
+
+O que mudou
+Somente os rótulos dos vereditos das hipóteses gravados pelo programa
+(hipoteses.csv e a parte "Hipóteses" do resumo.txt). Nenhuma regra, limite,
+medida, dado ou número foi alterado.
+
+Termos adotados (estudo confirmatório: hipóteses e regras registradas antes da coleta)
+  confirmada      a regra de confirmação registrada foi cumprida
+  não confirmada  a regra de confirmação não foi cumprida (não significa hipótese falsa)
+  refutada        a regra de refutação registrada foi cumprida (existe só em H1 e H2)
+  inconclusiva    não cumpre nem a regra de confirmação nem a de refutação (só em H1 e H2)
+
+Motivos
+1. Correção para seguir o registro prévio (config/registro-previo.json). Para H3a, H3b
+   e H5 o registro define apenas a condição de confirmação ("apoiada_se"). A versão
+   anterior do programa aplicava a H5 a regra de refutação da H2 e gravava "refutada"
+   (lusearch B/A, pmd B/A, pmd C/B) ou "inconclusiva" (avrora B/A e C/B). Pelo texto
+   registrado, esses casos são "não confirmada".
+2. Padronização com os termos usados no artigo.
+
+Correspondência com resultados/oficial-20261101 (versão anterior, mantida sem alteração)
+  apoiada       -> confirmada
+  não apoiada   -> não confirmada
+  refutada      -> refutada (H1, H2) / não confirmada (H5)
+  inconclusiva  -> inconclusiva (H1, H2) / não confirmada (H5)
+
+Resultados com os termos novos: resultados/oficial-20261101-termos/
+Mesmos dados de entrada (input_sha256), mesmos parâmetros (10 000 reamostragens, 95%,
+código de sorteio 20261101).
+
+Conferência: scripts/comparar_resultados.py comparou as duas pastas arquivo por arquivo.
+Resultado em evidencias/base-oficial/comparacao-termos-20261101.txt.
+Esperado: apenas hipoteses.csv e resumo.txt diferentes, e só nas linhas dos vereditos;
+demais arquivos idênticos (nos PDFs, exceto a data de criação).
+
+A pasta resultados/oficial-20261101 e a etiqueta base-oficial-v1 continuam como registro
+da primeira versão.

@@ -1,0 +1,411 @@
+{
+  "E1": {
+    "limit": 0.05,
+    "cells": [
+      {
+        "application": "avrora",
+        "role": "exploratorio",
+        "configuration": "A",
+        "n": 15,
+        "cv": 0.0980981304513
+      },
+      {
+        "application": "avrora",
+        "role": "exploratorio",
+        "configuration": "B",
+        "n": 15,
+        "cv": 0.0873441131684
+      },
+      {
+        "application": "avrora",
+        "role": "exploratorio",
+        "configuration": "C",
+        "n": 15,
+        "cv": 0.0754995582875
+      },
+      {
+        "application": "avrora",
+        "role": "exploratorio",
+        "configuration": "D",
+        "n": 15,
+        "cv": 0.074516252916
+      },
+      {
+        "application": "lusearch",
+        "role": "principal",
+        "configuration": "A",
+        "n": 15,
+        "cv": 0.0255614241705
+      },
+      {
+        "application": "lusearch",
+        "role": "principal",
+        "configuration": "B",
+        "n": 15,
+        "cv": 0.0162416015401
+      },
+      {
+        "application": "lusearch",
+        "role": "principal",
+        "configuration": "C",
+        "n": 15,
+        "cv": 0.0220141575422
+      },
+      {
+        "application": "lusearch",
+        "role": "principal",
+        "configuration": "D",
+        "n": 15,
+        "cv": 0.0193109628203
+      },
+      {
+        "application": "pmd",
+        "role": "principal",
+        "configuration": "A",
+        "n": 15,
+        "cv": 0.0257302818222
+      },
+      {
+        "application": "pmd",
+        "role": "principal",
+        "configuration": "B",
+        "n": 15,
+        "cv": 0.0292470677899
+      },
+      {
+        "application": "pmd",
+        "role": "principal",
+        "configuration": "C",
+        "n": 15,
+        "cv": 0.0223344467731
+      },
+      {
+        "application": "pmd",
+        "role": "principal",
+        "configuration": "D",
+        "n": 15,
+        "cv": 0.0266511969316
+      }
+    ],
+    "max_main": 0.0292470677899,
+    "met": true
+  },
+  "E2": {
+    "limit": 0.05,
+    "cells": [
+      {
+        "application": "avrora",
+        "role": "exploratorio",
+        "configuration": "A",
+        "session_medians": {
+          "20261022T215204Z": 50.3565808333,
+          "20261022T215207Z": 47.3848071667,
+          "20261022T215211Z": 41.94372,
+          "20261022T215214Z": 39.913106
+        },
+        "spread": 0.261655277676
+      },
+      {
+        "application": "avrora",
+        "role": "exploratorio",
+        "configuration": "B",
+        "session_medians": {
+          "20261022T215204Z": 48.636472,
+          "20261022T215207Z": 47.4368091667,
+          "20261022T215211Z": 42.2527911667,
+          "20261022T215214Z": 40.653623
+        },
+        "spread": 0.196362548056
+      },
+      {
+        "application": "avrora",
+        "role": "exploratorio",
+        "configuration": "C",
+        "session_medians": {
+          "20261022T215204Z": 45.7913155,
+          "20261022T215207Z": 45.921391,
+          "20261022T215211Z": 39.9551486667,
+          "20261022T215214Z": 39.3312183333
+        },
+        "spread": 0.167555772385
+      },
+      {
+        "application": "avrora",
+        "role": "exploratorio",
+        "configuration": "D",
+        "session_medians": {
+          "20261022T215204Z": 46.6090421667,
+          "20261022T215207Z": 45.7677865,
+          "20261022T215211Z": 40.7784805,
+          "20261022T215214Z": 38.717471
+        },
+        "spread": 0.203824551626
+      },
+      {
+        "application": "lusearch",
+        "role": "principal",
+        "configuration": "A",
+        "session_medians": {
+          "20261022T215204Z": 626.4228755,
+          "20261022T215207Z": 636.0070185,
+          "20261022T215211Z": 612.002725833,
+          "20261022T215214Z": 599.352876333
+        },
+        "spread": 0.0611561963144
+      },
+      {
+        "application": "lusearch",
+        "role": "principal",
+        "configuration": "B",
+        "session_medians": {
+          "20261022T215204Z": 585.859747,
+          "20261022T215207Z": 585.969935167,
+          "20261022T215211Z": 571.300285,
+          "20261022T215214Z": 571.652833667
+        },
+        "spread": 0.0256776524567
+      },
+      {
+        "application": "lusearch",
+        "role": "principal",
+        "configuration": "C",
+        "session_medians": {
+          "20261022T215204Z": 599.684428833,
+          "20261022T215207Z": 601.172655667,
+          "20261022T215211Z": 583.879517167,
+          "20261022T215214Z": 573.132810333
+        },
+        "spread": 0.0489238180537
+      },
+      {
+        "application": "lusearch",
+        "role": "principal",
+        "configuration": "D",
+        "session_medians": {
+          "20261022T215204Z": 598.0107575,
+          "20261022T215207Z": 603.568502833,
+          "20261022T215211Z": 584.673704667,
+          "20261022T215214Z": 582.295018333
+        },
+        "spread": 0.0365338596935
+      },
+      {
+        "application": "pmd",
+        "role": "principal",
+        "configuration": "A",
+        "session_medians": {
+          "20261022T215204Z": 108.284645,
+          "20261022T215207Z": 109.204432167,
+          "20261022T215211Z": 103.774961833,
+          "20261022T215214Z": 103.673216333
+        },
+        "spread": 0.0533524089341
+      },
+      {
+        "application": "pmd",
+        "role": "principal",
+        "configuration": "B",
+        "session_medians": {
+          "20261022T215204Z": 103.3907875,
+          "20261022T215207Z": 104.665015333,
+          "20261022T215211Z": 100.668311167,
+          "20261022T215214Z": 99.2234803333
+        },
+        "spread": 0.0548412027246
+      },
+      {
+        "application": "pmd",
+        "role": "principal",
+        "configuration": "C",
+        "session_medians": {
+          "20261022T215204Z": 98.045444,
+          "20261022T215207Z": 98.9804695,
+          "20261022T215211Z": 95.6836638333,
+          "20261022T215214Z": 95.112142
+        },
+        "spread": 0.0406712268135
+      },
+      {
+        "application": "pmd",
+        "role": "principal",
+        "configuration": "D",
+        "session_medians": {
+          "20261022T215204Z": 99.415751,
+          "20261022T215207Z": 99.8661686667,
+          "20261022T215211Z": 95.9535711667,
+          "20261022T215214Z": 94.3572413333
+        },
+        "spread": 0.0583837260976
+      }
+    ],
+    "max_main": 0.0611561963144,
+    "above_limit": [
+      "lusearch-A",
+      "pmd-A",
+      "pmd-B",
+      "pmd-D"
+    ],
+    "met": false
+  },
+  "E3": {
+    "limit_pp": 3.0,
+    "cells": [
+      {
+        "application": "avrora",
+        "role": "exploratorio",
+        "half_width_pp": 2.54658303742
+      },
+      {
+        "application": "lusearch",
+        "role": "principal",
+        "half_width_pp": 1.43566974032
+      },
+      {
+        "application": "pmd",
+        "role": "principal",
+        "half_width_pp": 1.25452694071
+      }
+    ],
+    "met": true
+  },
+  "E4": {
+    "limit": 0.02,
+    "cells": [
+      {
+        "application": "avrora",
+        "role": "exploratorio",
+        "configuration": "A",
+        "median": 0.0012155943388
+      },
+      {
+        "application": "avrora",
+        "role": "exploratorio",
+        "configuration": "B",
+        "median": 0.0025358516964
+      },
+      {
+        "application": "avrora",
+        "role": "exploratorio",
+        "configuration": "C",
+        "median": -0.00118753996529
+      },
+      {
+        "application": "avrora",
+        "role": "exploratorio",
+        "configuration": "D",
+        "median": 0.00644341591796
+      },
+      {
+        "application": "lusearch",
+        "role": "principal",
+        "configuration": "A",
+        "median": -0.0226793248945
+      },
+      {
+        "application": "lusearch",
+        "role": "principal",
+        "configuration": "B",
+        "median": -0.0239417771178
+      },
+      {
+        "application": "lusearch",
+        "role": "principal",
+        "configuration": "C",
+        "median": -0.0212754350554
+      },
+      {
+        "application": "lusearch",
+        "role": "principal",
+        "configuration": "D",
+        "median": -0.0230887353296
+      },
+      {
+        "application": "pmd",
+        "role": "principal",
+        "configuration": "A",
+        "median": -0.00394414241552
+      },
+      {
+        "application": "pmd",
+        "role": "principal",
+        "configuration": "B",
+        "median": -0.00479375696767
+      },
+      {
+        "application": "pmd",
+        "role": "principal",
+        "configuration": "C",
+        "median": -0.00108656283955
+      },
+      {
+        "application": "pmd",
+        "role": "principal",
+        "configuration": "D",
+        "median": -0.00358937544867
+      }
+    ],
+    "met": true,
+    "met_absolute": false
+  },
+  "E5": {
+    "processes": 180,
+    "complete": 180,
+    "share": 1.0,
+    "incomplete": [],
+    "manifests": {
+      "20261022T215204Z": "sessao1.json",
+      "20261022T215207Z": "sessao2.json",
+      "20261022T215211Z": "sessao3.json",
+      "20261022T215214Z": "sessao4.json"
+    },
+    "sessions_without_manifest": [],
+    "met": true
+  },
+  "E6": {
+    "limit_minutes": 90.0,
+    "limit_failure_share": 0.05,
+    "sessions": [
+      {
+        "session": "20261022T215204Z",
+        "status": "complete",
+        "elapsed_minutes": 61.4175001688,
+        "attempts": 49,
+        "failures": [],
+        "failure_share": 0.0,
+        "idle_celsius": 64.0,
+        "met": true
+      },
+      {
+        "session": "20261022T215207Z",
+        "status": "complete",
+        "elapsed_minutes": 61.4639418193,
+        "attempts": 49,
+        "failures": [],
+        "failure_share": 0.0,
+        "idle_celsius": 69.0,
+        "met": true
+      },
+      {
+        "session": "20261022T215211Z",
+        "status": "complete",
+        "elapsed_minutes": 61.5339260635,
+        "attempts": 49,
+        "failures": [],
+        "failure_share": 0.0,
+        "idle_celsius": 71.0,
+        "met": true
+      },
+      {
+        "session": "20261022T215214Z",
+        "status": "complete",
+        "elapsed_minutes": 46.6087983673,
+        "attempts": 37,
+        "failures": [],
+        "failure_share": 0.0,
+        "idle_celsius": 68.0,
+        "met": true
+      }
+    ],
+    "met": true
+  }
+}

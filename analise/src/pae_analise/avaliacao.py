@@ -350,6 +350,15 @@ def criterion_e6(root: Path, sessions: Sequence[str]) -> dict[str, Any]:
 
 # ---------------------------------------------------------------- hipóteses H1–H5
 
+# Termos dos vereditos (estudo confirmatório). Quando a hipótese registra regra de
+# confirmação e de refutação (H1, H2), há quatro resultados possíveis; quando registra
+# só a de confirmação (H3a, H3b, H5), o veredito é "confirmada" ou "não confirmada".
+CONFIRMADA = "confirmada"
+NAO_CONFIRMADA = "não confirmada"
+REFUTADA = "refutada"
+INCONCLUSIVA = "inconclusiva"
+SEM_DADOS = "sem dados"
+
 
 def _below_one(row: dict[str, Any] | None) -> bool:
     return row is not None and row["ci_high"] < 1
@@ -359,16 +368,22 @@ def _above_one(row: dict[str, Any] | None) -> bool:
     return row is not None and row["ci_low"] > 1
 
 
-def _power_decision(row: dict[str, Any] | None) -> str:
-    """Regra de H2 e H5. Dentro da faixa [0,98; 1,02] → apoiada; senão, se o IC exclui 1 → refutada."""
+def _power_decision(row: dict[str, Any] | None, *, refutable: bool) -> str:
+    """Regra de H2 e H5: IC dentro da faixa [0,98; 1,02] → confirmada.
+
+    Só H2 tem regra de refutação registrada (IC que não contém 1). Em H5, que
+    registra apenas a condição de confirmação, qualquer outro caso é "não confirmada".
+    """
     if row is None:
-        return "sem dados"
+        return SEM_DADOS
     low, high = POWER_BAND
     if low <= row["ci_low"] and row["ci_high"] <= high:
-        return "apoiada"
+        return CONFIRMADA
+    if not refutable:
+        return NAO_CONFIRMADA
     if not (row["ci_low"] <= 1 <= row["ci_high"]):
-        return "refutada"
-    return "inconclusiva"
+        return REFUTADA
+    return INCONCLUSIVA
 
 
 def evaluate_hypotheses(comparisons: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -378,13 +393,13 @@ def evaluate_hypotheses(comparisons: Sequence[dict[str, Any]]) -> list[dict[str,
         role = next(r["role"] for r in comparisons if r["application"] == app)
         energy = _find(comparisons, app, "energy_j", "D/C")
         if energy is None:
-            h1 = "sem dados"
+            h1 = SEM_DADOS
         elif _below_one(energy):
-            h1 = "apoiada"
+            h1 = CONFIRMADA
         elif _above_one(energy):
-            h1 = "refutada"
+            h1 = REFUTADA
         else:
-            h1 = "inconclusiva"
+            h1 = INCONCLUSIVA
         heap = _find(comparisons, app, "gc_heap_after_median_mb", "D/C")
         pauses = _find(comparisons, app, "gc_pauses", "D/C")
         pause_time = _find(comparisons, app, "gc_pause_time_ms", "D/C")
@@ -395,33 +410,33 @@ def evaluate_hypotheses(comparisons: Sequence[dict[str, Any]]) -> list[dict[str,
                     "hypothesis": "H2",
                     "application": app,
                     "role": role,
-                    "decision": _power_decision(_find(comparisons, app, "power_w", "D/C")),
+                    "decision": _power_decision(_find(comparisons, app, "power_w", "D/C"), refutable=True),
                 },
                 {
                     "hypothesis": "H3a",
                     "application": app,
                     "role": role,
-                    "decision": "apoiada" if _below_one(heap) else ("sem dados" if heap is None else "não apoiada"),
+                    "decision": CONFIRMADA if _below_one(heap) else (SEM_DADOS if heap is None else NAO_CONFIRMADA),
                 },
                 {
                     "hypothesis": "H3b",
                     "application": app,
                     "role": role,
-                    "decision": "apoiada"
+                    "decision": CONFIRMADA
                     if (_below_one(pauses) or _below_one(pause_time))
-                    else ("sem dados" if pauses is None and pause_time is None else "não apoiada"),
+                    else (SEM_DADOS if pauses is None and pause_time is None else NAO_CONFIRMADA),
                 },
                 {
                     "hypothesis": "H5 (B/A)",
                     "application": app,
                     "role": role,
-                    "decision": _power_decision(_find(comparisons, app, "power_w", "B/A")),
+                    "decision": _power_decision(_find(comparisons, app, "power_w", "B/A"), refutable=False),
                 },
                 {
                     "hypothesis": "H5 (C/B)",
                     "application": app,
                     "role": role,
-                    "decision": _power_decision(_find(comparisons, app, "power_w", "C/B")),
+                    "decision": _power_decision(_find(comparisons, app, "power_w", "C/B"), refutable=False),
                 },
             ]
         )
