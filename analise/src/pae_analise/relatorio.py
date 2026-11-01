@@ -8,6 +8,7 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
+import math
 import platform
 import subprocess
 from collections.abc import Sequence
@@ -35,22 +36,46 @@ def write_csv(path: Path, rows: Sequence[dict[str, Any]]) -> None:
     for row in rows:
         columns.extend(key for key in row if key not in columns)
     with path.open("x", encoding="utf-8", newline="") as stream:
-        writer = csv.DictWriter(stream, fieldnames=columns, extrasaction="ignore")
+        writer = csv.DictWriter(stream, fieldnames=columns, extrasaction="ignore", lineterminator="\n")
         writer.writeheader()
         for row in rows:
             writer.writerow({k: _cell(v) for k, v in row.items()})
 
 
+# Casas significativas gravadas. Diferenças na última casa de funções como erfc entre Windows e Linux
+# (da ordem de 1e-16) desaparecem, e os arquivos ficam idênticos byte a byte nos dois sistemas.
+SIGNIFICANT_DIGITS = 12
+
+
+def stable(value: Any) -> Any:
+    """Arredonda todos os números reais (também dentro de listas e dicionários) para 12 casas significativas."""
+    if isinstance(value, float):
+        return float(f"{value:.{SIGNIFICANT_DIGITS}g}") if math.isfinite(value) else value
+    if isinstance(value, dict):
+        return {k: stable(v) for k, v in value.items()}
+    if isinstance(value, list | tuple):
+        return [stable(v) for v in value]
+    return value
+
+
 def _cell(value: Any) -> Any:
+    value = stable(value)
     if isinstance(value, dict | list):
         return json.dumps(value, ensure_ascii=False)
     return value
 
 
 def write_json(path: Path, data: Any) -> None:
-    with path.open("x", encoding="utf-8") as stream:
-        json.dump(data, stream, ensure_ascii=False, indent=2, allow_nan=False)
+    """JSON em UTF-8 com fim de linha LF em qualquer sistema."""
+    with path.open("x", encoding="utf-8", newline="\n") as stream:
+        json.dump(stable(data), stream, ensure_ascii=False, indent=2, allow_nan=False)
         stream.write("\n")
+
+
+def write_text(path: Path, text: str) -> None:
+    """Texto em UTF-8 com fim de linha LF em qualquer sistema; recusa sobrescrever."""
+    with path.open("x", encoding="utf-8", newline="\n") as stream:
+        stream.write(text)
 
 
 def records_as_rows(records: Sequence[ProcessRecord]) -> list[dict[str, Any]]:
