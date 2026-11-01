@@ -24,6 +24,8 @@ def test_full_analysis_writes_every_output(root: Path, tmp_path: Path) -> None:
         "hipoteses.csv",
         "criterios.json",
         "h4.json",
+        "sensibilidade-global.csv",
+        "sensibilidade-contrastes.csv",
         "metadados.json",
         "resumo.txt",
     ):

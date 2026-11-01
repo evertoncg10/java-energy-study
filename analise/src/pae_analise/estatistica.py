@@ -176,3 +176,253 @@ def a12_magnitude(a12: float) -> str:
     if distance < 0.21:
         return "médio"
     return "grande"
+
+
+# ---------------------------------------------------------------- análise de sensibilidade (exploratória)
+#
+# Testes usados só na análise de sensibilidade, que não faz parte do registro prévio. As distribuições
+# são calculadas com as funções gama e beta incompletas regularizadas (Press et al., Numerical Recipes,
+# cap. 6), para manter o núcleo sem dependências externas. Os testes conferem os valores com o scipy.
+
+
+def _regularized_gamma_lower(a: float, x: float) -> float:
+    """P(a, x): função gama incompleta inferior regularizada."""
+    if x <= 0:
+        return 0.0
+    log_prefix = a * math.log(x) - x - math.lgamma(a)
+    if x < a + 1:  # Série.
+        term = total = 1 / a
+        denominator = a
+        for _ in range(1000):
+            denominator += 1
+            term *= x / denominator
+            total += term
+            if abs(term) < abs(total) * 1e-15:
+                break
+        return total * math.exp(log_prefix)
+    # Fração contínua de Lentz para Q(a, x).
+    tiny = 1e-300
+    b = x + 1 - a
+    c = 1 / tiny
+    d = 1 / b
+    h = d
+    for i in range(1, 1000):
+        an = -i * (i - a)
+        b += 2
+        d = an * d + b
+        d = tiny if abs(d) < tiny else d
+        c = b + an / c
+        c = tiny if abs(c) < tiny else c
+        d = 1 / d
+        delta = d * c
+        h *= delta
+        if abs(delta - 1) < 1e-15:
+            break
+    return 1 - math.exp(log_prefix) * h
+
+
+def _beta_continued_fraction(a: float, b: float, x: float) -> float:
+    tiny = 1e-300
+    qab, qap, qam = a + b, a + 1, a - 1
+    c = 1.0
+    d = 1 - qab * x / qap
+    d = tiny if abs(d) < tiny else d
+    d = 1 / d
+    h = d
+    for m in range(1, 1000):
+        m2 = 2 * m
+        aa = m * (b - m) * x / ((qam + m2) * (a + m2))
+        d = 1 + aa * d
+        d = tiny if abs(d) < tiny else d
+        c = 1 + aa / c
+        c = tiny if abs(c) < tiny else c
+        d = 1 / d
+        h *= d * c
+        aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2))
+        d = 1 + aa * d
+        d = tiny if abs(d) < tiny else d
+        c = 1 + aa / c
+        c = tiny if abs(c) < tiny else c
+        d = 1 / d
+        delta = d * c
+        h *= delta
+        if abs(delta - 1) < 1e-15:
+            break
+    return h
+
+
+def _regularized_beta(a: float, b: float, x: float) -> float:
+    """I_x(a, b): função beta incompleta regularizada."""
+    if x <= 0:
+        return 0.0
+    if x >= 1:
+        return 1.0
+    log_front = math.lgamma(a + b) - math.lgamma(a) - math.lgamma(b) + a * math.log(x) + b * math.log1p(-x)
+    if x < (a + 1) / (a + b + 2):
+        return math.exp(log_front) * _beta_continued_fraction(a, b, x) / a
+    return 1 - math.exp(log_front) * _beta_continued_fraction(b, a, 1 - x) / b
+
+
+def chi2_sf(statistic: float, df: float) -> float:
+    """P(X ≥ statistic) para X com distribuição qui-quadrado com ``df`` graus de liberdade."""
+    return 1.0 if statistic <= 0 else max(0.0, 1 - _regularized_gamma_lower(df / 2, statistic / 2))
+
+
+def f_sf(statistic: float, df1: float, df2: float) -> float:
+    """P(X ≥ statistic) para X com distribuição F(df1, df2)."""
+    if statistic <= 0:
+        return 1.0
+    return _regularized_beta(df2 / 2, df1 / 2, df2 / (df2 + df1 * statistic))
+
+
+def t_sf_two_sided(statistic: float, df: float) -> float:
+    """P(|T| ≥ |statistic|) para T com distribuição t de Student."""
+    return _regularized_beta(df / 2, 0.5, df / (df + statistic * statistic))
+
+
+def t_quantile(probability: float, df: float) -> float:
+    """Quantil da t de Student (0,5 < probability < 1), por bisseção."""
+    if not 0.5 < probability < 1:
+        raise ValueError("probability deve estar entre 0,5 e 1")
+    target = 2 * (1 - probability)  # Cauda bilateral.
+    low, high = 0.0, 1.0
+    while t_sf_two_sided(high, df) > target:
+        high *= 2
+    for _ in range(200):
+        middle = (low + high) / 2
+        if t_sf_two_sided(middle, df) > target:
+            low = middle
+        else:
+            high = middle
+    return (low + high) / 2
+
+
+@dataclass(frozen=True)
+class OmnibusTest:
+    """Teste global entre configurações nos mesmos blocos."""
+
+    statistic: float
+    df1: float
+    df2: float | None
+    p_value: float
+    blocks: int
+
+
+def friedman(table: Sequence[Sequence[float]]) -> OmnibusTest:
+    """Teste de Friedman: cada linha é um bloco, cada coluna uma configuração (postos dentro do bloco).
+
+    Aproximação qui-quadrado com correção de empates (igual a ``scipy.stats.friedmanchisquare``).
+    """
+    n = len(table)
+    k = len(table[0]) if table else 0
+    if n < 2 or k < 2 or any(len(row) != k for row in table):
+        raise ValueError("tabela completa com ao menos 2 blocos e 2 configurações")
+    rank_rows = [_ranks(row) for row in table]
+    rank_sums = [sum(row[j] for row in rank_rows) for j in range(k)]
+    statistic = 12 / (n * k * (k + 1)) * sum(r * r for r in rank_sums) - 3 * n * (k + 1)
+    ties = 0
+    for row in table:
+        counts: dict[float, int] = {}
+        for value in row:
+            counts[value] = counts.get(value, 0) + 1
+        ties += sum(t**3 - t for t in counts.values())
+    correction = 1 - ties / (n * (k**3 - k))
+    statistic = statistic / correction if correction > 0 else 0.0
+    return OmnibusTest(statistic=statistic, df1=k - 1, df2=None, p_value=chi2_sf(statistic, k - 1), blocks=n)
+
+
+def block_anova(table: Sequence[Sequence[float]]) -> OmnibusTest:
+    """ANOVA de dois fatores sem interação (blocos completos casualizados): F da configuração.
+
+    Cada linha é um bloco e cada coluna uma configuração. O bloco entra como fator para retirar a
+    variação entre blocos e sessões do erro.
+    """
+    n = len(table)
+    k = len(table[0]) if table else 0
+    if n < 2 or k < 2 or any(len(row) != k for row in table):
+        raise ValueError("tabela completa com ao menos 2 blocos e 2 configurações")
+    grand = sum(sum(row) for row in table) / (n * k)
+    column_means = [sum(row[j] for row in table) / n for j in range(k)]
+    row_means = [sum(row) / k for row in table]
+    ss_columns = n * sum((m - grand) ** 2 for m in column_means)
+    ss_rows = k * sum((m - grand) ** 2 for m in row_means)
+    ss_total = sum((v - grand) ** 2 for row in table for v in row)
+    ss_error = ss_total - ss_columns - ss_rows
+    df1, df2 = k - 1, (k - 1) * (n - 1)
+    if ss_error <= 0:
+        return OmnibusTest(statistic=math.inf, df1=df1, df2=df2, p_value=0.0, blocks=n)
+    statistic = (ss_columns / df1) / (ss_error / df2)
+    return OmnibusTest(statistic=statistic, df1=df1, df2=df2, p_value=f_sf(statistic, df1, df2), blocks=n)
+
+
+@dataclass(frozen=True)
+class PairedLogTest:
+    """Teste t pareado sobre log(x/y): razão das médias geométricas com IC."""
+
+    ratio: float
+    ci_low: float
+    ci_high: float
+    statistic: float
+    p_value: float
+    pairs: int
+
+
+def paired_log_t(pairs: Sequence[tuple[float, float]], level: float = 0.95) -> PairedLogTest:
+    """Teste t pareado no log da razão de cada bloco. É o contraste da ANOVA em blocos para duas configurações."""
+    differences = [math.log(x / y) for x, y in pairs]
+    n = len(differences)
+    if n < 2:
+        raise ValueError("são necessários ao menos 2 pares")
+    mean = statistics.mean(differences)
+    error = statistics.stdev(differences) / math.sqrt(n)
+    if error == 0:
+        p_value = 1.0 if mean == 0 else 0.0
+        statistic = 0.0 if mean == 0 else math.copysign(math.inf, mean)
+        return PairedLogTest(math.exp(mean), math.exp(mean), math.exp(mean), statistic, p_value, n)
+    statistic = mean / error
+    margin = t_quantile(1 - (1 - level) / 2, n - 1) * error
+    return PairedLogTest(
+        ratio=math.exp(mean),
+        ci_low=math.exp(mean - margin),
+        ci_high=math.exp(mean + margin),
+        statistic=statistic,
+        p_value=t_sf_two_sided(statistic, n - 1),
+        pairs=n,
+    )
+
+
+@dataclass(frozen=True)
+class SignedRank:
+    statistic: float
+    p_value: float
+    pairs: int
+
+
+def wilcoxon_signed_rank(pairs: Sequence[tuple[float, float]]) -> SignedRank:
+    """Teste de Wilcoxon pareado bilateral, exato por enumeração (diferenças nulas são descartadas).
+
+    A estatística é a soma dos postos das diferenças positivas. Com empates entre |diferenças|,
+    a distribuição exata é calculada com os postos médios observados.
+    """
+    differences = [x - y for x, y in pairs if x != y]
+    n = len(differences)
+    if n == 0:
+        return SignedRank(statistic=0.0, p_value=1.0, pairs=0)
+    if n > 25:
+        raise ValueError("enumeração exata limitada a 25 pares")
+    ranks = _ranks([abs(d) for d in differences])
+    positive = sum(r for r, d in zip(ranks, differences, strict=True) if d > 0)
+    # Distribuição da soma de postos com sinais ao acaso: contagem por soma (postos × 2 são inteiros).
+    counts: dict[int, int] = {0: 1}
+    for rank in ranks:
+        step = round(rank * 2)
+        updated: dict[int, int] = dict(counts)
+        for total, count in counts.items():
+            updated[total + step] = updated.get(total + step, 0) + count
+        counts = updated
+    total_cases = 2**n
+    mean = sum(ranks)  # Em dobro: média da soma (sum(ranks) / 2) × 2.
+    observed = round(positive * 2)
+    distance = abs(observed - mean)
+    extreme = sum(count for total, count in counts.items() if abs(total - mean) >= distance - 1e-9)
+    return SignedRank(statistic=positive, p_value=min(1.0, extreme / total_cases), pairs=n)

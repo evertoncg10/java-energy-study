@@ -2,7 +2,8 @@
 
 Comandos:
     consolidar   grava a base consolidada (uma linha por processo) da coleta oficial e dos pilotos;
-    analisar     consolida e roda toda a análise (descritiva, razões, critérios, hipóteses, figuras).
+    analisar     consolida e roda toda a análise (descritiva, razões, critérios, hipóteses,
+                 sensibilidade exploratória e figuras).
 
 Exemplos (a partir da raiz do repositório):
     pae-analise consolidar --saida resultados/consolidacao
@@ -17,7 +18,7 @@ import sys
 from collections.abc import Sequence
 from pathlib import Path
 
-from pae_analise import __version__, figuras
+from pae_analise import __version__, figuras, sensibilidade
 from pae_analise.avaliacao import (
     AnalysisSettings,
     compare_configurations,
@@ -108,6 +109,8 @@ def run_analysis(root: Path, output: Path, settings: AnalysisSettings, with_figu
     hypotheses = evaluate_hypotheses(comparisons)
     h4 = hypothesis_h4(comparisons)
     decomposition = decompose_energy(records)
+    omnibus = sensibilidade.omnibus_tests(records)
+    contrasts = sensibilidade.contrast_tests(records, comparisons, settings.level)
 
     write_csv(output / "base-oficial.csv", records_as_rows(records))
     write_json(output / "base-oficial.json", records_as_json(records))
@@ -118,8 +121,11 @@ def run_analysis(root: Path, output: Path, settings: AnalysisSettings, with_figu
     write_csv(output / "hipoteses.csv", hypotheses)
     write_json(output / "criterios.json", criteria)
     write_json(output / "h4.json", h4)
+    write_csv(output / "sensibilidade-global.csv", omnibus)
+    write_csv(output / "sensibilidade-contrastes.csv", contrasts)
     write_json(output / "metadados.json", metadata(root, records, settings))
     text = summary_text(records, comparisons, criteria, hypotheses, h4, decomposition)
+    text += "\n".join(sensibilidade.summary_lines(omnibus, contrasts)) + "\n"
     (output / "resumo.txt").write_text(text, encoding="utf-8")
 
     if with_figures:
@@ -127,8 +133,11 @@ def run_analysis(root: Path, output: Path, settings: AnalysisSettings, with_figu
             folder = output / "figuras"
             folder.mkdir()
             figuras.plot_ratios(comparisons, folder)
-            figuras.plot_energy(records, folder)
+            figuras.plot_decomposition(comparisons, folder)
+            figuras.plot_memory(comparisons, folder)
             figuras.plot_sessions(criteria["E2"], folder)
+            figuras.plot_energy(records, folder)
+            figuras.plot_flow(folder)
         else:
             print("Aviso: matplotlib não instalado; figuras não geradas (pip install -e .[figuras]).")
     print(text, end="")
