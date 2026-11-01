@@ -46,5 +46,9 @@ mypy_path = "src"
 packages = ["pae_analise"]
 
 [[tool.mypy.overrides]]
-module = ["matplotlib", "matplotlib.*"]
+# As figuras usam matplotlib sem tipos (Any). Os stubs do numpy, puxados pelo matplotlib, usam sintaxe
+# de Python 3.12 e quebram a checagem com python_version 3.10; por isso esses pacotes não são seguidos.
+module = ["matplotlib", "matplotlib.*", "numpy", "numpy.*"]
 ignore_missing_imports = true
+follow_imports = "skip"
+follow_imports_for_stubs = true
