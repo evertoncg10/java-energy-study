@@ -486,14 +486,14 @@ espera reproduzir é a **direção e o tamanho das razões** entre configuraçõ
 | Programas | `git`, `python3` (3.10+), `curl`, `unzip`, `sha256sum`, Maven 3.9+ | `mvn -version` |
 | SDKMAN | com um Java padrão instalado | `sdk version` |
 
-Em Ubuntu, Debian, Zorin OS ou Mint, os programas se instalam com:
+Para instalar os programas no Ubuntu, Debian, Zorin OS ou Mint, use:
 
 ```bash
 sudo apt update
 sudo apt install git python3 python3-venv curl unzip zip coreutils maven
 ```
 
-O SDKMAN se instala com (depois, abra um terminal novo):
+Para instalar o SDKMAN, use os comandos abaixo (depois, abra um terminal novo):
 
 ```bash
 curl -s "https://get.sdkman.io" | bash
