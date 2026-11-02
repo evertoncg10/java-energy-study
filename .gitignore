@@ -55,6 +55,7 @@ ferramentas/**/*.tgz
 *.md
 !/README.md
 !/README.en.md
+!/DATA-DICTIONARY.md
 *.rst
 *.adoc
 *.doc

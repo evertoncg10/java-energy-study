@@ -311,6 +311,7 @@ O repositório está organizado assim:
 ├── LICENSE                         # Licença MIT (código)
 ├── LICENCA-DADOS.txt               # Licença CC BY 4.0 (dados, resultados, evidências, configuração)
 ├── CITATION.cff                    # Dados de citação
+├── DATA-DICTIONARY.md              # Dicionário de dados (em inglês), com as colunas e campos de todos os arquivos
 ├── Dockerfile / .dockerignore      # Imagem que refaz a análise
 ├── config/
 │   ├── execucao.json               # Protocolo fixado da coleta (JDKs, cargas, iterações, heap, pausas, SHA-256)
@@ -556,7 +557,9 @@ A pasta de saída da análise contém os seguintes arquivos:
 | `metadados.json` | data, sistema, versões, commit e SHA-256 dos dados de entrada |
 | `figuras/` | energia, razões, sessões, decomposição, memória e fluxo do protocolo (PNG e PDF) |
 
-O melhor ponto de partida é o `resumo.txt`, que reúne os principais números em texto corrido.
+O melhor ponto de partida é o `resumo.txt`, que reúne os principais números em texto corrido. O significado de cada coluna desses
+arquivos, e de cada campo dos dados brutos, está no [dicionário de dados](DATA-DICTIONARY.md), escrito em inglês para
+atender também pesquisadores de outros países.
 
 #### Conferência automática
 

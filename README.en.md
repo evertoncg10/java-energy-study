@@ -37,7 +37,8 @@ If you want to check the data, re-run the analysis or even repeat the measuremen
 the whole path here, explained step by step in [How to reproduce](#-how-to-reproduce).
 
 > The code, scripts, file names and program messages are in Portuguese. This English README explains each step and
-> translates the messages you will see along the way; there is also a glossary at the end.
+> translates the messages you will see along the way. There is a glossary at the end, and every column and field of
+> the data is described in the [data dictionary](DATA-DICTIONARY.md).
 
 ---
 
@@ -317,6 +318,7 @@ The repository is organized as follows:
 ├── LICENSE                         # MIT license (code)
 ├── LICENCA-DADOS.txt               # CC BY 4.0 license (data, results, evidence, configuration)
 ├── CITATION.cff                    # Citation metadata
+├── DATA-DICTIONARY.md              # Data dictionary, with the columns and fields of every file
 ├── Dockerfile / .dockerignore      # Image that re-runs the analysis
 ├── config/
 │   ├── execucao.json               # Frozen collection protocol (JDKs, workloads, iterations, heap, pauses, SHA-256)
@@ -566,7 +568,8 @@ The analysis output folder contains the following files:
 | `metadados.json` | date, system, versions, commit and SHA-256 of the input data |
 | `figuras/` | energy, ratios, sessions, decomposition, memory and protocol flow (PNG and PDF) |
 
-The best place to start is `resumo.txt`, which brings the main numbers together in plain text.
+The best place to start is `resumo.txt`, which brings the main numbers together in plain text. Every column of these files, and every field of the raw data, is described in the
+[data dictionary](DATA-DICTIONARY.md).
 
 #### Automatic checks
 
@@ -933,31 +936,103 @@ ORCID [0009-0003-7548-2501](https://orcid.org/0009-0003-7548-2501).
 
 ## 📖 Glossary of Portuguese terms
 
-Since the code and the messages are in Portuguese, this list may help you find your way around:
+Since the code and the messages are in Portuguese, the tables below may help you find your way around. The meaning
+of each data column and field is in the [data dictionary](DATA-DICTIONARY.md).
+
+**General terms**
 
 | Portuguese | English |
 |---|---|
+| aquecimento (da máquina) | (machine) warm-up |
 | analisar / análise | analyze / analysis |
 | bloco | block |
 | brutos (dados) | raw (data) |
+| cabeçalhos compactos | Compact Object Headers |
+| carga (de trabalho) | workload |
 | código de sorteio / semente | random draw code / seed |
 | coleta | data collection |
-| conferir / conferência / CONFERE | check / verification / passes |
+| conferir / conferência / CONFERE / NAO_CONFERE | check / verification / passes / fails |
 | configuração | configuration |
 | critério | criterion |
 | desvio | deviation |
 | evidências | evidence |
 | executar | run |
+| falha | failure |
 | figuras | figures |
 | hipótese | hypothesis |
 | liberar leitura | allow reading |
 | manifesto | manifest (list of files with SHA-256) |
 | medidor | meter |
+| ocorrências | incidents |
+| oficial / piloto / verificação | official / pilot / verification |
 | planejar / plano | plan |
 | preparar | prepare |
+| principal / exploratório | main / exploratory |
 | razão | ratio |
 | registro prévio | pre-registration |
 | resultados | results |
+| resumo | summary |
 | retomar | resume |
 | saída | output |
 | sessão | session |
+| sobrecarga | overhead |
+
+**Folders and files**
+
+| Name | English | What it holds |
+|---|---|---|
+| `analise/` | analysis | Python analysis package `pae-analise` |
+| `config/execucao.json` | run configuration | frozen collection protocol |
+| `config/registro-previo.json` | pre-registration | criteria, hypotheses and decision rules |
+| `dados/brutos/` | raw data | official sessions |
+| `dados/piloto/` | pilot data | pilot runs |
+| `evidencias/manifestos/` | evidence / manifests | SHA-256 of every data file |
+| `evidencias/conferencias/` | evidence / checks | session and collection checks |
+| `evidencias/base-oficial/` | evidence / official dataset | how the official results were produced |
+| `ferramentas/` | tools | DaCapo reference and download folder |
+| `medidor-java/` | Java meter | energy meter source code |
+| `resultados/` | results | analysis outputs |
+| `requisitos-travados.txt` | locked requirements | exact Python library versions |
+| `plano-antes-execucao.json` | plan before execution | session plan written before the run |
+| `progresso.jsonl` | progress | one line per finished process |
+| `resultado.json` | result | verified result of a process |
+| `ambiente-inicial` / `ambiente-final` | initial / final environment | system state at session start and end |
+| `temperatura-ociosa` | idle temperature | idle temperature at session start |
+| `resumo-sessao` | session summary | session status and duration |
+| `descritiva.csv` | descriptive | descriptive statistics |
+| `razoes.csv` | ratios | effect sizes between configurations |
+| `hipoteses.csv` | hypotheses | hypothesis verdicts |
+| `criterios.json` | criteria | criteria E1 to E6 |
+| `decomposicao.csv` | decomposition | energy = power × time decomposition |
+| `sensibilidade-*.csv` | sensitivity | exploratory sensitivity analysis |
+| `metadados.json` | metadata | run metadata |
+
+**Scripts and command options**
+
+| Name | English | What it does |
+|---|---|---|
+| `reproduzir_analise.sh` | reproduce analysis | re-runs the analysis and compares it with the official one |
+| `conferir_dados.sh` | check data | checks the data against the manifests |
+| `comparar_resultados.py` | compare results | compares two results folders |
+| `preparar_ambiente_coleta.sh` | prepare collection environment | installs JDKs and DaCapo, builds the meter |
+| `planejar_sessoes_oficiais.sh` | plan official sessions | writes the 4 session plans |
+| `sessao.py planejar` / `executar` | session plan / run | plans or runs a session |
+| `executar.py` / `executar.sh` | run | prepares or runs a single JVM process |
+| `selecionar-java.sh` | select Java | selects the JDK through SDKMAN |
+| `manifesto.py gerar` / `conferir` | manifest generate / check | writes or checks a manifest |
+| `conferir_sessao.py` | check session | checks the quality of a session |
+| `conferir_coleta.py` | check collection | checks several sessions together |
+| `pae-analise analisar` / `consolidar` | analyze / consolidate | full analysis / dataset only |
+| `--saida` | output | output folder |
+| `--sem-figuras` / `--com-figuras` | without / with figures | skip or add figures |
+| `--reamostragens` | resamples | bootstrap resamples |
+| `--semente` | seed | random draw code |
+| `--ignorar-figuras` | ignore figures | leave figures out of a comparison |
+| `--configuracao` | configuration | A, B, C or D |
+| `--aplicacao` | application | DaCapo workload |
+| `--liberar-leitura` | allow reading | allows reading the RAPL counter |
+| `--categoria` | category | `oficial`, `piloto` or `verificacao` |
+| `--blocos` / `--primeiro-bloco` | blocks / first block | number of blocks / first block number |
+| `--plano` | plan | plan file |
+| `--retomar` | resume | continue an interrupted session |
+| `--sessao` / `--manifesto` | session / manifest | session folder / manifest file |
