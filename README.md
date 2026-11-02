@@ -11,19 +11,31 @@
 
 🇧🇷 Português | 🇺🇸 [English](README.en.md)
 
-Este repositório reúne o protocolo, o código, os dados brutos, as evidências e a análise estatística de uma pesquisa
-de mestrado em **Software Verde** (Engenharia de Software) que mede o consumo de energia do processador e o tempo de
-execução de versões e opções da máquina virtual Java (**JVM**) da distribuição **Eclipse Temurin**: **JDK 17, 21 e 25**,
-e o JDK 25 **com e sem cabeçalhos compactos de objeto** (*Compact Object Headers*, JEP 519).
+Este repositório armazena tudo o que foi usado em uma pesquisa de mestrado sobre **Software Verde**, na área de
+Engenharia de Software, incluindo o protocolo de medição, o código, os dados brutos, as evidências e a análise
+estatística.
 
-A pesquisa segue o método **Design Science Research (DSR)**. O artefato construído é o **PAE-JVM – Protocolo de
-Avaliação Energética de configurações da JVM**: medidor integrado à suíte DaCapo, seleção verificada do JDK,
-orquestrador de sessões, regras de ruído, de falha e de análise. A coleta experimental é a avaliação desse artefato,
-com critérios (E1 a E7) e hipóteses (H1 a H5) registrados **antes** da coleta em
-[`config/registro-previo.json`](config/registro-previo.json).
+A motivação inicial é uma dúvida prática e simples de declarar. Quando trocamos a versão do Java, o programa passa a
+gastar mais ou menos energia? Para responder a essa dúvida com segurança, porém, é preciso antes saber medir bem, e é
+nisso que a pesquisa se concentra.
 
-Tudo o que é preciso para conferir os dados, refazer a análise e repetir a coleta está aqui, com o passo a passo
-completo na seção [Como reproduzir](#-como-reproduzir).
+O foco, portanto, é **como medir**, de forma confiável e reprodutível, o efeito de versões e opções da máquina virtual
+Java (**JVM**) sobre a energia e o tempo de execução, usando apenas um computador pessoal. Para avaliar o protocolo
+criado com esse fim, ele foi aplicado a um caso real, no qual comparamos o consumo de energia do processador e o tempo de
+execução de três versões da distribuição **Eclipse Temurin**, os **JDKs 17, 21 e 25**, e também o JDK 25 **com e sem os
+cabeçalhos compactos de objeto** (*Compact Object Headers*, JEP 519), uma novidade que promete reduzir o uso de
+memória. As perguntas formais da pesquisa estão na seção [Perguntas da pesquisa](#-perguntas-da-pesquisa).
+
+A pesquisa segue o método **Design Science Research (DSR)**. Isso quer dizer que, além de medir, construímos e
+avaliamos um artefato, o **PAE-JVM – Protocolo de Avaliação Energética de configurações da JVM**. Ele junta um medidor
+de energia integrado à suíte de testes DaCapo, a seleção conferida do JDK em cada execução, um orquestrador que
+organiza as sessões de medição e um conjunto de regras para lidar com ruído, falhas e análise. A coleta de dados
+serviu justamente para avaliar esse protocolo. Os critérios de avaliação (E1 a E7) e as hipóteses (H1 a H5) foram
+registrados **antes** da coleta, no arquivo [`config/registro-previo.json`](config/registro-previo.json), para que os
+resultados não pudessem influenciar as regras.
+
+Quem quiser conferir os dados, refazer a análise ou até repetir a medição em outro computador encontra aqui o
+caminho completo, explicado passo a passo na seção [Como reproduzir](#-como-reproduzir).
 
 ---
 
@@ -53,20 +65,23 @@ completo na seção [Como reproduzir](#-como-reproduzir).
 
 ## ❓ Perguntas da pesquisa
 
-**Pergunta de projeto (DSR):** como avaliar, de forma confiável e reprodutível, o efeito de versões e opções da JVM
-sobre a energia e o tempo de execução em um computador pessoal sem medidor externo?
+A pergunta principal, do ponto de vista do DSR, é sobre o método, ou seja, **como avaliar, de forma confiável e reprodutível,
+o efeito de versões e opções da JVM sobre a energia e o tempo de execução em um computador pessoal, sem um medidor
+externo de energia?** Muitos desenvolvedores e pesquisadores só têm o próprio notebook à disposição, e o PAE-JVM foi
+pensado para esse cenário.
 
-**Perguntas de conhecimento:**
+Para testar o protocolo na prática, ele foi aplicado a duas perguntas concretas:
 
-- **QC1.** Ao ativar os cabeçalhos compactos no Eclipse Temurin 25, o que muda na energia do processador e no tempo
-  de execução da mesma tarefa, e essa mudança segue o mecanismo esperado (menor ocupação de memória e menos trabalho
-  de coleta de lixo)?
-- **QC2.** Nas atualizações do Temurin 17 para o 21 e do 21 para o 25, a mudança de energia acompanha a mudança de
-  tempo?
+- **QC1.** Ao ligar os cabeçalhos compactos no Eclipse Temurin 25, o que muda na energia do processador e no tempo de
+  execução da mesma tarefa? E essa mudança acontece pelo motivo esperado, ou seja, menos memória ocupada e menos
+  trabalho do coletor de lixo?
+- **QC2.** Quando passamos do Temurin 17 para o 21, e do 21 para o 25, a energia muda na mesma proporção que o tempo?
 
 ---
 
 ## ☕ Configurações comparadas
+
+Comparamos quatro configurações, sempre com a distribuição Eclipse Temurin instalada pelo SDKMAN:
 
 | Configuração | JDK (Eclipse Temurin) | Identificador no SDKMAN | Opção específica |
 |---|---|---|---|
@@ -75,18 +90,25 @@ sobre a energia e o tempo de execução em um computador pessoal sem medidor ext
 | **C** | 25.0.3+9-LTS | `25.0.3-tem` | `-XX:-UseCompactObjectHeaders` (desligado) |
 | **D** | 25.0.3+9-LTS | `25.0.3-tem` | `-XX:+UseCompactObjectHeaders` (ligado) |
 
-Opções comuns a todas: coletor **G1** (`-XX:+UseG1GC`), heap fixo de **1 GB** (`-Xms1g -Xmx1g`), log de coleta de lixo
-(`-Xlog:gc`), **1 thread** da carga e afinidade aos núcleos de desempenho (um processador lógico por núcleo físico).
-Antes de cada processo, o programa confere a versão completa, o fornecedor, o `java.home`, o G1 e o estado dos
-cabeçalhos compactos efetivamente ativos na JVM; se algo divergir, o processo não roda.
+Para que a comparação fosse justa, tudo o mais ficou igual nas quatro configurações, com o coletor de lixo **G1** (`-XX:+UseG1GC`), o
+heap fixo de **1 GB** (`-Xms1g -Xmx1g`), o log de coleta de lixo ligado (`-Xlog:gc`), a carga rodando com **1 thread**
+e o processo preso aos núcleos de desempenho do processador (um processador lógico por núcleo físico).
 
-Comparações: **B/A** (17 → 21), **C/B** (21 → 25) e **D/C** (cabeçalhos compactos ligados contra desligados).
+Um cuidado importante é que, antes de cada execução, o programa pergunta à própria JVM qual versão, fornecedor e pasta de
+instalação ela está usando, se o G1 está ativo e se os cabeçalhos compactos estão ligados ou desligados. Se qualquer
+resposta for diferente do esperado, a execução nem começa. Assim temos certeza de que cada medida corresponde à
+configuração certa.
+
+Fizemos três comparações, **B/A** (do 17 para o 21), **C/B** (do 21 para o 25) e **D/C** (cabeçalhos compactos
+ligados contra desligados, no mesmo JDK 25).
 
 ---
 
 ## 📦 Cargas de trabalho (DaCapo)
 
-Suíte **DaCapo 23.11-MR2-chopin** ([site oficial](https://www.dacapobench.org/)), entrada `default`, 1 thread.
+Como carga de trabalho, usamos a suíte **DaCapo 23.11-MR2-chopin** ([site oficial](https://www.dacapobench.org/)),
+um conjunto de aplicações Java reais muito usado em pesquisas sobre a JVM. Escolhemos três aplicações, todas com a
+entrada `default` e 1 thread:
 
 | Carga | Papel | O que faz | Iterações de preparação | Iterações medidas |
 |---|---|---|---|---|
@@ -94,46 +116,71 @@ Suíte **DaCapo 23.11-MR2-chopin** ([site oficial](https://www.dacapobench.org/)
 | **pmd** | principal | análise estática de código Java | 7 | 3 |
 | **avrora** | exploratória | simulação de microcontroladores AVR | 12 | 3 |
 
-O número de preparações (*warm-up*) de cada carga foi definido nos pilotos (dados em `dados/piloto/`). As cargas
-principais respondem às hipóteses; a avrora roda nos mesmos blocos, mas fica fora das conclusões, porque variou
-muito nos pilotos.
+A JVM precisa de algumas rodadas até "aquecer", isto é, até o compilador JIT otimizar o código e o tempo de cada
+rodada se estabilizar. Por isso cada aplicação roda primeiro algumas iterações de preparação (*warm-up*), que não
+entram na medida, e só depois as 3 iterações medidas. O número de preparações de cada aplicação foi definido nos
+pilotos, cujos dados estão em `dados/piloto/`.
+
+As duas cargas principais, lusearch e pmd, são as que respondem às hipóteses. A avrora roda nos mesmos blocos, mas
+ficou fora das conclusões porque variou muito nos pilotos. Ela usa pouco o processador e fica mais sensível ao que
+acontece em segundo plano.
 
 ---
 
 ## ⚡ Como a energia é medida
 
-- **Fonte:** contador de energia do **pacote do processador** pela interface **Intel RAPL** do Linux
-  (`/sys/class/powercap/intel-rapl:0/energy_uj`). Mede o processador inteiro (todos os núcleos, cache e controlador
-  de memória integrado), não só a JVM nem a energia da tomada.
-- **Medidor:** projeto Java em [`medidor-java/`](medidor-java/), executado como *callback* da DaCapo dentro da
-  própria JVM. Lê o contador a cada **100 ms**, trata a volta do contador e marca o início e o fim exatos de cada
-  iteração da DaCapo.
-- **Linha de base ociosa:** antes de cada processo, 10 s de leitura sem carga (potência ociosa registrada).
-- **Sobrecarga do medidor:** comparação do tempo das iterações medidas com o da última preparação (critério E4).
+Os processadores Intel trazem um contador interno de energia chamado **RAPL** (*Running Average Power Limit*), que o
+Linux disponibiliza no arquivo `/sys/class/powercap/intel-rapl:0/energy_uj`. Usamos o contador do **pacote do
+processador**, que cobre o processador inteiro, com todos os núcleos, a memória cache e o controlador de memória
+integrado. É importante ter isso em mente ao ler os resultados, porque o valor não é a energia só da JVM, nem a
+energia medida na tomada.
+
+Quem lê esse contador é um pequeno medidor escrito em Java, na pasta [`medidor-java/`](medidor-java/). Ele roda como
+*callback* da própria DaCapo, dentro da JVM que está sendo medida, e por isso sabe exatamente quando cada iteração
+começa e termina. Durante a execução, o medidor consulta o contador a cada **100 ms** e trata o momento em que o
+contador "dá a volta" e recomeça do zero.
+
+Antes de cada processo, o programa também mede a energia com a máquina parada durante 10 segundos, o que registra a
+potência ociosa daquele momento. E, para saber se o próprio medidor atrapalha a medição, comparamos o tempo das
+iterações medidas com o da última iteração de preparação (é o critério E4).
 
 ---
 
 ## 🧪 Desenho da coleta
 
-- **Blocos completos e aleatorizados:** cada bloco tem as 12 combinações (3 cargas × 4 configurações), em ordem
-  sorteada. Total de **15 blocos = 180 processos** (15 por combinação). Cada processo é uma **JVM nova**.
-- **Sessões:** os 15 blocos foram divididos em **4 sessões** (4 + 4 + 4 + 3 blocos), em dias diferentes, com códigos
-  de sorteio **20261101 a 20261104**. O plano de cada sessão é gravado **antes** da execução.
-- **Aquecimento da máquina:** cada sessão começa com um processo `pmd`/B que não entra na análise.
-- **Pausas:** pelo menos 10 s entre processos e espera até a temperatura do pacote voltar a no máximo 8 °C acima da
-  temperatura ociosa medida no início da sessão (limite de 120 s de espera).
-- **Falhas:** um processo que falha é repetido uma vez no fim do mesmo bloco; a falha fica registrada. Três falhas
-  seguidas interrompem a sessão. Na coleta oficial houve **0 falhas**.
-- **Controles antes de cada processo:** carregador ligado, nenhuma opção Java herdada do ambiente
-  (`JAVA_TOOL_OPTIONS` etc.), SHA-256 do medidor e da DaCapo iguais aos registrados, contador RAPL avançando.
-- **Rastreabilidade:** cada processo guarda comando, identidade da JVM, estado do sistema antes e depois, log de GC,
-  leituras do medidor e resultado. Ao fim de cada sessão, um manifesto grava o SHA-256 de todos os arquivos.
+A medição de energia é sensível a muita coisa, como a temperatura, as tarefas do sistema e até a ordem em que as execuções
+acontecem. O desenho da coleta foi pensado para controlar esses efeitos.
 
-Parâmetros fixos da coleta: [`config/execucao.json`](config/execucao.json) (estado `fixado`).
+As execuções foram organizadas em **blocos completos**. Cada bloco contém as 12 combinações possíveis (3 cargas × 4
+configurações), em uma ordem sorteada. Foram **15 blocos, totalizando 180 processos**, ou seja, 15 medidas para cada
+combinação. Cada processo é uma **JVM nova**, iniciada do zero, para que uma execução não herde o estado da anterior.
+
+Os 15 blocos foram divididos em **4 sessões**, feitas em dias diferentes, com 4, 4, 4 e 3 blocos. Cada sessão usou um
+código de sorteio próprio, de **20261101 a 20261104**, e o plano de cada sessão, com a ordem exata dos processos, foi
+gravado **antes** de a sessão começar. Toda sessão começa com uma execução de aquecimento da máquina (`pmd` na
+configuração B), que não entra na análise.
+
+Entre um processo e outro, o programa espera pelo menos 10 segundos e, depois, aguarda o processador esfriar até no
+máximo 8 °C acima da temperatura medida com a máquina parada no início da sessão, com uma espera máxima de 120
+segundos. Se um processo falha, ele é repetido uma vez no fim do mesmo bloco, e a falha continua registrada. Se
+houver três falhas seguidas, a sessão para, para que o problema seja investigado. Na coleta oficial não houve nenhuma
+falha.
+
+Antes de cada processo, o programa ainda confere se o carregador está ligado, se não há opções Java "escondidas" em
+variáveis de ambiente (como `JAVA_TOOL_OPTIONS`), se o medidor e a DaCapo são exatamente os mesmos arquivos registrados
+(pelo SHA-256) e se o contador RAPL está avançando.
+
+Por fim, tudo fica guardado. Cada processo deixa registrados o comando usado, a identidade da JVM, o estado do sistema
+antes e depois, o log de coleta de lixo, as leituras do medidor e o resultado. Ao fim de cada sessão, um manifesto
+grava o SHA-256 de todos os arquivos, o que permite provar mais tarde que nada foi alterado.
+
+Todos esses parâmetros estão fixados no arquivo [`config/execucao.json`](config/execucao.json).
 
 ---
 
 ## 💻 Ambiente da coleta original
+
+As medições foram feitas em um notebook pessoal, com a seguinte configuração:
 
 | Item | Valor |
 |---|---|
@@ -145,12 +192,15 @@ Parâmetros fixos da coleta: [`config/execucao.json`](config/execucao.json) (est
 | Seleção de JDK | SDKMAN 5.23.0 (`sdk use` só no processo filho; Java padrão do sistema intacto) |
 | Medidor | Java 17 (Maven), SHA-256 `415ddd80…26339995` |
 
-O estado completo do sistema de cada sessão está em `dados/brutos/<sessão>/<sessão>-ambiente-inicial.json` e
-`-ambiente-final.json`; o de cada processo, em `system-before.json` e `system-after.json`.
+Se precisar de mais detalhes, o estado completo do sistema no início e no fim de cada sessão está em
+`dados/brutos/<sessão>/<sessão>-ambiente-inicial.json` e `-ambiente-final.json`. Para cada processo, os arquivos
+`system-before.json` e `system-after.json` mostram o estado da máquina antes e depois da execução.
 
 ---
 
 ## 📏 Métricas
+
+Para cada processo, calculamos as seguintes medidas:
 
 | Métrica | Unidade | Definição |
 |---|---|---|
@@ -162,22 +212,26 @@ O estado completo do sistema de cada sessão está em `dados/brutos/<sessão>/<s
 | Heap após coleta | MB | mediana da ocupação do heap depois de cada coleta |
 | Sobrecarga do medidor | % | tempo médio das iterações medidas ÷ tempo da última preparação − 1 |
 
-A potência ajuda a separar duas causas: uma configuração pode gastar menos energia porque termina antes (mesma
-potência, menos tempo) ou porque exige menos do processador (menor potência em tempo parecido).
+A potência média ajuda a entender o porquê de uma diferença de energia. Uma configuração pode gastar menos energia
+porque termina mais rápido, com a mesma potência, ou porque exige menos do processador, com menor potência em um
+tempo parecido. São explicações diferentes, e a potência separa uma da outra.
 
 ---
 
 ## 📊 Análise estatística, critérios e hipóteses
 
-- **Medida de efeito:** razão das medianas entre configurações (por exemplo, D/C), com **IC 95% por bootstrap pareado
-  por bloco** (10 000 reamostragens, código de sorteio 20261101). Uma razão abaixo de 1 indica valor menor na
-  configuração do numerador.
-- **Testes complementares** (em `razoes.csv`): Mann-Whitney U com correção de Holm e tamanho de efeito A12 de
-  Vargha-Delaney.
-- **Análise de sensibilidade (exploratória, fora do registro prévio):** Friedman, ANOVA em blocos sobre log,
-  teste t pareado sobre log e Wilcoxon exato, com Holm.
+Para comparar duas configurações, usamos a **razão entre as medianas**. Por exemplo, uma razão D/C de 0,98 na energia
+significa que a configuração D gastou 2% menos energia que a C. A incerteza dessa razão é dada por um **intervalo de
+confiança de 95%** calculado por *bootstrap* pareado por bloco, com 10 000 reamostragens e código de sorteio
+20261101. "Pareado por bloco" quer dizer que cada comparação é feita entre execuções do mesmo bloco, que rodaram
+próximas no tempo e nas mesmas condições da máquina.
 
-**Critérios de avaliação do artefato (E1–E7):**
+O arquivo `razoes.csv` traz também testes complementares, como o Mann-Whitney U com correção de Holm e o tamanho de efeito
+A12 de Vargha-Delaney. Além disso, fizemos uma análise de sensibilidade exploratória, que não estava no registro
+prévio, com os testes de Friedman, ANOVA em blocos sobre o logaritmo, teste t pareado sobre o logaritmo e Wilcoxon
+exato, todos com correção de Holm. Ela serve para verificar se as conclusões mudariam com outros métodos.
+
+O protocolo foi avaliado por sete critérios, definidos antes da coleta:
 
 | Critério | Medida | Limite |
 |---|---|---|
@@ -189,7 +243,7 @@ potência, menos tempo) ou porque exige menos do processador (menor potência em
 | E6 Viabilidade | tempo de máquina por sessão e falhas | ≤ 1h30 por sessão; falhas ≤ 5% |
 | E7 Comparação ingênua | medição sem preparação, sem núcleos fixos e sem sorteio | descritivo |
 
-**Hipóteses (H1–H5):**
+E as hipóteses, também registradas antes, com a regra que decide cada uma:
 
 | Hipótese | Enunciado | Confirmada se | Refutada se |
 |---|---|---|---|
@@ -200,17 +254,19 @@ potência, menos tempo) ou porque exige menos do processador (menor potência em
 | H4 | Maior redução de energia na carga com maior redução de heap | exploratória, descritiva | – |
 | H5 | Em B/A e C/B a energia acompanha o tempo | IC 95% da potência dentro de [0,98; 1,02] | – |
 
-**Termos dos vereditos:** **confirmada** (a regra de confirmação foi atendida), **refutada** (a regra de refutação
-foi atendida), **inconclusiva** (nenhuma das duas regras foi atendida, quando a hipótese tem as duas) e **não
-confirmada** (a regra de confirmação não foi atendida, quando a hipótese não tem regra de refutação). Explicação da
-escolha dos termos: [`evidencias/base-oficial/NOTA_TERMOS_VEREDITOS.txt`](evidencias/base-oficial/NOTA_TERMOS_VEREDITOS.txt).
+Os vereditos usam quatro termos, comuns em estudos confirmatórios de Engenharia de Software. Uma hipótese é
+**confirmada** quando a regra de confirmação é atendida e **refutada** quando a regra de refutação é atendida. Quando
+a hipótese tem as duas regras e nenhuma é atendida, ela é **inconclusiva**. Quando a hipótese só tem regra de
+confirmação e essa regra não é atendida, ela é **não confirmada**. A explicação completa da escolha desses termos
+está em [`evidencias/base-oficial/NOTA_TERMOS_VEREDITOS.txt`](evidencias/base-oficial/NOTA_TERMOS_VEREDITOS.txt).
 
 ---
 
 ## 📈 Principais resultados
 
-Resultados completos: [`resultados/oficial-20261101-termos/resumo.txt`](resultados/oficial-20261101-termos/resumo.txt).
-Valores das cargas principais (razão das medianas e IC 95% pareado por bloco):
+A tabela abaixo resume as cargas principais. Cada célula mostra a razão das medianas e, entre colchetes, o intervalo
+de confiança de 95%. O resultado completo, com todas as cargas e medidas, está em
+[`resultados/oficial-20261101-termos/resumo.txt`](resultados/oficial-20261101-termos/resumo.txt).
 
 | Carga | Comparação | Energia | Tempo | Potência média |
 |---|---|---|---|---|
@@ -221,6 +277,13 @@ Valores das cargas principais (razão das medianas e IC 95% pareado por bloco):
 | pmd | C/B (21 → 25) | 0,9546 [0,9401; 0,9617] | 0,9352 [0,9332; 0,9391] | 1,0142 [1,0052; 1,0260] |
 | pmd | D/C (compactos) | 1,0037 [0,9903; 1,0154] | 1,0048 [1,0028; 1,0085] | 1,0018 [0,9874; 1,0121] |
 
+Em resumo, a passagem do Java 17 para o 21 reduziu a energia nas duas cargas principais (cerca de 7% no lusearch e
+4% no pmd). Do 21 para o 25, o pmd economizou mais 4,5%, enquanto o lusearch gastou 2% a mais. Já os cabeçalhos
+compactos não trouxeram mudança de energia que se pudesse detectar, apesar de terem reduzido o trabalho do coletor
+de lixo.
+
+Os vereditos das hipóteses ficaram assim:
+
 | Hipótese | lusearch | pmd |
 |---|---|---|
 | H1 energia menor em D | inconclusiva | inconclusiva |
@@ -230,14 +293,18 @@ Valores das cargas principais (razão das medianas e IC 95% pareado por bloco):
 | H5 B/A energia acompanha tempo | não confirmada | não confirmada |
 | H5 C/B energia acompanha tempo | confirmada | não confirmada |
 
-Critérios: E1, E3, E4 (mediana), E5 e E6 **atendidos**; **E2 não atendido** (maior diferença entre sessões de 6,1%,
-limite de 5%, em lusearch-A, pmd-A, pmd-B e pmd-D); E7 pendente (sessão ingênua). As razões pareadas por bloco
-ficaram estáveis entre as sessões, então as comparações devem ser feitas por razões dentro do bloco, e não por
-energia absoluta entre dias diferentes. Todos os 180 processos são válidos.
+Quanto ao protocolo, os critérios E1, E3, E4 (pela mediana), E5 e E6 foram atendidos. O critério **E2 não foi
+atendido**, pois a maior diferença de energia entre sessões foi de 6,1%, acima do limite de 5%, nas combinações
+lusearch-A, pmd-A, pmd-B e pmd-D. O critério E7 ainda depende da sessão ingênua. Esse resultado do E2 é, ele mesmo,
+uma lição importante. A energia absoluta muda de um dia para outro, mas as razões entre configurações dentro de cada
+bloco ficaram estáveis entre as sessões. Por isso a recomendação é comparar configurações pelas razões dentro do
+bloco, e não pela energia absoluta medida em dias diferentes. Todos os 180 processos foram considerados válidos.
 
 ---
 
 ## 📂 Estrutura do repositório
+
+O repositório está organizado assim:
 
 ```text
 ├── README.md / README.en.md        # Esta documentação (português / inglês)
@@ -279,7 +346,8 @@ energia absoluta entre dias diferentes. Todos os 180 processos são válidos.
 └── .github/workflows/analise.yml   # Conferência automática (estilo, tipos, testes, reprodução e Docker)
 ```
 
-Dentro de cada pasta de processo (`dados/brutos/<sessão>/bNN-OOO-carga-config/`):
+Cada processo medido tem a sua própria pasta, com um nome como `b01-001-lusearch-A` (bloco 1, primeiro processo da
+sessão, carga lusearch, configuração A). Dentro dela ficam:
 
 | Arquivo | Conteúdo |
 |---|---|
@@ -298,22 +366,32 @@ Dentro de cada pasta de processo (`dados/brutos/<sessão>/bNN-OOO-carga-config/`
 
 ## 🚀 Como reproduzir
 
-Há dois níveis:
+Existem duas formas de reproduzir este trabalho, e cada uma exige um nível diferente de preparação.
+
+A primeira é **refazer a análise**. Você usa os dados que já estão no repositório, confere que eles não foram
+alterados e recalcula todos os números a partir dos dados brutos. Funciona em qualquer computador (Windows, Linux ou
+macOS) e leva uns 5 minutos.
+
+A segunda é **repetir a coleta**, ou seja, medir tudo de novo em outra máquina e analisar os dados novos. Essa exige
+um computador com Linux e processador Intel com RAPL, além de cerca de 4 horas de máquina, fora a preparação.
 
 | Nível | O que faz | Onde roda | Tempo |
 |---|---|---|---|
 | **1. Refazer a análise** | confere os dados e recalcula todos os números a partir dos dados brutos do repositório | Windows, Linux ou macOS | ~5 min |
 | **2. Repetir a coleta** | mede de novo em outra máquina e analisa os dados novos | Linux com Intel RAPL | ~4 h de máquina + preparação |
 
-Todos os comandos rodam **na pasta raiz do projeto** (a pasta onde está este README), num terminal *bash*:
-Linux ou macOS (Terminal) ou Windows com **Git Bash** (instalado junto com o [Git para Windows](https://git-scm.com/download/win)).
-Comandos equivalentes para PowerShell estão indicados quando diferem.
+Em ambos os casos, os comandos devem ser executados **na pasta raiz do projeto**, que é a pasta onde está este
+README, usando um terminal *bash*. No Linux e no macOS, basta abrir o Terminal. No Windows, use o **Git Bash**, que vem
+junto com o [Git para Windows](https://git-scm.com/download/win). Quando algum comando for diferente no PowerShell,
+isso está indicado no texto.
 
 ---
 
 ### 🔁 Nível 1 – Refazer a análise (qualquer computador)
 
 #### Pré-requisitos
+
+Você vai precisar apenas do Git e do Python:
 
 | Programa | Versão | Como conferir | Onde obter |
 |---|---|---|---|
@@ -322,16 +400,20 @@ Comandos equivalentes para PowerShell estão indicados quando diferem.
 | Espaço em disco | ~300 MB | – | – |
 | Internet | só para baixar o repositório e as bibliotecas | – | – |
 
-No Windows, ao instalar o Python, marque **"Add python.exe to PATH"**.
+No Windows, durante a instalação do Python, lembre de marcar a opção **"Add python.exe to PATH"**. Sem ela, o
+terminal não encontra o Python.
 
 #### Passo 1 – Baixar o repositório
+
+Comece baixando o repositório e entrando na pasta dele:
 
 ```bash
 git clone https://github.com/evertoncg10/java-energy-study.git
 cd java-energy-study
 ```
 
-Para usar exatamente a versão da análise publicada, troque para a marca correspondente (opcional):
+Se quiser trabalhar exatamente com a versão usada na análise publicada, troque para a marca correspondente. Esse
+passo é opcional:
 
 ```bash
 git checkout analise-v1.1
@@ -339,23 +421,30 @@ git checkout analise-v1.1
 
 #### Passo 2 – Conferir a integridade dos dados
 
+Antes de analisar, vale confirmar que os dados que você baixou são os mesmos que foram medidos. Ao fim de cada
+sessão, gravamos um manifesto com o SHA-256 de cada arquivo, e o script abaixo compara os arquivos atuais com esses
+manifestos:
+
 ```bash
 bash scripts/conferir_dados.sh
 ```
 
-Confere cada arquivo dos dados contra os manifestos SHA-256 gravados ao fim de cada sessão e refaz a conferência da
-coleta. Resultado esperado: `CONFERE` em todas as linhas e, no fim,
-`RESULTADO: todos os dados conferem com os manifestos.`
+Se estiver tudo certo, cada linha mostra `CONFERE` e a última diz
+`RESULTADO: todos os dados conferem com os manifestos.` O script também refaz a conferência da coleta completa, com o
+resumo de cada sessão.
 
 #### Passo 3 – Refazer a análise (opção A: um comando)
+
+A forma mais simples é deixar um script fazer tudo:
 
 ```bash
 bash scripts/reproduzir_analise.sh
 ```
 
-O script cria o ambiente virtual `analise/.venv` (só na primeira vez), instala as versões travadas das bibliotecas,
-roda os testes automáticos, refaz a análise numa pasta nova `resultados/reproducao-AAAAMMDD-HHMMSS` e compara com os
-resultados oficiais. Leva cerca de 1 minuto depois da instalação. Resultado esperado, no fim:
+Na primeira vez, ele cria um ambiente virtual do Python em `analise/.venv` e instala as bibliotecas exatamente nas
+versões usadas na análise oficial. Depois roda os testes automáticos, refaz a análise em uma pasta nova
+(`resultados/reproducao-AAAAMMDD-HHMMSS`) e compara o resultado com os números oficiais. Depois da instalação, o
+processo todo leva cerca de 1 minuto. No final, você deve ver algo assim:
 
 ```text
 idêntico: razoes.csv
@@ -364,17 +453,19 @@ idêntico: resumo.txt
 Arquivos diferentes: 0
 ```
 
-Para gerar também as figuras: `bash scripts/reproduzir_analise.sh --com-figuras`.
+Se quiser gerar também as figuras, rode `bash scripts/reproduzir_analise.sh --com-figuras`.
 
 #### Passo 3 – Refazer a análise (opção B: comando por comando)
 
-1. Criar o ambiente virtual (só na primeira vez):
+Se preferir entender cada etapa, ou se estiver usando o PowerShell ou o Prompt de Comando, siga os comandos abaixo.
+
+1. Crie o ambiente virtual. Isso só é necessário na primeira vez:
 
    ```bash
    python -m venv analise/.venv        # se "python" não existir, use python3
    ```
 
-2. Ativar o ambiente virtual (em todo terminal novo):
+2. Ative o ambiente virtual. Isso precisa ser feito em todo terminal novo, e o comando depende do sistema:
 
    | Sistema / terminal | Comando |
    |---|---|
@@ -383,11 +474,10 @@ Para gerar também as figuras: `bash scripts/reproduzir_analise.sh --com-figuras
    | Windows – Prompt de Comando (CMD) | `analise\.venv\Scripts\activate.bat` |
    | Linux ou macOS | `source analise/.venv/bin/activate` |
 
-   Com o ambiente ativo, o terminal mostra `(.venv)` no começo da linha.
-   No Windows, rode também `export PYTHONUTF8=1` (Git Bash) ou `$env:PYTHONUTF8=1` (PowerShell), para os acentos
-   saírem certos.
+   Você sabe que deu certo quando o terminal passa a mostrar `(.venv)` no começo da linha. No Windows, rode também
+   `export PYTHONUTF8=1` (Git Bash) ou `$env:PYTHONUTF8=1` (PowerShell), para que os acentos apareçam corretamente.
 
-3. Instalar as versões travadas e rodar os testes:
+3. Instale as bibliotecas nas versões travadas e rode os testes:
 
    ```bash
    cd analise
@@ -396,30 +486,33 @@ Para gerar também as figuras: `bash scripts/reproduzir_analise.sh --com-figuras
    cd ..
    ```
 
-   Resultado esperado: `41 passed`.
+   Os testes devem terminar com `41 passed`.
 
-4. Refazer a análise completa (com figuras):
+4. Agora rode a análise completa, com as figuras:
 
    ```bash
    pae-analise analisar --saida resultados/reproducao
    ```
 
-   A pasta de saída precisa ser nova; para rodar de novo, use outro nome (por exemplo `resultados/reproducao2`).
-   Opções: `--sem-figuras` (não gera figuras), `--reamostragens N` (padrão 10000) e `--semente N`
-   (código de sorteio do bootstrap, padrão 20261101). Só os padrões reproduzem os números oficiais.
+   A pasta de saída precisa ser nova, porque o programa nunca sobrescreve resultados. Para rodar de novo, use outro
+   nome, como `resultados/reproducao2`. O comando aceita algumas opções, como `--sem-figuras` (não gera as figuras),
+   `--reamostragens N` (padrão 10000) e `--semente N` (código de sorteio do *bootstrap*, padrão 20261101). Só os
+   valores padrão reproduzem os números oficiais.
 
-5. Comparar com os resultados oficiais:
+5. Por fim, compare o seu resultado com o oficial:
 
    ```bash
    python scripts/comparar_resultados.py resultados/oficial-20261101-termos resultados/reproducao --ignorar-figuras
    ```
 
-   Resultado esperado: `Arquivos diferentes: 0`. O `metadados.json` sempre muda (data, sistema e commit); nele o
-   script confere só o campo `input_sha256`, que identifica os dados de entrada. As figuras ficam de fora com
-   `--ignorar-figuras` porque só saem idênticas byte a byte no mesmo sistema operacional; os números (CSV, JSON e
-   texto) saem idênticos em Windows, Linux e macOS.
+   O esperado é `Arquivos diferentes: 0`. Dois detalhes ajudam a interpretar a saída. O arquivo `metadados.json`
+   sempre muda, porque registra a data, o sistema e o commit de cada execução; por isso o script confere nele só o
+   campo `input_sha256`, que identifica os dados de entrada. Já as figuras ficam de fora com `--ignorar-figuras`
+   porque só saem idênticas byte a byte no mesmo sistema operacional. Os números, nos arquivos CSV, JSON e texto,
+   saem idênticos no Windows, no Linux e no macOS.
 
-6. Só a base consolidada (uma linha por processo), se quiser trabalhar os dados em outra ferramenta:
+6. Se você só quiser a base consolidada, com uma linha por processo, para trabalhar os dados em outra ferramenta
+   (uma planilha, o R etc.), use:
 
    ```bash
    pae-analise consolidar --saida resultados/base
@@ -427,15 +520,17 @@ Para gerar também as figuras: `bash scripts/reproduzir_analise.sh --com-figuras
 
 #### Opção C: Docker
 
-Com o [Docker](https://docs.docker.com/get-docker/) instalado, sem precisar de Python:
+Se você tem o [Docker](https://docs.docker.com/get-docker/) instalado, nem precisa do Python. Basta construir a imagem
+e rodá-la:
 
 ```bash
 docker build -t pae-jvm-analise .
 docker run --rm pae-jvm-analise
 ```
 
-O contêiner refaz a análise e mostra a comparação com os resultados oficiais (esperado: `Arquivos diferentes: 0`).
-Para gravar a análise completa, com figuras, em `resultados/reproducao-docker` do seu computador:
+O contêiner refaz a análise e mostra a comparação com os resultados oficiais. Também aqui, o esperado é
+`Arquivos diferentes: 0`. Se quiser guardar a análise completa, com as figuras, na pasta `resultados/reproducao-docker`
+do seu computador, use:
 
 ```bash
 docker run --rm -v "$(pwd)/resultados:/saida" pae-jvm-analise pae-analise analisar --saida /saida/reproducao-docker
@@ -444,6 +539,8 @@ docker run --rm -v "$(pwd)/resultados:/saida" pae-jvm-analise pae-analise analis
 No PowerShell, troque `$(pwd)` por `${PWD}`.
 
 #### Arquivos gerados pela análise
+
+A pasta de saída da análise contém os seguintes arquivos:
 
 | Arquivo | Conteúdo |
 |---|---|
@@ -459,20 +556,26 @@ No PowerShell, troque `$(pwd)` por `${PWD}`.
 | `metadados.json` | data, sistema, versões, commit e SHA-256 dos dados de entrada |
 | `figuras/` | energia, razões, sessões, decomposição, memória e fluxo do protocolo (PNG e PDF) |
 
+O melhor ponto de partida é o `resumo.txt`, que reúne os principais números em texto corrido.
+
 #### Conferência automática
 
-A cada alteração no repositório, o GitHub Actions ([`.github/workflows/analise.yml`](.github/workflows/analise.yml))
-instala as versões travadas, roda estilo (ruff), tipos (mypy) e testes (pytest), refaz a análise e compara com os
-resultados oficiais, e também constrói e roda a imagem Docker.
+Você não precisa confiar só na nossa palavra. A cada alteração no repositório, o GitHub Actions
+([`.github/workflows/analise.yml`](.github/workflows/analise.yml)) instala as versões travadas, verifica o estilo
+(ruff), os tipos (mypy) e os testes (pytest), confere a integridade dos dados, refaz a análise e compara o resultado
+com o oficial. Ele também constrói e roda a imagem Docker.
 
 ---
 
 ### 🔬 Nível 2 – Repetir a coleta (Linux com Intel RAPL)
 
-Repetir a coleta mede a energia de novo, em outra máquina. Os valores absolutos dependem do equipamento; o que se
-espera reproduzir é a **direção e o tamanho das razões** entre configurações, com o mesmo protocolo.
+Repetir a coleta significa medir tudo de novo, em outro computador. Vale alinhar a expectativa desde já. Os valores
+absolutos de energia dependem do equipamento, então não vão bater com os nossos. O que se espera reproduzir é a
+**direção e o tamanho das razões** entre as configurações, usando o mesmo protocolo.
 
 #### Pré-requisitos
+
+A coleta tem exigências bem mais específicas que a análise, porque depende do contador de energia do processador:
 
 | Item | Exigência | Como conferir |
 |---|---|---|
@@ -486,14 +589,14 @@ espera reproduzir é a **direção e o tamanho das razões** entre configuraçõ
 | Programas | `git`, `python3` (3.10+), `curl`, `unzip`, `sha256sum`, Maven 3.9+ | `mvn -version` |
 | SDKMAN | com um Java padrão instalado | `sdk version` |
 
-Em Ubuntu, Debian, Zorin OS ou Mint, os programas se instalam com:
+Para instalar os programas no Ubuntu, Debian, Zorin OS ou Mint, use:
 
 ```bash
 sudo apt update
 sudo apt install git python3 python3-venv curl unzip zip coreutils maven
 ```
 
-O SDKMAN se instala com (depois, abra um terminal novo):
+Para instalar o SDKMAN, use os comandos abaixo (depois, abra um terminal novo):
 
 ```bash
 curl -s "https://get.sdkman.io" | bash
@@ -501,8 +604,8 @@ source "$HOME/.sdkman/bin/sdkman-init.sh"
 sdk install java 21.0.11-tem      # serve como Java padrão; não interfere na coleta
 ```
 
-Sem processador Intel híbrido, a coleta ainda roda, mas a afinidade precisa ser desligada
-(veja [Adaptar a outro equipamento](#adaptar-a-outro-equipamento)).
+Se o seu processador não for Intel híbrido, a coleta ainda funciona, mas é preciso desligar a afinidade de núcleos.
+A seção [Adaptar a outro equipamento](#adaptar-a-outro-equipamento) explica como.
 
 #### Passo 1 – Baixar o repositório
 
@@ -513,18 +616,24 @@ cd java-energy-study
 
 #### Passo 2 – Preparar o ambiente
 
+Deixamos um script que prepara a máquina de uma vez:
+
 ```bash
 bash scripts/preparar_ambiente_coleta.sh
 ```
 
-O script confere o sistema, instala pelo SDKMAN os JDKs `17.0.19-tem`, `21.0.11-tem` e `25.0.3-tem` (sem mudar o Java
-padrão), baixa a DaCapo do endereço oficial registrado em [`ferramentas/dacapo.json`](ferramentas/dacapo.json),
-confere o SHA-256 oficial, extrai em `ferramentas/dacapo/`, instala o JAR da DaCapo no repositório local do Maven,
-compila e testa o medidor e compara os SHA-256 com [`config/execucao.json`](config/execucao.json). Pode ser executado
-de novo: o que já está pronto é só conferido. O download leva de minutos a horas, conforme a internet.
+Ele começa conferindo o sistema. Depois instala pelo SDKMAN os JDKs `17.0.19-tem`, `21.0.11-tem` e `25.0.3-tem`, sem
+mexer no Java padrão do seu computador. Em seguida, baixa a DaCapo do endereço oficial registrado em
+[`ferramentas/dacapo.json`](ferramentas/dacapo.json), confere o SHA-256 oficial do arquivo e o extrai em
+`ferramentas/dacapo/`. Por fim, instala o JAR da DaCapo no repositório local do Maven, compila e testa o medidor e
+compara os SHA-256 com os registrados em [`config/execucao.json`](config/execucao.json).
+
+Cada linha da saída mostra `[ok]`, `[aviso]` ou `[erro]`, para você saber o que aconteceu. O script pode ser
+executado quantas vezes for preciso, porque o que já estiver pronto é apenas conferido. O download da DaCapo pode levar de
+alguns minutos a algumas horas, dependendo da sua internet.
 
 <details>
-<summary>O mesmo passo, comando por comando</summary>
+<summary>Prefere fazer à mão? Veja o mesmo passo, comando por comando</summary>
 
 ```bash
 # JDKs (responda "n" quando perguntar se quer tornar padrão)
@@ -552,8 +661,10 @@ python3 -m unittest discover -s scripts/tests
 
 </details>
 
-Se o SHA-256 do medidor sair diferente do original (outro compilador ou outra versão do Maven), o código é o mesmo,
-mas o programa recusa o JAR. Nesse caso, copie a configuração e registre o novo valor, e relate isso como desvio:
+Pode acontecer de o SHA-256 do medidor que você compilou sair diferente do original. Isso acontece quando o
+compilador ou a versão do Maven não são exatamente os mesmos. O código é idêntico, mas, por segurança, o programa
+recusa um JAR que não confere. Nesse caso, faça uma cópia da configuração, registre nela o novo valor e anote isso
+como um desvio do protocolo:
 
 ```bash
 cp config/execucao.json config/replicacao.json
@@ -561,55 +672,62 @@ sha256sum medidor-java/target/java-energy-meter-0.1.0.jar
 # edite config/replicacao.json: troque "meter" → "sha256" pelo valor mostrado acima
 ```
 
-Daí em diante, use `--config config/replicacao.json` nos comandos dos passos 4 e 6.
+A partir daí, acrescente `--config config/replicacao.json` aos comandos dos passos 4 e 6.
 
 #### Passo 3 – Liberar a leitura do contador RAPL
 
-Por segurança, o Linux só deixa o administrador ler o contador de energia. O comando abaixo libera a leitura só
-desse contador para o seu usuário (pede a sua senha do `sudo` no próprio terminal; o programa não guarda senha):
+Por segurança, o Linux só deixa o administrador ler o contador de energia. O comando abaixo libera a leitura apenas
+desse contador para o seu usuário. Ele vai pedir a sua senha do `sudo` no próprio terminal; o programa não vê nem
+guarda a senha.
 
 ```bash
 bash scripts/executar.sh preparar --configuracao A --liberar-leitura
 ```
 
-A liberação vale até o computador reiniciar; depois de reiniciar, rode de novo. Equivale a
+Essa liberação dura até o computador ser reiniciado. Depois de reiniciar, basta rodar o comando de novo. Para quem
+tiver curiosidade, ele equivale a
 `sudo chown $(id -u) /sys/devices/virtual/powercap/intel-rapl/intel-rapl:0/energy_uj`.
 
 #### Passo 4 – Execução de verificação
 
-Um processo de teste, fora da amostra (grava em `dados/verificacao/`, que não vai para o Git):
+Antes da coleta de verdade, faça uma execução de teste. Ela fica fora da amostra e é gravada em `dados/verificacao/`,
+uma pasta que não vai para o Git:
 
 ```bash
 bash scripts/executar.sh executar --configuracao D --aplicacao pmd
 ```
 
-Resultado esperado: uma linha JSON terminando com `"status": "success"`. Isso confirma SDKMAN, JDK, cabeçalhos
-compactos, RAPL, afinidade, DaCapo e medidor.
+Se tudo estiver certo, aparece uma linha em JSON terminando com `"status": "success"`. Esse único teste já confirma
+que o SDKMAN, o JDK, os cabeçalhos compactos, o RAPL, a afinidade de núcleos, a DaCapo e o medidor estão funcionando.
 
 #### Passo 5 – Preparar a máquina antes de cada sessão
 
-Cada sessão leva cerca de 1 hora (a 4ª, cerca de 47 min). Antes de começar:
+Cada sessão leva cerca de 1 hora (a quarta, que é menor, leva uns 47 minutos). Como qualquer atividade paralela
+interfere na energia medida, prepare a máquina antes de começar:
 
-1. Ligar o carregador e mantê-lo ligado até o fim.
-2. Fechar todos os outros programas (navegador, editores, sincronização de nuvem, antivírus em varredura).
-3. Desligar a suspensão automática e o descanso de tela durante a sessão.
-4. Não usar o computador durante a sessão.
-5. Esperar alguns minutos com a máquina ociosa (a temperatura ociosa medida no início define as pausas).
-6. Conferir que o contador RAPL está liberado (passo 3).
+1. Ligue o carregador e mantenha-o ligado até o fim.
+2. Feche todos os outros programas, inclusive navegador, editores, sincronização de nuvem e antivírus em varredura.
+3. Desligue a suspensão automática e o descanso de tela durante a sessão.
+4. Não use o computador enquanto a sessão estiver rodando.
+5. Deixe a máquina parada por alguns minutos antes de começar, porque a temperatura medida no início define as
+   pausas da sessão.
+6. Confira se o contador RAPL está liberado (passo 3).
 
 #### Passo 6 – Planejar as sessões
 
-Grava os 4 planos com o mesmo desenho da coleta original (15 blocos em 4 + 4 + 4 + 3; códigos de sorteio 20261101 a
-20261104), numa pasta fora do repositório:
+O próximo passo é gravar os planos das sessões. O script abaixo cria os 4 planos com o mesmo desenho da coleta
+original (15 blocos divididos em 4 + 4 + 4 + 3, com os códigos de sorteio 20261101 a 20261104) e os guarda em uma
+pasta fora do repositório:
 
 ```bash
 bash scripts/planejar_sessoes_oficiais.sh ../planos-pae-jvm
-# com configuração de replicação:
+# se você criou uma configuração de replicação:
 # bash scripts/planejar_sessoes_oficiais.sh ../planos-pae-jvm config/replicacao.json
 ```
 
-Com os mesmos códigos de sorteio, a ordem dos processos sai **idêntica** à da coleta original (conferido contra os
-`plano-antes-execucao.json` das 4 sessões). Para um plano isolado:
+Como os códigos de sorteio são os mesmos, a ordem dos processos sai **idêntica** à da coleta original. Conferimos
+isso comparando os planos gerados com os arquivos `plano-antes-execucao.json` das 4 sessões. Se quiser criar um plano
+de cada vez, o comando é este:
 
 ```bash
 python3 scripts/sessao.py planejar --config config/execucao.json --categoria oficial \
@@ -618,24 +736,27 @@ python3 scripts/sessao.py planejar --config config/execucao.json --categoria ofi
 
 #### Passo 7 – Executar as sessões
 
-Uma sessão por vez, de preferência em dias diferentes, repetindo o passo 5 antes de cada uma:
+Rode uma sessão de cada vez, de preferência em dias diferentes, e repita o passo 5 antes de cada uma:
 
 ```bash
 python3 scripts/sessao.py executar --plano ../planos-pae-jvm/plano-sessao1.json
 ```
 
-O terminal mostra `ok` ou `FALHA` a cada processo e, no fim, `SESSAO=dados/brutos/<pasta da sessão>`. Se a sessão
-for interrompida (queda de energia, por exemplo), continue sem repetir o que já passou:
+Durante a sessão, o terminal mostra `ok` ou `FALHA` a cada processo. No final aparece
+`SESSAO=dados/brutos/<pasta da sessão>`, com o nome da pasta onde os dados foram gravados. Se a sessão for
+interrompida, por uma queda de energia por exemplo, é possível continuar de onde parou, sem repetir o que já foi
+feito:
 
 ```bash
 python3 scripts/sessao.py executar --plano ../planos-pae-jvm/plano-sessao1.json --retomar
 ```
 
-Repita para `plano-sessao2.json`, `plano-sessao3.json` e `plano-sessao4.json`.
+Depois, faça o mesmo com `plano-sessao2.json`, `plano-sessao3.json` e `plano-sessao4.json`.
 
 #### Passo 8 – Congelar e conferir cada sessão
 
-Logo depois de cada sessão (troque `PASTA` pela pasta mostrada em `SESSAO=`):
+Assim que cada sessão terminar, gere o manifesto e confira a qualidade dos dados. Troque `PASTA` pelo nome que
+apareceu em `SESSAO=`:
 
 ```bash
 python3 scripts/manifesto.py gerar --sessao dados/brutos/PASTA \
@@ -643,9 +764,10 @@ python3 scripts/manifesto.py gerar --sessao dados/brutos/PASTA \
 python3 scripts/conferir_sessao.py --sessao dados/brutos/PASTA
 ```
 
-O manifesto grava o SHA-256 de todos os arquivos (o programa nunca sobrescreve um manifesto). A conferência mostra
-duração, falhas, temperaturas, cobertura das leituras e CV por combinação, e termina com `CONFERE` ou
-`NAO_CONFERE`. Depois das 4 sessões, confira a coleta inteira (inclui o critério E2):
+O manifesto registra o SHA-256 de todos os arquivos da sessão, e o programa nunca sobrescreve um manifesto já
+existente. A conferência mostra a duração, as falhas, as temperaturas, a cobertura das leituras e o CV de cada
+combinação, e termina com `CONFERE` (tudo certo) ou `NAO_CONFERE` (há algum problema). Quando as 4 sessões estiverem
+prontas, confira a coleta inteira, o que inclui o critério E2:
 
 ```bash
 python3 scripts/conferir_coleta.py \
@@ -657,9 +779,9 @@ python3 scripts/conferir_coleta.py \
 
 #### Passo 9 – Analisar os dados novos
 
-A análise lê **todas** as sessões de `dados/brutos/` e os manifestos `evidencias/manifestos/sessao*.json`. Para
-analisar só os seus dados, tire as 4 sessões originais e os manifestos originais dessas pastas (o Git guarda as
-versões originais) e coloque os seus manifestos no lugar:
+A análise lê **todas** as sessões que estiverem em `dados/brutos/` e todos os manifestos
+`evidencias/manifestos/sessao*.json`. Para analisar só os seus dados, tire dessas pastas as 4 sessões e os manifestos
+originais e coloque os seus manifestos no lugar. Não se preocupe com os originais, pois o Git guarda todos eles.
 
 ```bash
 mkdir -p ../originais-pae-jvm
@@ -668,21 +790,23 @@ mv evidencias/manifestos/sessao*.json ../originais-pae-jvm/
 cp ../manifestos-pae-jvm/sessao*.json evidencias/manifestos/
 ```
 
-O Git vai mostrar esses arquivos como removidos; é esperado. Para voltar ao estado original depois:
+O Git vai mostrar esses arquivos como removidos, o que é esperado. Para voltar ao estado original depois, use
 `git checkout -- dados/brutos evidencias/manifestos`.
 
-Depois, ative o ambiente da análise (Nível 1, passo 3, itens 1 a 3) e rode:
+Em seguida, ative o ambiente da análise (Nível 1, passo 3, itens 1 a 3) e rode:
 
 ```bash
 pae-analise analisar --saida resultados/replicacao
 ```
 
-Compare o seu `resultados/replicacao/resumo.txt` com o oficial, principalmente as razões D/C, C/B e B/A.
+Para avaliar a replicação, compare o seu `resultados/replicacao/resumo.txt` com o oficial, principalmente as razões
+D/C, C/B e B/A.
 
 #### Adaptar a outro equipamento
 
-Qualquer mudança no protocolo deve ser feita numa **cópia** da configuração (por exemplo `config/replicacao.json`)
-e relatada como desvio:
+Nem todo computador é igual ao que usamos. Se for preciso mudar alguma coisa no protocolo, faça a mudança em uma
+**cópia** da configuração (por exemplo, `config/replicacao.json`) e registre a mudança como desvio. As situações mais
+comuns são estas:
 
 | Situação | O que mudar na cópia |
 |---|---|
@@ -690,12 +814,15 @@ e relatada como desvio:
 | Contador RAPL em outro caminho | `"rapl_directory"` com o caminho do domínio `package-0` |
 | SHA-256 do medidor diferente | `"meter"` → `"sha256"` com o valor novo |
 
-Os JDKs, a DaCapo, as cargas, as iterações, o heap e as pausas não devem mudar; se mudarem, o resultado deixa de ser
-uma repetição deste protocolo.
+Os JDKs, a DaCapo, as cargas, as iterações, o heap e as pausas não devem mudar. Se mudarem, o que você terá é um
+novo experimento, e não uma repetição deste protocolo.
 
 ---
 
 ## 🛠️ Solução de problemas
+
+Reunimos aqui os problemas mais comuns e o que fazer em cada caso. As mensagens aparecem em português porque é a
+língua do programa.
 
 | Mensagem ou situação | Causa e solução |
 |---|---|
@@ -722,56 +849,60 @@ uma repetição deste protocolo.
 
 ## 🏷️ Versões marcadas
 
+Duas versões do repositório estão marcadas com etiquetas do Git, para que possam ser recuperadas a qualquer momento:
+
 | Marca | Conteúdo |
 |---|---|
 | `base-oficial-v1` | base oficial fechada depois da coleta, resultados em `resultados/oficial-20261101` |
 | `analise-v1.1` | mesmos números, com os vereditos nos termos confirmada, não confirmada, refutada e inconclusiva (`resultados/oficial-20261101-termos`) |
 
-Como os resultados oficiais foram gerados, ocorrências e somas de verificação: [`evidencias/base-oficial/`](evidencias/base-oficial/).
+A pasta [`evidencias/base-oficial/`](evidencias/base-oficial/) explica como os resultados oficiais foram gerados e
+traz o registro de ocorrências e as somas de verificação.
 
 ---
 
 ## 🌍 Ciência aberta
 
-Em linha com as práticas de **Ciência Aberta**, estão públicos e reprodutíveis:
+Este trabalho segue as práticas de **Ciência Aberta**, e tudo o que sustenta os resultados está disponível para quem
+quiser conferir. Isso inclui o protocolo fixado e o registro prévio de critérios, hipóteses e regras de decisão,
+gravados antes da coleta; os dados brutos de todos os 180 processos oficiais e dos pilotos, sem nenhuma exclusão, com
+os manifestos SHA-256; o código do medidor, dos scripts de coleta e da análise, com testes automáticos; as versões
+exatas das bibliotecas, a imagem Docker e a conferência automática da reprodução; e, por fim, os resultados oficiais
+junto com o registro de ocorrências e desvios.
 
-- o protocolo fixado e o registro prévio de critérios, hipóteses e regras de decisão, gravados antes da coleta;
-- os dados brutos de todos os 180 processos oficiais e dos pilotos, sem exclusões, com os manifestos SHA-256;
-- o código do medidor, dos scripts de coleta e da análise, com testes automáticos;
-- as versões exatas das bibliotecas, a imagem Docker e a conferência automática da reprodução;
-- os resultados oficiais e o registro de ocorrências e desvios.
-
-**Fora do repositório:** o arquivo da DaCapo (baixado do site oficial e conferido pelo SHA-256) e as pastas de
-trabalho `scratch` da DaCapo de cada processo, que constam dos manifestos e dos pacotes completos das sessões. Os
-pacotes completos serão publicados no Zenodo, com DOI, que será indicado aqui.
+Apenas duas coisas ficam fora do repositório, por causa do tamanho. A primeira é o arquivo da DaCapo, que pode ser
+baixado do site oficial e conferido pelo SHA-256. A segunda são as pastas de trabalho (`scratch`) que a DaCapo cria em
+cada processo. Elas constam dos manifestos e fazem parte dos pacotes completos das sessões, que serão publicados no
+Zenodo com DOI próprio, a ser indicado aqui.
 
 ---
 
 ## ⚠️ Limitações
 
-- A energia é a do **pacote do processador** (RAPL), não a da tomada nem só a da JVM; RAPL é uma estimativa do
-  próprio processador, sem calibração externa.
-- Uma única máquina (notebook) e um único sistema; os valores absolutos não se generalizam para outros equipamentos.
-- O critério E2 não foi atendido (6,1% entre sessões, limite 5%): compare razões dentro do bloco, não energia
-  absoluta entre dias.
-- Três cargas da DaCapo, uma thread e heap fixo de 1 GB; outras cargas e configurações podem se comportar diferente.
+Como toda pesquisa, esta tem limites que precisam ser considerados na leitura dos resultados. A energia medida é a do
+**pacote do processador**, pelo RAPL. Não é a energia da tomada, nem a energia só da JVM, e o RAPL é uma estimativa
+do próprio processador, sem calibração externa. Todas as medidas vieram de uma única máquina, um notebook, com um
+único sistema operacional, então os valores absolutos não valem para outros equipamentos. O critério E2 não foi
+atendido (6,1% de diferença entre sessões, para um limite de 5%), o que reforça a recomendação de comparar razões
+dentro do bloco, e não energia absoluta entre dias diferentes. Por fim, usamos três cargas da DaCapo, com uma thread
+e heap fixo de 1 GB; outras cargas e outras configurações podem se comportar de forma diferente.
 
 ---
 
 ## 📜 Licenças
 
-- **Código** (`analise/`, `medidor-java/`, `scripts/`): licença MIT, em [`LICENSE`](LICENSE).
-- **Dados, resultados, evidências e configuração** (`dados/`, `resultados/`, `evidencias/`, `config/`): Creative
-  Commons Atribuição 4.0 Internacional (CC BY 4.0), em [`LICENCA-DADOS.txt`](LICENCA-DADOS.txt).
-- A DaCapo (Apache-2.0, com as licenças próprias das aplicações) e os JDKs Eclipse Temurin mantêm as licenças próprias
-  e não fazem parte deste repositório.
+O **código** (pastas `analise/`, `medidor-java/` e `scripts/`) está sob a licença MIT, descrita em
+[`LICENSE`](LICENSE). Os **dados, resultados, evidências e configurações** (pastas `dados/`, `resultados/`,
+`evidencias/` e `config/`) estão sob a licença Creative Commons Atribuição 4.0 Internacional (CC BY 4.0), descrita em
+[`LICENCA-DADOS.txt`](LICENCA-DADOS.txt). A DaCapo (Apache-2.0, com as licenças próprias de cada aplicação) e os JDKs
+Eclipse Temurin mantêm as suas próprias licenças e não fazem parte deste repositório.
 
 ---
 
 ## 📝 Como citar
 
-Os dados de citação estão em [`CITATION.cff`](CITATION.cff); o GitHub mostra a referência pronta no botão
-**"Cite this repository"**. Em BibTeX:
+Se este trabalho for útil para você, por favor cite-o. Os dados de citação estão em [`CITATION.cff`](CITATION.cff), e
+o GitHub mostra a referência pronta no botão **"Cite this repository"**. Em BibTeX:
 
 ```bibtex
 @software{goncalves_pae_jvm_2026,
