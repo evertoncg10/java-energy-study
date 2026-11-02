@@ -13,11 +13,12 @@
 
 Este repositório guarda tudo o que foi usado em uma pesquisa de mestrado sobre **Software Verde**, na área de
 Engenharia de Software: o protocolo de medição, o código, os dados brutos, as evidências e a análise estatística.
-A pergunta de fundo é simples de enunciar: quando trocamos a versão do Java, o programa passa a gastar mais ou menos
-energia? Para responder, comparamos o consumo de energia do processador e o tempo de execução de três versões da
-máquina virtual Java (**JVM**) da distribuição **Eclipse Temurin**, os **JDKs 17, 21 e 25**, e também o JDK 25 **com e
-sem os cabeçalhos compactos de objeto** (*Compact Object Headers*, JEP 519), uma novidade que promete reduzir o uso de
-memória.
+O foco da pesquisa é **como medir**, de forma confiável e reprodutível, o efeito de versões e opções da máquina virtual
+Java (**JVM**) sobre a energia e o tempo de execução, usando apenas um computador pessoal. Para avaliar o protocolo
+criado com esse fim, ele foi aplicado a um caso real: comparamos o consumo de energia do processador e o tempo de
+execução de três versões da distribuição **Eclipse Temurin**, os **JDKs 17, 21 e 25**, e também o JDK 25 **com e sem os
+cabeçalhos compactos de objeto** (*Compact Object Headers*, JEP 519), uma novidade que promete reduzir o uso de
+memória. As perguntas formais da pesquisa estão na seção [Perguntas da pesquisa](#-perguntas-da-pesquisa).
 
 A pesquisa segue o método **Design Science Research (DSR)**. Isso quer dizer que, além de medir, construímos e
 avaliamos um artefato: o **PAE-JVM – Protocolo de Avaliação Energética de configurações da JVM**. Ele junta um medidor

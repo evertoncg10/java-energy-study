@@ -12,11 +12,13 @@
 🇧🇷 [Português](README.md) | 🇺🇸 English
 
 This repository holds everything used in a master's research project on **Green Software**, in the field of Software
-Engineering: the measurement protocol, the code, the raw data, the evidence and the statistical analysis. The question
-behind it is easy to state: when we change the Java version, does the program end up using more or less energy? To
-answer it, we compared the processor energy and the execution time of three versions of the Java Virtual Machine
-(**JVM**) from the **Eclipse Temurin** distribution, **JDKs 17, 21 and 25**, and also JDK 25 **with and without Compact
-Object Headers** (JEP 519), a new feature that promises to reduce memory use.
+Engineering: the measurement protocol, the code, the raw data, the evidence and the statistical analysis. The focus
+of the research is **how to measure**, reliably and reproducibly, the effect of versions and options of the Java
+Virtual Machine (**JVM**) on energy and execution time, using only a personal computer. To evaluate the protocol built
+for this purpose, we applied it to a real case: we compared the processor energy and the execution time of three
+versions of the **Eclipse Temurin** distribution, **JDKs 17, 21 and 25**, and also JDK 25 **with and without Compact
+Object Headers** (JEP 519), a new feature that promises to reduce memory use. The formal research questions are in
+the [Research questions](#-research-questions) section.
 
 The research follows the **Design Science Research (DSR)** method. This means that, besides measuring, we built and
 evaluated an artifact: **PAE-JVM** (*Protocolo de Avaliação Energética de configurações da JVM*, an energy evaluation
