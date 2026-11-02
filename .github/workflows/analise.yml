@@ -2,9 +2,9 @@ name: analise
 
 on:
   push:
-    paths: ["analise/**", "dados/**", "config/**", ".github/workflows/analise.yml"]
+    paths: ["analise/**", "dados/**", "config/**", "evidencias/**", "resultados/**", "scripts/comparar_resultados.py", "Dockerfile", ".github/workflows/analise.yml"]
   pull_request:
-    paths: ["analise/**", "dados/**", "config/**", ".github/workflows/analise.yml"]
+    paths: ["analise/**", "dados/**", "config/**", "evidencias/**", "resultados/**", "scripts/comparar_resultados.py", "Dockerfile", ".github/workflows/analise.yml"]
 
 jobs:
   verificar:
@@ -17,13 +17,27 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Instalar
-        run: python -m pip install -e ".[dev,figuras]"
+      - name: Instalar (versões travadas)
+        run: python -m pip install -r requisitos-travados.txt -e ".[dev,figuras]"
       - name: Estilo (ruff)
         run: |
-          ruff check src tests
+          ruff check src tests ../scripts/comparar_resultados.py
           ruff format --check src tests
       - name: Tipos (mypy)
         run: mypy
       - name: Testes (pytest)
         run: pytest
+      - name: Reprodução dos resultados oficiais
+        working-directory: .
+        run: |
+          pae-analise analisar --saida "$RUNNER_TEMP/reproducao" --sem-figuras > /dev/null
+          python scripts/comparar_resultados.py resultados/oficial-20261101-termos "$RUNNER_TEMP/reproducao" --ignorar-figuras
+
+  docker:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Construir a imagem da análise
+        run: docker build -t pae-jvm-analise .
+      - name: Reprodução dentro do contêiner
+        run: docker run --rm pae-jvm-analise

@@ -1,0 +1,16 @@
+LICENÇA DOS DADOS – PAE-JVM
+
+Os dados, resultados, evidências e arquivos de configuração deste repositório
+(pastas dados/, resultados/, evidencias/ e config/) são de Everton Cezar Gonçalves, 2026,
+e estão sob a licença Creative Commons Atribuição 4.0 Internacional (CC BY 4.0).
+
+Texto da licença: https://creativecommons.org/licenses/by/4.0/legalcode.pt
+Resumo:           https://creativecommons.org/licenses/by/4.0/deed.pt_BR
+
+É permitido copiar, redistribuir, adaptar e usar o material para qualquer fim, desde que
+se dê o crédito, se indique a licença e se informe se houve alterações.
+A forma de citar está no arquivo CITATION.cff.
+
+O código-fonte (analise/, medidor-java/ e scripts/) está sob a licença MIT (arquivo LICENSE).
+A suíte DaCapo e os JDKs usados na coleta não fazem parte deste repositório e mantêm as
+licenças próprias.

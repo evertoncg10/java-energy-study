@@ -49,6 +49,7 @@ ferramentas/**/*.tgz
 
 # Documentação e configuração de editor mantidas na pasta local de documentos
 *.md
+!/README.md
 *.rst
 *.adoc
 *.doc
