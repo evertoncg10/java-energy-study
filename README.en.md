@@ -11,17 +11,22 @@
 
 🇧🇷 [Português](README.md) | 🇺🇸 English
 
-This repository holds everything used in a master's research project on **Green Software**, in the field of Software
-Engineering: the measurement protocol, the code, the raw data, the evidence and the statistical analysis. The focus
-of the research is **how to measure**, reliably and reproducibly, the effect of versions and options of the Java
+This repository stores everything used in a master's research project on **Green Software**, in the field of Software
+Engineering, including the measurement protocol, the code, the raw data, the evidence and the statistical analysis.
+
+The starting point is a practical doubt that is simple to state. When we change the Java version, does the program
+end up using more or less energy? To answer it with confidence, however, we first need to know how to measure well,
+and that is what this research focuses on.
+
+The focus, therefore, is **how to measure**, reliably and reproducibly, the effect of versions and options of the Java
 Virtual Machine (**JVM**) on energy and execution time, using only a personal computer. To evaluate the protocol built
-for this purpose, we applied it to a real case: we compared the processor energy and the execution time of three
+for this purpose, we applied it to a real case, in which we compared the processor energy and the execution time of three
 versions of the **Eclipse Temurin** distribution, **JDKs 17, 21 and 25**, and also JDK 25 **with and without Compact
 Object Headers** (JEP 519), a new feature that promises to reduce memory use. The formal research questions are in
 the [Research questions](#-research-questions) section.
 
 The research follows the **Design Science Research (DSR)** method. This means that, besides measuring, we built and
-evaluated an artifact: **PAE-JVM** (*Protocolo de Avaliação Energética de configurações da JVM*, an energy evaluation
+evaluated an artifact, **PAE-JVM** (*Protocolo de Avaliação Energética de configurações da JVM*, an energy evaluation
 protocol for JVM configurations). It brings together an energy meter integrated with the DaCapo benchmark suite, a
 verified JDK selection for every run, an orchestrator that organizes the measurement sessions, and a set of rules for
 dealing with noise, failures and analysis. The data collection served precisely to evaluate this protocol. The
@@ -63,7 +68,7 @@ the whole path here, explained step by step in [How to reproduce](#-how-to-repro
 
 ## ❓ Research questions
 
-The main question, from the DSR point of view, is about the method: **how can we evaluate, reliably and
+The main question, from the DSR point of view, is about the method, that is, **how can we evaluate, reliably and
 reproducibly, the effect of JVM versions and options on energy and execution time on a personal computer, without an
 external power meter?** Many developers and researchers only have their own laptop to work with, and PAE-JVM was
 designed for exactly that situation.
@@ -88,17 +93,17 @@ We compared four configurations, always using the Eclipse Temurin distribution i
 | **C** | 25.0.3+9-LTS | `25.0.3-tem` | `-XX:-UseCompactObjectHeaders` (off) |
 | **D** | 25.0.3+9-LTS | `25.0.3-tem` | `-XX:+UseCompactObjectHeaders` (on) |
 
-To keep the comparison fair, everything else stayed the same across the four: the **G1** garbage collector
+To keep the comparison fair, everything else stayed the same across the four configurations, with the **G1** garbage collector
 (`-XX:+UseG1GC`), a fixed **1 GB** heap (`-Xms1g -Xmx1g`), garbage collection logging turned on (`-Xlog:gc`), the
 workload running with **1 thread**, and the process pinned to the processor's performance cores (one logical CPU per
 physical core).
 
-One important safeguard: before every run, the program asks the JVM itself which version, vendor and installation
+One important safeguard is that, before every run, the program asks the JVM itself which version, vendor and installation
 folder it is using, whether G1 is active, and whether Compact Object Headers are on or off. If any answer differs
 from what is expected, the run does not even start. This way we know for sure that each measurement belongs to the
 right configuration.
 
-We make three comparisons: **B/A** (from 17 to 21), **C/B** (from 21 to 25) and **D/C** (Compact Object Headers on
+We make three comparisons, **B/A** (from 17 to 21), **C/B** (from 21 to 25) and **D/C** (Compact Object Headers on
 versus off, on the same JDK 25).
 
 ---
@@ -121,7 +126,7 @@ then the 3 measured iterations. The number of warm-up iterations for each applic
 whose data are in `dados/piloto/`.
 
 The two main workloads, lusearch and pmd, are the ones that answer the hypotheses. avrora runs in the same blocks but
-was left out of the conclusions because it varied a lot in the pilots: it uses the processor lightly, which makes it
+was left out of the conclusions because it varied a lot in the pilots. It uses the processor lightly, which makes it
 more sensitive to whatever is happening in the background.
 
 ---
@@ -130,7 +135,7 @@ more sensitive to whatever is happening in the background.
 
 Intel processors have a built-in energy counter called **RAPL** (*Running Average Power Limit*), which Linux exposes
 in the file `/sys/class/powercap/intel-rapl:0/energy_uj`. We used the **processor package** counter, which covers the
-whole processor: all cores, the cache and the integrated memory controller. It is worth keeping this in mind when
+whole processor, including all cores, the cache and the integrated memory controller. It is worth keeping this in mind when
 reading the results, because the value is neither the energy of the JVM alone nor the energy drawn from the wall
 socket.
 
@@ -147,7 +152,7 @@ measured iterations with that of the last warm-up iteration (this is criterion E
 
 ## 🧪 Collection design
 
-Energy measurement is sensitive to many things: temperature, system tasks, even the order in which runs happen. The
+Energy measurement is sensitive to many things, such as temperature, system tasks and even the order in which runs happen. The
 collection was designed to keep these effects under control.
 
 Runs were organized in **complete blocks**. Each block contains all 12 possible combinations (3 workloads × 4
@@ -227,7 +232,7 @@ computed with a block-paired *bootstrap*, with 10,000 resamples and random draw 
 that each comparison is made between runs of the same block, which ran close together in time and under the same
 machine conditions.
 
-The `razoes.csv` file also includes complementary tests: Mann-Whitney U with Holm correction and the Vargha-Delaney
+The `razoes.csv` file also includes complementary tests, such as Mann-Whitney U with Holm correction and the Vargha-Delaney
 A12 effect size. On top of that, we ran an exploratory sensitivity analysis, which was not in the pre-registration,
 using the Friedman test, blocked ANOVA on logs, paired t-test on logs and exact Wilcoxon, all with Holm correction. Its
 purpose is to check whether the conclusions would change with other methods.
@@ -279,7 +284,7 @@ confidence interval. The complete results, with every workload and measure, are 
 | pmd | C/B (21 → 25) | 0.9546 [0.9401, 0.9617] | 0.9352 [0.9332, 0.9391] | 1.0142 [1.0052, 1.0260] |
 | pmd | D/C (compact) | 1.0037 [0.9903, 1.0154] | 1.0048 [1.0028, 1.0085] | 1.0018 [0.9874, 1.0121] |
 
-In short: moving from Java 17 to 21 reduced energy in both main workloads (about 7% for lusearch and 4% for pmd).
+In short, moving from Java 17 to 21 reduced energy in both main workloads (about 7% for lusearch and 4% for pmd).
 From 21 to 25, pmd saved another 4.5%, while lusearch used 2% more. Compact Object Headers, on the other hand, brought
 no detectable change in energy, even though they reduced the garbage collector's work.
 
@@ -294,9 +299,9 @@ The hypothesis verdicts came out as follows:
 | H5 B/A energy follows time | not confirmed | not confirmed |
 | H5 C/B energy follows time | confirmed | not confirmed |
 
-As for the protocol, criteria E1, E3, E4 (by the median), E5 and E6 were met. Criterion **E2 was not met**: the
+As for the protocol, criteria E1, E3, E4 (by the median), E5 and E6 were met. Criterion **E2 was not met**, since the
 largest energy difference between sessions was 6.1%, above the 5% limit, in the combinations lusearch-A, pmd-A, pmd-B
-and pmd-D. Criterion E7 still depends on the naive session. This E2 result is itself an important lesson: absolute
+and pmd-D. Criterion E7 still depends on the naive session. This E2 result is itself an important lesson. Absolute
 energy changes from one day to the next, but the ratios between configurations within each block stayed stable
 across sessions. That is why we recommend comparing configurations through within-block ratios rather than through
 absolute energy measured on different days. All 180 processes were considered valid.
@@ -500,7 +505,7 @@ below.
    ```
 
    The output folder (`--saida`) has to be new, because the program never overwrites results. To run it again, use
-   another name, such as `resultados/reproducao2`. The command accepts a few options: `--sem-figuras` (skips the
+   another name, such as `resultados/reproducao2`. The command accepts a few options, such as `--sem-figuras` (skips the
    figures), `--reamostragens N` (bootstrap resamples, default 10000) and `--semente N` (bootstrap random draw code,
    default 20261101). Only the default values reproduce the official numbers.
 
@@ -575,7 +580,7 @@ the official one. It also builds and runs the Docker image.
 ### 🔬 Level 2 – Repeat the data collection (Linux with Intel RAPL)
 
 Repeating the collection means measuring everything again, on another computer. It is worth setting expectations
-right away: absolute energy values depend on the hardware, so they will not match ours. What you should expect to
+right away. Absolute energy values depend on the hardware, so they will not match ours. What you should expect to
 reproduce is the **direction and size of the ratios** between configurations, using the same protocol.
 
 #### Prerequisites
@@ -635,7 +640,7 @@ without touching your computer's default Java. Next, it downloads DaCapo from th
 meter, and compares the SHA-256 values with those recorded in [`config/execucao.json`](config/execucao.json).
 
 Each output line shows `[ok]`, `[aviso]` (warning) or `[erro]` (error), so you know what happened. You can run the
-script as many times as you need: whatever is already in place is only checked. The DaCapo download can take anywhere
+script as many times as you need, because whatever is already in place is only checked. The DaCapo download can take anywhere
 from a few minutes to a few hours, depending on your connection.
 
 <details>
@@ -788,7 +793,7 @@ python3 scripts/conferir_coleta.py \
 
 The analysis reads **all** sessions in `dados/brutos/` and all manifests `evidencias/manifestos/sessao*.json`. To
 analyze only your own data, move the 4 original sessions and their manifests out of those folders and put your
-manifests in their place. Do not worry about the originals: Git keeps all of them.
+manifests in their place. Do not worry about the originals, because Git keeps all of them.
 
 ```bash
 mkdir -p ../originais-pae-jvm
@@ -870,7 +875,7 @@ includes the incident record and the checksums.
 
 ## 🌍 Open science
 
-This work follows **Open Science** practices: everything that supports the results is available to anyone who wants
+This work follows **Open Science** practices, and everything that supports the results is available to anyone who wants
 to check it. That includes the frozen protocol and the pre-registration of criteria, hypotheses and decision rules,
 written before the collection; the raw data of all 180 official processes and of the pilots, with no exclusions, along
 with the SHA-256 manifests; the code of the meter, the collection scripts and the analysis, with automated tests; the
@@ -887,7 +892,7 @@ will be published on Zenodo with their own DOI, to be added here.
 ## ⚠️ Limitations
 
 Like any research, this one has limits that should be kept in mind when reading the results. The energy measured is
-that of the **processor package**, through RAPL: it is not wall-socket energy, nor the energy of the JVM alone, and
+that of the **processor package**, through RAPL. It is not wall-socket energy, nor the energy of the JVM alone, and
 RAPL is the processor's own estimate, without external calibration. All measurements came from a single machine, a
 laptop, with a single operating system, so the absolute values do not carry over to other hardware. Criterion E2 was
 not met (a 6.1% difference between sessions, against a 5% limit), which reinforces the recommendation to compare

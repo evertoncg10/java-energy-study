@@ -11,17 +11,23 @@
 
 🇧🇷 Português | 🇺🇸 [English](README.en.md)
 
-Este repositório guarda tudo o que foi usado em uma pesquisa de mestrado sobre **Software Verde**, na área de
-Engenharia de Software: o protocolo de medição, o código, os dados brutos, as evidências e a análise estatística.
-O foco da pesquisa é **como medir**, de forma confiável e reprodutível, o efeito de versões e opções da máquina virtual
+Este repositório armazena tudo o que foi usado em uma pesquisa de mestrado sobre **Software Verde**, na área de
+Engenharia de Software, incluindo o protocolo de medição, o código, os dados brutos, as evidências e a análise
+estatística.
+
+A motivação inicial é uma dúvida prática e simples de declarar. Quando trocamos a versão do Java, o programa passa a
+gastar mais ou menos energia? Para responder a essa dúvida com segurança, porém, é preciso antes saber medir bem, e é
+nisso que a pesquisa se concentra.
+
+O foco, portanto, é **como medir**, de forma confiável e reprodutível, o efeito de versões e opções da máquina virtual
 Java (**JVM**) sobre a energia e o tempo de execução, usando apenas um computador pessoal. Para avaliar o protocolo
-criado com esse fim, ele foi aplicado a um caso real: comparamos o consumo de energia do processador e o tempo de
+criado com esse fim, ele foi aplicado a um caso real, no qual comparamos o consumo de energia do processador e o tempo de
 execução de três versões da distribuição **Eclipse Temurin**, os **JDKs 17, 21 e 25**, e também o JDK 25 **com e sem os
 cabeçalhos compactos de objeto** (*Compact Object Headers*, JEP 519), uma novidade que promete reduzir o uso de
 memória. As perguntas formais da pesquisa estão na seção [Perguntas da pesquisa](#-perguntas-da-pesquisa).
 
 A pesquisa segue o método **Design Science Research (DSR)**. Isso quer dizer que, além de medir, construímos e
-avaliamos um artefato: o **PAE-JVM – Protocolo de Avaliação Energética de configurações da JVM**. Ele junta um medidor
+avaliamos um artefato, o **PAE-JVM – Protocolo de Avaliação Energética de configurações da JVM**. Ele junta um medidor
 de energia integrado à suíte de testes DaCapo, a seleção conferida do JDK em cada execução, um orquestrador que
 organiza as sessões de medição e um conjunto de regras para lidar com ruído, falhas e análise. A coleta de dados
 serviu justamente para avaliar esse protocolo. Os critérios de avaliação (E1 a E7) e as hipóteses (H1 a H5) foram
@@ -59,7 +65,7 @@ caminho completo, explicado passo a passo na seção [Como reproduzir](#-como-re
 
 ## ❓ Perguntas da pesquisa
 
-A pergunta principal, do ponto de vista do DSR, é sobre o método: **como avaliar, de forma confiável e reprodutível,
+A pergunta principal, do ponto de vista do DSR, é sobre o método, ou seja, **como avaliar, de forma confiável e reprodutível,
 o efeito de versões e opções da JVM sobre a energia e o tempo de execução em um computador pessoal, sem um medidor
 externo de energia?** Muitos desenvolvedores e pesquisadores só têm o próprio notebook à disposição, e o PAE-JVM foi
 pensado para esse cenário.
@@ -84,16 +90,16 @@ Comparamos quatro configurações, sempre com a distribuição Eclipse Temurin i
 | **C** | 25.0.3+9-LTS | `25.0.3-tem` | `-XX:-UseCompactObjectHeaders` (desligado) |
 | **D** | 25.0.3+9-LTS | `25.0.3-tem` | `-XX:+UseCompactObjectHeaders` (ligado) |
 
-Para que a comparação fosse justa, tudo o mais ficou igual nas quatro: o coletor de lixo **G1** (`-XX:+UseG1GC`), o
+Para que a comparação fosse justa, tudo o mais ficou igual nas quatro configurações, com o coletor de lixo **G1** (`-XX:+UseG1GC`), o
 heap fixo de **1 GB** (`-Xms1g -Xmx1g`), o log de coleta de lixo ligado (`-Xlog:gc`), a carga rodando com **1 thread**
 e o processo preso aos núcleos de desempenho do processador (um processador lógico por núcleo físico).
 
-Um cuidado importante: antes de cada execução, o programa pergunta à própria JVM qual versão, fornecedor e pasta de
+Um cuidado importante é que, antes de cada execução, o programa pergunta à própria JVM qual versão, fornecedor e pasta de
 instalação ela está usando, se o G1 está ativo e se os cabeçalhos compactos estão ligados ou desligados. Se qualquer
 resposta for diferente do esperado, a execução nem começa. Assim temos certeza de que cada medida corresponde à
 configuração certa.
 
-As comparações feitas são três: **B/A** (do 17 para o 21), **C/B** (do 21 para o 25) e **D/C** (cabeçalhos compactos
+Fizemos três comparações, **B/A** (do 17 para o 21), **C/B** (do 21 para o 25) e **D/C** (cabeçalhos compactos
 ligados contra desligados, no mesmo JDK 25).
 
 ---
@@ -116,7 +122,7 @@ entram na medida, e só depois as 3 iterações medidas. O número de preparaç�
 pilotos, cujos dados estão em `dados/piloto/`.
 
 As duas cargas principais, lusearch e pmd, são as que respondem às hipóteses. A avrora roda nos mesmos blocos, mas
-ficou fora das conclusões porque variou muito nos pilotos: ela usa pouco o processador e fica mais sensível ao que
+ficou fora das conclusões porque variou muito nos pilotos. Ela usa pouco o processador e fica mais sensível ao que
 acontece em segundo plano.
 
 ---
@@ -125,7 +131,7 @@ acontece em segundo plano.
 
 Os processadores Intel trazem um contador interno de energia chamado **RAPL** (*Running Average Power Limit*), que o
 Linux disponibiliza no arquivo `/sys/class/powercap/intel-rapl:0/energy_uj`. Usamos o contador do **pacote do
-processador**, que cobre o processador inteiro: todos os núcleos, a memória cache e o controlador de memória
+processador**, que cobre o processador inteiro, com todos os núcleos, a memória cache e o controlador de memória
 integrado. É importante ter isso em mente ao ler os resultados, porque o valor não é a energia só da JVM, nem a
 energia medida na tomada.
 
@@ -142,7 +148,7 @@ iterações medidas com o da última iteração de preparação (é o critério 
 
 ## 🧪 Desenho da coleta
 
-A medição de energia é sensível a muita coisa: temperatura, tarefas do sistema, a ordem em que as execuções
+A medição de energia é sensível a muita coisa, como a temperatura, as tarefas do sistema e até a ordem em que as execuções
 acontecem. O desenho da coleta foi pensado para controlar esses efeitos.
 
 As execuções foram organizadas em **blocos completos**. Cada bloco contém as 12 combinações possíveis (3 cargas × 4
@@ -220,7 +226,7 @@ confiança de 95%** calculado por *bootstrap* pareado por bloco, com 10 000 ream
 20261101. "Pareado por bloco" quer dizer que cada comparação é feita entre execuções do mesmo bloco, que rodaram
 próximas no tempo e nas mesmas condições da máquina.
 
-O arquivo `razoes.csv` traz também testes complementares: Mann-Whitney U com correção de Holm e o tamanho de efeito
+O arquivo `razoes.csv` traz também testes complementares, como o Mann-Whitney U com correção de Holm e o tamanho de efeito
 A12 de Vargha-Delaney. Além disso, fizemos uma análise de sensibilidade exploratória, que não estava no registro
 prévio, com os testes de Friedman, ANOVA em blocos sobre o logaritmo, teste t pareado sobre o logaritmo e Wilcoxon
 exato, todos com correção de Holm. Ela serve para verificar se as conclusões mudariam com outros métodos.
@@ -271,7 +277,7 @@ de confiança de 95%. O resultado completo, com todas as cargas e medidas, está
 | pmd | C/B (21 → 25) | 0,9546 [0,9401; 0,9617] | 0,9352 [0,9332; 0,9391] | 1,0142 [1,0052; 1,0260] |
 | pmd | D/C (compactos) | 1,0037 [0,9903; 1,0154] | 1,0048 [1,0028; 1,0085] | 1,0018 [0,9874; 1,0121] |
 
-Em resumo: a passagem do Java 17 para o 21 reduziu a energia nas duas cargas principais (cerca de 7% no lusearch e
+Em resumo, a passagem do Java 17 para o 21 reduziu a energia nas duas cargas principais (cerca de 7% no lusearch e
 4% no pmd). Do 21 para o 25, o pmd economizou mais 4,5%, enquanto o lusearch gastou 2% a mais. Já os cabeçalhos
 compactos não trouxeram mudança de energia que se pudesse detectar, apesar de terem reduzido o trabalho do coletor
 de lixo.
@@ -288,9 +294,9 @@ Os vereditos das hipóteses ficaram assim:
 | H5 C/B energia acompanha tempo | confirmada | não confirmada |
 
 Quanto ao protocolo, os critérios E1, E3, E4 (pela mediana), E5 e E6 foram atendidos. O critério **E2 não foi
-atendido**: a maior diferença de energia entre sessões foi de 6,1%, acima do limite de 5%, nas combinações
+atendido**, pois a maior diferença de energia entre sessões foi de 6,1%, acima do limite de 5%, nas combinações
 lusearch-A, pmd-A, pmd-B e pmd-D. O critério E7 ainda depende da sessão ingênua. Esse resultado do E2 é, ele mesmo,
-uma lição importante: a energia absoluta muda de um dia para outro, mas as razões entre configurações dentro de cada
+uma lição importante. A energia absoluta muda de um dia para outro, mas as razões entre configurações dentro de cada
 bloco ficaram estáveis entre as sessões. Por isso a recomendação é comparar configurações pelas razões dentro do
 bloco, e não pela energia absoluta medida em dias diferentes. Todos os 180 processos foram considerados válidos.
 
@@ -489,7 +495,7 @@ Se preferir entender cada etapa, ou se estiver usando o PowerShell ou o Prompt d
    ```
 
    A pasta de saída precisa ser nova, porque o programa nunca sobrescreve resultados. Para rodar de novo, use outro
-   nome, como `resultados/reproducao2`. O comando aceita algumas opções: `--sem-figuras` (não gera as figuras),
+   nome, como `resultados/reproducao2`. O comando aceita algumas opções, como `--sem-figuras` (não gera as figuras),
    `--reamostragens N` (padrão 10000) e `--semente N` (código de sorteio do *bootstrap*, padrão 20261101). Só os
    valores padrão reproduzem os números oficiais.
 
@@ -563,7 +569,7 @@ com o oficial. Ele também constrói e roda a imagem Docker.
 
 ### 🔬 Nível 2 – Repetir a coleta (Linux com Intel RAPL)
 
-Repetir a coleta significa medir tudo de novo, em outro computador. Vale alinhar a expectativa desde já: os valores
+Repetir a coleta significa medir tudo de novo, em outro computador. Vale alinhar a expectativa desde já. Os valores
 absolutos de energia dependem do equipamento, então não vão bater com os nossos. O que se espera reproduzir é a
 **direção e o tamanho das razões** entre as configurações, usando o mesmo protocolo.
 
@@ -623,7 +629,7 @@ mexer no Java padrão do seu computador. Em seguida, baixa a DaCapo do endereço
 compara os SHA-256 com os registrados em [`config/execucao.json`](config/execucao.json).
 
 Cada linha da saída mostra `[ok]`, `[aviso]` ou `[erro]`, para você saber o que aconteceu. O script pode ser
-executado quantas vezes for preciso: o que já estiver pronto é apenas conferido. O download da DaCapo pode levar de
+executado quantas vezes for preciso, porque o que já estiver pronto é apenas conferido. O download da DaCapo pode levar de
 alguns minutos a algumas horas, dependendo da sua internet.
 
 <details>
@@ -775,7 +781,7 @@ python3 scripts/conferir_coleta.py \
 
 A análise lê **todas** as sessões que estiverem em `dados/brutos/` e todos os manifestos
 `evidencias/manifestos/sessao*.json`. Para analisar só os seus dados, tire dessas pastas as 4 sessões e os manifestos
-originais e coloque os seus manifestos no lugar. Não se preocupe com os originais: o Git guarda todos eles.
+originais e coloque os seus manifestos no lugar. Não se preocupe com os originais, pois o Git guarda todos eles.
 
 ```bash
 mkdir -p ../originais-pae-jvm
@@ -857,7 +863,7 @@ traz o registro de ocorrências e as somas de verificação.
 
 ## 🌍 Ciência aberta
 
-Este trabalho segue as práticas de **Ciência Aberta**: tudo o que sustenta os resultados está disponível para quem
+Este trabalho segue as práticas de **Ciência Aberta**, e tudo o que sustenta os resultados está disponível para quem
 quiser conferir. Isso inclui o protocolo fixado e o registro prévio de critérios, hipóteses e regras de decisão,
 gravados antes da coleta; os dados brutos de todos os 180 processos oficiais e dos pilotos, sem nenhuma exclusão, com
 os manifestos SHA-256; o código do medidor, dos scripts de coleta e da análise, com testes automáticos; as versões
@@ -874,7 +880,7 @@ Zenodo com DOI próprio, a ser indicado aqui.
 ## ⚠️ Limitações
 
 Como toda pesquisa, esta tem limites que precisam ser considerados na leitura dos resultados. A energia medida é a do
-**pacote do processador**, pelo RAPL: não é a energia da tomada, nem a energia só da JVM, e o RAPL é uma estimativa
+**pacote do processador**, pelo RAPL. Não é a energia da tomada, nem a energia só da JVM, e o RAPL é uma estimativa
 do próprio processador, sem calibração externa. Todas as medidas vieram de uma única máquina, um notebook, com um
 único sistema operacional, então os valores absolutos não valem para outros equipamentos. O critério E2 não foi
 atendido (6,1% de diferença entre sessões, para um limite de 5%), o que reforça a recomendação de comparar razões
