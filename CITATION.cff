@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "Se usar estes dados ou este código, cite como abaixo."
+title: "PAE-JVM – Protocolo de Avaliação Energética de configurações da JVM: dados, análise e código"
+type: software
+authors:
+  - family-names: "Gonçalves"
+    given-names: "Everton Cezar"
+    orcid: "https://orcid.org/0009-0003-7548-2501"
+    affiliation: "Universidade Tecnológica Federal do Paraná (UTFPR)"
+repository-code: "https://github.com/evertoncg10/java-energy-study"
+license: MIT
+version: "1.1"
+keywords:
+  - software verde
+  - eficiência energética
+  - Java
+  - JVM
+  - RAPL
+  - DaCapo
+  - design science research
