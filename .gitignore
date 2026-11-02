@@ -44,12 +44,17 @@ ferramentas/**/*.tgz
 /ferramentas/dacapo/
 /scratch/
 /dados/verificacao/*
+# Reproduções locais da análise (scripts/reproduzir_analise.sh e README)
+/resultados/reproducao*/
+/resultados/replicacao*/
+/resultados/base/
 # Pasta de trabalho do DaCapo (saídas das cargas): entra no manifesto e no pacote completo, fica fora do Git
 /dados/**/scratch/
 
 # Documentação e configuração de editor mantidas na pasta local de documentos
 *.md
 !/README.md
+!/README.en.md
 *.rst
 *.adoc
 *.doc

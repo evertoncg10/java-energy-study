@@ -2,9 +2,9 @@ name: analise
 
 on:
   push:
-    paths: ["analise/**", "dados/**", "config/**", "evidencias/**", "resultados/**", "scripts/comparar_resultados.py", "Dockerfile", ".github/workflows/analise.yml"]
+    paths: ["analise/**", "dados/**", "config/**", "evidencias/**", "resultados/**", "scripts/**", "Dockerfile", ".github/workflows/analise.yml"]
   pull_request:
-    paths: ["analise/**", "dados/**", "config/**", "evidencias/**", "resultados/**", "scripts/comparar_resultados.py", "Dockerfile", ".github/workflows/analise.yml"]
+    paths: ["analise/**", "dados/**", "config/**", "evidencias/**", "resultados/**", "scripts/**", "Dockerfile", ".github/workflows/analise.yml"]
 
 jobs:
   verificar:
@@ -27,6 +27,9 @@ jobs:
         run: mypy
       - name: Testes (pytest)
         run: pytest
+      - name: Integridade dos dados (manifestos SHA-256)
+        working-directory: .
+        run: bash scripts/conferir_dados.sh
       - name: Reprodução dos resultados oficiais
         working-directory: .
         run: |
