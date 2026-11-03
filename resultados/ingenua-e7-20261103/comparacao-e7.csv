@@ -1,0 +1,28 @@
+application,role,metric,comparison,repetitions,naive_ratio,naive_ci_low,naive_ci_high,naive_half_width_pp,naive_direction,official_ratio,official_ci_low,official_ci_high,official_half_width_pp,official_direction,same_direction
+avrora,exploratorio,energy_j,B/A,10,0.999813,0.986215,1.02764,2.07111,sem diferença,1.00325,0.99454,1.063,3.42299,sem diferença,True
+avrora,exploratorio,time_s,B/A,10,1.01604,0.997266,1.0463,2.45163,sem diferença,1.02192,1.00599,1.03952,1.67643,maior,False
+avrora,exploratorio,power_w,B/A,10,0.988678,0.952742,1.0111,2.91787,sem diferença,0.986763,0.983708,1.03762,2.69564,sem diferença,True
+avrora,exploratorio,energy_j,C/B,10,0.917666,0.901508,0.932577,1.55341,menor,0.938007,0.889995,0.969421,3.97133,menor,True
+avrora,exploratorio,time_s,C/B,10,0.948845,0.935155,0.954935,0.988996,menor,0.940843,0.918727,0.95784,1.9556,menor,True
+avrora,exploratorio,power_w,C/B,10,0.973726,0.952787,0.989515,1.83638,menor,1.01119,0.961816,1.03564,3.69107,sem diferença,False
+avrora,exploratorio,energy_j,D/C,10,1.02495,1.00091,1.04517,2.21285,maior,1.01273,0.99435,1.04528,2.54658,sem diferença,False
+avrora,exploratorio,time_s,D/C,10,1.01264,0.993363,1.0429,2.47687,sem diferença,1.00743,0.996363,1.01615,0.9892,sem diferença,True
+avrora,exploratorio,power_w,D/C,10,0.99269,0.981739,1.02195,2.01077,sem diferença,0.998719,0.990794,1.04574,2.74723,sem diferença,True
+lusearch,principal,energy_j,B/A,10,0.928662,0.911798,0.944535,1.63684,menor,0.933482,0.919155,0.947852,1.43486,menor,True
+lusearch,principal,time_s,B/A,10,0.938114,0.911213,0.959374,2.40806,menor,0.946801,0.940549,0.95191,0.568053,menor,True
+lusearch,principal,power_w,B/A,10,0.990678,0.952671,1.03769,4.25087,sem diferença,0.983493,0.976089,0.997025,1.0468,menor,False
+lusearch,principal,energy_j,C/B,10,1.03704,0.985032,1.0721,4.35359,sem diferença,1.02023,1.01042,1.02709,0.833306,maior,False
+lusearch,principal,time_s,C/B,10,1.01192,0.984547,1.05613,3.57927,sem diferença,1.01011,1.00489,1.01272,0.391324,maior,False
+lusearch,principal,power_w,C/B,10,1.02329,0.936139,1.08729,7.55746,sem diferença,1.01516,1.00704,1.01609,0.452805,maior,False
+lusearch,principal,energy_j,D/C,10,0.977237,0.959302,1.01145,2.60736,sem diferença,0.995465,0.988821,1.01753,1.43567,sem diferença,True
+lusearch,principal,time_s,D/C,10,1.01116,0.991668,1.03126,1.97984,sem diferença,0.996183,0.992613,1.00594,0.666581,sem diferença,True
+lusearch,principal,power_w,D/C,10,0.974689,0.94121,1.02346,4.1126,sem diferença,0.999671,0.984799,1.00933,1.22673,sem diferença,True
+pmd,principal,energy_j,B/A,10,0.863657,0.841581,0.893038,2.57282,menor,0.959701,0.950188,0.975112,1.2462,menor,True
+pmd,principal,time_s,B/A,10,0.966947,0.945619,0.989549,2.19652,menor,0.94859,0.942336,0.950304,0.398407,menor,True
+pmd,principal,power_w,B/A,10,0.894216,0.853947,0.921792,3.39224,menor,1.01325,1.01028,1.03418,1.19487,maior,False
+pmd,principal,energy_j,C/B,10,0.926674,0.902307,0.949286,2.34896,menor,0.954594,0.940062,0.961654,1.07961,menor,True
+pmd,principal,time_s,C/B,10,0.915468,0.885831,0.935625,2.48968,menor,0.935231,0.933205,0.939093,0.294391,menor,True
+pmd,principal,power_w,C/B,10,1.0097,0.983863,1.05452,3.53301,sem diferença,1.01417,1.00522,1.02602,1.03998,maior,False
+pmd,principal,energy_j,D/C,10,0.974389,0.936915,1.00028,3.16824,sem diferença,1.00372,0.990342,1.01543,1.25453,sem diferença,True
+pmd,principal,time_s,D/C,10,1.04794,1.00812,1.07047,3.11733,maior,1.00477,1.00285,1.00848,0.281747,maior,True
+pmd,principal,power_w,D/C,10,0.93085,0.881081,0.963572,4.12455,menor,1.00179,0.987367,1.0121,1.23642,sem diferença,False

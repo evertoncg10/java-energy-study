@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "started_at_utc": "2026-11-03T20:07:26.180832+00:00",
+  "mode": "executar",
+  "configuration": "C",
+  "category": "verification",
+  "application": "pmd",
+  "output": "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/verificacao/ingenua-20261103T194354Z/r06-067-pmd-C",
+  "status": "success",
+  "events": [
+    {
+      "phase": "sdkman_selected",
+      "at_utc": "2026-11-03T20:07:26.245932+00:00",
+      "jdk": "25.0.3-tem",
+      "java": "/home/everton/.sdkman/candidates/java/25.0.3-tem/bin/java"
+    },
+    {
+      "phase": "java_identity_verified",
+      "at_utc": "2026-11-03T20:07:26.313174+00:00"
+    },
+    {
+      "phase": "rapl_after_sdkman",
+      "at_utc": "2026-11-03T20:07:26.313540+00:00",
+      "directory": "/sys/devices/virtual/powercap/intel-rapl/intel-rapl:0",
+      "domain": "package-0",
+      "release_requested": false,
+      "release_performed": false,
+      "first_energy_uj": 49343886313,
+      "last_energy_uj": 49344249288,
+      "before_nanos": 2108299672403,
+      "after_nanos": 2108350203711,
+      "range_uj": 262143328850,
+      "uid": 1000,
+      "mode": "0o400",
+      "readable": true
+    },
+    {
+      "phase": "workload_launch",
+      "at_utc": "2026-11-03T20:07:26.419143+00:00"
+    }
+  ],
+  "process_exit_code": 0,
+  "workload_launched": true,
+  "measurement_verified": true,
+  "session_id": "ingenua-20261103T194354Z",
+  "block_id": "r6",
+  "order": 67,
+  "config_sha256": "194fd2f6796b9263cc42ca1adcf6180dbfb408b8d234f2ac8b9aa35fdf44490e",
+  "sdkman_command": [
+    "bash",
+    "/home/everton/Documentos/Projetos_Java/java-energy-study/scripts/selecionar-java.sh",
+    "/home/everton/.sdkman",
+    "25.0.3-tem",
+    "/home/everton/Documentos/Projetos_Java/java-energy-study/dados/verificacao/ingenua-20261103T194354Z/r06-067-pmd-C/sdkman.json"
+  ],
+  "cpu_affinity": {
+    "policy": null,
+    "cpus": null
+  },
+  "verified_measurement": {
+    "java_runtime_version": "25.0.3+9-LTS",
+    "application": "pmd",
+    "energy_j": 102.323041,
+    "time_s": 3.339563451,
+    "measured_energy_j": [
+      102.323041
+    ],
+    "measured_time_s": [
+      3.339563451
+    ],
+    "warmup_dacapo_ms": [
+      5560
+    ],
+    "measured_dacapo_ms": [
+      3339
+    ],
+    "available_processors": 20,
+    "validation": true
+  },
+  "finished_at_utc": "2026-11-03T20:07:35.775918+00:00",
+  "total_wall_seconds": 9.595082305999767,
+  "wrapper_exit_code": 0
+}

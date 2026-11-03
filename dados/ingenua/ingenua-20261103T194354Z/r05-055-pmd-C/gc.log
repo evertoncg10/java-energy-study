@@ -1,0 +1,24 @@
+[0.002s][info][gc] Using G1
+[0.185s][info][gc] GC(0) Pause Young (Normal) (G1 Evacuation Pause) 52M->3M(1024M) 2.270ms
+[0.212s][info][gc] GC(1) Pause Full (System.gc()) 7M->3M(1024M) 4.667ms
+[1.403s][info][gc] GC(2) Pause Young (Normal) (G1 Evacuation Pause) 447M->16M(1024M) 2.985ms
+[2.364s][info][gc] GC(3) Pause Young (Normal) (G1 Evacuation Pause) 617M->17M(1024M) 3.636ms
+[2.497s][info][gc] GC(4) Pause Young (Concurrent Start) (Metadata GC Threshold) 89M->17M(1024M) 3.030ms
+[2.497s][info][gc] GC(5) Concurrent Mark Cycle
+[2.504s][info][gc] GC(5) Pause Remark 18M->18M(1024M) 2.094ms
+[2.505s][info][gc] GC(5) Pause Cleanup 18M->18M(1024M) 0.017ms
+[2.505s][info][gc] GC(5) Concurrent Mark Cycle 8.718ms
+[3.220s][info][gc] GC(6) Pause Young (Prepare Mixed) (G1 Evacuation Pause) 616M->17M(1024M) 3.658ms
+[3.860s][info][gc] GC(7) Pause Young (Mixed) (G1 Evacuation Pause) 617M->17M(1024M) 3.373ms
+[4.389s][info][gc] GC(8) Pause Young (Normal) (G1 Evacuation Pause) 616M->21M(1024M) 4.088ms
+[4.954s][info][gc] GC(9) Pause Young (Normal) (G1 Evacuation Pause) 616M->23M(1024M) 4.464ms
+[5.362s][info][gc] GC(10) Pause Young (Normal) (G1 Evacuation Pause) 616M->23M(1024M) 3.397ms
+[5.787s][info][gc] GC(11) Pause Young (Normal) (G1 Evacuation Pause) 617M->24M(1024M) 4.361ms
+[5.935s][info][gc] GC(12) Pause Full (System.gc()) 120M->13M(1024M) 18.573ms
+[6.667s][info][gc] GC(13) Pause Young (Normal) (G1 Evacuation Pause) 627M->21M(1024M) 2.081ms
+[7.109s][info][gc] GC(14) Pause Young (Normal) (G1 Evacuation Pause) 626M->19M(1024M) 1.691ms
+[7.534s][info][gc] GC(15) Pause Young (Normal) (G1 Evacuation Pause) 627M->21M(1024M) 1.541ms
+[7.959s][info][gc] GC(16) Pause Young (Normal) (G1 Evacuation Pause) 626M->22M(1024M) 2.175ms
+[8.371s][info][gc] GC(17) Pause Young (Normal) (G1 Evacuation Pause) 626M->35M(1024M) 2.880ms
+[8.745s][info][gc] GC(18) Pause Young (Normal) (G1 Evacuation Pause) 626M->26M(1024M) 3.579ms
+[9.133s][info][gc] GC(19) Pause Young (Normal) (G1 Evacuation Pause) 626M->23M(1024M) 1.910ms

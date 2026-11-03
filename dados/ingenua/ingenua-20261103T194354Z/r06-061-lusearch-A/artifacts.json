@@ -1,0 +1,10 @@
+{
+  "meter": {
+    "path": "/home/everton/Documentos/Projetos_Java/java-energy-study/medidor-java/target/java-energy-meter-0.1.0.jar",
+    "sha256": "415ddd802fbcde66e77e2f7c1262e79680d92b8fef7a49468a1559ff26339995"
+  },
+  "dacapo": {
+    "path": "/home/everton/Documentos/Projetos_Java/java-energy-study/ferramentas/dacapo/dacapo-23.11-MR2-chopin.jar",
+    "sha256": "c488cc61fcd02bb04b87e601fd80517b8b0991c0baf564cae17538fdc1edb792"
+  }
+}

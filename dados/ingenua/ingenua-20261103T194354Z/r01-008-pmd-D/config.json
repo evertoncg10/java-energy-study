@@ -1,0 +1,80 @@
+{
+ "schema_version": 1,
+ "protocol_status": "ingenua-e7",
+ "configurations": {
+  "A": {
+   "sdkman_id": "17.0.19-tem",
+   "java_feature": 17,
+   "java_version": "17.0.19",
+   "runtime_version": "17.0.19+10",
+   "compact_headers": null
+  },
+  "B": {
+   "sdkman_id": "21.0.11-tem",
+   "java_feature": 21,
+   "java_version": "21.0.11",
+   "runtime_version": "21.0.11+10-LTS",
+   "compact_headers": null
+  },
+  "C": {
+   "sdkman_id": "25.0.3-tem",
+   "java_feature": 25,
+   "java_version": "25.0.3",
+   "runtime_version": "25.0.3+9-LTS",
+   "compact_headers": false
+  },
+  "D": {
+   "sdkman_id": "25.0.3-tem",
+   "java_feature": 25,
+   "java_version": "25.0.3",
+   "runtime_version": "25.0.3+9-LTS",
+   "compact_headers": true
+  }
+ },
+ "applications": {
+  "avrora": {
+   "input": "default",
+   "threads": 1,
+   "heap_initial": "1g",
+   "heap_max": "1g",
+   "warmup_iterations": 1,
+   "role": "exploratorio"
+  },
+  "lusearch": {
+   "input": "default",
+   "threads": 1,
+   "heap_initial": "1g",
+   "heap_max": "1g",
+   "warmup_iterations": 1,
+   "role": "principal"
+  },
+  "pmd": {
+   "input": "default",
+   "threads": 1,
+   "heap_initial": "1g",
+   "heap_max": "1g",
+   "warmup_iterations": 1,
+   "role": "principal"
+  }
+ },
+ "warmup_iterations": 1,
+ "measured_iterations": 1,
+ "cpu_affinity": null,
+ "idle_baseline_seconds": 0,
+ "gc_log": true,
+ "process_timeout_seconds": 600,
+ "rapl_directory": "/sys/class/powercap/intel-rapl:0",
+ "sample_interval_ms": 100,
+ "max_gap_ms": 10000,
+ "assumed_power_upper_bound_w": 1000,
+ "meter": {
+  "path": "medidor-java/target/java-energy-meter-0.1.0.jar",
+  "sha256": "415ddd802fbcde66e77e2f7c1262e79680d92b8fef7a49468a1559ff26339995"
+ },
+ "dacapo": {
+  "path": "ferramentas/dacapo/dacapo-23.11-MR2-chopin.jar",
+  "version": "23.11-MR2-chopin",
+  "sha256": "c488cc61fcd02bb04b87e601fd80517b8b0991c0baf564cae17538fdc1edb792"
+ },
+ "descricao": "Sessão ingênua do critério E7 (T45), fora da amostra oficial. Diferenças em relação a config/execucao.json: preparação mínima de 1 iteração para todas as aplicações (o medidor exige ao menos uma), 1 iteração medida, sem afinidade de núcleos, sem linha de base ociosa, sem pausas e ordem fixa (sem sorteio). JDKs, DaCapo, medidor, heap, coletor e log de GC são os mesmos do protocolo."
+}

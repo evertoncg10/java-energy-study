@@ -1,0 +1,24 @@
+[0.002s][info][gc] Using G1
+[0.196s][info][gc] GC(0) Pause Young (Normal) (G1 Evacuation Pause) 52M->3M(1024M) 2.242ms
+[0.225s][info][gc] GC(1) Pause Full (System.gc()) 6M->3M(1024M) 4.752ms
+[1.526s][info][gc] GC(2) Pause Young (Normal) (G1 Evacuation Pause) 446M->16M(1024M) 3.057ms
+[2.487s][info][gc] GC(3) Pause Young (Normal) (G1 Evacuation Pause) 617M->17M(1024M) 4.330ms
+[2.601s][info][gc] GC(4) Pause Young (Concurrent Start) (Metadata GC Threshold) 84M->17M(1024M) 3.155ms
+[2.601s][info][gc] GC(5) Concurrent Mark Cycle
+[2.608s][info][gc] GC(5) Pause Remark 19M->19M(1024M) 2.060ms
+[2.608s][info][gc] GC(5) Pause Cleanup 19M->19M(1024M) 0.016ms
+[2.609s][info][gc] GC(5) Concurrent Mark Cycle 7.704ms
+[3.421s][info][gc] GC(6) Pause Young (Prepare Mixed) (G1 Evacuation Pause) 616M->17M(1024M) 3.134ms
+[4.227s][info][gc] GC(7) Pause Young (Mixed) (G1 Evacuation Pause) 616M->16M(1024M) 3.685ms
+[4.803s][info][gc] GC(8) Pause Young (Normal) (G1 Evacuation Pause) 616M->23M(1024M) 4.033ms
+[5.413s][info][gc] GC(9) Pause Young (Normal) (G1 Evacuation Pause) 617M->22M(1024M) 3.775ms
+[5.860s][info][gc] GC(10) Pause Young (Normal) (G1 Evacuation Pause) 617M->23M(1024M) 3.676ms
+[6.330s][info][gc] GC(11) Pause Young (Normal) (G1 Evacuation Pause) 617M->26M(1024M) 4.663ms
+[6.479s][info][gc] GC(12) Pause Full (System.gc()) 100M->13M(1024M) 20.105ms
+[7.262s][info][gc] GC(13) Pause Young (Normal) (G1 Evacuation Pause) 627M->22M(1024M) 1.508ms
+[7.764s][info][gc] GC(14) Pause Young (Normal) (G1 Evacuation Pause) 627M->19M(1024M) 1.849ms
+[8.260s][info][gc] GC(15) Pause Young (Normal) (G1 Evacuation Pause) 626M->19M(1024M) 1.885ms
+[8.753s][info][gc] GC(16) Pause Young (Normal) (G1 Evacuation Pause) 626M->22M(1024M) 2.499ms
+[9.224s][info][gc] GC(17) Pause Young (Normal) (G1 Evacuation Pause) 626M->36M(1024M) 2.992ms
+[9.621s][info][gc] GC(18) Pause Young (Normal) (G1 Evacuation Pause) 627M->25M(1024M) 2.275ms
+[10.019s][info][gc] GC(19) Pause Young (Normal) (G1 Evacuation Pause) 627M->22M(1024M) 1.915ms

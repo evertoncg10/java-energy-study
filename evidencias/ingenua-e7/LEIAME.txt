@@ -1,0 +1,45 @@
+SESSÃO INGÊNUA DO CRITÉRIO E7 (T45) – FORA DA AMOSTRA OFICIAL
+
+Objetivo
+  O critério E7 do registro prévio (config/registro-previo.json) compara a conclusão e a variação
+  de uma medição feita sem os cuidados do protocolo com as da coleta oficial. O critério é
+  descritivo, ou seja, não tem limite de aprovação.
+
+Como foi feita
+  Data: 03/11/2026, das 19:43 às 20:24 UTC (40 min), no mesmo notebook da coleta oficial,
+  ligado ao carregador, com os outros programas fechados e o perfil de energia "balanceado".
+  Configuração: config/ingenua-e7.json (cópia de config/execucao.json com as mudanças abaixo).
+  Script: scripts/sessao_ingenua.sh 10 (10 repetições x 3 cargas x 4 configurações = 120 processos).
+  Diferenças em relação ao protocolo oficial:
+    - ordem fixa A, B, C, D dentro de cada carga, sem sorteio;
+    - sem núcleos fixos (o sistema escolhe os núcleos);
+    - sem pausas entre os processos, sem espera de temperatura e sem linha de base ociosa;
+    - 1 iteração de preparação e 1 iteração medida em todas as cargas.
+  JDKs, DaCapo, medidor, heap, coletor de lixo e log de GC são os mesmos da coleta oficial.
+  Resultado da execução: 120 de 120 processos válidos, nenhuma falha.
+
+Desvio em relação ao registro prévio
+  O registro prévio descreve a medição ingênua como "sem preparação". O medidor exige pelo menos
+  uma iteração de preparação (IterationPlan), e mudar o medidor alteraria o SHA-256 registrado.
+  Por isso foi usada a preparação mínima possível, de 1 iteração. O registro prévio também falava
+  em "uma execução por configuração"; foram feitas 10 repetições para que a variação pudesse ser
+  medida, como pede o próprio critério.
+
+Dados e conferência
+  Dados brutos: dados/ingenua/ingenua-20261103T194354Z (plano gravado antes da execução em
+  plano-antes-execucao.txt; andamento em progresso.txt).
+  Manifesto SHA-256: evidencias/manifestos/ingenua-e7.json. Conferência:
+    python3 scripts/manifesto.py conferir --sessao dados/ingenua/ingenua-20261103T194354Z \
+      --manifesto evidencias/manifestos/ingenua-e7.json --sem-scratch   → CONFERE
+
+Análise
+  python3 scripts/analisar_ingenua.py --sessao dados/ingenua/ingenua-20261103T194354Z \
+    --saida resultados/<pasta nova>
+  Resultado oficial do E7: resultados/ingenua-e7-20261103 (resumo-e7.txt). As razões usam o mesmo
+  bootstrap da análise principal, com a repetição no papel do bloco. A sessão ingênua não altera
+  nenhum resultado oficial: a análise principal lê apenas dados/brutos e dados/piloto.
+
+Limitações
+  É uma única sessão, em um único dia, com 10 repetições (a coleta oficial tem 15 blocos em 4 dias)
+  e 1 iteração medida por processo (a oficial usa a média de 3). Parte da diferença de variação
+  vem dessas escolhas, e não só da falta de preparação, de núcleos fixos e de sorteio.

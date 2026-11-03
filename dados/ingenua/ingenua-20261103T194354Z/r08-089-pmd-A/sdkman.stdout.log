@@ -1,0 +1,8 @@
+
+[1;32mUsing java version 17.0.19-tem in this shell.[0m
+
+SDKMAN!
+script: 5.23.0
+native: 0.7.34 (linux x86_64)
+
+Java resolvido após sdk use: /home/everton/.sdkman/candidates/java/17.0.19-tem/bin/java
