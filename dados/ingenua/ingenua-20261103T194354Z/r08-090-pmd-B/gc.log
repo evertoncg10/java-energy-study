@@ -1,0 +1,26 @@
+[0.002s][info][gc] Using G1
+[0.187s][info][gc] GC(0) Pause Young (Normal) (G1 Evacuation Pause) 51M->3M(1024M) 2.211ms
+[0.217s][info][gc] GC(1) Pause Full (System.gc()) 6M->3M(1024M) 5.262ms
+[0.471s][info][gc] GC(2) Pause Young (Normal) (G1 Evacuation Pause) 70M->5M(1024M) 1.321ms
+[0.721s][info][gc] GC(3) Pause Young (Normal) (G1 Evacuation Pause) 142M->5M(1024M) 1.642ms
+[2.040s][info][gc] GC(4) Pause Young (Normal) (G1 Evacuation Pause) 616M->9M(1024M) 3.129ms
+[2.543s][info][gc] GC(5) Pause Young (Concurrent Start) (Metadata GC Threshold) 370M->16M(1024M) 3.275ms
+[2.543s][info][gc] GC(6) Concurrent Mark Cycle
+[2.551s][info][gc] GC(6) Pause Remark 17M->17M(1024M) 2.192ms
+[2.552s][info][gc] GC(6) Pause Cleanup 18M->18M(1024M) 0.112ms
+[2.552s][info][gc] GC(6) Concurrent Mark Cycle 9.335ms
+[3.301s][info][gc] GC(7) Pause Young (Prepare Mixed) (G1 Evacuation Pause) 616M->14M(1024M) 3.400ms
+[4.002s][info][gc] GC(8) Pause Young (Mixed) (G1 Evacuation Pause) 616M->15M(1024M) 3.424ms
+[4.569s][info][gc] GC(9) Pause Young (Normal) (G1 Evacuation Pause) 616M->46M(1024M) 7.059ms
+[5.121s][info][gc] GC(10) Pause Young (Normal) (G1 Evacuation Pause) 616M->22M(1024M) 4.483ms
+[5.562s][info][gc] GC(11) Pause Young (Normal) (G1 Evacuation Pause) 623M->21M(1024M) 2.183ms
+[5.983s][info][gc] GC(12) Pause Young (Normal) (G1 Evacuation Pause) 623M->22M(1024M) 2.214ms
+[6.376s][info][gc] GC(13) Pause Full (System.gc()) 471M->12M(1024M) 18.516ms
+[7.070s][info][gc] GC(14) Pause Young (Normal) (G1 Evacuation Pause) 626M->19M(1024M) 1.534ms
+[7.528s][info][gc] GC(15) Pause Young (Normal) (G1 Evacuation Pause) 626M->18M(1024M) 1.213ms
+[7.983s][info][gc] GC(16) Pause Young (Normal) (G1 Evacuation Pause) 626M->17M(1024M) 1.333ms
+[8.465s][info][gc] GC(17) Pause Young (Normal) (G1 Evacuation Pause) 625M->18M(1024M) 1.466ms
+[8.881s][info][gc] GC(18) Pause Young (Normal) (G1 Evacuation Pause) 625M->24M(1024M) 2.191ms
+[9.314s][info][gc] GC(19) Pause Young (Normal) (G1 Evacuation Pause) 625M->22M(1024M) 1.635ms
+[9.677s][info][gc] GC(20) Pause Young (Normal) (G1 Evacuation Pause) 625M->21M(1024M) 1.866ms
+[10.048s][info][gc] GC(21) Pause Young (Normal) (G1 Evacuation Pause) 626M->22M(1024M) 2.798ms

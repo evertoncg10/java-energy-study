@@ -1,0 +1,4 @@
+[0.002s][info][gc] Using G1
+[0.181s][info][gc] GC(0) Pause Full (System.gc()) 51M->2M(1024M) 5.643ms
+[2.544s][info][gc] GC(1) Pause Young (Normal) (G1 Evacuation Pause) 53M->4M(1024M) 2.461ms
+[4.088s][info][gc] GC(2) Pause Full (System.gc()) 33M->3M(1024M) 10.731ms

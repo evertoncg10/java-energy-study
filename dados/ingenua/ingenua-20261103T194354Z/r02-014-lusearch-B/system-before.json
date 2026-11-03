@@ -1,0 +1,72 @@
+{
+  "at_utc": "2026-11-03T19:48:34.585905+00:00",
+  "mains": [
+    {
+      "name": "ACAD",
+      "online": "1"
+    }
+  ],
+  "swap_pages": {
+    "pswpin": 0,
+    "pswpout": 0
+  },
+  "power_profile": "balanced",
+  "platform_profile": "balanced",
+  "no_turbo": "0",
+  "governor": "powersave",
+  "energy_performance_preference": "balance_performance",
+  "meminfo": "MemTotal:       16081584 kB\nMemFree:         4295384 kB\nMemAvailable:   11855228 kB\nBuffers:          225572 kB\nCached:          7924564 kB\nSwapCached:            0 kB\nActive:          3612284 kB\nInactive:        6196256 kB\nActive(anon):    2273816 kB\nInactive(anon):        0 kB\nActive(file):    1338468 kB\nInactive(file):  6196256 kB\nUnevictable:      415988 kB\nMlocked:              48 kB\nSwapTotal:      32767996 kB\nSwapFree:       32767996 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:              2140 kB\nWriteback:             0 kB\nAnonPages:       2075056 kB\nMapped:           801404 kB\nShmem:            615372 kB\nKReclaimable:     369848 kB\nSlab:             634524 kB\nSReclaimable:     369404 kB\nSUnreclaim:       265120 kB\nKernelStack:       17684 kB\nPageTables:        37184 kB\nSecPageTables:      5828 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    40808788 kB\nCommitted_AS:   11644612 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:      131988 kB\nVmallocChunk:          0 kB\nPercpu:            21680 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:         0 kB\nShmemHugePages:   370688 kB\nShmemPmdMapped:        0 kB\nFileHugePages:    270336 kB\nFilePmdMapped:      2048 kB\nCmaTotal:              0 kB\nCmaFree:         1659424 kB\nUnaccepted:            0 kB\nBalloon:               0 kB\nGPUActive:             0 kB\nGPUReclaim:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      628992 kB\nDirectMap2M:     6424576 kB\nDirectMap1G:     9437184 kB",
+  "loadavg": "1.70 1.58 1.09 1/1068 10393",
+  "thermal_zones": [
+    {
+      "name": "thermal_zone2",
+      "type": "SEN2",
+      "temperature_millicelsius": "61050"
+    },
+    {
+      "name": "thermal_zone0",
+      "type": "acpitz",
+      "temperature_millicelsius": "90000"
+    },
+    {
+      "name": "thermal_zone9",
+      "type": "x86_pkg_temp",
+      "temperature_millicelsius": "81000"
+    },
+    {
+      "name": "thermal_zone7",
+      "type": "TCPU_PCI",
+      "temperature_millicelsius": "81000"
+    },
+    {
+      "name": "thermal_zone5",
+      "type": "SEN5",
+      "temperature_millicelsius": "69050"
+    },
+    {
+      "name": "thermal_zone3",
+      "type": "SEN3",
+      "temperature_millicelsius": "73050"
+    },
+    {
+      "name": "thermal_zone1",
+      "type": "INT3400 Thermal",
+      "temperature_millicelsius": "20000"
+    },
+    {
+      "name": "thermal_zone8",
+      "type": "iwlwifi_1",
+      "temperature_millicelsius": "55000"
+    },
+    {
+      "name": "thermal_zone6",
+      "type": "TCPU",
+      "temperature_millicelsius": "90050"
+    },
+    {
+      "name": "thermal_zone4",
+      "type": "SEN4",
+      "temperature_millicelsius": "66050"
+    }
+  ]
+}

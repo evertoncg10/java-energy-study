@@ -1,0 +1,8 @@
+{
+  "selected_at_utc": "2026-11-03T19:55:58.876776+00:00",
+  "sdkman_id": "17.0.19-tem",
+  "expected_java_home": "/home/everton/.sdkman/candidates/java/17.0.19-tem",
+  "java_home": "/home/everton/.sdkman/candidates/java/17.0.19-tem",
+  "java_executable": "/home/everton/.sdkman/candidates/java/17.0.19-tem/bin/java",
+  "method": "sdk use java"
+}
