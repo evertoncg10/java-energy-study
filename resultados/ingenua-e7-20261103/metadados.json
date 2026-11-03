@@ -1,0 +1,12 @@
+{
+ "sessao": "ingenua-20261103T194354Z",
+ "processos": 120,
+ "invalidos": [],
+ "referencia_oficial": "resultados/oficial-20261101-termos",
+ "bootstrap": {
+  "reamostragens": 10000,
+  "nivel": 0.95,
+  "semente": 20261101,
+  "bloco": "repetição"
+ }
+}
