@@ -13,7 +13,8 @@
 #   4. baixa a DaCapo 23.11-MR2-chopin (cerca de 6,3 GB; precisa de ~23 GB livres), confere o
 #      SHA-256 oficial e extrai em ferramentas/dacapo/;
 #   5. se o medidor ainda não existe (ou não confere), instala o JAR da DaCapo no repositório local
-#      do Maven e compila o medidor com os testes; um medidor que já confere não é recompilado;
+#      do Maven e compila o medidor com os testes usando o Temurin 25.0.3, o mesmo da coleta original;
+#      um medidor que já confere não é recompilado;
 #   6. compara o SHA-256 do medidor e da DaCapo com config/execucao.json.
 # Não pede senha e não altera configurações do sistema. A liberação de leitura do RAPL é feita
 # depois, à parte, com: bash scripts/executar.sh preparar --configuracao A --liberar-leitura
@@ -112,8 +113,10 @@ else
   mvn -q install:install-file -Dfile="$jar" -DgroupId=org.dacapo -DartifactId=dacapo \
       -Dversion=23.11-MR2-chopin -Dpackaging=jar
   ok "DaCapo instalada no repositório local do Maven"
-  JAVA_HOME=$SDKMAN_DIR/candidates/java/17.0.19-tem mvn -q -f medidor-java/pom.xml clean package
-  ok "Medidor compilado e testado com o Temurin 17.0.19"
+  # O medidor original foi compilado com o Temurin 25.0.3. Com esse mesmo JDK, o JAR sai idêntico byte a byte,
+  # porque o pom.xml fixa a data gravada nos arquivos (project.build.outputTimestamp).
+  JAVA_HOME=$SDKMAN_DIR/candidates/java/25.0.3-tem mvn -q -f medidor-java/pom.xml clean package
+  ok "Medidor compilado e testado com o Temurin 25.0.3"
 fi
 
 echo "== 6/6 Conferência final"
@@ -121,7 +124,7 @@ if echo "$medidor_sha  $medidor" | sha256sum -c --quiet - 2> /dev/null; then
   ok "SHA-256 do medidor igual ao da coleta original"
 else
   aviso "SHA-256 do medidor diferente do registrado ($(sha256sum "$medidor" | cut -c1-16)…)."
-  aviso "O código é o mesmo; a diferença vem do compilador ou do Maven. Para coletar, copie"
+  aviso "O código é o mesmo; a diferença vem do JDK ou do Maven usados na compilação. Para coletar, copie"
   aviso "config/execucao.json para config/replicacao.json, troque meter.sha256 pelo valor completo"
   aviso "(sha256sum $medidor), use --config config/replicacao.json e relate isso como desvio."
 fi
