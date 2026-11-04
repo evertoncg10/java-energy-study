@@ -190,7 +190,7 @@ As medições foram feitas em um notebook pessoal, com a seguinte configuração
 | Sistema | Zorin OS (base Ubuntu), kernel Linux 7.0.0-38-generic, instalado direto na máquina |
 | Energia | notebook ligado ao carregador; perfil de energia "balanced"; *governor* `powersave`; turbo ligado |
 | Seleção de JDK | SDKMAN 5.23.0 (`sdk use` só no processo filho; Java padrão do sistema intacto) |
-| Medidor | Java 17 (Maven), SHA-256 `415ddd80…26339995` |
+| Medidor | Java 17 (Maven, compilado com o Temurin 25.0.3), SHA-256 `415ddd80…26339995` |
 
 Se precisar de mais detalhes, o estado completo do sistema no início e no fim de cada sessão está em
 `dados/brutos/<sessão>/<sessão>-ambiente-inicial.json` e `-ambiente-final.json`. Para cada processo, os arquivos
@@ -655,7 +655,7 @@ echo "c488cc61fcd02bb04b87e601fd80517b8b0991c0baf564cae17538fdc1edb792  ferramen
 # Medidor
 mvn install:install-file -Dfile=ferramentas/dacapo/dacapo-23.11-MR2-chopin.jar \
   -DgroupId=org.dacapo -DartifactId=dacapo -Dversion=23.11-MR2-chopin -Dpackaging=jar
-JAVA_HOME="$HOME/.sdkman/candidates/java/17.0.19-tem" mvn -f medidor-java/pom.xml clean package
+JAVA_HOME="$HOME/.sdkman/candidates/java/25.0.3-tem" mvn -f medidor-java/pom.xml clean package
 sha256sum medidor-java/target/java-energy-meter-0.1.0.jar   # original: 415ddd802fbcde66e77e2f7c1262e79680d92b8fef7a49468a1559ff26339995
 
 # Testes dos scripts de coleta
@@ -664,9 +664,10 @@ python3 -m unittest discover -s scripts/tests
 
 </details>
 
-Pode acontecer de o SHA-256 do medidor que você compilou sair diferente do original. Isso acontece quando o
-compilador ou a versão do Maven não são exatamente os mesmos. O código é idêntico, mas, por segurança, o programa
-recusa um JAR que não confere. Nesse caso, faça uma cópia da configuração, registre nela o novo valor e anote isso
+O medidor original foi compilado com o Temurin 25.0.3, e o projeto fixa a data gravada dentro do JAR. Por isso,
+compilando com esse mesmo JDK, o resultado sai idêntico ao original, byte a byte (isso foi conferido no notebook do
+estudo em 03/11/2026). Se mesmo assim o SHA-256 do seu medidor sair diferente, a causa é outro JDK ou outra versão do
+Maven. O código é idêntico, mas, por segurança, o programa recusa um JAR que não confere. Nesse caso, faça uma cópia da configuração, registre nela o novo valor e anote isso
 como um desvio do protocolo:
 
 ```bash

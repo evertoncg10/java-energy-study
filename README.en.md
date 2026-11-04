@@ -197,7 +197,7 @@ The measurements were taken on a personal laptop with the following setup:
 | System | Zorin OS (Ubuntu based), Linux kernel 7.0.0-38-generic, installed on bare metal |
 | Power | laptop on the charger; power profile "balanced"; `powersave` governor; turbo on |
 | JDK selection | SDKMAN 5.23.0 (`sdk use` only in the child process; system default Java untouched) |
-| Meter | Java 17 (Maven), SHA-256 `415ddd80…26339995` |
+| Meter | Java 17 (Maven, built with Temurin 25.0.3), SHA-256 `415ddd80…26339995` |
 
 If you need more detail, the full system state at the start and end of each session is in
 `dados/brutos/<session>/<session>-ambiente-inicial.json` and `-ambiente-final.json`. For each process, the files
@@ -666,7 +666,7 @@ echo "c488cc61fcd02bb04b87e601fd80517b8b0991c0baf564cae17538fdc1edb792  ferramen
 # Meter
 mvn install:install-file -Dfile=ferramentas/dacapo/dacapo-23.11-MR2-chopin.jar \
   -DgroupId=org.dacapo -DartifactId=dacapo -Dversion=23.11-MR2-chopin -Dpackaging=jar
-JAVA_HOME="$HOME/.sdkman/candidates/java/17.0.19-tem" mvn -f medidor-java/pom.xml clean package
+JAVA_HOME="$HOME/.sdkman/candidates/java/25.0.3-tem" mvn -f medidor-java/pom.xml clean package
 sha256sum medidor-java/target/java-energy-meter-0.1.0.jar   # original: 415ddd802fbcde66e77e2f7c1262e79680d92b8fef7a49468a1559ff26339995
 
 # Tests of the collection scripts
@@ -675,9 +675,10 @@ python3 -m unittest discover -s scripts/tests
 
 </details>
 
-The SHA-256 of the meter you built may turn out different from the original. This happens when the compiler or the
-Maven version is not exactly the same. The code is identical but, to be safe, the program refuses a JAR that does not
-match. In that case, make a copy of the configuration, record the new value in it, and note this as a protocol
+The original meter was built with Temurin 25.0.3, and the project fixes the timestamp stored inside the JAR. So,
+building with that same JDK gives a result identical to the original, byte for byte (this was checked on the study
+notebook on 03/11/2026). If the SHA-256 of your meter still turns out different, the cause is another JDK or another
+Maven version. The code is identical but, to be safe, the program refuses a JAR that does not match. In that case, make a copy of the configuration, record the new value in it, and note this as a protocol
 deviation:
 
 ```bash
