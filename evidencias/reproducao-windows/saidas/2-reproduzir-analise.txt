@@ -1,0 +1,28 @@
+== 1/6 Procurando Python 3.10 ou mais novo
+Python 3.13.17
+== 2/6 Ambiente virtual analise/.venv
+Python 3.13.17
+== 3/6 Instalando as versões travadas
+
+[notice] A new release of pip is available: 26.2.2 -> 26.3
+[notice] To update, run: python.exe -m pip install --upgrade pip
+== 4/6 Testes automáticos
+.........................................                                [100%]
+== 5/6 Análise em resultados/reproducao-20261105-111127
+Resumo legível: resultados/reproducao-20261105-111127/resumo.txt
+== 6/6 Comparação com resultados/oficial-20261101-termos
+idêntico: base-oficial.csv
+idêntico: base-oficial.json
+idêntico: base-pilotos.csv
+idêntico: criterios.json
+idêntico: decomposicao.csv
+idêntico: descritiva.csv
+idêntico: h4.json
+idêntico: hipoteses.csv
+metadados (data, plataforma e commit mudam); mesmos dados de entrada: sim
+idêntico: razoes.csv
+idêntico: resumo.txt
+idêntico: sensibilidade-contrastes.csv
+idêntico: sensibilidade-global.csv
+
+Arquivos diferentes: 0

@@ -337,7 +337,8 @@ O repositório está organizado assim:
 │   ├── manifestos/                 # SHA-256 de cada arquivo de cada sessão, dos pilotos e da sessão ingênua
 │   ├── conferencias/               # Conferência de cada sessão e da coleta completa
 │   ├── base-oficial/               # Como os resultados oficiais foram gerados, ocorrências e somas de verificação
-│   └── ingenua-e7/                 # Método, desvio e limitações da sessão ingênua
+│   ├── ingenua-e7/                 # Método, desvio e limitações da sessão ingênua
+│   └── reproducao-windows/         # Reprodução limpa no Windows, a partir de um clone novo
 ├── resultados/
 │   ├── oficial-20261101/           # Resultados oficiais (versão base-oficial-v1)
 │   ├── oficial-20261101-termos/    # Mesmos números com os termos atuais dos vereditos (USE ESTA)
@@ -410,7 +411,7 @@ A tabela abaixo mostra em quais sistemas cada nível já foi conferido e o que m
 | Sistema | Nível 1 (análise) | Nível 2 (coleta) | Observações |
 |---|---|---|---|
 | **Linux** | conferido | conferido | sistema da coleta original (Zorin OS, baseado no Ubuntu). A conferência automática do GitHub roda a cada mudança num Ubuntu 24.04 |
-| **Windows** | conferido | não funciona | reprodução limpa feita no Windows com Git Bash e Python 3.13. Use o Git Bash, ou o Docker |
+| **Windows** | conferido | não funciona | reprodução limpa feita no Windows com Git Bash e Python 3.13, registrada em [`evidencias/reproducao-windows/`](evidencias/reproducao-windows/LEIAME.txt). Use o Git Bash, ou o Docker |
 | **macOS** | esperado, ainda não conferido | não funciona | os scripts usam só recursos presentes no macOS. O macOS não traz Python 3.10+, então instale-o pelo [site oficial](https://www.python.org/downloads/macos/) ou pelo Homebrew. O Docker também é uma opção |
 
 A coleta não funciona no Windows nem no macOS porque o contador de energia RAPL só é lido pelo Linux. Os Macs com chip

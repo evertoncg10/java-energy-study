@@ -344,7 +344,8 @@ The repository is organized as follows:
 │   ├── manifestos/                 # SHA-256 of every file of each session, pilot and the naive session
 │   ├── conferencias/               # Quality check of each session and of the whole collection
 │   ├── base-oficial/               # How official results were produced, incidents, checksums
-│   └── ingenua-e7/                 # Method, deviation and limitations of the naive session
+│   ├── ingenua-e7/                 # Method, deviation and limitations of the naive session
+│   └── reproducao-windows/         # Clean reproduction on Windows, from a fresh clone
 ├── resultados/                     # Results
 │   ├── oficial-20261101/           # Official results (tag base-oficial-v1)
 │   ├── oficial-20261101-termos/    # Same numbers with the current verdict terms (USE THIS ONE)
@@ -417,7 +418,7 @@ The table below shows on which systems each level has already been checked and w
 | System | Level 1 (analysis) | Level 2 (collection) | Notes |
 |---|---|---|---|
 | **Linux** | checked | checked | system of the original collection (Zorin OS, based on Ubuntu). The automatic GitHub check runs on Ubuntu 24.04 at every change |
-| **Windows** | checked | does not work | clean reproduction done on Windows with Git Bash and Python 3.13. Use Git Bash, or Docker |
+| **Windows** | checked | does not work | clean reproduction done on Windows with Git Bash and Python 3.13, recorded in [`evidencias/reproducao-windows/`](evidencias/reproducao-windows/LEIAME.txt). Use Git Bash, or Docker |
 | **macOS** | expected, not yet checked | does not work | the scripts only use features available on macOS. macOS does not ship Python 3.10+, so install it from the [official site](https://www.python.org/downloads/macos/) or with Homebrew. Docker is also an option |
 
 The collection does not work on Windows or macOS because the RAPL energy counter is only read through Linux. Macs with
@@ -1028,6 +1029,7 @@ of each data column and field is in the [data dictionary](DATA-DICTIONARY.md).
 | `evidencias/manifestos/` | evidence / manifests | SHA-256 of every data file |
 | `evidencias/conferencias/` | evidence / checks | session and collection checks |
 | `evidencias/base-oficial/` | evidence / official dataset | how the official results were produced |
+| `evidencias/reproducao-windows/` | evidence / Windows reproduction | clean reproduction on Windows (T38) |
 | `ferramentas/` | tools | DaCapo reference and download folder |
 | `medidor-java/` | Java meter | energy meter source code |
 | `resultados/` | results | analysis outputs |

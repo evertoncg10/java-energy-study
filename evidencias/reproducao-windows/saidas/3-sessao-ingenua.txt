@@ -1,0 +1,11 @@
+  pmd       C  84
+  pmd       D  84
+
+idêntico: base-ingenua.csv
+idêntico: comparacao-e7.csv
+idêntico: descritiva-ingenua.csv
+idêntico: metadados.json
+idêntico: resumo-e7.txt
+idêntico: temperatura-por-posicao.csv
+
+Arquivos diferentes: 0
