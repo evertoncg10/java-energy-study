@@ -62,6 +62,7 @@ the whole path here, explained step by step in [How to reproduce](#-how-to-repro
 - [Tagged versions](#-tagged-versions)
 - [Open science](#-open-science)
 - [Limitations](#-limitations)
+- [Use of artificial intelligence](#-use-of-artificial-intelligence)
 - [Licenses](#-licenses)
 - [How to cite](#-how-to-cite)
 - [Glossary of Portuguese terms](#-glossary-of-portuguese-terms)
@@ -942,6 +943,15 @@ laptop, with a single operating system, so the absolute values do not carry over
 not met (a 6.1% difference between sessions, against a 5% limit), which reinforces the recommendation to compare
 within-block ratios rather than absolute energy across different days. Lastly, we used three DaCapo workloads, with
 one thread and a fixed 1 GB heap; other workloads and settings may behave differently.
+
+---
+
+## 🤖 Use of artificial intelligence
+
+This repository was supported by the Claude assistant (Anthropic) in writing the documentation (README and data
+dictionary) and as an aid in implementing the scripts and the Python code for the statistical analysis, developed under
+the author's direction. The method decisions, data collection and interpretation of results are the author's, who
+reviewed all material and is responsible for the work.
 
 ---
 

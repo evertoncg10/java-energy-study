@@ -59,6 +59,7 @@ caminho completo, explicado passo a passo na seção [Como reproduzir](#-como-re
 - [Versões marcadas](#-versões-marcadas)
 - [Ciência aberta](#-ciência-aberta)
 - [Limitações](#-limitações)
+- [Uso de inteligência artificial](#-uso-de-inteligência-artificial)
 - [Licenças](#-licenças)
 - [Como citar](#-como-citar)
 
@@ -930,6 +931,15 @@ do próprio processador, sem calibração externa. Todas as medidas vieram de um
 atendido (6,1% de diferença entre sessões, para um limite de 5%), o que reforça a recomendação de comparar razões
 dentro do bloco, e não energia absoluta entre dias diferentes. Por fim, usamos três cargas da DaCapo, com uma thread
 e heap fixo de 1 GB; outras cargas e outras configurações podem se comportar de forma diferente.
+
+---
+
+## 🤖 Uso de inteligência artificial
+
+Este repositório teve o apoio do assistente Claude (Anthropic) na escrita da documentação (README e dicionário de
+dados) e como auxílio na implementação dos scripts e do código em Python da análise estatística, desenvolvidos sob a
+condução do autor. As decisões de método, a coleta dos dados e a interpretação dos resultados são do autor, que revisou
+todo o material e é o responsável pelo trabalho.
 
 ---
 
