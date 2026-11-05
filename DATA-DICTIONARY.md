@@ -22,6 +22,7 @@ should be used for any new work. The raw data live in `dados/brutos/<session>/`,
 - [decomposicao.csv (energy = power × time)](#decomposicaocsv-energy--power--time)
 - [sensibilidade-global.csv and sensibilidade-contrastes.csv (sensitivity analysis)](#sensibilidade-globalcsv-and-sensibilidade-contrastescsv-sensitivity-analysis)
 - [metadados.json (run metadata)](#metadadosjson-run-metadata)
+- [Naive session of criterion E7](#naive-session-of-criterion-e7)
 - [Raw data of a session](#raw-data-of-a-session)
 - [Raw data of a process](#raw-data-of-a-process)
 
@@ -236,6 +237,71 @@ conclusions. It covers energy, time and mean power.
 | `settings` | `resamples` (10,000), `level` (0.95) and `seed` (20261101) of the bootstrap |
 | `official_processes` | number of official processes read |
 | `input_sha256` | SHA-256 that identifies the input data (the same on any computer) |
+
+---
+
+## Naive session of criterion E7
+
+Criterion E7 compares the official protocol with a "naive" measurement (fixed order A, B, C, D, no pinned cores, no
+pauses, 1 warm-up and 1 measured iteration). The naive session is **outside the official sample**. Its raw data live
+in `dados/ingenua/ingenua-20261103T194354Z/`, with the same files as an official process folder, and its results
+in [`resultados/ingenua-e7-20261103/`](resultados/ingenua-e7-20261103/), produced by `scripts/analisar_ingenua.py`.
+In these files the **repetition** (1 to 10) plays the role of the block.
+
+### base-ingenua.csv (one row per naive process)
+
+| Column | Meaning |
+|---|---|
+| `name` | process folder name, e.g. `r01-001-lusearch-A` (repetition 1, first process of the session, workload, configuration) |
+| `repetition` | repetition number (1 to 10) |
+| `order` | position of the process in the session (1 to 120) |
+| `application`, `configuration` | see [Common values](#common-values) |
+| `java_runtime_version` | Java version reported by the JVM |
+| `compact_headers` | whether Compact Object Headers were on (empty when the JVM does not report it) |
+| `energy_j`, `time_s`, `power_w` | energy (J), time (s) and mean power (W) of the measured iteration |
+| `gc_pauses` | number of garbage collection pauses |
+| `start_celsius` | processor package temperature at the start of the process, in °C |
+| `valid` | `True` if the process passed all checks |
+| `problems` | checks that failed (empty when valid) |
+
+### descritiva-ingenua.csv (descriptive statistics)
+
+| Column | Meaning |
+|---|---|
+| `application`, `configuration`, `metric` | see [Common values](#common-values) |
+| `n` | number of naive processes (10 per combination) |
+| `median`, `cv` | median and coefficient of variation (fraction) in the naive session |
+| `official_median`, `official_cv` | the same values in the official collection, for comparison |
+
+### comparacao-e7.csv (naive versus official conclusions)
+
+| Column | Meaning |
+|---|---|
+| `application`, `role`, `metric`, `comparison` | see [Common values](#common-values) |
+| `repetitions` | number of repetitions with both configurations (10) |
+| `naive_ratio`, `naive_ci_low`, `naive_ci_high` | ratio of medians and its 95% confidence interval in the naive session (repetition-paired bootstrap, 10,000 resamples, seed 20261101) |
+| `naive_half_width_pp` | half-width of the naive confidence interval, in percentage points |
+| `naive_direction` | conclusion read from the naive interval |
+| `official_ratio`, `official_ci_low`, `official_ci_high`, `official_half_width_pp` | the same values in the official collection |
+| `official_direction` | conclusion read from the official interval |
+| `same_direction` | `True` if the naive measurement reaches the same conclusion as the official collection |
+
+The direction values are `menor` (lower, whole interval below 1), `maior` (higher, whole interval above 1) and
+`sem diferença` (no difference, the interval contains 1).
+
+### temperatura-por-posicao.csv
+
+| Column | Meaning |
+|---|---|
+| `application`, `configuration` | see [Common values](#common-values) |
+| `median_start_celsius` | median package temperature at the start of the process, in °C, to show the effect of the fixed order |
+
+### resumo-e7.txt and metadados.json
+
+`resumo-e7.txt` is the readable summary of the comparison, in Portuguese. `metadados.json` records the session name
+(`sessao`), the number of processes (`processos`), the invalid processes (`invalidos`), the official results used as
+reference (`referencia_oficial`) and the bootstrap settings (`reamostragens` resamples, `nivel` level, `semente`
+seed, `bloco` block = `repetição` repetition).
 
 ---
 

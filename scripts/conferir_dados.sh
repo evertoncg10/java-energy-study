@@ -45,6 +45,9 @@ conferir dados/piloto/20261020T181929Z evidencias/manifestos/piloto-20261020T181
 conferir dados/piloto/complemento-20261020T185137Z evidencias/manifestos/piloto-complemento-20261020T185137Z.json
 conferir dados/piloto/20261022T170707Z evidencias/manifestos/piloto-20261022T170707Z.json
 
+echo "== Sessão ingênua do critério E7 (fora da amostra oficial)"
+conferir dados/ingenua/ingenua-20261103T194354Z evidencias/manifestos/ingenua-e7.json
+
 echo "== Conferência da coleta completa (qualidade das sessões e E2)"
 "$python_cmd" scripts/conferir_coleta.py \
   --sessao dados/brutos/20261022T215204Z --manifesto evidencias/manifestos/sessao1.json \
