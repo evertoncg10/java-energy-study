@@ -8,6 +8,7 @@
 [![Docker](https://img.shields.io/badge/Docker-an%C3%A1lise-2496ED?logo=docker&logoColor=white)](#opção-c-docker)
 [![Código: MIT](https://img.shields.io/badge/C%C3%B3digo-MIT-yellow)](LICENSE)
 [![Dados: CC BY 4.0](https://img.shields.io/badge/Dados-CC%20BY%204.0-lightgrey)](LICENCA-DADOS.txt)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23982640.svg)](https://doi.org/10.5281/zenodo.23982640)
 
 🇧🇷 Português | 🇺🇸 [English](README.en.md)
 
@@ -915,8 +916,8 @@ junto com o registro de ocorrências e desvios.
 
 Apenas duas coisas ficam fora do repositório, por causa do tamanho. A primeira é o arquivo da DaCapo, que pode ser
 baixado do site oficial e conferido pelo SHA-256. A segunda são as pastas de trabalho (`scratch`) que a DaCapo cria em
-cada processo. Elas constam dos manifestos e fazem parte dos pacotes completos das sessões, que serão publicados no
-Zenodo com DOI próprio, a ser indicado aqui.
+cada processo. Elas constam dos manifestos e fazem parte dos pacotes completos das sessões, publicados no Zenodo junto
+com a versão v1.0 deste repositório, com o DOI [10.5281/zenodo.23982640](https://doi.org/10.5281/zenodo.23982640).
 
 ---
 
@@ -945,14 +946,16 @@ Eclipse Temurin mantêm as suas próprias licenças e não fazem parte deste rep
 ## 📝 Como citar
 
 Se este trabalho for útil para você, por favor cite-o. Os dados de citação estão em [`CITATION.cff`](CITATION.cff), e
-o GitHub mostra a referência pronta no botão **"Cite this repository"**. Em BibTeX:
+o GitHub mostra a referência pronta no botão **"Cite this repository"**. O registro no Zenodo tem o DOI
+[10.5281/zenodo.23982640](https://doi.org/10.5281/zenodo.23982640). Em BibTeX:
 
 ```bibtex
 @software{goncalves_pae_jvm_2026,
   author  = {Gonçalves, Everton Cezar},
   title   = {{PAE-JVM – Protocolo de Avaliação Energética de configurações da JVM: dados, análise e código}},
   year    = {2026},
-  version = {1.1},
+  version = {1.0},
+  doi     = {10.5281/zenodo.23982640},
   url     = {https://github.com/evertoncg10/java-energy-study}
 }
 ```

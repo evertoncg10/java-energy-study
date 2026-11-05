@@ -8,6 +8,7 @@
 [![Docker](https://img.shields.io/badge/Docker-analysis-2496ED?logo=docker&logoColor=white)](#option-c-docker)
 [![Code: MIT](https://img.shields.io/badge/Code-MIT-yellow)](LICENSE)
 [![Data: CC BY 4.0](https://img.shields.io/badge/Data-CC%20BY%204.0-lightgrey)](LICENCA-DADOS.txt)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23982640.svg)](https://doi.org/10.5281/zenodo.23982640)
 
 🇧🇷 [Português](README.md) | 🇺🇸 English
 
@@ -927,8 +928,8 @@ together with the record of incidents and deviations.
 
 Only two things are kept out of the repository, because of their size. The first is the DaCapo archive, which can be
 downloaded from the official site and checked by its SHA-256. The second is the working folders (`scratch`) that
-DaCapo creates for each process. They are listed in the manifests and are part of the full session packages, which
-will be published on Zenodo with their own DOI, to be added here.
+DaCapo creates for each process. They are listed in the manifests and are part of the full session packages, published on Zenodo together
+with version v1.0 of this repository, under the DOI [10.5281/zenodo.23982640](https://doi.org/10.5281/zenodo.23982640).
 
 ---
 
@@ -957,14 +958,16 @@ Temurin JDKs keep their own licenses and are not part of this repository.
 ## 📝 How to cite
 
 If this work is useful to you, please cite it. The citation metadata is in [`CITATION.cff`](CITATION.cff), and GitHub
-shows a ready-made reference under the **"Cite this repository"** button. In BibTeX:
+shows a ready-made reference under the **"Cite this repository"** button. The Zenodo record has the DOI
+[10.5281/zenodo.23982640](https://doi.org/10.5281/zenodo.23982640). In BibTeX:
 
 ```bibtex
 @software{goncalves_pae_jvm_2026,
   author  = {Gonçalves, Everton Cezar},
   title   = {{PAE-JVM – Protocolo de Avaliação Energética de configurações da JVM: dados, análise e código}},
   year    = {2026},
-  version = {1.1},
+  version = {1.0},
+  doi     = {10.5281/zenodo.23982640},
   url     = {https://github.com/evertoncg10/java-energy-study}
 }
 ```
