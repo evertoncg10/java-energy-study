@@ -5,7 +5,7 @@ type: software
 authors:
   - family-names: "Gonçalves"
     given-names: "Everton Cezar"
-    orcid: "https://orcid.org/0009-0003-7548-2501"
+    orcid: "https://orcid.org/0009-0003-7648-2501"
     affiliation: "Universidade Tecnológica Federal do Paraná (UTFPR)"
 repository-code: "https://github.com/evertoncg10/java-energy-study"
 license: MIT

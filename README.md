@@ -961,4 +961,4 @@ o GitHub mostra a referência pronta no botão **"Cite this repository"**. O reg
 ```
 
 **Autor:** Everton Cezar Gonçalves – Universidade Tecnológica Federal do Paraná (UTFPR) –
-ORCID [0009-0003-7548-2501](https://orcid.org/0009-0003-7548-2501).
+ORCID [0009-0003-7648-2501](https://orcid.org/0009-0003-7648-2501).
