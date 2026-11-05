@@ -180,7 +180,7 @@ def main(argv: list[str] | None = None) -> int:
                 "sessao": args.sessao.name,
                 "processos": len(rows),
                 "invalidos": invalid,
-                "referencia_oficial": str(OFFICIAL.relative_to(ROOT)),
+                "referencia_oficial": OFFICIAL.relative_to(ROOT).as_posix(),
                 "bootstrap": {"reamostragens": 10000, "nivel": 0.95, "semente": 20261101, "bloco": "repetição"},
             },
             ensure_ascii=False,
