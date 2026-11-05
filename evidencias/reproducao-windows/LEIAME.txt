@@ -1,0 +1,49 @@
+REPRODUÇÃO LIMPA NO WINDOWS (T38)
+
+Objetivo
+  Conferir se uma pessoa que parte de um clone novo do repositório, seguindo só o README, chega aos
+  mesmos resultados. É uma avaliação adicional do pacote de artefatos, fora do registro prévio.
+
+Como foi feita
+  Data: 05/11/2026, no notebook do pesquisador com Windows 11.
+  Ambiente: Git Bash (MSYS2 UCRT64) e Python 3.13.17, em ambiente virtual analise/.venv.
+  Clone novo do repositório, numa pasta separada da pasta de trabalho, sem copiar arquivos locais.
+  Commit conferido na rodada final: be4cf95 (main).
+  Passos, a partir da pasta raiz do clone:
+    1. bash scripts/conferir_dados.sh
+    2. bash scripts/reproduzir_analise.sh
+    3. python scripts/analisar_ingenua.py --sessao dados/ingenua/ingenua-20261103T194354Z \
+         --saida resultados/<pasta nova>
+       python scripts/comparar_resultados.py resultados/ingenua-e7-20261103 resultados/<pasta nova>
+
+Resultado
+  Passo 1: as 4 sessões oficiais, os pilotos e a sessão ingênua conferem com os manifestos.
+           180 processos, 184 tentativas, 0 falhas. Maior diferença do E2 de 6.1%, o mesmo valor do Linux.
+  Passo 2: 41 testes automáticos aprovados. A análise oficial deu 0 arquivos diferentes em relação a
+           resultados/oficial-20261101-termos. O metadados.json muda só a data, a plataforma e o commit,
+           e os dados de entrada são os mesmos.
+  Passo 3: a análise da sessão ingênua deu 0 arquivos diferentes, inclusive o metadados.json.
+  As saídas da rodada final estão na pasta saidas/, gravadas no terminal com tee e salvas aqui
+  com o fim de linha do Linux.
+    saidas/1-conferir-dados.txt       passo 1
+    saidas/2-reproduzir-analise.txt   passo 2
+    saidas/3-sessao-ingenua.txt       passo 3 (últimas linhas da análise e a comparação)
+
+Problemas encontrados e corrigidos
+  A primeira rodada mostrou que alguns scripts auxiliares só funcionavam no Linux. Nenhuma correção
+  alterou dados ou resultados.
+  a) conferir_sessao.py usava, por meio de executar.py, o módulo fcntl, que não existe no Windows.
+     A correção ficou em conferir_sessao.py. O executar.py não mudou, pois o SHA-256 dele está
+     registrado em cada processo coletado. (PR #23)
+  b) analisar_ingenua.py gravava texto com o fim de linha do Windows. Passou a gravar sempre no
+     formato do Linux. (PR #23)
+  c) comparar_resultados.py falhava no metadados.json da sessão ingênua, que não tem o campo
+     input_sha256, e mostrava acentos errados no terminal do Windows. Também passou a tratar como
+     idênticos os arquivos de texto que diferem só no fim de linha. (PR #23)
+  d) analisar_ingenua.py gravava no metadados.json o caminho da referência oficial com barra
+     invertida no Windows. Passou a gravar sempre com barra normal. (PR #24)
+  Depois dessas correções, os passos 1 a 3 foram repetidos e deram os resultados acima.
+
+Limites
+  O nível 2 (coleta) não foi testado no Windows, pois depende do contador RAPL lido pelo Linux.
+  O macOS ainda não foi conferido.

@@ -1,0 +1,34 @@
+== Sessões oficiais
+dados/brutos/20261022T215204Z                              CONFERE
+dados/brutos/20261022T215207Z                              CONFERE
+dados/brutos/20261022T215211Z                              CONFERE
+dados/brutos/20261022T215214Z                              CONFERE
+== Pilotos (fora da amostra oficial)
+dados/piloto/20261020T181145Z                              CONFERE
+dados/piloto/20261020T181929Z                              CONFERE
+dados/piloto/complemento-20261020T185137Z                  CONFERE
+dados/piloto/20261022T170707Z                              CONFERE
+== Sessão ingênua do critério E7 (fora da amostra oficial)
+dados/ingenua/ingenua-20261103T194354Z                     CONFERE
+== Conferência da coleta completa (qualidade das sessões e E2)
+20261022T215204Z código 20261101: 48 processos, 0 falhas, 61 min, ociosa 64 °C, potência ociosa 6.48 W
+20261022T215207Z código 20261102: 48 processos, 0 falhas, 61 min, ociosa 69 °C, potência ociosa 6.45 W
+20261022T215211Z código 20261103: 48 processos, 0 falhas, 62 min, ociosa 71 °C, potência ociosa 4.71 W
+20261022T215214Z código 20261104: 36 processos, 0 falhas, 47 min, ociosa 68 °C, potência ociosa 4.72 W
+Total: 180 processos, 184 tentativas, 0 falhas
+aplicação papel        conf   E2 energia     E2 tempo  E2 potência
+avrora    exploratorio A           26.2%         2.5%        26.0%
+avrora    exploratorio B           19.6%         4.7%        14.8%
+avrora    exploratorio C           16.8%         0.9%        16.1%
+avrora    exploratorio D           20.4%         2.0%        17.9%
+lusearch  principal    A            6.1%         0.5%         6.1%
+lusearch  principal    B            2.6%         0.4%         3.3%
+lusearch  principal    C            4.9%         1.0%         6.3%
+lusearch  principal    D            3.7%         1.3%         4.0%
+pmd       principal    A            5.3%         0.3%         5.7%
+pmd       principal    B            5.5%         0.5%         4.9%
+pmd       principal    C            4.1%         0.5%         4.0%
+pmd       principal    D            5.8%         0.6%         5.3%
+E2 (principais, 4 sessões): maior diferença 6.1%, limite 5.0%, acima do limite: lusearch-A, pmd-A, pmd-B, pmd-D
+CONFERE
+RESULTADO: todos os dados conferem com os manifestos.
