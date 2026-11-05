@@ -410,6 +410,20 @@ In both cases, run the commands **in the project's root folder**, which is the f
 *bash* terminal. On Linux and macOS, just open the Terminal. On Windows, use **Git Bash**, which comes with
 [Git for Windows](https://git-scm.com/download/win). Whenever a command is different in PowerShell, the text says so.
 
+#### Operating systems
+
+The table below shows on which systems each level has already been checked and what changes on each one.
+
+| System | Level 1 (analysis) | Level 2 (collection) | Notes |
+|---|---|---|---|
+| **Linux** | checked | checked | system of the original collection (Zorin OS, based on Ubuntu). The automatic GitHub check runs on Ubuntu 24.04 at every change |
+| **Windows** | checked | does not work | clean reproduction done on Windows with Git Bash and Python 3.13. Use Git Bash, or Docker |
+| **macOS** | expected, not yet checked | does not work | the scripts only use features available on macOS. macOS does not ship Python 3.10+, so install it from the [official site](https://www.python.org/downloads/macos/) or with Homebrew. Docker is also an option |
+
+The collection does not work on Windows or macOS because the RAPL energy counter is only read through Linux. Macs with
+Apple chips, in addition, do not have this counter. To redo the analysis, any of the three systems works, and the
+numbers come out identical byte for byte. Only the figures may show small image differences between systems.
+
 ---
 
 ### 🔁 Level 1 – Re-run the analysis (any computer)

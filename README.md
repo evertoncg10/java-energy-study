@@ -403,6 +403,20 @@ README, usando um terminal *bash*. No Linux e no macOS, basta abrir o Terminal. 
 junto com o [Git para Windows](https://git-scm.com/download/win). Quando algum comando for diferente no PowerShell,
 isso está indicado no texto.
 
+#### Sistemas operacionais
+
+A tabela abaixo mostra em quais sistemas cada nível já foi conferido e o que muda em cada um.
+
+| Sistema | Nível 1 (análise) | Nível 2 (coleta) | Observações |
+|---|---|---|---|
+| **Linux** | conferido | conferido | sistema da coleta original (Zorin OS, baseado no Ubuntu). A conferência automática do GitHub roda a cada mudança num Ubuntu 24.04 |
+| **Windows** | conferido | não funciona | reprodução limpa feita no Windows com Git Bash e Python 3.13. Use o Git Bash, ou o Docker |
+| **macOS** | esperado, ainda não conferido | não funciona | os scripts usam só recursos presentes no macOS. O macOS não traz Python 3.10+, então instale-o pelo [site oficial](https://www.python.org/downloads/macos/) ou pelo Homebrew. O Docker também é uma opção |
+
+A coleta não funciona no Windows nem no macOS porque o contador de energia RAPL só é lido pelo Linux. Os Macs com chip
+Apple, além disso, não têm esse contador. Para refazer a análise, qualquer um dos três sistemas serve, e os números
+saem idênticos byte a byte. Só as figuras podem ter pequenas diferenças de imagem entre sistemas.
+
 ---
 
 ### 🔁 Nível 1 – Refazer a análise (qualquer computador)

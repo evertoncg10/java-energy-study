@@ -8,6 +8,16 @@ from pathlib import Path
 import statistics
 import sys
 from datetime import datetime, timezone
+import types
+
+# A conferência só lê arquivos, mas reaproveita funções de sessao.py, que carrega executar.py.
+# O executar.py usa o módulo fcntl (trava de arquivo da coleta), que só existe no Linux e no macOS.
+# No Windows, um módulo vazio no lugar dele permite conferir os dados sem mudar o executar.py,
+# cujo SHA-256 está registrado em cada processo coletado. A coleta continua exigindo Linux.
+try:
+    import fcntl  # noqa: F401
+except ImportError:
+    sys.modules['fcntl'] = types.ModuleType('fcntl')
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location('sessao', ROOT/'scripts/sessao.py')
