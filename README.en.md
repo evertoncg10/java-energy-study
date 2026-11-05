@@ -302,10 +302,21 @@ The hypothesis verdicts came out as follows:
 
 As for the protocol, criteria E1, E3, E4 (by the median), E5 and E6 were met. Criterion **E2 was not met**, since the
 largest energy difference between sessions was 6.1%, above the 5% limit, in the combinations lusearch-A, pmd-A, pmd-B
-and pmd-D. Criterion E7 still depends on the naive session. This E2 result is itself an important lesson. Absolute
+and pmd-D. This E2 result is itself an important lesson. Absolute
 energy changes from one day to the next, but the ratios between configurations within each block stayed stable
 across sessions. That is why we recommend comparing configurations through within-block ratios rather than through
 absolute energy measured on different days. All 180 processes were considered valid.
+
+Criterion E7 was evaluated in a separate session, outside the official sample, with 120 processes measured the
+"naive" way, that is, in a fixed order, without pinned cores, without pauses and with a single measured iteration. For
+the main workloads, 11 of the 18 conclusions matched the official collection and 7 would change, almost all of them
+about average power. Two examples show the risk. For pmd, the naive measurement would suggest that compact headers
+reduce power by about 7%, an effect the official collection does not confirm. For lusearch, the 2% energy increase
+from Java 21 to 25 would disappear. In addition, the energy confidence interval became twice as wide (2.59 versus
+1.25 percentage points) and the CV went above 5% in 5 of the 8 main combinations. Since the meter requires at least
+one warm-up iteration, the session used this minimum warm-up, which is recorded as a deviation. The details are in
+[`evidencias/ingenua-e7/LEIAME.txt`](evidencias/ingenua-e7/LEIAME.txt) and the summary in
+[`resultados/ingenua-e7-20261103/resumo-e7.txt`](resultados/ingenua-e7-20261103/resumo-e7.txt).
 
 ---
 
@@ -323,17 +334,21 @@ The repository is organized as follows:
 ├── config/
 │   ├── execucao.json               # Frozen collection protocol (JDKs, workloads, iterations, heap, pauses, SHA-256)
 │   ├── registro-previo.json        # Pre-registration: criteria E1–E7, hypotheses H1–H5, decision rules
-│   └── piloto-t12.json             # Configuration of the pilot that defined the protocol
+│   ├── piloto-t12.json             # Configuration of the pilot that defined the protocol
+│   └── ingenua-e7.json             # Configuration of the naive session of criterion E7
 ├── dados/                          # Data
 │   ├── brutos/<session>/           # 4 official sessions; one folder per process (e.g. b01-001-lusearch-A)
-│   └── piloto/                     # Pilots (outside the official sample)
+│   ├── piloto/                     # Pilots (outside the official sample)
+│   └── ingenua/                    # Naive session of criterion E7 (outside the official sample)
 ├── evidencias/                     # Evidence
-│   ├── manifestos/                 # SHA-256 of every file of each session and pilot
+│   ├── manifestos/                 # SHA-256 of every file of each session, pilot and the naive session
 │   ├── conferencias/               # Quality check of each session and of the whole collection
-│   └── base-oficial/               # How official results were produced, incidents, checksums
+│   ├── base-oficial/               # How official results were produced, incidents, checksums
+│   └── ingenua-e7/                 # Method, deviation and limitations of the naive session
 ├── resultados/                     # Results
 │   ├── oficial-20261101/           # Official results (tag base-oficial-v1)
-│   └── oficial-20261101-termos/    # Same numbers with the current verdict terms (USE THIS ONE)
+│   ├── oficial-20261101-termos/    # Same numbers with the current verdict terms (USE THIS ONE)
+│   └── ingenua-e7-20261103/        # Comparison of the naive session with the official collection (criterion E7)
 ├── analise/                        # Python package pae-analise (consolidation, statistics, figures, tests)
 │   └── requisitos-travados.txt     # Exact library versions (lock file)
 ├── medidor-java/                   # Energy meter (DaCapo callback, Maven, Java 17)
@@ -350,6 +365,8 @@ The repository is organized as follows:
 │   ├── manifesto.py                # Writes or checks a session's SHA-256 manifest
 │   ├── conferir_sessao.py          # Checks a session's quality against the protocol
 │   ├── conferir_coleta.py          # Checks several sessions together (includes E2)
+│   ├── sessao_ingenua.sh           # Runs the naive session of criterion E7
+│   ├── analisar_ingenua.py         # Compares the naive session with the official collection
 │   └── tests/                      # Tests of the collection scripts
 └── .github/workflows/analise.yml   # Automatic checks (style, types, tests, reproduction and Docker)
 ```
@@ -567,6 +584,12 @@ The analysis output folder contains the following files:
 | `sensibilidade-*.csv` | exploratory sensitivity analysis |
 | `metadados.json` | date, system, versions, commit and SHA-256 of the input data |
 | `figuras/` | energy, ratios, sessions, decomposition, memory and protocol flow (PNG and PDF) |
+
+The E7 comparison has its own script, since it uses another session. To re-run it, use a new output folder:
+
+```bash
+python3 scripts/analisar_ingenua.py --sessao dados/ingenua/ingenua-20261103T194354Z --saida resultados/e7-reproducao
+```
 
 The best place to start is `resumo.txt`, which brings the main numbers together in plain text. Every column of these files, and every field of the raw data, is described in the
 [data dictionary](DATA-DICTIONARY.md).
@@ -865,12 +888,13 @@ program's language, so each one comes with a translation.
 
 ## 🏷️ Tagged versions
 
-Two versions of the repository are marked with Git tags, so they can be retrieved at any time:
+Three versions of the repository are marked with Git tags, so they can be retrieved at any time:
 
 | Tag | Content |
 |---|---|
 | `base-oficial-v1` | official dataset closed after collection, results in `resultados/oficial-20261101` |
 | `analise-v1.1` | same numbers, with verdicts in the terms confirmada, não confirmada, refutada and inconclusiva (`resultados/oficial-20261101-termos`) |
+| `v1.0` | complete artifact package, with the naive session of criterion E7, the data dictionary and the reproducible meter; this is the version deposited on Zenodo |
 
 The [`evidencias/base-oficial/`](evidencias/base-oficial/) folder explains how the official results were produced and
 includes the incident record and the checksums.

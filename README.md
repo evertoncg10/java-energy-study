@@ -295,10 +295,21 @@ Os vereditos das hipóteses ficaram assim:
 
 Quanto ao protocolo, os critérios E1, E3, E4 (pela mediana), E5 e E6 foram atendidos. O critério **E2 não foi
 atendido**, pois a maior diferença de energia entre sessões foi de 6,1%, acima do limite de 5%, nas combinações
-lusearch-A, pmd-A, pmd-B e pmd-D. O critério E7 ainda depende da sessão ingênua. Esse resultado do E2 é, ele mesmo,
+lusearch-A, pmd-A, pmd-B e pmd-D. Esse resultado do E2 é, ele mesmo,
 uma lição importante. A energia absoluta muda de um dia para outro, mas as razões entre configurações dentro de cada
 bloco ficaram estáveis entre as sessões. Por isso a recomendação é comparar configurações pelas razões dentro do
 bloco, e não pela energia absoluta medida em dias diferentes. Todos os 180 processos foram considerados válidos.
+
+O critério E7 foi avaliado numa sessão à parte, fora da amostra oficial, com 120 processos medidos do jeito
+"ingênuo", isto é, em ordem fixa, sem núcleos fixos, sem pausas e com uma única iteração medida. Nas cargas
+principais, 11 das 18 conclusões ficaram iguais às da coleta oficial e 7 mudariam, quase todas sobre a potência
+média. Dois exemplos mostram o risco. No pmd, a medição ingênua indicaria que os cabeçalhos compactos reduzem a
+potência em cerca de 7%, efeito que a coleta oficial não confirma. No lusearch, o aumento de 2% de energia do Java 21
+para o 25 desapareceria. Além disso, o intervalo de confiança da energia ficou duas vezes mais largo (2,59 contra
+1,25 pontos percentuais) e o CV passou de 5% em 5 das 8 combinações principais. Como o medidor exige ao menos uma
+iteração de preparação, a sessão usou essa preparação mínima, o que está registrado como desvio. Os detalhes estão em
+[`evidencias/ingenua-e7/LEIAME.txt`](evidencias/ingenua-e7/LEIAME.txt) e o resumo em
+[`resultados/ingenua-e7-20261103/resumo-e7.txt`](resultados/ingenua-e7-20261103/resumo-e7.txt).
 
 ---
 
@@ -316,17 +327,21 @@ O repositório está organizado assim:
 ├── config/
 │   ├── execucao.json               # Protocolo fixado da coleta (JDKs, cargas, iterações, heap, pausas, SHA-256)
 │   ├── registro-previo.json        # Critérios E1–E7, hipóteses H1–H5 e regras de decisão (antes da coleta)
-│   └── piloto-t12.json             # Configuração do piloto que definiu o protocolo
+│   ├── piloto-t12.json             # Configuração do piloto que definiu o protocolo
+│   └── ingenua-e7.json             # Configuração da sessão ingênua do critério E7
 ├── dados/
 │   ├── brutos/<sessão>/            # 4 sessões oficiais; uma pasta por processo (ex.: b01-001-lusearch-A)
-│   └── piloto/                     # Pilotos (fora da amostra oficial)
+│   ├── piloto/                     # Pilotos (fora da amostra oficial)
+│   └── ingenua/                    # Sessão ingênua do critério E7 (fora da amostra oficial)
 ├── evidencias/
-│   ├── manifestos/                 # SHA-256 de cada arquivo de cada sessão e dos pilotos
+│   ├── manifestos/                 # SHA-256 de cada arquivo de cada sessão, dos pilotos e da sessão ingênua
 │   ├── conferencias/               # Conferência de cada sessão e da coleta completa
-│   └── base-oficial/               # Como os resultados oficiais foram gerados, ocorrências e somas de verificação
+│   ├── base-oficial/               # Como os resultados oficiais foram gerados, ocorrências e somas de verificação
+│   └── ingenua-e7/                 # Método, desvio e limitações da sessão ingênua
 ├── resultados/
 │   ├── oficial-20261101/           # Resultados oficiais (versão base-oficial-v1)
-│   └── oficial-20261101-termos/    # Mesmos números com os termos atuais dos vereditos (USE ESTA)
+│   ├── oficial-20261101-termos/    # Mesmos números com os termos atuais dos vereditos (USE ESTA)
+│   └── ingenua-e7-20261103/        # Comparação da sessão ingênua com a coleta oficial (critério E7)
 ├── analise/                        # Pacote Python pae-analise (consolidação, estatística, figuras, testes)
 │   └── requisitos-travados.txt     # Versões exatas das bibliotecas
 ├── medidor-java/                   # Medidor de energia (callback da DaCapo, Maven, Java 17)
@@ -343,6 +358,8 @@ O repositório está organizado assim:
 │   ├── manifesto.py                # Gera ou confere o manifesto SHA-256 de uma sessão
 │   ├── conferir_sessao.py          # Confere a qualidade de uma sessão contra o protocolo
 │   ├── conferir_coleta.py          # Confere várias sessões juntas (inclui E2)
+│   ├── sessao_ingenua.sh           # Executa a sessão ingênua do critério E7
+│   ├── analisar_ingenua.py         # Compara a sessão ingênua com a coleta oficial
 │   └── tests/                      # Testes dos scripts de coleta
 └── .github/workflows/analise.yml   # Conferência automática (estilo, tipos, testes, reprodução e Docker)
 ```
@@ -556,6 +573,12 @@ A pasta de saída da análise contém os seguintes arquivos:
 | `sensibilidade-*.csv` | análise de sensibilidade exploratória |
 | `metadados.json` | data, sistema, versões, commit e SHA-256 dos dados de entrada |
 | `figuras/` | energia, razões, sessões, decomposição, memória e fluxo do protocolo (PNG e PDF) |
+
+A comparação do critério E7 tem um script próprio, pois usa outra sessão. Para refazê-la, use uma pasta de saída nova:
+
+```bash
+python3 scripts/analisar_ingenua.py --sessao dados/ingenua/ingenua-20261103T194354Z --saida resultados/e7-reproducao
+```
 
 O melhor ponto de partida é o `resumo.txt`, que reúne os principais números em texto corrido. O significado de cada coluna desses
 arquivos, e de cada campo dos dados brutos, está no [dicionário de dados](DATA-DICTIONARY.md), escrito em inglês para
@@ -853,12 +876,13 @@ língua do programa.
 
 ## 🏷️ Versões marcadas
 
-Duas versões do repositório estão marcadas com etiquetas do Git, para que possam ser recuperadas a qualquer momento:
+Três versões do repositório estão marcadas com etiquetas do Git, para que possam ser recuperadas a qualquer momento:
 
 | Marca | Conteúdo |
 |---|---|
 | `base-oficial-v1` | base oficial fechada depois da coleta, resultados em `resultados/oficial-20261101` |
 | `analise-v1.1` | mesmos números, com os vereditos nos termos confirmada, não confirmada, refutada e inconclusiva (`resultados/oficial-20261101-termos`) |
+| `v1.0` | pacote de artefatos completo, com a sessão ingênua do critério E7, o dicionário de dados e o medidor reproduzível; é a versão depositada no Zenodo |
 
 A pasta [`evidencias/base-oficial/`](evidencias/base-oficial/) explica como os resultados oficiais foram gerados e
 traz o registro de ocorrências e as somas de verificação.
