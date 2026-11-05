@@ -91,6 +91,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--sessao", type=Path, required=True)
     parser.add_argument("--saida", type=Path, required=True)
     args = parser.parse_args(argv)
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")  # acentos corretos no terminal do Windows
     if args.saida.exists():
         print(f"A pasta de saída já existe e não será sobrescrita: {args.saida}", file=sys.stderr)
         return 2
@@ -170,8 +172,9 @@ def main(argv: list[str] | None = None) -> int:
     write_csv(args.saida / "comparacao-e7.csv", comparison)
     write_csv(args.saida / "temperatura-por-posicao.csv", position)
     summary = report(args.sessao, rows, invalid, descriptive, comparison, position)
-    (args.saida / "resumo-e7.txt").write_text(summary, encoding="utf-8")
-    (args.saida / "metadados.json").write_text(
+    write_text(args.saida / "resumo-e7.txt", summary)
+    write_text(
+        args.saida / "metadados.json",
         json.dumps(
             {
                 "sessao": args.sessao.name,
@@ -184,10 +187,15 @@ def main(argv: list[str] | None = None) -> int:
             indent=1,
         )
         + "\n",
-        encoding="utf-8",
     )
     print(summary)
     return 0
+
+
+def write_text(path: Path, text: str) -> None:
+    # Fim de linha sempre LF, como no pacote de análise, para o arquivo sair igual no Windows e no Linux.
+    with path.open("w", encoding="utf-8", newline="\n") as stream:
+        stream.write(text)
 
 
 def write_csv(path: Path, rows: list[dict]) -> None:

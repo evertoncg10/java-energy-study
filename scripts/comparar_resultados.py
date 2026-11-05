@@ -52,11 +52,13 @@ def compare(first: Path, second: Path, ignore_figures: bool = False) -> int:
         a, b = (first / name).read_bytes(), (second / name).read_bytes()
         if a == b:
             print(f"idêntico: {name}")
-        elif name == "metadados.json":
-            same_input = json.loads(a)["input_sha256"] == json.loads(b)["input_sha256"]
+        elif name == "metadados.json" and "input_sha256" in json.loads(a):
+            same_input = json.loads(a)["input_sha256"] == json.loads(b).get("input_sha256")
             answer = "sim" if same_input else "NÃO"
             print(f"metadados (data, plataforma e commit mudam); mesmos dados de entrada: {answer}")
             different += 0 if same_input else 1
+        elif Path(name).suffix in TEXT_SUFFIXES and a.replace(b"\r\n", b"\n") == b.replace(b"\r\n", b"\n"):
+            print(f"idêntico, exceto o fim de linha (Windows ou Linux): {name}")
         elif name.endswith(".pdf") and _same_pdf(a, b):
             print(f"idêntico, exceto a data de criação do PDF: {name}")
         else:
@@ -78,6 +80,9 @@ def compare(first: Path, second: Path, ignore_figures: bool = False) -> int:
 
 
 def main() -> int:
+    # Garante acentos corretos no terminal do Windows (Git Bash), mesmo sem PYTHONUTF8=1.
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("primeira", type=Path, help="Pasta de resultados de referência.")
     parser.add_argument("segunda", type=Path, help="Pasta de resultados a comparar.")
