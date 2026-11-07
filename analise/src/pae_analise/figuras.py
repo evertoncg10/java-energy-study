@@ -290,9 +290,17 @@ def plot_memory(comparisons: Sequence[dict[str, Any]], folder: Path, comparison:
 # Etapas do PAE-JVM: (título, descrição, requisitos atendidos).
 PAE_JVM_STEPS: tuple[tuple[str, str, str], ...] = (
     ("1. Registro prévio", "hipóteses H1–H5,\nlimites E1–E7 e\ncódigos de sorteio", "R3, R6"),
-    ("2. Preparação verificada", "JDK pelo SDKMAN,\nconferido dentro da JVM;\nSHA-256 dos arquivos;\nnotebook na tomada", "R1, R6"),
+    (
+        "2. Preparação verificada",
+        "JDK pelo SDKMAN,\nconferido dentro da JVM;\nSHA-256 dos arquivos;\nnotebook na tomada",
+        "R1, R6",
+    ),
     ("3. Sessão em blocos", "blocos completos\n(A, B, C, D) em\nordem sorteada", "R2, R3"),
-    ("4. Execução medida", "núcleos de desempenho,\nespera térmica,\npreparações e 3\niterações com RAPL", "R1, R4, R5"),
+    (
+        "4. Execução medida",
+        "núcleos de desempenho,\nespera térmica,\npreparações e 3\niterações com RAPL",
+        "R1, R4, R5",
+    ),
     ("5. Conferência", "manifesto SHA-256,\nfalhas preservadas,\nnova tentativa no bloco", "R6"),
     ("6. Análise", "razão das medianas\npareada por bloco,\nIC bootstrap, Holm, A12", "R4"),
     ("7. Avaliação", "critérios E1–E7\n(FEDS, risco técnico\ne eficácia)", "R1–R7"),
