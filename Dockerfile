@@ -3,7 +3,7 @@
 #
 # Construir (na pasta raiz do projeto):
 #     docker build -t pae-jvm-analise .
-# Refazer a análise e comparar com os resultados oficiais (sem figuras):
+# Refazer a análise e o cálculo do peso das pausas e comparar com os resultados publicados (sem figuras):
 #     docker run --rm pae-jvm-analise
 # Gerar tudo, com figuras, numa pasta do computador:
 #     docker run --rm -v "$(pwd)/resultados:/saida" pae-jvm-analise pae-analise analisar --saida /saida/reproducao-docker
@@ -22,6 +22,6 @@ COPY config/ config/
 COPY dados/ dados/
 COPY evidencias/ evidencias/
 COPY resultados/ resultados/
-COPY scripts/comparar_resultados.py scripts/
+COPY scripts/comparar_resultados.py scripts/analisar_pausas.py scripts/
 
-CMD ["sh", "-c", "pae-analise analisar --saida /tmp/reproducao --sem-figuras > /dev/null && python scripts/comparar_resultados.py resultados/oficial-20261101-termos /tmp/reproducao --ignorar-figuras"]
+CMD ["sh", "-c", "pae-analise analisar --saida /tmp/reproducao --sem-figuras > /dev/null && python scripts/comparar_resultados.py resultados/oficial-20261101-termos /tmp/reproducao --ignorar-figuras && python scripts/analisar_pausas.py --saida /tmp/pausas > /dev/null && python scripts/comparar_resultados.py resultados/pausas-gc-20261107 /tmp/pausas"]

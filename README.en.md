@@ -351,7 +351,8 @@ The repository is organized as follows:
 ├── resultados/                     # Results
 │   ├── oficial-20261101/           # Official results (tag base-oficial-v1)
 │   ├── oficial-20261101-termos/    # Same numbers with the current verdict terms (USE THIS ONE)
-│   └── ingenua-e7-20261103/        # Comparison of the naive session with the official collection (criterion E7)
+│   ├── ingenua-e7-20261103/        # Comparison of the naive session with the official collection (criterion E7)
+│   └── pausas-gc-20261107/         # Share of garbage collection pauses in each process time (descriptive)
 ├── analise/                        # Python package pae-analise (consolidation, statistics, figures, tests)
 │   └── requisitos-travados.txt     # Exact library versions (lock file)
 ├── medidor-java/                   # Energy meter (DaCapo callback, Maven, Java 17)
@@ -370,6 +371,7 @@ The repository is organized as follows:
 │   ├── conferir_coleta.py          # Checks several sessions together (includes E2)
 │   ├── sessao_ingenua.sh           # Runs the naive session of criterion E7
 │   ├── analisar_ingenua.py         # Compares the naive session with the official collection
+│   ├── analisar_pausas.py          # Computes the share of garbage collection pauses in each process time
 │   └── tests/                      # Tests of the collection scripts
 └── .github/workflows/analise.yml   # Automatic checks (style, types, tests, reproduction and Docker)
 ```
@@ -608,6 +610,23 @@ The E7 comparison has its own script, since it uses another session. To re-run i
 python3 scripts/analisar_ingenua.py --sessao dados/ingenua/ingenua-20261103T194354Z --saida resultados/e7-reproducao
 ```
 
+The share of garbage collection pauses in the time of each process also has its own script. This calculation is
+descriptive and is not part of the pre-registration. It explains why Compact Object Headers reduced garbage
+collection without changing energy, since pauses take less than 1% of the time of each process. The script reads the
+official base (`base-oficial.csv`) and the ratios (`razoes.csv`) from `resultados/oficial-20261101-termos` and writes
+three files plus a record of the data used. `pausas.csv` has the median pause share per application and
+configuration, `efeito-pausas.csv` has the largest possible effect of the pause reduction on total time, and
+`resumo-pausas.txt` brings both together in plain text. `metadados.json` stores the SHA-256 of the two input files.
+To re-run the calculation and check it against the published files, use a new output folder:
+
+```bash
+python3 scripts/analisar_pausas.py --saida resultados/pausas-reproducao
+python3 scripts/comparar_resultados.py resultados/pausas-gc-20261107 resultados/pausas-reproducao
+```
+
+The expected result is `Arquivos diferentes: 0` (no different files). To use the script with data from another
+collection, pass the files with `--base` and `--razoes`.
+
 The best place to start is `resumo.txt`, which brings the main numbers together in plain text. Every column of these files, and every field of the raw data, is described in the
 [data dictionary](DATA-DICTIONARY.md).
 
@@ -616,7 +635,7 @@ The best place to start is `resumo.txt`, which brings the main numbers together 
 You do not have to take our word for it. On every change to the repository, GitHub Actions
 ([`.github/workflows/analise.yml`](.github/workflows/analise.yml)) installs the locked versions, checks style (ruff),
 types (mypy) and tests (pytest), verifies the integrity of the data, re-runs the analysis and compares the result with
-the official one. It also builds and runs the Docker image.
+the official one. It also re-runs the pause share calculation, and builds and runs the Docker image, which checks both.
 
 ---
 
@@ -1060,6 +1079,7 @@ of each data column and field is in the [data dictionary](DATA-DICTIONARY.md).
 | `decomposicao.csv` | decomposition | energy = power × time decomposition |
 | `sensibilidade-*.csv` | sensitivity | exploratory sensitivity analysis |
 | `metadados.json` | metadata | run metadata |
+| `pausas.csv` / `efeito-pausas.csv` | pauses / pause effect | share of garbage collection pauses in each process time and its largest effect on total time |
 
 **Scripts and command options**
 
@@ -1076,6 +1096,7 @@ of each data column and field is in the [data dictionary](DATA-DICTIONARY.md).
 | `manifesto.py gerar` / `conferir` | manifest generate / check | writes or checks a manifest |
 | `conferir_sessao.py` | check session | checks the quality of a session |
 | `conferir_coleta.py` | check collection | checks several sessions together |
+| `analisar_pausas.py` | analyze pauses | computes the share of garbage collection pauses in each process time |
 | `pae-analise analisar` / `consolidar` | analyze / consolidate | full analysis / dataset only |
 | `--saida` | output | output folder |
 | `--sem-figuras` / `--com-figuras` | without / with figures | skip or add figures |
@@ -1088,5 +1109,6 @@ of each data column and field is in the [data dictionary](DATA-DICTIONARY.md).
 | `--categoria` | category | `oficial`, `piloto` or `verificacao` |
 | `--blocos` / `--primeiro-bloco` | blocks / first block | number of blocks / first block number |
 | `--plano` | plan | plan file |
+| `--base` / `--razoes` | base / ratios | input files of `analisar_pausas.py` |
 | `--retomar` | resume | continue an interrupted session |
 | `--sessao` / `--manifesto` | session / manifest | session folder / manifest file |

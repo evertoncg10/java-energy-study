@@ -344,7 +344,8 @@ O repositório está organizado assim:
 ├── resultados/
 │   ├── oficial-20261101/           # Resultados oficiais (versão base-oficial-v1)
 │   ├── oficial-20261101-termos/    # Mesmos números com os termos atuais dos vereditos (USE ESTA)
-│   └── ingenua-e7-20261103/        # Comparação da sessão ingênua com a coleta oficial (critério E7)
+│   ├── ingenua-e7-20261103/        # Comparação da sessão ingênua com a coleta oficial (critério E7)
+│   └── pausas-gc-20261107/         # Peso das pausas de coleta no tempo de cada processo (descritivo)
 ├── analise/                        # Pacote Python pae-analise (consolidação, estatística, figuras, testes)
 │   └── requisitos-travados.txt     # Versões exatas das bibliotecas
 ├── medidor-java/                   # Medidor de energia (callback da DaCapo, Maven, Java 17)
@@ -363,6 +364,7 @@ O repositório está organizado assim:
 │   ├── conferir_coleta.py          # Confere várias sessões juntas (inclui E2)
 │   ├── sessao_ingenua.sh           # Executa a sessão ingênua do critério E7
 │   ├── analisar_ingenua.py         # Compara a sessão ingênua com a coleta oficial
+│   ├── analisar_pausas.py          # Calcula o peso das pausas de coleta no tempo de cada processo
 │   └── tests/                      # Testes dos scripts de coleta
 └── .github/workflows/analise.yml   # Conferência automática (estilo, tipos, testes, reprodução e Docker)
 ```
@@ -597,6 +599,23 @@ A comparação do critério E7 tem um script próprio, pois usa outra sessão. P
 python3 scripts/analisar_ingenua.py --sessao dados/ingenua/ingenua-20261103T194354Z --saida resultados/e7-reproducao
 ```
 
+O peso das pausas de coleta de lixo no tempo de cada processo também tem um script próprio. Esse cálculo é
+descritivo e não faz parte do registro prévio. Ele explica por que os cabeçalhos compactos reduziram a coleta de lixo
+sem mudar a energia, pois as pausas ocupam menos de 1% do tempo de cada processo. O script lê a base oficial
+(`base-oficial.csv`) e as razões (`razoes.csv`) de `resultados/oficial-20261101-termos` e grava três arquivos e um
+registro dos dados usados. O `pausas.csv` traz a mediana da fração de pausas por aplicação e configuração, o
+`efeito-pausas.csv` traz o efeito máximo da redução de pausas sobre o tempo total, e o `resumo-pausas.txt` reúne os
+dois em texto. O `metadados.json` guarda o SHA-256 dos dois arquivos de entrada. Para refazer o cálculo e conferir
+com os arquivos publicados, use uma pasta de saída nova:
+
+```bash
+python3 scripts/analisar_pausas.py --saida resultados/pausas-reproducao
+python3 scripts/comparar_resultados.py resultados/pausas-gc-20261107 resultados/pausas-reproducao
+```
+
+O resultado esperado é `Arquivos diferentes: 0`. Para usar o script com dados de outra coleta, indique os arquivos
+com `--base` e `--razoes`.
+
 O melhor ponto de partida é o `resumo.txt`, que reúne os principais números em texto corrido. O significado de cada coluna desses
 arquivos, e de cada campo dos dados brutos, está no [dicionário de dados](DATA-DICTIONARY.md), escrito em inglês para
 atender também pesquisadores de outros países.
@@ -606,7 +625,7 @@ atender também pesquisadores de outros países.
 Você não precisa confiar só na nossa palavra. A cada alteração no repositório, o GitHub Actions
 ([`.github/workflows/analise.yml`](.github/workflows/analise.yml)) instala as versões travadas, verifica o estilo
 (ruff), os tipos (mypy) e os testes (pytest), confere a integridade dos dados, refaz a análise e compara o resultado
-com o oficial. Ele também constrói e roda a imagem Docker.
+com o oficial. Ele também refaz o cálculo do peso das pausas, e constrói e roda a imagem Docker, que confere os dois.
 
 ---
 

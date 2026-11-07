@@ -12,7 +12,8 @@
 #   3. instala as versões travadas de analise/requisitos-travados.txt;
 #   4. roda os testes automáticos do pacote de análise;
 #   5. roda a análise numa pasta nova resultados/reproducao-AAAAMMDD-HHMMSS;
-#   6. compara com os resultados oficiais. Resultado esperado: "Arquivos diferentes: 0".
+#   6. compara com os resultados oficiais. Resultado esperado: "Arquivos diferentes: 0";
+#   7. refaz o cálculo do peso das pausas de coleta e compara com resultados/pausas-gc-20261107.
 # Saída do script: 0 quando os números são idênticos; 1 quando há diferença; 2 em erro de ambiente.
 set -euo pipefail
 
@@ -27,7 +28,7 @@ raiz=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
 cd "$raiz"
 export PYTHONUTF8=1
 
-echo "== 1/6 Procurando Python 3.10 ou mais novo"
+echo "== 1/7 Procurando Python 3.10 ou mais novo"
 python_base=""
 for candidato in python3 python py; do
   if command -v "$candidato" > /dev/null 2>&1 \
@@ -42,7 +43,7 @@ if [[ -z "$python_base" ]]; then
 fi
 "$python_base" --version
 
-echo "== 2/6 Ambiente virtual analise/.venv"
+echo "== 2/7 Ambiente virtual analise/.venv"
 if [[ ! -d analise/.venv ]]; then
   "$python_base" -m venv analise/.venv
 fi
@@ -55,14 +56,14 @@ else
 fi
 python --version
 
-echo "== 3/6 Instalando as versões travadas"
+echo "== 3/7 Instalando as versões travadas"
 (cd analise && python -m pip install --quiet -r requisitos-travados.txt -e ".[dev,figuras]")
 
-echo "== 4/6 Testes automáticos"
+echo "== 4/7 Testes automáticos"
 (cd analise && python -m pytest -q)
 
 saida="resultados/reproducao-$(date +%Y%m%d-%H%M%S)"
-echo "== 5/6 Análise em $saida"
+echo "== 5/7 Análise em $saida"
 if [[ $com_figuras -eq 1 ]]; then
   pae-analise analisar --saida "$saida" > /dev/null
 else
@@ -70,5 +71,9 @@ else
 fi
 echo "Resumo legível: $saida/resumo.txt"
 
-echo "== 6/6 Comparação com resultados/oficial-20261101-termos"
+echo "== 6/7 Comparação com resultados/oficial-20261101-termos"
 python scripts/comparar_resultados.py resultados/oficial-20261101-termos "$saida" --ignorar-figuras
+
+echo "== 7/7 Peso das pausas de coleta, comparado com resultados/pausas-gc-20261107"
+python scripts/analisar_pausas.py --saida "$saida/pausas" > /dev/null
+python scripts/comparar_resultados.py resultados/pausas-gc-20261107 "$saida/pausas"
