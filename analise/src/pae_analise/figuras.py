@@ -342,7 +342,7 @@ def plot_flow(folder: Path) -> list[Path]:
     ax.text(
         xe - 0.15,
         ye + height / 2,
-        "ciclo de projeto da DSR:\nas avaliações dos pilotos\n(T11 e T12) refinaram\nas etapas 2 a 6",
+        "ciclo de projeto da DSR:\nas avaliações dos\ndois pilotos refinaram\nas etapas 2 a 6",
         fontsize=6.5,
         color="#A03030",
         ha="right",
