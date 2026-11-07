@@ -21,10 +21,12 @@ jobs:
         run: python -m pip install -r requisitos-travados.txt -e ".[dev,figuras]"
       - name: Estilo (ruff)
         run: |
-          ruff check src tests ../scripts/comparar_resultados.py
-          ruff format --check src tests
+          ruff check src tests ../scripts/comparar_resultados.py ../scripts/analisar_pausas.py
+          ruff format --check src tests ../scripts/analisar_pausas.py
       - name: Tipos (mypy)
-        run: mypy
+        run: |
+          mypy
+          mypy --strict ../scripts/analisar_pausas.py
       - name: Testes (pytest)
         run: pytest
       - name: Integridade dos dados (manifestos SHA-256)
@@ -35,6 +37,11 @@ jobs:
         run: |
           pae-analise analisar --saida "$RUNNER_TEMP/reproducao" --sem-figuras > /dev/null
           python scripts/comparar_resultados.py resultados/oficial-20261101-termos "$RUNNER_TEMP/reproducao" --ignorar-figuras
+      - name: Reprodução do peso das pausas de coleta
+        working-directory: .
+        run: |
+          python scripts/analisar_pausas.py --saida "$RUNNER_TEMP/pausas" > /dev/null
+          python scripts/comparar_resultados.py resultados/pausas-gc-20261107 "$RUNNER_TEMP/pausas"
 
   docker:
     runs-on: ubuntu-24.04

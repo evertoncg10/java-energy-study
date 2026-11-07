@@ -23,6 +23,7 @@ should be used for any new work. The raw data live in `dados/brutos/<session>/`,
 - [sensibilidade-global.csv and sensibilidade-contrastes.csv (sensitivity analysis)](#sensibilidade-globalcsv-and-sensibilidade-contrastescsv-sensitivity-analysis)
 - [metadados.json (run metadata)](#metadadosjson-run-metadata)
 - [Naive session of criterion E7](#naive-session-of-criterion-e7)
+- [Share of garbage collection pauses](#share-of-garbage-collection-pauses)
 - [Raw data of a session](#raw-data-of-a-session)
 - [Raw data of a process](#raw-data-of-a-process)
 
@@ -302,6 +303,38 @@ The direction values are `menor` (lower, whole interval below 1), `maior` (highe
 (`sessao`), the number of processes (`processos`), the invalid processes (`invalidos`), the official results used as
 reference (`referencia_oficial`) and the bootstrap settings (`reamostragens` resamples, `nivel` level, `semente`
 seed, `bloco` block = `repetição` repetition).
+
+---
+
+## Share of garbage collection pauses
+
+A descriptive calculation, outside the pre-registration, in
+[`resultados/pausas-gc-20261107/`](resultados/pausas-gc-20261107/), produced by `scripts/analisar_pausas.py` from
+`base-oficial.csv` and `razoes.csv` of `resultados/oficial-20261101-termos`. Only valid processes are used.
+
+### pausas.csv (one row per workload and configuration)
+
+| Column | Meaning |
+|---|---|
+| `application`, `role`, `configuration` | see [Common values](#common-values) |
+| `processes` | number of valid processes (15) |
+| `median_gc_pause_time_ms` | median total garbage collection pause time per process, in ms (`gc_pause_time_ms` of the base) |
+| `median_wall_seconds` | median total time of the process, in s (`wall_seconds` of the base) |
+| `median_pause_fraction_pct` | median of `gc_pause_time_ms / 1000 / wall_seconds` per process, in percent |
+
+### efeito-pausas.csv (largest possible effect on total time, main workloads)
+
+| Column | Meaning |
+|---|---|
+| `application` | main workload (`lusearch` or `pmd`) |
+| `pause_fraction_c_pct` | `median_pause_fraction_pct` of configuration C (Java 25 without compact headers) |
+| `pause_change_dc_pct` | change of the pause time from C to D, in percent (`change_pct` of `razoes.csv`, metric `gc_pause_time_ms`, comparison `D/C`) |
+| `max_time_effect_pct` | `pause_fraction_c_pct × abs(pause_change_dc_pct) / 100`, the largest change of total time the pause reduction could explain, in percent |
+
+### resumo-pausas.txt and metadados.json
+
+`resumo-pausas.txt` is the readable summary, in Portuguese. `metadados.json` records that the calculation is
+descriptive (`calculo`) and the SHA-256 of the two input files (`input_sha256`, with `base` and `razoes`).
 
 ---
 

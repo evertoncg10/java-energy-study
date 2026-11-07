@@ -1,0 +1,13 @@
+application,role,configuration,processes,median_gc_pause_time_ms,median_wall_seconds,median_pause_fraction_pct
+avrora,exploratorio,A,15,96.241,66.8735,0.144565
+avrora,exploratorio,B,15,98.597,67.0037,0.146142
+avrora,exploratorio,C,15,95.466,64.1949,0.148577
+avrora,exploratorio,D,15,96.752,64.4415,0.150143
+lusearch,principal,A,15,191.868,87.2013,0.219481
+lusearch,principal,B,15,207.275,83.3876,0.248877
+lusearch,principal,C,15,198.281,83.8375,0.237305
+lusearch,principal,D,15,190.559,83.5895,0.228327
+pmd,principal,A,15,302.62,45.5505,0.664427
+pmd,principal,B,15,350.629,43.4331,0.805677
+pmd,principal,C,15,353.424,41.336,0.855061
+pmd,principal,D,15,304.998,41.5345,0.736027

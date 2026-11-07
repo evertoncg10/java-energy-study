@@ -1,0 +1,24 @@
+Peso das pausas de coleta de lixo no tempo de cada processo
+Cálculo descritivo, fora do registro prévio.
+Entrada: resultados/oficial-20261101-termos/base-oficial.csv
+
+Mediana de (tempo de pausa de coleta / tempo total do processo), processos válidos:
+  avrora    A   0,14%  (15 processos; Java 17)
+  avrora    B   0,15%  (15 processos; Java 21)
+  avrora    C   0,15%  (15 processos; Java 25 sem cabeçalhos compactos)
+  avrora    D   0,15%  (15 processos; Java 25 com cabeçalhos compactos)
+  lusearch  A   0,22%  (15 processos; Java 17)
+  lusearch  B   0,25%  (15 processos; Java 21)
+  lusearch  C   0,24%  (15 processos; Java 25 sem cabeçalhos compactos)
+  lusearch  D   0,23%  (15 processos; Java 25 com cabeçalhos compactos)
+  pmd       A   0,66%  (15 processos; Java 17)
+  pmd       B   0,81%  (15 processos; Java 21)
+  pmd       C   0,86%  (15 processos; Java 25 sem cabeçalhos compactos)
+  pmd       D   0,74%  (15 processos; Java 25 com cabeçalhos compactos)
+
+Efeito máximo da redução de pausas com os cabeçalhos compactos (D/C) sobre o tempo total, nas aplicações principais:
+  lusearch  pausas em C 0,24% x mudança das pausas em D/C -3,89% = no máximo 0,01% do tempo total
+  pmd       pausas em C 0,86% x mudança das pausas em D/C -13,70% = no máximo 0,12% do tempo total
+
+Leitura: mesmo que toda a redução de pausas virasse redução de tempo, o efeito ficaria abaixo
+da margem de erro do protocolo para a energia (cerca de 1,3 pontos percentuais em D/C).
