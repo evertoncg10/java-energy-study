@@ -960,8 +960,8 @@ primeira foi corrigir os scripts de execução do primeiro para o segundo piloto
 primeiro piloto. A segunda foi melhorar o README em português e criar o README em inglês e o dicionário de dados do
 repositório. A terceira foi ajudar a corrigir erros na implementação em Python da análise estatística. As decisões de
 método, a coleta dos dados e a interpretação dos resultados são minhas. Os valores principais foram conferidos
-manualmente, e a análise completa foi reproduzida em outro computador a partir do repositório público. Revisei todo o
-material e assumo total responsabilidade pelo conteúdo deste trabalho.
+manualmente, e a análise completa foi reproduzida em outro computador a partir do repositório público. Revisei tudo o
+que foi produzido com o apoio da IA nessas três tarefas e assumo total responsabilidade pelo conteúdo deste trabalho.
 
 ---
 

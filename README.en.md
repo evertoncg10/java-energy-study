@@ -972,8 +972,8 @@ the execution scripts from the first to the second pilot, solving the problems f
 was improving the README in Portuguese and creating the README in English and the repository's data dictionary. The
 third was helping to fix errors in the Python implementation of the statistical analysis. The method decisions, the
 data collection and the interpretation of the results are mine. The main values were checked by hand, and the full
-analysis was reproduced on another computer from the public repository. I reviewed all the material and take full
-responsibility for the content of this work.
+analysis was reproduced on another computer from the public repository. I reviewed everything produced with the AI's
+support in these three tasks and take full responsibility for the content of this work.
 
 ---
 
