@@ -955,7 +955,7 @@ e heap fixo de 1 GB; outras cargas e outras configurações podem se comportar d
 
 ## 🤖 Uso de inteligência artificial
 
-Nesta pesquisa, o autor usou o assistente Claude (Anthropic) como apoio em três tarefas, conduzidas pelo autor. A
+Nesta pesquisa foi utilizado o assistente Claude (Anthropic) como apoio em três tarefas, conduzidas pelo autor. A
 primeira foi corrigir os scripts de execução do primeiro para o segundo piloto, resolvendo os problemas encontrados no
 primeiro piloto. A segunda foi melhorar o README em português e criar o README em inglês e o dicionário de dados do
 repositório. A terceira foi ajudar a corrigir erros na implementação em Python da análise estatística. As decisões de
