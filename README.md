@@ -955,10 +955,13 @@ e heap fixo de 1 GB; outras cargas e outras configurações podem se comportar d
 
 ## 🤖 Uso de inteligência artificial
 
-Este repositório teve o apoio do assistente Claude (Anthropic) na escrita da documentação (README e dicionário de
-dados) e como auxílio na implementação dos scripts e do código em Python da análise estatística, desenvolvidos sob a
-condução do autor. As decisões de método, a coleta dos dados e a interpretação dos resultados são do autor, que revisou
-todo o material e é o responsável pelo trabalho.
+Nesta pesquisa, o autor usou o assistente Claude (Anthropic) como apoio em três tarefas, conduzidas pelo autor. A
+primeira foi corrigir os scripts de execução do primeiro para o segundo piloto, resolvendo os problemas encontrados no
+primeiro piloto. A segunda foi melhorar o README em português e criar o README em inglês e o dicionário de dados do
+repositório. A terceira foi ajudar a corrigir erros na implementação em Python da análise estatística. As decisões de
+método, a coleta dos dados e a interpretação dos resultados são do autor. Os valores principais foram conferidos
+manualmente e a análise completa foi reproduzida em outro computador a partir do repositório público. O autor revisou
+todo o material e assume total responsabilidade pelo conteúdo deste trabalho.
 
 ---
 

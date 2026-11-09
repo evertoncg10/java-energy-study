@@ -967,10 +967,13 @@ one thread and a fixed 1 GB heap; other workloads and settings may behave differ
 
 ## 🤖 Use of artificial intelligence
 
-This repository was supported by the Claude assistant (Anthropic) in writing the documentation (README and data
-dictionary) and as an aid in implementing the scripts and the Python code for the statistical analysis, developed under
-the author's direction. The method decisions, data collection and interpretation of results are the author's, who
-reviewed all material and is responsible for the work.
+In this research, the author used the Claude assistant (Anthropic) as support in three tasks, led by the author. The
+first was fixing the execution scripts from the first to the second pilot, solving the problems found in the first
+pilot. The second was improving the README in Portuguese and creating the README in English and the repository's data
+dictionary. The third was helping to fix errors in the Python implementation of the statistical analysis. The method
+decisions, the data collection and the interpretation of the results are the author's. The main values were checked
+by hand, and the full analysis was reproduced on another computer from the public repository. The author reviewed all
+material and takes full responsibility for the content of this work.
 
 ---
 
