@@ -967,7 +967,7 @@ one thread and a fixed 1 GB heap; other workloads and settings may behave differ
 
 ## 🤖 Use of artificial intelligence
 
-In this research, the author used the Claude assistant (Anthropic) as support in three tasks, led by the author. The
+In this research, the Claude assistant (Anthropic) was used as support in three tasks, led by the author. The
 first was fixing the execution scripts from the first to the second pilot, solving the problems found in the first
 pilot. The second was improving the README in Portuguese and creating the README in English and the repository's data
 dictionary. The third was helping to fix errors in the Python implementation of the statistical analysis. The method
