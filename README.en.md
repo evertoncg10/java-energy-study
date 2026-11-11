@@ -12,6 +12,16 @@
 
 🇧🇷 [Português](README.md) | 🇺🇸 English
 
+> **📄 Article on compact headers.** The article "Cabeçalhos compactos no Java 25 economizam energia? Um protocolo de
+> medição para computadores pessoais" (Do compact headers in Java 25 save energy? A measurement protocol for personal
+> computers) uses only part of this collection, the comparison of Java 25 without and with compact object headers
+> (question QC1, hypotheses H1 to H4). The comparison of Java 17, 21 and 25 (QC2, H5) uses the same collection, but is
+> left out of the article and appears here as a complementary result. The article cites version
+> [v1.0](https://github.com/evertoncg10/java-energy-study/tree/v1.0) of this repository. The article figures and the
+> share of garbage collection pauses were published after v1.0, from the same data, in the folders
+> [`resultados/artigo-cabecalhos-20261111`](resultados/artigo-cabecalhos-20261111/) and
+> [`resultados/pausas-gc-20261107`](resultados/pausas-gc-20261107/).
+
 This repository stores everything used in a master's research project on **Green Software**, in the field of Software
 Engineering, including the measurement protocol, the code, the raw data, the evidence and the statistical analysis.
 
@@ -352,7 +362,8 @@ The repository is organized as follows:
 │   ├── oficial-20261101/           # Official results (tag base-oficial-v1)
 │   ├── oficial-20261101-termos/    # Same numbers with the current verdict terms (USE THIS ONE)
 │   ├── ingenua-e7-20261103/        # Comparison of the naive session with the official collection (criterion E7)
-│   └── pausas-gc-20261107/         # Share of garbage collection pauses in each process time (descriptive)
+│   ├── pausas-gc-20261107/         # Share of garbage collection pauses in each process time (descriptive)
+│   └── artigo-cabecalhos-20261111/ # Figures of the article on compact headers (H1–H4)
 ├── analise/                        # Python package pae-analise (consolidation, statistics, figures, tests)
 │   └── requisitos-travados.txt     # Exact library versions (lock file)
 ├── medidor-java/                   # Energy meter (DaCapo callback, Maven, Java 17)
@@ -372,6 +383,7 @@ The repository is organized as follows:
 │   ├── sessao_ingenua.sh           # Runs the naive session of criterion E7
 │   ├── analisar_ingenua.py         # Compares the naive session with the official collection
 │   ├── analisar_pausas.py          # Computes the share of garbage collection pauses in each process time
+│   ├── figuras_artigo_cabecalhos.py# Draws the figures of the article on compact headers
 │   └── tests/                      # Tests of the collection scripts
 └── .github/workflows/analise.yml   # Automatic checks (style, types, tests, reproduction and Docker)
 ```
@@ -1100,6 +1112,7 @@ of each data column and field is in the [data dictionary](DATA-DICTIONARY.md).
 | `conferir_sessao.py` | check session | checks the quality of a session |
 | `conferir_coleta.py` | check collection | checks several sessions together |
 | `analisar_pausas.py` | analyze pauses | computes the share of garbage collection pauses in each process time |
+| `figuras_artigo_cabecalhos.py` | article figures on compact headers | draws the two figures of the article |
 | `pae-analise analisar` / `consolidar` | analyze / consolidate | full analysis / dataset only |
 | `--saida` | output | output folder |
 | `--sem-figuras` / `--com-figuras` | without / with figures | skip or add figures |

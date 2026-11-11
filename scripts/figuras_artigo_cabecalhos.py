@@ -60,7 +60,10 @@ def main(argv: list[str] | None = None) -> int:
         print("matplotlib não está instalado.", file=sys.stderr)
         return 1
     if args.saida.exists() and any(args.saida.iterdir()):
-        print(f"A pasta {args.saida} já tem arquivos; escolha uma pasta nova.", file=sys.stderr)
+        print(
+            f"A pasta {args.saida} já tem arquivos; escolha uma pasta nova.",
+            file=sys.stderr,
+        )
         return 1
     args.saida.mkdir(parents=True, exist_ok=True)
 
@@ -74,7 +77,9 @@ def main(argv: list[str] | None = None) -> int:
         "entrada_sha256": sha256(RATIOS),
         "arquivos": [p.name for p in paths],
     }
-    (args.saida / "metadados.json").write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (args.saida / "metadados.json").write_text(
+        json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
     for path in paths:
         print(path.relative_to(ROOT) if path.is_relative_to(ROOT) else path)
     return 0
