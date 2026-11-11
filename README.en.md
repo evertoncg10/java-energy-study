@@ -955,11 +955,10 @@ Three versions of the repository are marked with Git tags, so they can be retrie
 |---|---|
 | `base-oficial-v1` | official dataset closed after collection, results in `resultados/oficial-20261101` |
 | `analise-v1.1` | same numbers, with verdicts in the terms confirmada, não confirmada, refutada and inconclusiva (`resultados/oficial-20261101-termos`) |
-| `v1.0` | complete artifact package, with the naive session of criterion E7, the data dictionary and the reproducible meter; this is the version deposited on Zenodo |
+| `v1.0` | complete artifact package, with the naive session of criterion E7, the data dictionary and the reproducible meter; this is the version deposited on Zenodo and cited in the article |
+| `v2.0` | repository presentation focused on Compact Object Headers, with the share of garbage collection pauses (`resultados/pausas-gc-20261107`) and the article figures (`resultados/artigo-cabecalhos-20261111`) |
 
-After v1.0, the main branch (`main`) received, without a new tag, the share of garbage collection pauses
-(`resultados/pausas-gc-20261107`) and the figures of the article on Compact Object Headers
-(`resultados/artigo-cabecalhos-20261111`). Both use the same data as v1.0 and change no official result.
+v2.0 uses the same data as v1.0 and changes no official result.
 
 The [`evidencias/base-oficial/`](evidencias/base-oficial/) folder explains how the official results were produced and
 includes the incident record and the checksums.
