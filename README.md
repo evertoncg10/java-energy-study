@@ -12,6 +12,15 @@
 
 🇧🇷 Português | 🇺🇸 [English](README.en.md)
 
+> **📄 Artigo sobre os cabeçalhos compactos.** O artigo "Cabeçalhos compactos no Java 25 economizam energia? Um
+> protocolo de medição para computadores pessoais" usa só uma parte desta coleta, a comparação do Java 25 sem e com
+> cabeçalhos compactos (pergunta QC1, hipóteses H1 a H4). A comparação entre o Java 17, 21 e 25 (QC2, H5) usa a mesma
+> coleta, mas fica fora do artigo e aparece aqui como resultado complementar. O artigo cita a versão
+> [v1.0](https://github.com/evertoncg10/java-energy-study/tree/v1.0) deste repositório. As figuras do artigo e o cálculo
+> do peso das pausas de coleta foram publicados depois da v1.0, com os mesmos dados, nas pastas
+> [`resultados/artigo-cabecalhos-20261111`](resultados/artigo-cabecalhos-20261111/) e
+> [`resultados/pausas-gc-20261107`](resultados/pausas-gc-20261107/).
+
 Este repositório armazena tudo o que foi usado em uma pesquisa de mestrado sobre **Software Verde**, na área de
 Engenharia de Software, incluindo o protocolo de medição, o código, os dados brutos, as evidências e a análise
 estatística.
@@ -345,7 +354,8 @@ O repositório está organizado assim:
 │   ├── oficial-20261101/           # Resultados oficiais (versão base-oficial-v1)
 │   ├── oficial-20261101-termos/    # Mesmos números com os termos atuais dos vereditos (USE ESTA)
 │   ├── ingenua-e7-20261103/        # Comparação da sessão ingênua com a coleta oficial (critério E7)
-│   └── pausas-gc-20261107/         # Peso das pausas de coleta no tempo de cada processo (descritivo)
+│   ├── pausas-gc-20261107/         # Peso das pausas de coleta no tempo de cada processo (descritivo)
+│   └── artigo-cabecalhos-20261111/ # Figuras do artigo sobre os cabeçalhos compactos (H1–H4)
 ├── analise/                        # Pacote Python pae-analise (consolidação, estatística, figuras, testes)
 │   └── requisitos-travados.txt     # Versões exatas das bibliotecas
 ├── medidor-java/                   # Medidor de energia (callback da DaCapo, Maven, Java 17)
@@ -365,6 +375,7 @@ O repositório está organizado assim:
 │   ├── sessao_ingenua.sh           # Executa a sessão ingênua do critério E7
 │   ├── analisar_ingenua.py         # Compara a sessão ingênua com a coleta oficial
 │   ├── analisar_pausas.py          # Calcula o peso das pausas de coleta no tempo de cada processo
+│   ├── figuras_artigo_cabecalhos.py# Gera as figuras do artigo sobre os cabeçalhos compactos
 │   └── tests/                      # Testes dos scripts de coleta
 └── .github/workflows/analise.yml   # Conferência automática (estilo, tipos, testes, reprodução e Docker)
 ```

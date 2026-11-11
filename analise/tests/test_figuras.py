@@ -33,6 +33,16 @@ def _rows() -> list[dict[str, Any]]:
         ("decomposicao", lambda rows, folder: figuras.plot_decomposition(rows, folder)),
         ("memoria", lambda rows, folder: figuras.plot_memory(rows, folder)),
         ("fluxo", lambda rows, folder: figuras.plot_flow(folder)),
+        (
+            "memoria-cabecalhos",
+            lambda rows, folder: figuras.plot_memory(rows, folder, xlabel="com e sem", name="memoria-cabecalhos"),
+        ),
+        (
+            "fluxo-cabecalhos",
+            lambda rows, folder: figuras.plot_flow(
+                folder, steps=figuras.PAE_JVM_STEPS_CABECALHOS, name="fluxo-cabecalhos"
+            ),
+        ),
     ],
 )
 def test_figures_write_png_and_pdf(name: str, draw: Any, tmp_path: Path) -> None:
@@ -41,6 +51,15 @@ def test_figures_write_png_and_pdf(name: str, draw: Any, tmp_path: Path) -> None
     assert all(p.stat().st_size > 0 for p in paths)
     with pytest.raises(FileExistsError):
         draw(_rows(), tmp_path)
+
+
+def test_article_steps_drop_h5_and_a12() -> None:
+    full = " ".join(body for _, body, _ in figuras.PAE_JVM_STEPS)
+    article = " ".join(body for _, body, _ in figuras.PAE_JVM_STEPS_CABECALHOS)
+    assert "H1–H5" in full and "A12" in full
+    assert "H1–H4" in article and "H5" not in article and "A12" not in article
+    assert "(A, B, C, D)" not in article
+    assert len(figuras.PAE_JVM_STEPS_CABECALHOS) == len(figuras.PAE_JVM_STEPS)
 
 
 def test_percent_labels_use_comma_and_sign() -> None:

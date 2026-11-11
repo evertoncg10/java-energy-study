@@ -252,8 +252,18 @@ def plot_decomposition(comparisons: Sequence[dict[str, Any]], folder: Path) -> l
     return paths
 
 
-def plot_memory(comparisons: Sequence[dict[str, Any]], folder: Path, comparison: str = "D/C") -> list[Path]:
-    """Razões D/C (cabeçalhos compactos ligados ÷ desligados) de energia, heap e coleta de lixo, com IC 95%."""
+def plot_memory(
+    comparisons: Sequence[dict[str, Any]],
+    folder: Path,
+    comparison: str = "D/C",
+    xlabel: str | None = None,
+    name: str = "memoria",
+) -> list[Path]:
+    """Razões D/C (cabeçalhos compactos ligados ÷ desligados) de energia, heap e coleta de lixo, com IC 95%.
+
+    ``xlabel`` troca o texto do eixo horizontal e ``name`` o nome dos arquivos; os padrões geram a
+    figura do estudo completo.
+    """
     plt = _pyplot()
     apps = sorted({r["application"] for r in comparisons})
     metrics = list(MEMORY_METRICS)
@@ -279,10 +289,10 @@ def plot_memory(comparisons: Sequence[dict[str, Any]], folder: Path, comparison:
     ax.set_yticks(range(len(metrics)), [MEMORY_METRICS[m] for m in metrics])
     ax.invert_yaxis()
     _percent_axis(ax.xaxis)
-    ax.set_xlabel(f"variação {comparison} (razão das medianas, IC 95%)")
+    ax.set_xlabel(xlabel or f"variação {comparison} (razão das medianas, IC 95%)")
     ax.legend(fontsize=7, loc="upper left", bbox_to_anchor=(1.02, 1.0), frameon=False)
     fig.tight_layout()
-    paths = _save(fig, folder, "memoria")
+    paths = _save(fig, folder, name)
     plt.close(fig)
     return paths
 
@@ -306,8 +316,25 @@ PAE_JVM_STEPS: tuple[tuple[str, str, str], ...] = (
     ("7. Avaliação", "critérios E1–E7\n(FEDS, risco técnico\ne eficácia)", "R1–R7"),
 )
 
+# Mesmas etapas, para o artigo focado nos cabeçalhos compactos do Java 25: só as hipóteses H1–H4,
+# sem o A12, que o artigo não usa, e sem as letras das configurações.
+PAE_JVM_STEPS_CABECALHOS: tuple[tuple[str, str, str], ...] = tuple(
+    (
+        title,
+        body.replace("H1–H5", "H1–H4")
+        .replace("IC bootstrap, Holm, A12", "IC bootstrap e Holm")
+        .replace("(A, B, C, D) em", "com as quatro\nconfigurações em"),
+        reqs,
+    )
+    for title, body, reqs in PAE_JVM_STEPS
+)
 
-def plot_flow(folder: Path) -> list[Path]:
+
+def plot_flow(
+    folder: Path,
+    steps: Sequence[tuple[str, str, str]] = PAE_JVM_STEPS,
+    name: str = "fluxo",
+) -> list[Path]:
     """Diagrama das etapas do PAE-JVM em duas linhas (em "U"), com o ciclo de refinamento da DSR."""
     plt = _pyplot()
     from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
@@ -318,7 +345,7 @@ def plot_flow(folder: Path) -> list[Path]:
     rows = [0, 0, 0, 0, 1, 1, 1]
     positions = [(c * (width + gap_x), -r * (height + gap_y)) for c, r in zip(columns, rows, strict=True)]
     fig, ax = plt.subplots(figsize=(7.2, 3.6))
-    for (x, y), (title, body, reqs) in zip(positions, PAE_JVM_STEPS, strict=True):
+    for (x, y), (title, body, reqs) in zip(positions, steps, strict=True):
         final = title.startswith("7.")
         ax.add_patch(
             FancyBboxPatch(
@@ -361,6 +388,6 @@ def plot_flow(folder: Path) -> list[Path]:
     ax.set_aspect("equal")
     ax.axis("off")
     fig.tight_layout()
-    paths = _save(fig, folder, "fluxo")
+    paths = _save(fig, folder, name)
     plt.close(fig)
     return paths
