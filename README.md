@@ -1,4 +1,4 @@
-# PAE-JVM: Eficiência Energética de JVMs – Temurin 17 vs 21 vs 25 e cabeçalhos compactos
+# PAE-JVM: os cabeçalhos compactos do Java 25 economizam energia?
 
 [![Java Support](https://img.shields.io/badge/Java-17%20%7C%2021%20%7C%2025-orange?logo=openjdk)](#-configurações-comparadas)
 [![Python Analysis](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python)](#-nível-1--refazer-a-análise-qualquer-computador)
@@ -12,29 +12,28 @@
 
 🇧🇷 Português | 🇺🇸 [English](README.en.md)
 
-> **📄 Artigo sobre os cabeçalhos compactos.** O artigo "Cabeçalhos compactos no Java 25 economizam energia? Um
-> protocolo de medição para computadores pessoais" usa só uma parte desta coleta, a comparação do Java 25 sem e com
-> cabeçalhos compactos (pergunta QC1, hipóteses H1 a H4). A comparação entre o Java 17, 21 e 25 (QC2, H5) usa a mesma
-> coleta, mas fica fora do artigo e aparece aqui como resultado complementar. O artigo cita a versão
-> [v1.0](https://github.com/evertoncg10/java-energy-study/tree/v1.0) deste repositório. As figuras do artigo e o cálculo
-> do peso das pausas de coleta foram publicados depois da v1.0, com os mesmos dados, nas pastas
-> [`resultados/artigo-cabecalhos-20261111`](resultados/artigo-cabecalhos-20261111/) e
-> [`resultados/pausas-gc-20261107`](resultados/pausas-gc-20261107/).
+> **📄 Versão v2.0, focada no artigo sobre os cabeçalhos compactos.** O artigo "Cabeçalhos compactos no Java 25
+> economizam energia? Um protocolo de medição para computadores pessoais" cita a versão
+> [v1.0](https://github.com/evertoncg10/java-energy-study/tree/v1.0) deste repositório. A v2.0 usa os mesmos dados e
+> os mesmos resultados oficiais. Ela muda a apresentação, para dar destaque aos cabeçalhos compactos, e acrescenta o
+> cálculo do peso das pausas de coleta e as figuras do artigo.
 
 Este repositório armazena tudo o que foi usado em uma pesquisa de mestrado sobre **Software Verde**, na área de
 Engenharia de Software, incluindo o protocolo de medição, o código, os dados brutos, as evidências e a análise
 estatística.
 
-A motivação inicial é uma dúvida prática e simples de declarar. Quando trocamos a versão do Java, o programa passa a
-gastar mais ou menos energia? Para responder a essa dúvida com segurança, porém, é preciso antes saber medir bem, e é
-nisso que a pesquisa se concentra.
+O Java 25 trouxe os **cabeçalhos compactos de objeto** (*Compact Object Headers*, JEP 519), uma opção que diminui o
+espaço que cada objeto ocupa na memória. A dúvida prática que motivou a pesquisa é simples de declarar. Se o programa
+ocupa menos memória e o coletor de lixo trabalha menos, ele também gasta menos energia? Para responder a essa dúvida
+com segurança, porém, é preciso antes saber medir bem, pois a variação natural das medidas pode ser maior que o
+efeito procurado.
 
 O foco, portanto, é **como medir**, de forma confiável e reprodutível, o efeito de versões e opções da máquina virtual
 Java (**JVM**) sobre a energia e o tempo de execução, usando apenas um computador pessoal. Para avaliar o protocolo
-criado com esse fim, ele foi aplicado a um caso real, no qual comparamos o consumo de energia do processador e o tempo de
-execução de três versões da distribuição **Eclipse Temurin**, os **JDKs 17, 21 e 25**, e também o JDK 25 **com e sem os
-cabeçalhos compactos de objeto** (*Compact Object Headers*, JEP 519), uma novidade que promete reduzir o uso de
-memória. As perguntas formais da pesquisa estão na seção [Perguntas da pesquisa](#-perguntas-da-pesquisa).
+criado com esse fim, ele foi aplicado a um caso real, no qual comparamos o consumo de energia do processador e o tempo
+de execução do **Eclipse Temurin 25 com e sem os cabeçalhos compactos**. A mesma coleta também mediu os **JDKs 17 e
+21**, o que permitiu comparar as versões do Java como resultado complementar. As perguntas formais da pesquisa estão
+na seção [Perguntas da pesquisa](#-perguntas-da-pesquisa).
 
 A pesquisa segue o método **Design Science Research (DSR)**. Isso quer dizer que, além de medir, construímos e
 avaliamos um artefato, o **PAE-JVM – Protocolo de Avaliação Energética de configurações da JVM**. Ele junta um medidor
@@ -43,6 +42,10 @@ organiza as sessões de medição e um conjunto de regras para lidar com ruído,
 serviu justamente para avaliar esse protocolo. Os critérios de avaliação (E1 a E7) e as hipóteses (H1 a H5) foram
 registrados **antes** da coleta, no arquivo [`config/registro-previo.json`](config/registro-previo.json), para que os
 resultados não pudessem influenciar as regras.
+
+![Etapas do PAE-JVM](resultados/artigo-cabecalhos-20261111/fluxo-cabecalhos.png)
+
+*Etapas do PAE-JVM aplicadas à comparação do Java 25 com e sem cabeçalhos compactos (hipóteses H1 a H4).*
 
 Quem quiser conferir os dados, refazer a análise ou até repetir a medição em outro computador encontra aqui o
 caminho completo, explicado passo a passo na seção [Como reproduzir](#-como-reproduzir).
@@ -81,12 +84,17 @@ o efeito de versões e opções da JVM sobre a energia e o tempo de execução e
 externo de energia?** Muitos desenvolvedores e pesquisadores só têm o próprio notebook à disposição, e o PAE-JVM foi
 pensado para esse cenário.
 
-Para testar o protocolo na prática, ele foi aplicado a duas perguntas concretas:
+Para testar o protocolo na prática, ele foi aplicado a uma pergunta concreta, que é a pergunta principal deste
+repositório:
 
 - **QC1.** Ao ligar os cabeçalhos compactos no Eclipse Temurin 25, o que muda na energia do processador e no tempo de
   execução da mesma tarefa? E essa mudança acontece pelo motivo esperado, ou seja, menos memória ocupada e menos
-  trabalho do coletor de lixo?
+  trabalho do coletor de lixo? As hipóteses H1 a H4 tratam dessa pergunta.
+
+A mesma coleta respondeu também a uma pergunta complementar, que fica fora do artigo:
+
 - **QC2.** Quando passamos do Temurin 17 para o 21, e do 21 para o 25, a energia muda na mesma proporção que o tempo?
+  A hipótese H5 trata dessa pergunta.
 
 ---
 
@@ -111,7 +119,8 @@ resposta for diferente do esperado, a execução nem começa. Assim temos certez
 configuração certa.
 
 Fizemos três comparações, **B/A** (do 17 para o 21), **C/B** (do 21 para o 25) e **D/C** (cabeçalhos compactos
-ligados contra desligados, no mesmo JDK 25).
+ligados contra desligados, no mesmo JDK 25). A comparação principal é a **D/C**. As configurações A e B servem à
+pergunta complementar sobre as versões do Java.
 
 ---
 
@@ -275,25 +284,42 @@ está em [`evidencias/base-oficial/NOTA_TERMOS_VEREDITOS.txt`](evidencias/base-o
 
 ## 📈 Principais resultados
 
-A tabela abaixo resume as cargas principais. Cada célula mostra a razão das medianas e, entre colchetes, o intervalo
-de confiança de 95%. O resultado completo, com todas as cargas e medidas, está em
+### Cabeçalhos compactos no Java 25 (pergunta principal)
+
+Cada célula mostra a razão das medianas entre o Java 25 com e sem cabeçalhos compactos (D/C) e, entre colchetes, o
+intervalo de confiança de 95%. Uma razão abaixo de 1 indica que o valor diminuiu ao ligar os cabeçalhos compactos. O
+resultado completo, com todas as cargas e medidas, está em
 [`resultados/oficial-20261101-termos/resumo.txt`](resultados/oficial-20261101-termos/resumo.txt).
 
-| Carga | Comparação | Energia | Tempo | Potência média |
-|---|---|---|---|---|
-| lusearch | B/A (17 → 21) | 0,9335 [0,9192; 0,9479] | 0,9468 [0,9405; 0,9519] | 0,9835 [0,9761; 0,9970] |
-| lusearch | C/B (21 → 25) | 1,0202 [1,0104; 1,0271] | 1,0101 [1,0049; 1,0127] | 1,0152 [1,0070; 1,0161] |
-| lusearch | D/C (compactos) | 0,9955 [0,9888; 1,0175] | 0,9962 [0,9926; 1,0059] | 0,9997 [0,9848; 1,0093] |
-| pmd | B/A (17 → 21) | 0,9597 [0,9502; 0,9751] | 0,9486 [0,9423; 0,9503] | 1,0133 [1,0103; 1,0342] |
-| pmd | C/B (21 → 25) | 0,9546 [0,9401; 0,9617] | 0,9352 [0,9332; 0,9391] | 1,0142 [1,0052; 1,0260] |
-| pmd | D/C (compactos) | 1,0037 [0,9903; 1,0154] | 1,0048 [1,0028; 1,0085] | 1,0018 [0,9874; 1,0121] |
+| Carga | Energia | Tempo | Potência média |
+|---|---|---|---|
+| lusearch | 0,9955 [0,9888; 1,0175] | 0,9962 [0,9926; 1,0059] | 0,9997 [0,9848; 1,0093] |
+| pmd | 1,0037 [0,9903; 1,0154] | 1,0048 [1,0028; 1,0085] | 1,0018 [0,9874; 1,0121] |
 
-Em resumo, a passagem do Java 17 para o 21 reduziu a energia nas duas cargas principais (cerca de 7% no lusearch e
-4% no pmd). Do 21 para o 25, o pmd economizou mais 4,5%, enquanto o lusearch gastou 2% a mais. Já os cabeçalhos
-compactos não trouxeram mudança de energia que se pudesse detectar, apesar de terem reduzido o trabalho do coletor
-de lixo.
+Ligar os cabeçalhos compactos não trouxe mudança de energia que o protocolo pudesse detectar. Nas duas cargas, o
+intervalo de confiança da energia contém o 1, e a margem de erro ficou em 1,44 ponto percentual no lusearch e 1,25 no
+pmd, dentro do limite de 3 pontos do critério E3. O pmd ficou cerca de 0,5% mais lento com os cabeçalhos compactos.
 
-Os vereditos das hipóteses ficaram assim:
+A memória e o coletor de lixo mudaram como esperado, sobretudo no pmd. A tabela mostra as medianas sem e com
+cabeçalhos compactos.
+
+| Carga | Heap após coleta | Número de coletas | Tempo de pausas |
+|---|---|---|---|
+| lusearch | 22 → 22 MB (0%) | 154 → 150 (−2,6%) | 198 → 191 ms (−3,9%) |
+| pmd | 21 → 19 MB (−9,5%) | 85 → 74 (−12,9%) | 353 → 305 ms (−13,7%) |
+
+![Mudança ao ligar os cabeçalhos compactos](resultados/artigo-cabecalhos-20261111/memoria-cabecalhos.png)
+
+*Mudança ao ligar os cabeçalhos compactos na energia, no heap e na coleta de lixo, com o intervalo de confiança de
+95%.*
+
+Por que menos trabalho do coletor não virou menos energia? Um cálculo descritivo feito após a coleta, fora do registro
+prévio, mostra que as pausas de coleta ocupam uma parte muito pequena do tempo de cada processo, entre 0,74% e 0,86%
+no pmd e entre 0,23% e 0,24% no lusearch. Mesmo que toda a redução das pausas virasse redução de tempo, o ganho ficaria
+em no máximo 0,12% do tempo total no pmd, muito abaixo da margem de erro do protocolo. O cálculo está em
+[`resultados/pausas-gc-20261107/resumo-pausas.txt`](resultados/pausas-gc-20261107/resumo-pausas.txt).
+
+Os vereditos das hipóteses sobre os cabeçalhos compactos ficaram assim:
 
 | Hipótese | lusearch | pmd |
 |---|---|---|
@@ -301,8 +327,13 @@ Os vereditos das hipóteses ficaram assim:
 | H2 potência D/C sem mudança | confirmada | confirmada |
 | H3a heap menor em D | não confirmada | confirmada |
 | H3b menos coletas/pausas em D | confirmada | confirmada |
-| H5 B/A energia acompanha tempo | não confirmada | não confirmada |
-| H5 C/B energia acompanha tempo | confirmada | não confirmada |
+
+No lusearch, a H3a não foi confirmada porque o log de coleta da JVM informa a memória em megabytes inteiros, e uma
+diferença menor que 1 MB não aparece. A H4 é descritiva e não mostrou a relação esperada, pois nenhuma das reduções
+de energia foi detectada. No avrora, carga exploratória, a variação da energia ficou entre 7,5% e 9,8%, acima do
+limite do critério E1, e o protocolo também não detectou mudança de energia.
+
+### O protocolo (critérios E1 a E7)
 
 Quanto ao protocolo, os critérios E1, E3, E4 (pela mediana), E5 e E6 foram atendidos. O critério **E2 não foi
 atendido**, pois a maior diferença de energia entre sessões foi de 6,1%, acima do limite de 5%, nas combinações
@@ -321,6 +352,25 @@ para o 25 desapareceria. Além disso, o intervalo de confiança da energia ficou
 iteração de preparação, a sessão usou essa preparação mínima, o que está registrado como desvio. Os detalhes estão em
 [`evidencias/ingenua-e7/LEIAME.txt`](evidencias/ingenua-e7/LEIAME.txt) e o resumo em
 [`resultados/ingenua-e7-20261103/resumo-e7.txt`](resultados/ingenua-e7-20261103/resumo-e7.txt).
+
+### Resultado complementar: versões do Java (pergunta QC2)
+
+Esta comparação fica fora do artigo, mas usa a mesma coleta. O formato das células é o mesmo da primeira tabela.
+
+| Carga | Comparação | Energia | Tempo | Potência média |
+|---|---|---|---|---|
+| lusearch | B/A (17 → 21) | 0,9335 [0,9192; 0,9479] | 0,9468 [0,9405; 0,9519] | 0,9835 [0,9761; 0,9970] |
+| lusearch | C/B (21 → 25) | 1,0202 [1,0104; 1,0271] | 1,0101 [1,0049; 1,0127] | 1,0152 [1,0070; 1,0161] |
+| pmd | B/A (17 → 21) | 0,9597 [0,9502; 0,9751] | 0,9486 [0,9423; 0,9503] | 1,0133 [1,0103; 1,0342] |
+| pmd | C/B (21 → 25) | 0,9546 [0,9401; 0,9617] | 0,9352 [0,9332; 0,9391] | 1,0142 [1,0052; 1,0260] |
+
+A passagem do Java 17 para o 21 reduziu a energia nas duas cargas principais, cerca de 7% no lusearch e 4% no pmd. Do
+21 para o 25, o pmd economizou mais 4,5%, enquanto o lusearch gastou 2% a mais.
+
+| Hipótese | lusearch | pmd |
+|---|---|---|
+| H5 B/A energia acompanha tempo | não confirmada | não confirmada |
+| H5 C/B energia acompanha tempo | confirmada | não confirmada |
 
 ---
 
@@ -1005,7 +1055,8 @@ Eclipse Temurin mantêm as suas próprias licenças e não fazem parte deste rep
 
 Se este trabalho for útil para você, por favor cite-o. Os dados de citação estão em [`CITATION.cff`](CITATION.cff), e
 o GitHub mostra a referência pronta no botão **"Cite this repository"**. O registro no Zenodo tem o DOI
-[10.5281/zenodo.23982640](https://doi.org/10.5281/zenodo.23982640). Em BibTeX:
+[10.5281/zenodo.23982640](https://doi.org/10.5281/zenodo.23982640) e corresponde à versão v1.0, que é a citada no
+artigo. Em BibTeX:
 
 ```bibtex
 @software{goncalves_pae_jvm_2026,
