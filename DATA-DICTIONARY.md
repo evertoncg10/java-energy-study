@@ -24,6 +24,7 @@ should be used for any new work. The raw data live in `dados/brutos/<session>/`,
 - [metadados.json (run metadata)](#metadadosjson-run-metadata)
 - [Naive session of criterion E7](#naive-session-of-criterion-e7)
 - [Share of garbage collection pauses](#share-of-garbage-collection-pauses)
+- [Figures of the article on compact headers](#figures-of-the-article-on-compact-headers)
 - [Raw data of a session](#raw-data-of-a-session)
 - [Raw data of a process](#raw-data-of-a-process)
 
@@ -335,6 +336,21 @@ A descriptive calculation, outside the pre-registration, in
 
 `resumo-pausas.txt` is the readable summary, in Portuguese. `metadados.json` records that the calculation is
 descriptive (`calculo`) and the SHA-256 of the two input files (`input_sha256`, with `base` and `razoes`).
+
+---
+
+## Figures of the article on compact headers
+
+The two figures of the article on Compact Object Headers (question QC1, hypotheses H1 to H4), in
+[`resultados/artigo-cabecalhos-20261111/`](resultados/artigo-cabecalhos-20261111/), drawn by
+`scripts/figuras_artigo_cabecalhos.py` from `razoes.csv` of `resultados/oficial-20261101-termos`. They add no new
+number.
+
+| File | Content |
+|---|---|
+| `fluxo-cabecalhos.png` / `.pdf` | the seven steps of the PAE-JVM, with hypotheses H1–H4 and without A12 or configuration letters |
+| `memoria-cabecalhos.png` / `.pdf` | D/C ratios of energy, heap after collection, number of collections and pause time, with the 95% CI, for each workload; axis "com e sem cabeçalhos compactos" (with and without compact headers) |
+| `metadados.json` | the script (`script`), the input file (`entrada`), its SHA-256 (`entrada_sha256`) and the files written (`arquivos`) |
 
 ---
 

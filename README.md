@@ -627,6 +627,18 @@ python3 scripts/comparar_resultados.py resultados/pausas-gc-20261107 resultados/
 O resultado esperado é `Arquivos diferentes: 0`. Para usar o script com dados de outra coleta, indique os arquivos
 com `--base` e `--razoes`.
 
+As duas figuras do artigo sobre os cabeçalhos compactos também têm um script próprio. Ele lê as razões
+(`razoes.csv`) de `resultados/oficial-20261101-termos` e grava o fluxograma do protocolo, com as hipóteses H1 a H4, e
+a figura de memória, com o eixo "com e sem cabeçalhos compactos", em PNG e PDF, além de um `metadados.json` com o
+SHA-256 do arquivo de entrada. Nenhum número muda. Para gerar as figuras, use uma pasta de saída nova:
+
+```bash
+python3 scripts/figuras_artigo_cabecalhos.py --saida resultados/figuras-artigo-reproducao
+```
+
+As figuras publicadas estão em `resultados/artigo-cabecalhos-20261111`. Como acontece com as outras figuras, os
+arquivos podem ter pequenas diferenças entre sistemas operacionais, então a conferência é visual.
+
 O melhor ponto de partida é o `resumo.txt`, que reúne os principais números em texto corrido. O significado de cada coluna desses
 arquivos, e de cada campo dos dados brutos, está no [dicionário de dados](DATA-DICTIONARY.md), escrito em inglês para
 atender também pesquisadores de outros países.
@@ -930,6 +942,10 @@ Três versões do repositório estão marcadas com etiquetas do Git, para que po
 | `base-oficial-v1` | base oficial fechada depois da coleta, resultados em `resultados/oficial-20261101` |
 | `analise-v1.1` | mesmos números, com os vereditos nos termos confirmada, não confirmada, refutada e inconclusiva (`resultados/oficial-20261101-termos`) |
 | `v1.0` | pacote de artefatos completo, com a sessão ingênua do critério E7, o dicionário de dados e o medidor reproduzível; é a versão depositada no Zenodo |
+
+Depois da v1.0, a versão principal (`main`) recebeu, sem nova marca, o cálculo do peso das pausas de coleta
+(`resultados/pausas-gc-20261107`) e as figuras do artigo sobre os cabeçalhos compactos
+(`resultados/artigo-cabecalhos-20261111`). Os dois usam os mesmos dados da v1.0 e não mudam nenhum resultado oficial.
 
 A pasta [`evidencias/base-oficial/`](evidencias/base-oficial/) explica como os resultados oficiais foram gerados e
 traz o registro de ocorrências e as somas de verificação.
