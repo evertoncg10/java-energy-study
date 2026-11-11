@@ -639,6 +639,19 @@ python3 scripts/comparar_resultados.py resultados/pausas-gc-20261107 resultados/
 The expected result is `Arquivos diferentes: 0` (no different files). To use the script with data from another
 collection, pass the files with `--base` and `--razoes`.
 
+The two figures of the article on Compact Object Headers also have their own script. It reads the ratios
+(`razoes.csv`) from `resultados/oficial-20261101-termos` and writes the protocol flowchart, with hypotheses H1 to H4,
+and the memory figure, with the axis "com e sem cabeçalhos compactos" (with and without compact headers), in PNG and
+PDF, plus a `metadados.json` with the SHA-256 of the input file. No number changes. To draw the figures, use a new
+output folder:
+
+```bash
+python3 scripts/figuras_artigo_cabecalhos.py --saida resultados/figuras-artigo-reproducao
+```
+
+The published figures are in `resultados/artigo-cabecalhos-20261111`. As with the other figures, the files may differ
+slightly between operating systems, so the check is visual.
+
 The best place to start is `resumo.txt`, which brings the main numbers together in plain text. Every column of these files, and every field of the raw data, is described in the
 [data dictionary](DATA-DICTIONARY.md).
 
@@ -943,6 +956,10 @@ Three versions of the repository are marked with Git tags, so they can be retrie
 | `base-oficial-v1` | official dataset closed after collection, results in `resultados/oficial-20261101` |
 | `analise-v1.1` | same numbers, with verdicts in the terms confirmada, não confirmada, refutada and inconclusiva (`resultados/oficial-20261101-termos`) |
 | `v1.0` | complete artifact package, with the naive session of criterion E7, the data dictionary and the reproducible meter; this is the version deposited on Zenodo |
+
+After v1.0, the main branch (`main`) received, without a new tag, the share of garbage collection pauses
+(`resultados/pausas-gc-20261107`) and the figures of the article on Compact Object Headers
+(`resultados/artigo-cabecalhos-20261111`). Both use the same data as v1.0 and change no official result.
 
 The [`evidencias/base-oficial/`](evidencias/base-oficial/) folder explains how the official results were produced and
 includes the incident record and the checksums.
