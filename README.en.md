@@ -1,4 +1,4 @@
-# PAE-JVM: JVM Energy Efficiency – Temurin 17 vs 21 vs 25 and Compact Object Headers
+# PAE-JVM: do compact object headers in Java 25 save energy?
 
 [![Java Support](https://img.shields.io/badge/Java-17%20%7C%2021%20%7C%2025-orange?logo=openjdk)](#-configurations-compared)
 [![Python Analysis](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python)](#-level-1--re-run-the-analysis-any-computer)
@@ -12,29 +12,27 @@
 
 🇧🇷 [Português](README.md) | 🇺🇸 English
 
-> **📄 Article on compact headers.** The article "Cabeçalhos compactos no Java 25 economizam energia? Um protocolo de
-> medição para computadores pessoais" (Do compact headers in Java 25 save energy? A measurement protocol for personal
-> computers) uses only part of this collection, the comparison of Java 25 without and with compact object headers
-> (question QC1, hypotheses H1 to H4). The comparison of Java 17, 21 and 25 (QC2, H5) uses the same collection, but is
-> left out of the article and appears here as a complementary result. The article cites version
-> [v1.0](https://github.com/evertoncg10/java-energy-study/tree/v1.0) of this repository. The article figures and the
-> share of garbage collection pauses were published after v1.0, from the same data, in the folders
-> [`resultados/artigo-cabecalhos-20261111`](resultados/artigo-cabecalhos-20261111/) and
-> [`resultados/pausas-gc-20261107`](resultados/pausas-gc-20261107/).
+> **📄 Version v2.0, focused on the article on compact headers.** The article "Cabeçalhos compactos no Java 25
+> economizam energia? Um protocolo de medição para computadores pessoais" (Do compact headers in Java 25 save energy?
+> A measurement protocol for personal computers) cites version
+> [v1.0](https://github.com/evertoncg10/java-energy-study/tree/v1.0) of this repository. Version v2.0 uses the same data
+> and the same official results. It changes the presentation, to highlight Compact Object Headers, and adds the share
+> of garbage collection pauses and the article figures.
 
 This repository stores everything used in a master's research project on **Green Software**, in the field of Software
 Engineering, including the measurement protocol, the code, the raw data, the evidence and the statistical analysis.
 
-The starting point is a practical doubt that is simple to state. When we change the Java version, does the program
-end up using more or less energy? To answer it with confidence, however, we first need to know how to measure well,
-and that is what this research focuses on.
+Java 25 brought **Compact Object Headers** (JEP 519), an option that reduces the space each object takes in memory.
+The practical doubt behind this research is simple to state. If the program uses less memory and the garbage
+collector works less, does it also use less energy? To answer it with confidence, however, we first need to know how
+to measure well, since the natural variation of the measurements can be larger than the effect we are looking for.
 
 The focus, therefore, is **how to measure**, reliably and reproducibly, the effect of versions and options of the Java
 Virtual Machine (**JVM**) on energy and execution time, using only a personal computer. To evaluate the protocol built
-for this purpose, we applied it to a real case, in which we compared the processor energy and the execution time of three
-versions of the **Eclipse Temurin** distribution, **JDKs 17, 21 and 25**, and also JDK 25 **with and without Compact
-Object Headers** (JEP 519), a new feature that promises to reduce memory use. The formal research questions are in
-the [Research questions](#-research-questions) section.
+for this purpose, we applied it to a real case, in which we compared the processor energy and the execution time of
+**Eclipse Temurin 25 with and without Compact Object Headers**. The same collection also measured **JDKs 17 and 21**,
+which allowed us to compare Java versions as a complementary result. The formal research questions are in the
+[Research questions](#-research-questions) section.
 
 The research follows the **Design Science Research (DSR)** method. This means that, besides measuring, we built and
 evaluated an artifact, **PAE-JVM** (*Protocolo de Avaliação Energética de configurações da JVM*, an energy evaluation
@@ -43,6 +41,11 @@ verified JDK selection for every run, an orchestrator that organizes the measure
 dealing with noise, failures and analysis. The data collection served precisely to evaluate this protocol. The
 evaluation criteria (E1 to E7) and the hypotheses (H1 to H5) were registered **before** the collection, in
 [`config/registro-previo.json`](config/registro-previo.json), so that the results could not influence the rules.
+
+![PAE-JVM steps](resultados/artigo-cabecalhos-20261111/fluxo-cabecalhos.png)
+
+*PAE-JVM steps applied to the comparison of Java 25 with and without compact headers (hypotheses H1 to H4). The
+figure text is in Portuguese, as in the article.*
 
 If you want to check the data, re-run the analysis or even repeat the measurements on another computer, you will find
 the whole path here, explained step by step in [How to reproduce](#-how-to-reproduce).
@@ -86,12 +89,17 @@ reproducibly, the effect of JVM versions and options on energy and execution tim
 external power meter?** Many developers and researchers only have their own laptop to work with, and PAE-JVM was
 designed for exactly that situation.
 
-To test the protocol in practice, we applied it to two concrete questions:
+To test the protocol in practice, we applied it to one concrete question, which is the main question of this
+repository:
 
 - **QC1.** When Compact Object Headers are turned on in Eclipse Temurin 25, what changes in processor energy and
   execution time for the same task? And does that change happen for the expected reason, that is, less memory in use
-  and less work for the garbage collector?
+  and less work for the garbage collector? Hypotheses H1 to H4 address this question.
+
+The same collection also answered a complementary question, which is left out of the article:
+
 - **QC2.** When we move from Temurin 17 to 21, and from 21 to 25, does energy change in the same proportion as time?
+  Hypothesis H5 addresses this question.
 
 ---
 
@@ -117,7 +125,8 @@ from what is expected, the run does not even start. This way we know for sure th
 right configuration.
 
 We make three comparisons, **B/A** (from 17 to 21), **C/B** (from 21 to 25) and **D/C** (Compact Object Headers on
-versus off, on the same JDK 25).
+versus off, on the same JDK 25). The main comparison is **D/C**. Configurations A and B serve the complementary
+question about Java versions.
 
 ---
 
@@ -284,24 +293,42 @@ in Portuguese). A hypothesis is **confirmada** (confirmed) when its confirmation
 
 ## 📈 Main results
 
-The table below summarizes the main workloads. Each cell shows the ratio of medians and, in brackets, the 95%
-confidence interval. The complete results, with every workload and measure, are in
+### Compact Object Headers in Java 25 (main question)
+
+Each cell shows the ratio of medians between Java 25 with and without compact headers (D/C) and, in brackets, the 95%
+confidence interval. A ratio below 1 means the value went down when compact headers were turned on. The complete
+results, with every workload and measure, are in
 [`resultados/oficial-20261101-termos/resumo.txt`](resultados/oficial-20261101-termos/resumo.txt).
 
-| Workload | Comparison | Energy | Time | Mean power |
-|---|---|---|---|---|
-| lusearch | B/A (17 → 21) | 0.9335 [0.9192, 0.9479] | 0.9468 [0.9405, 0.9519] | 0.9835 [0.9761, 0.9970] |
-| lusearch | C/B (21 → 25) | 1.0202 [1.0104, 1.0271] | 1.0101 [1.0049, 1.0127] | 1.0152 [1.0070, 1.0161] |
-| lusearch | D/C (compact) | 0.9955 [0.9888, 1.0175] | 0.9962 [0.9926, 1.0059] | 0.9997 [0.9848, 1.0093] |
-| pmd | B/A (17 → 21) | 0.9597 [0.9502, 0.9751] | 0.9486 [0.9423, 0.9503] | 1.0133 [1.0103, 1.0342] |
-| pmd | C/B (21 → 25) | 0.9546 [0.9401, 0.9617] | 0.9352 [0.9332, 0.9391] | 1.0142 [1.0052, 1.0260] |
-| pmd | D/C (compact) | 1.0037 [0.9903, 1.0154] | 1.0048 [1.0028, 1.0085] | 1.0018 [0.9874, 1.0121] |
+| Workload | Energy | Time | Mean power |
+|---|---|---|---|
+| lusearch | 0.9955 [0.9888, 1.0175] | 0.9962 [0.9926, 1.0059] | 0.9997 [0.9848, 1.0093] |
+| pmd | 1.0037 [0.9903, 1.0154] | 1.0048 [1.0028, 1.0085] | 1.0018 [0.9874, 1.0121] |
 
-In short, moving from Java 17 to 21 reduced energy in both main workloads (about 7% for lusearch and 4% for pmd).
-From 21 to 25, pmd saved another 4.5%, while lusearch used 2% more. Compact Object Headers, on the other hand, brought
-no detectable change in energy, even though they reduced the garbage collector's work.
+Turning on compact headers brought no change in energy that the protocol could detect. In both workloads the energy
+confidence interval contains 1, and the margin of error was 1.44 percentage points for lusearch and 1.25 for pmd,
+within the 3-point limit of criterion E3. pmd became about 0.5% slower with compact headers.
 
-The hypothesis verdicts came out as follows:
+Memory and the garbage collector changed as expected, mainly in pmd. The table shows the medians without and with
+compact headers.
+
+| Workload | Heap after collection | Number of collections | Pause time |
+|---|---|---|---|
+| lusearch | 22 → 22 MB (0%) | 154 → 150 (−2.6%) | 198 → 191 ms (−3.9%) |
+| pmd | 21 → 19 MB (−9.5%) | 85 → 74 (−12.9%) | 353 → 305 ms (−13.7%) |
+
+![Change when compact headers are turned on](resultados/artigo-cabecalhos-20261111/memoria-cabecalhos.png)
+
+*Change when compact headers are turned on in energy, heap and garbage collection, with the 95% confidence interval.
+The figure text is in Portuguese, as in the article.*
+
+Why did less collector work not turn into less energy? A descriptive calculation made after the collection, outside the
+pre-registration, shows that collection pauses take a very small part of each process's time, between 0.74% and 0.86%
+for pmd and between 0.23% and 0.24% for lusearch. Even if the whole pause reduction turned into time reduction, the
+gain would be at most 0.12% of the total time for pmd, far below the protocol's margin of error. The calculation is in
+[`resultados/pausas-gc-20261107/resumo-pausas.txt`](resultados/pausas-gc-20261107/resumo-pausas.txt).
+
+The verdicts of the hypotheses about compact headers came out as follows:
 
 | Hypothesis | lusearch | pmd |
 |---|---|---|
@@ -309,8 +336,13 @@ The hypothesis verdicts came out as follows:
 | H2 no D/C power change | confirmed | confirmed |
 | H3a smaller heap in D | not confirmed | confirmed |
 | H3b fewer collections/pauses in D | confirmed | confirmed |
-| H5 B/A energy follows time | not confirmed | not confirmed |
-| H5 C/B energy follows time | confirmed | not confirmed |
+
+For lusearch, H3a was not confirmed because the JVM collection log reports memory in whole megabytes, so a difference
+smaller than 1 MB does not show. H4 is descriptive and did not show the expected relation, since none of the energy
+reductions was detected. For avrora, the exploratory workload, energy variation was between 7.5% and 9.8%, above the
+limit of criterion E1, and the protocol also detected no change in energy.
+
+### The protocol (criteria E1 to E7)
 
 As for the protocol, criteria E1, E3, E4 (by the median), E5 and E6 were met. Criterion **E2 was not met**, since the
 largest energy difference between sessions was 6.1%, above the 5% limit, in the combinations lusearch-A, pmd-A, pmd-B
@@ -329,6 +361,26 @@ from Java 21 to 25 would disappear. In addition, the energy confidence interval 
 one warm-up iteration, the session used this minimum warm-up, which is recorded as a deviation. The details are in
 [`evidencias/ingenua-e7/LEIAME.txt`](evidencias/ingenua-e7/LEIAME.txt) and the summary in
 [`resultados/ingenua-e7-20261103/resumo-e7.txt`](resultados/ingenua-e7-20261103/resumo-e7.txt).
+
+### Complementary result: Java versions (question QC2)
+
+This comparison is left out of the article, but uses the same collection. The cells have the same format as in the
+first table.
+
+| Workload | Comparison | Energy | Time | Mean power |
+|---|---|---|---|---|
+| lusearch | B/A (17 → 21) | 0.9335 [0.9192, 0.9479] | 0.9468 [0.9405, 0.9519] | 0.9835 [0.9761, 0.9970] |
+| lusearch | C/B (21 → 25) | 1.0202 [1.0104, 1.0271] | 1.0101 [1.0049, 1.0127] | 1.0152 [1.0070, 1.0161] |
+| pmd | B/A (17 → 21) | 0.9597 [0.9502, 0.9751] | 0.9486 [0.9423, 0.9503] | 1.0133 [1.0103, 1.0342] |
+| pmd | C/B (21 → 25) | 0.9546 [0.9401, 0.9617] | 0.9352 [0.9332, 0.9391] | 1.0142 [1.0052, 1.0260] |
+
+Moving from Java 17 to 21 reduced energy in both main workloads, about 7% for lusearch and 4% for pmd. From 21 to 25,
+pmd saved another 4.5%, while lusearch used 2% more.
+
+| Hypothesis | lusearch | pmd |
+|---|---|---|
+| H5 B/A energy follows time | not confirmed | not confirmed |
+| H5 C/B energy follows time | confirmed | not confirmed |
 
 ---
 
@@ -1019,7 +1071,8 @@ Temurin JDKs keep their own licenses and are not part of this repository.
 
 If this work is useful to you, please cite it. The citation metadata is in [`CITATION.cff`](CITATION.cff), and GitHub
 shows a ready-made reference under the **"Cite this repository"** button. The Zenodo record has the DOI
-[10.5281/zenodo.23982640](https://doi.org/10.5281/zenodo.23982640). In BibTeX:
+[10.5281/zenodo.23982640](https://doi.org/10.5281/zenodo.23982640) and corresponds to version v1.0, which is the one
+cited in the article. In BibTeX:
 
 ```bibtex
 @software{goncalves_pae_jvm_2026,
