@@ -941,11 +941,10 @@ Três versões do repositório estão marcadas com etiquetas do Git, para que po
 |---|---|
 | `base-oficial-v1` | base oficial fechada depois da coleta, resultados em `resultados/oficial-20261101` |
 | `analise-v1.1` | mesmos números, com os vereditos nos termos confirmada, não confirmada, refutada e inconclusiva (`resultados/oficial-20261101-termos`) |
-| `v1.0` | pacote de artefatos completo, com a sessão ingênua do critério E7, o dicionário de dados e o medidor reproduzível; é a versão depositada no Zenodo |
+| `v1.0` | pacote de artefatos completo, com a sessão ingênua do critério E7, o dicionário de dados e o medidor reproduzível; é a versão depositada no Zenodo e citada no artigo |
+| `v2.0` | apresentação do repositório focada nos cabeçalhos compactos, com o cálculo do peso das pausas de coleta (`resultados/pausas-gc-20261107`) e as figuras do artigo (`resultados/artigo-cabecalhos-20261111`) |
 
-Depois da v1.0, a versão principal (`main`) recebeu, sem nova marca, o cálculo do peso das pausas de coleta
-(`resultados/pausas-gc-20261107`) e as figuras do artigo sobre os cabeçalhos compactos
-(`resultados/artigo-cabecalhos-20261111`). Os dois usam os mesmos dados da v1.0 e não mudam nenhum resultado oficial.
+A v2.0 usa os mesmos dados da v1.0 e não muda nenhum resultado oficial.
 
 A pasta [`evidencias/base-oficial/`](evidencias/base-oficial/) explica como os resultados oficiais foram gerados e
 traz o registro de ocorrências e as somas de verificação.
