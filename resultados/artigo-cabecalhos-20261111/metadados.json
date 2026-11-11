@@ -1,0 +1,11 @@
+{
+  "script": "scripts/figuras_artigo_cabecalhos.py",
+  "entrada": "resultados/oficial-20261101-termos/razoes.csv",
+  "entrada_sha256": "0e88687263323efcbace144bd9cfb3a0946c1e5297bc6b30620242571469b53f",
+  "arquivos": [
+    "fluxo-cabecalhos.png",
+    "fluxo-cabecalhos.pdf",
+    "memoria-cabecalhos.png",
+    "memoria-cabecalhos.pdf"
+  ]
+}
